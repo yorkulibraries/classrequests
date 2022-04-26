@@ -1,0 +1,12 @@
+$('#new_assignment_response').remove();
+$('body').append("<div id='new_assignment_response'></div>");
+$('#new_assignment_response').append("<%= escape_javascript(render 'form', formats: [:html]) %>");
+$('#new_assignment_response #assignment_response_form').modal('show');
+
+
+// Chosen Plugin Load
+$('.request-chosen').chosen({
+  // no_results_text: 'No Result Found',
+  allow_single_deselect: true,
+  width: '100%'
+});

@@ -1,0 +1,59 @@
+
+
+//$link-color:            theme-color('primary');
+//$link-color:            theme-color('primary');
+//$link-decoration:       none;
+////$link-hover-color:      darken($link-color, 15%);
+//$link-hover-decoration: underline;
+
+// .badge-primary    { background-color: lighten($primary, 45%); }
+// .badge-secondary  { background-color: $secondary; }
+// .badge-info       { background-color: lighten($info, 45%); }
+// .badge-success    { background-color: $success; }
+// .badge-warning    { background-color: $warning; }
+// .badge-danger     { background-color: $danger; }
+// .badge-light      { background-color: $light; }
+// .badge-dark       { background-color: $dark; }
+
+/* Only way to override boostrap was via !important because they put !important in their css */
+// .text-primary    { color: $primary !important; }
+// .text-secondary  { color: $secondary !important; }
+// .text-info       { color: $info !important; }
+// .text-success    { color: $success !important; }
+// .text-warning    { color: $warning !important; }
+// .text-danger     { color: $danger !important; }
+// .text-light      { color: $light !important; }
+// .text-dark       { color: $dark !important; }
+
+// .alert-primary    { background-color: $primary; }
+// .alert-secondary  { background-color: $secondary; }
+// .alert-info       { background-color: $yellow; }
+// .alert-success    { background-color: $success; }
+// .alert-warning    { background-color: $warning; }
+// .alert-danger     { background-color: $danger; }
+
+/* Added Gray Backgrounds */
+// .bg-gray-100 { background-color: $gray-100; }
+// .bg-gray-200 { background-color: $gray-200; }
+// .bg-gray-300 { background-color: $gray-300; }
+// .bg-gray-400 { background-color: $gray-400; }
+// .bg-gray-500 { background-color: $gray-500; }
+// .bg-gray-600 { background-color: $gray-600; }
+// .bg-gray-700 { background-color: $gray-700; }
+// .bg-gray-800 { background-color: $gray-800; }
+// .bg-gray-900 { background-color: $gray-900; }
+// .bg-black { background-color: $black; }
+// .bg-light-primary { background-color: lighten($primary, 45%); }
+// .bg-light-info { background-color: lighten($info, 20%); }
+
+/* Added YorkU Backgrounds */
+.bg-york-grey-dark { background-color: $york-grey-dark; }
+.bg-york-grey-medium { background-color: $york-grey-medium; }
+.bg-york-grey-pewter { background-color: $york-grey-pewter; }
+.bg-york-grey-light { background-color: $york-grey-light; }
+.bg-york-grey-lighter { background-color: $york-grey-lighter; }
+.bg-york-red-pms-186 { background-color: $york-red-pms-186; }
+.bg-york-red-medium { background-color: $york-red-medium; }
+.bg-york-red-dark { background-color: $york-red-dark; }
+.bg-york-light-blue { background-color: $york-light-blue; }
+.bg-york-bright-blue { background-color: $york-bright-blue; }

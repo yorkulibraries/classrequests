@@ -1,0 +1,39 @@
+<!-- <footer class='footer text-muted bg-light'> -->
+<!-- <footer id='sticky-footer' class='mt-auto py-1 text-dark border border-gray'> -->
+  <!-- <div class='container px-md-0'> -->
+    <div class='row my-0'>
+      <div class='col-12 col-md-6 text-center text-md-start navbar-yul'>
+        <ul class='list-inline mb-1'>
+          <!-- <li class='list-inline-item small'>
+            <%= link_to terms_path, class: 'nav-link' do %>
+              <span class='navbar-text'><%= (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR' %> Terms</span>
+            <% end %>
+          </li>
+          <li class='list-inline-item small'>
+            <%= link_to privacy_path, class: 'nav-link' do %>
+              <span class='navbar-text'><%= (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR' %> Privacy</span>
+            <% end %>
+          </li>
+          -->
+          <li class='list-inline-item small'>
+            <a class='nav-link' href="<%= Setting.library_homepage_url %>">
+              <span class='navbar-text'><%= t(:library_homepage) %></span>
+            </a>
+          </li>
+          <li class='list-inline-item small'>
+            <a class='nav-link' href="<%= Setting.university_homepage_url %>">
+              <span class='navbar-text'><%= t(:university_homepage) %></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class='col-12 col-md-6 text-center text-md-end navbar-yul'>
+        <ul class='list-inline mb-1'>
+          <li class='list-inline-item small pt-md-2 pe-md-3'>
+            <span class='navbar-text'>© <%= (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR' %> 2021 - <%= Date.today.year %> York University Libraries</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  <!-- </div> -->
+<!-- </footer> -->

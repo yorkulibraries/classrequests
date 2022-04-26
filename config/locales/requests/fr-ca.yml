@@ -1,0 +1,42 @@
+## REQUESTS ENGLISH TRANSLATIONS
+
+fr-ca:
+  new_library_class_request: "Formulaire de demande d’atelier"
+  contact_information: "Vos coordonnées"
+  course_information: "Détails du cours"
+  simple_form:
+    labels:
+      request:
+        username: "Username"
+        patron_type: "Je suis…"
+        first_name: "Prénom"
+        last_name: "Nom de famille"
+        email: "Adresse courriel"
+        phone: "Numéro de téléphone"
+        academic_year: "L’année scolaire"
+        faculty_abbrev: "abréviation de la faculté"
+        subject_abbrev: "abréviation de le département ou le sujet"
+        course_number: "Le numéro du cours"
+        course_title: "Le titre du cours"
+        faculty: "La faculté"
+        subject: "Le département ou le sujet"
+        submitted_by: "Submitted By"
+        status: "Status"
+    hints:
+      request:
+        email: ""
+        phone: "416-736-2100 or x12345"
+        academic_year: "1. Parmi la liste, choisissez l’année scolaire"
+        faculty_abbrev: "2. Parmi la liste, choisissez votre faculté"
+        subject_abbrev: "3. Parmi la liste, choisissez votre département/ sujet"
+        course_number: "P. ex.: 4501"
+        course_title: "P. ex.: Introduction à l’économie"
+    prompt:
+      request:
+        academic_year: "Parmi la liste, choisissez l’année scolaire"
+        faculty_abbrev: "Parmi la liste, choisissez votre faculté"
+        subject_abbrev: "Parmi la liste, choisissez votre département/ sujet"        
+    # placeholders:
+    #
+    # error_notification:
+    #   default_message: "Please review the problems below:"

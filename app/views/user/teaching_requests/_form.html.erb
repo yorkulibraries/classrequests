@@ -1,0 +1,159 @@
+<div class='card w-90'>
+  <%= simple_form_for([:user, @teaching_request], html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class='card-body'>
+      <p class='small lead text-secondary'><%= t(:fields_marked_are_mandatory) %></p>
+      <h4 class='card-title text-primary'><%= t(:contact_information) %></h4>
+      <hr class='w-50 ml-0' />
+
+      <!-- CONTACT INFORMATION -->
+      <div class='row mt-3'>
+          <%= f.input :user_id, as: :hidden %>
+          <%= f.input :username, input_html: {value: current_user.username } %>
+      </div>
+      <div class='row mt-3'>
+          <%= f.input :patron_type, include_blank: false, input_html: {class: 'form-select request-chosen'}, selected: current_user.iam_identification %>
+      </div>
+      <div class='row mt-3 behalf_row'>
+        <%= f.input :submitted_on_behalf %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :first_name %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :last_name %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :email %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :phone %>
+      </div>
+
+    </div>
+    <!-- COURSE INFORMATION -->
+    <div class='card-body bg-light pt-5 pb-5'>
+      <h4 class='card-title text-primary'><%= t(:course_information) %></h4>
+      <hr class='w-50 ml-0' />
+      <div class='row mt-3'>
+        <%= f.input :academic_year, collection: @academic_years,
+                    prompt: t(:academic_year, scope: [:simple_form, :prompt, :request]),
+                    label_method: :academic_year, value_method: :academic_year,
+                    input_html: {class: 'form-select request-chosen'} %>
+
+  <!--selected: "#{Time.current.year}-#{Time.current.year+1}", -->
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :faculty_abbrev, collection: @course_faculties,
+                    prompt: t(:faculty_abbrev, scope: [:simple_form, :prompt, :request]),
+                    label_method: :faculty_label, value_method: :faculty_abbrev,
+                    input_html: {class: 'form-select request-chosen'} %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :subject_abbrev, collection: @faculty_departments, disabled: false,
+                    prompt: t(:subject_abbrev, scope: [:simple_form, :prompt, :request]),
+                    label_method: :subject_label, value_method: :subject_abbrev,
+                    input_html: {class: 'form-select request-chosen'} %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :course_number, hint: 'e.g. 4501 or 0000 if not a course', required: true %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :course_title, hint: 'e.g. Introduction to Economics' %>
+      </div>
+    </div>
+    <!-- SECTION/CLASS INFORMATION -->
+    <div class='card-body'>
+      <h4 class='card-title text-primary fs-5'><%= t(:class_preferences) %></h4>
+      <hr class='w-50 ml-0' />
+
+      <div class='row mt-3'>
+        <%= f.input :section_name_or_about %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :number_of_students %>
+      </div>
+
+      <div class='row mt-3'>
+        <%= f.input :preferred_date, as: :string, html5: false,
+                input_html: {class: '', data: { behaviour: 'flatpickr-teaching-request'}}
+                # hint: 'Minimum 3 weeks in advance.'
+                %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :preferred_time, html5: false, as: :string,
+                input_html: {class: '', data: { behaviour: 'flatpickr-time'}}
+                # hint: 'Subject to Library Hours'
+                %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :alternate_date, as: :string, html5: false,
+          input_html: {class: '', data: { behaviour: 'flatpickr-teaching-request'}}
+          # hint: 'Minimum 3 weeks in advance.'
+        %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :alternate_time, html5: false, as: :string,
+              input_html: {class: '', data: { behaviour: 'flatpickr-time'}},
+              hint: 'Subject to Library Hours'
+              %>
+      </div>
+
+      <div class='row mt-3'>
+        <%= f.input :duration, collection: TeachingRequest.duration.options(except: :sixty_plus), include_blank: false,
+              input_html: {autocomplete: 'off', class: 'form-select request-chosen' }
+              %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :location_preference, as: :radio_buttons, collection: TeachingRequest.location_preference.options(except: :off_campus),
+              wrapper: :horizontal_collection, input_html: {autocomplete: 'off', class: '' }
+              %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :room %>
+      </div>
+      <div class='row mt-3'>
+        <%= f.input :request_note, as: :rich_text_area %>
+      </div>
+
+      <div class='row mt-3'>
+          <%= f.input :faculty, as: :hidden %>
+          <%= f.input :subject, as: :hidden %>
+          <%= f.input :instructor_notes, as: :hidden %>
+          <%= f.input :submitted_by, as: :hidden %>
+          <%= f.input :status, as: :hidden %>
+          <%= invisible_captcha %>
+      </div>
+    </div><!-- card body close -->
+
+    <!-- CLASS INFORMATION -->
+    <!-- <div class='card-body'>
+      <h4 class='card-title text-primary fs-5'><%= t(:class_preferences) %></h3>
+      <hr class='w-50 ml-0' />
+
+    </div> -->
+
+<!-- </div>  -->
+<!-- card close -->
+<!-- <div class='card'> -->
+  <div class='card-body bg-light pt-5 pb-5'>
+  <hr/>
+  <!-- <div class='form-actions'> -->
+  <div class='row'>
+    <div class='col-2'>
+      <%= f.button :submit, data: {confirm: 'Are you sure?'}, class: 'btn btn-success' do %>
+          <%= t(:submit_my_request) %>
+          <i class='fa fa-arrow-right'></i>
+      <% end %>
+    </div>
+    <div class='col-10 text-md-end'>
+      <%= link_to t(:cancel, scope: :button), operators_index_path, class:'btn btn-outline-danger' %>
+    </div>
+  </div>
+  <br/>
+  </div> <!-- card body close -->
+
+<% end %>
+</div> <!-- card close -->

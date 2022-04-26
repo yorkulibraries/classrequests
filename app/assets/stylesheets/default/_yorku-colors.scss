@@ -1,0 +1,192 @@
+
+/********* YORKU BOOTSTRAP 5 OVERRIDE COLORS ********* */
+
+ $white:    #fff !default;
+ $gray-100: #f8f9fa !default;
+ $gray-200: #e9ecef !default;
+ $gray-300: #dee2e6 !default;
+ $gray-400: #ced4da !default;
+ $gray-500: #adb5bd !default;
+ $gray-600: #6c757d !default;
+ $gray-700: #495057 !default;
+ $gray-800: #343a40 !default;
+ $gray-900: #212529 !default;
+ $black:    #000 !default;
+ // scss-docs-end gray-color-variables
+
+ // fusv-disable
+ // scss-docs-start gray-colors-map
+ $grays: (
+   '100': $gray-100,
+   '200': $gray-200,
+   '300': $gray-300,
+   '400': $gray-400,
+   '500': $gray-500,
+   '600': $gray-600,
+   '700': $gray-700,
+   '800': $gray-800,
+   '900': $gray-900
+ ) !default;
+
+ // scss-docs-start color-variables
+ $blue:    #0d6efd !default;
+ $indigo:  #6610f2 !default;
+ $purple:  #6f42c1 !default;
+ $pink:    #d63384 !default;
+ $red:     #dc3545 !default;
+ $orange:  #fd7e14 !default;
+ $yellow:  #ffc107 !default;
+ $green:   #198754 !default;
+ $teal:    #20c997 !default;
+ $cyan:    #0dcaf0 !default;
+ // scss-docs-end color-variables
+
+ // scss-docs-start colors-map
+ $colors: (
+   'blue':       $blue,
+   'indigo':     $indigo,
+   'purple':     $purple,
+   'pink':       $pink,
+   'red':        $red,
+   'orange':     $orange,
+   'yellow':     $yellow,
+   'green':      $green,
+   'teal':       $teal,
+   'cyan':       $cyan,
+   'white':      $white,
+   'gray':       $gray-600,
+   'gray-dark':  $gray-800
+ ) !default;
+
+/* 2021 YorkU colours */
+/* http://toolbox.info.yorku.ca/visual-identity/colours/ */
+$york-grey-dark:   #686260;
+$york-grey-medium: #B7AEA9;
+$york-grey-pewter: #D6CFCA;
+$york-grey-light:  #E8E4DF;
+$york-grey-lighter: #FAFAFA;
+$york-red-pms-186: #E31837;
+$york-red-medium:  #B82025;
+$york-red-dark:    #8C0000;
+$york-light-blue:  #ACE6F8;
+$york-bright-blue: #3AC2EF;
+
+// $primary:       $york-red-medium; // #e31837; //#cc2030;      /* original $blue */
+// $secondary:     $york-grey-dark; //#fff; //#666666; /* $gray-700 * original gray-600 */
+// // $success:       #35B01C;
+// $info:          $york-light-blue; // #004A8D; // #CBC1A0; //#158475; /*#5575AB; */     /* original $cyan */
+// $warning:       #FFE202; //#D36B21; /*#F1DBB0*/     /* original $yellow */
+// $danger:        #FF6F61; //#FC5412; //#E31837; /* Pink Peacock - https://www.w3schools.com/colors/colors_trends.asp */
+// $light:         $gray-100;
+// $dark:          $gray-800;
+
+// Assign the override colors
+$primary:       $york-red-pms-186 !default;
+$secondary:     $black !default; //$gray-600 !default;
+$success:       #2e8540 !default; //#35B01C !default; //$green !default;
+$info:          darken($blue, 25%); //$york-light-blue; //$york-grey-dark; //#0071bc; //$york-light-blue; //$cyan !default;
+$warning:       #ffc107 !default;
+$danger:        #cd2026; //#FF6F61; //#FC5412; //#E31837; $red !default;
+$light:         $gray-100 !default;
+$dark:          map-get($colors, 'gray-dark') !default;
+
+// $dropdown-link-hover-color:         shade-color($gray-900, 10%) !default;
+// $dropdown-link-hover-bg:            $york-grey-light;
+
+////$link-color:    $green;
+
+// Set the override colors
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark,
+);
+
+$yorku-colors: (
+  'york-grey-dark': $york-grey-dark,
+  'york-grey-medium': $york-grey-medium,
+  'york-grey-pewter': $york-grey-pewter,
+  'york-grey-light': $york-grey-light,
+  'york-grey-lighter': $york-grey-lighter,
+  'york-red-pms-186': $york-red-pms-186,
+  'york-red-medium': $york-red-medium,
+  'york-red-dark': $york-red-dark,
+  'york-light-blue': $york-light-blue,
+  'york-bright-blue': $york-bright-blue
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $yorku-colors);
+
+
+.badge-incomplete, .badge-duplicate, .badge-not-submitted {
+//  background-color: lighten($secondary, 40%);
+  background-color: $gray-600;
+  // color: $secondary;
+  color: $black;
+}
+
+.badge-new-request, .badge-new_request {
+  background-color: lighten($primary, 15%);
+  color: $light;
+}
+.badge-being-reviewed {
+  background-color: lighten($info, 40%);
+//  color: $light;
+}
+.badge-in-process, .badge-in_process {
+//  background-color: $warning;
+  background-color: $warning //lighten($warning, 20%);
+  // color: $dark;
+}
+.badge-unfulfilled {
+  background-color:  $dark;//$purple;
+}
+
+.badge-assigned {
+  background-color: $success;
+  // color: $black;
+}
+
+.badge-completed, .badge-done, .badge-booked, .badge-booked-\/-scheduled {
+  // background-color: lighten($success, 50%);
+  background-color: darken($blue, 15%);
+  // font-size: 0.8rem;
+  color: $white
+}
+
+// .badge-primary    { background-color: lighten($primary, 45%); }
+// .badge-secondary  { background-color: $secondary; }
+// .badge-info       { background-color: lighten($info, 45%); }
+// .badge-success    { background-color: $success; }
+// .badge-warning    { background-color: $warning; }
+// .badge-danger     { background-color: $danger; }
+// .badge-light      { background-color: $light; }
+// .badge-dark       { background-color: $dark; }
+
+
+.badge-archived {}
+
+.badge-deleted, .badge-cancelled {
+  background-color: $danger;
+  color: $white;
+}
+
+//CALENDAR
+.simple-calendar {
+  .day {
+    font-weight: 500;
+  }
+  table .today { background-color: lighten($primary, 30%); }
+  .calendar-event.in_process { background-color: lighten($warning, 40%); }
+  .calendar-event.assigned { background-color: lighten($success, 50%); }
+  .list-group-item {
+    padding: 0.5rem 0.75rem;
+  }
+
+}

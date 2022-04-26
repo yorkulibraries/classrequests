@@ -1,0 +1,62 @@
+<%= render 'devise/shared/error_messages' %>
+
+<% if Setting.login_banner_url.present? %>
+  <div class='d-flex h-100 text-center login-banner'>
+    <div class='cover-container d-flex w-100 h-100 mx-auto flex-column'>
+      <img src="<%= image_url(Setting.login_banner_url) %>" height='' class='' alt=''></img>
+    </div>
+  </div>
+<% else %>
+  <!-- <div class='row text-center p-3 bg-white'>
+    <div class='col'><img src="<%= image_url(Setting.logo_url) %>" height='60px' class='' alt=''></img></div>
+  </div> -->
+<% end %>
+<div class='card bg-white w-75 m-auto p-4'>
+
+  <div class='card-body'>
+    <div class='card-title'><h1 class='text-center'><%= Setting.app_name %><br/><%= t(:login) %></h1></div>
+
+    <% if Setting.enable_devise_PPY %>
+    <div class='row mt-3'>
+      <div class='col-lg-6 col-md-6 ms-auto me-auto'>
+        <%= link_to 'Login with Passport York', users_ppy_login_path, class: 'btn btn-lg btn-primary w-100' %>
+        <hr class='secondary'/>
+      </div>
+    </div>
+    <% end %>
+
+    <% if Setting.enable_devise_database_auth %>
+      <div class='row mt-3'>
+        <div class='col-lg-6 col-md-6 ms-auto me-auto'>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class='mb-3'>
+              <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
+            </div>
+            <div class='mb-3'>
+              <%= f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'form-control' %>
+            </div>
+            <% if devise_mapping.rememberable? -%>
+              <div class='form-check'>
+                <label class='form-check-label'>
+                  <%= f.check_box :remember_me, class: 'form-check-input' %>
+                  Remember me
+                </label>
+              </div>
+            <% end -%>
+
+            <div class='form-group'>
+              <%= f.submit 'Log in', class: 'btn btn-md text-white btn-success w-100' %>
+
+            </div>
+        </div>
+      </div>
+      <div class='row mt-3'>
+        <div class='col-lg-6 col-md-6 ms-auto me-auto'>
+          <div class='card-text'><%= render 'devise/shared/links' %></div>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

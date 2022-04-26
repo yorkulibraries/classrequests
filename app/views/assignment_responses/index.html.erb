@@ -1,0 +1,49 @@
+
+
+
+<div class='row'>
+  <div class='col-sm-6'>
+    <h1>Assignment_responses</h1>
+  </div>
+
+  <div class='col-sm-6 text-right'>
+  <%= link_to new_assignment_response_path, class: 'btn btn-primary' do %>
+    Add New Assignment response
+  <% end %>
+  </div>
+</div>
+
+<div class='table-responsive'>
+  <table class='table table-striped table-bordered table-hover'>
+    <thead>
+      <tr>
+
+
+            <th>Response</th>
+            <th>Comment or reason</th>
+            <th>Teaching request</th>
+            <th>User</th>
+
+          <th></th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @assignment_responses.each do |assignment_response| %>
+        <%= content_tag :tr, id: dom_id(assignment_response), class: dom_class(assignment_response) do %>
+
+
+                      <td><%= assignment_response.response %></td>
+                      <td><%= assignment_response.comment_or_reason %></td>
+                      <td><%= assignment_response.teaching_request %></td>
+                      <td><%= assignment_response.user %></td>
+
+
+            <td><%= link_to 'Show', assignment_response %></td>
+
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

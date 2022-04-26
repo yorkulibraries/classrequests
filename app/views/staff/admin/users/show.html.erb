@@ -1,0 +1,34 @@
+<div class="card bg-light p-4">
+<div class='row'>
+  <div class='col'>
+    <% page_title t(:users_list) %>
+    <%= content_tag :h1, yield(:page_title) %>
+    <hr class="primary"/>
+  </div>
+</div>
+  <div class="card-body mt-3">
+    <dl class="dl-horizontal">
+      <dt class="text-muted" ><%= t(:name) %></dt>
+      <dd class="fw-bold"><%= @user.name %></dd>
+      <dt class="text-muted"><%= t(:branch_division) %></dt>
+      <dd class="fw-bold"><%= @user.password %></dd>
+    </dl>
+
+    <% for attribute in @user.attributes.keys %>
+      <p><%= attribute.humanize %> <%= @user.attributes[attribute].to_s %></p>
+    <% end %>
+
+  </div>
+  <div class="card-footer">
+    <div class="btn-toolbar justify-content-left" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group me-2" role="group" aria-label="First group">
+        <%= link_to staff_admin_users_path(), class: 'btn btn-sm btn-info' do %>
+          <span class="fas fa-hand-point-left"></span> <%= t(:return_to_all_users) %>
+        <% end %>
+        <%= link_to edit_staff_admin_user_path(@user), class: 'btn btn-sm btn-primary' do %>
+          <%= t(:edit) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

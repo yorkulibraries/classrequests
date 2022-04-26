@@ -1,0 +1,60 @@
+<h1><%= @lead_name %> has choose to <%= @response %> the following class request</h1>
+
+<p><strong>Comment/Reason Given:</strong><p>
+<p><%= @message %></p>
+<br/>
+
+<h3>CLASS INFORMATION</h3>
+<hr/>
+<table class='table'>
+  <tbody>
+  <tr>
+    <td><strong>ID:</strong></td>
+    <td><%= @request.id %></td>
+  </tr>
+  <tr>
+    <td><strong>Course/Section</strong></td>
+    <td>
+      <%= @request.faculty %> / <%= @request.subject %>"><%= @request.academic_year %> - [<%= @request.faculty_abbrev %> / <%= @request.subject_abbrev %> <%= @request.course_number %>]: <%= @request.course_title %><em><%= t(:title_not_provided) if @request.course_title == '' %></em> -
+      <%= defined?(@request.section_name_or_about) ? truncate(@request.section_name_or_about, length: 25) : 'Untitled Section' %>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Preferred Date / Time</strong></td>
+    <td><%= @request.preferred_date.strftime('%b %d, %Y') %> / <%= @request.preferred_time.strftime('%I:%M %p') rescue nil %></td>
+  </tr>
+  <tr>
+    <td><strong>Alternate Date / Time</strong></td>
+    <td><%= @request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= @request.alternate_time.strftime('%I:%M %p') rescue nil %></td>
+  </tr>
+  <tr>
+    <td><strong>Duration & Location</strong></td>
+    <td><%= @request.duration.text %> | <%= @request.location_preference.text %></td>
+  </tr>
+  <tr>
+    <td><strong>Assigned Instructors</strong></td>
+    <td>
+      <strong>
+        <%= @request.lead_instructor.name rescue nil%><br/>
+        <%= @request.second_instructor.full_name rescue nil%><br/>
+        <%= @request.third_instructor.full_name rescue nil%><br/>
+      </strong>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='2'>
+      <strong>Request Note:</strong> <br/>
+      <p> See record in application </p>
+    <td>
+  </tr>
+  </tbody>
+</table>
+
+
+<a href="<%= operators_index_url(host: Setting.web_host) %>">Please login to class requests and review.</a>
+
+Thank you.
+
+<h3>Have a great day!</h3>
+<p>----------------</p>
+<p><strong>YUL Class Request Messenger</strong></p>

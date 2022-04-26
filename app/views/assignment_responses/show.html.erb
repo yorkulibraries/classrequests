@@ -1,0 +1,24 @@
+<div class='page-header'>
+  <%= link_to assignment_responses_path, class: 'btn btn-default' do %>
+    All Assignment_responses
+  <% end %>
+  <%= link_to edit_assignment_response_path(@assignment_response), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show assignment_response</h1>
+</div>
+
+<dl class='dl-horizontal'>
+  <dt>Response:</dt>
+  <dd><%= @assignment_response.response %></dd>
+
+  <dt>Comment or reason:</dt>
+  <dd><%= @assignment_response.comment_or_reason %></dd>
+
+  <dt>Teaching request:</dt>
+  <dd><%= @assignment_response.teaching_request %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @assignment_response.user %></dd>
+
+</dl>

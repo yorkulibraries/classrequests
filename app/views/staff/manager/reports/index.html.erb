@@ -1,0 +1,139 @@
+<div class='row'>
+  <div class='col'>
+    <% page_title t(:my_reports_dashboard) %>
+    <h1><%= t(:management_reports_dashboard) %></h1>
+    <hr class='primary'/>
+  </div>
+</div>
+
+<div class='row mt-3'>
+  <div class='col-12'>
+    <div class='card mb-3 shadow p-3 rounded'>
+      <!-- <div class='card-title'>
+        <h2><%= t(:teachings_quick_report) %></h2>
+        <hr class='primary' />
+      </div> -->
+      <div class='card-body p-0'>
+        <table class='table table-striped table-sm align-middle text-center mb-0'>
+          <thead class='table-info'>
+            <th scope='col'><%= t(:teachings) %></th>
+            <th scope='col'><%= t(:last_month) %></th>
+            <th scope='col'><%= t(:this_month) %></th>
+            <th scope='col'><%= t(:this_year) %></th>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope='row'><%= t(:assigned_or_done) %></td>
+              <td scope='row'><%= @teachings_last_month %></td>
+              <td scope='row'><%= @teachings_this_month %></td>
+              <td scope='row'><%= @teachings_this_year %></td>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='row mt-3'>
+  <div class='col-sm-12 col-md-6'>
+    <div class='card mb-3 shadow p-3 rounded'>
+      <div class='card-title'>
+        <h2><%= t(:all_teachings_by_date) %></h2>
+        <hr class='primary' />
+      </div>
+      <div class='card-body p-0'>
+        <%= render partial: 'staff/manager/reports/teachings_by_date_ranges/form' %>
+      </div>
+    </div>
+  </div>
+  <div class='col-sm-12 col-md-6'>
+    <div class='card bg-white p-4'>
+      <div class='card-title'>
+        <h2><%= t(:all_teaching_counts_by_faculty) %></h2>
+        <hr class='primary' />
+      </div>
+      <div class='card-body p-0'>
+        <table class='table table-striped table-sm align-middle text-center'>
+          <thead class='table-info'>
+            <tr>
+              <th scope='col'><%= t(:faculty) %></th>
+              <th scope='col'><%= t(:abbrev) %></th>
+              <th scope='col'><%= t(:teachings) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @counts_by_faculty.each do |f| %>
+            <tr>
+              <td><%= f.faculty %></td>
+              <td><%= f.faculty_abbrev %></td>
+              <td><%= f.teachings %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='row mt-3'>
+  <div class='col-sm-12 col-md-6'>
+    <div class='card mb-3 shadow p-3 rounded'>
+      <div class='card-title'>
+        <h2><%= t(:teachings_by_locations) %></h2>
+        <hr class='primary' />
+      </div>
+      <div class='card-body p-0'>
+        <table class='table table-striped table-sm align-middle text-center'>
+          <thead class='table-info'>
+            <tr>
+              <th scope='col'><%= t(:faculty) %></th>
+              <th scope='col'><%= t(:abbrev) %></th>
+              <th scope='col'><%= t(:location_preference) %></th>
+              <th scope='col'><%= t(:teachings) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @counts_by_location.each do |f| %>
+            <tr class="<%= f.location_preference %>_colour">
+              <td><%= f.faculty %></td>
+              <td><%= f.faculty_abbrev %></td>
+              <td><%= f.location_preference.text %></td>
+              <td><%= f.teachings %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class='col-sm-12 col-md-6'>
+    <div class='card mb-3 shadow p-3 rounded'>
+      <div class='card-title'>
+        <h2><%= t(:teachings_by_durations) %></h2>
+        <hr class='primary' />
+      </div>
+      <div class='card-body p-0'>
+        <table class='table table-striped table-sm align-middle text-center'>
+          <thead class='table-info'>
+            <tr>
+              <th scope='col'><%= t(:faculty) %></th>
+              <th scope='col'><%= t(:abbrev) %></th>
+              <th scope='col'><%= t(:duration) %></th>
+              <th scope='col'><%= t(:teachings) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @counts_by_duration.each do |f| %>
+            <tr class="<%= f.duration %>_colour">
+              <td><%= f.faculty %></td>
+              <td><%= f.faculty_abbrev %></td>
+              <td><%= f.duration.text %></td>
+              <td><%= f.teachings %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</div>

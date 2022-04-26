@@ -1,0 +1,27 @@
+<li class='nav-item dropdown'>
+  <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+    <i class='fas fa-users-cog text-primary' aria-hidden='true'></i> <%= t(:manager) %>
+  </a>
+  <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+    <li>
+      <%= link_to staff_manager_dashboard_path(), class: 'dropdown-item' do %>
+        <i class='fas fa-columns text-primary'></i> <%= t(:manager_dashboard) %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to staff_manager_teaching_requests_path(), class: 'dropdown-item' do %>
+        <i class='fas fa-list text-primary'></i> <%= t(:requests_dashboard) %>
+      <% end %>
+    </li>
+    <div class='dropdown-divider'></div>
+    <li><%= link_to staff_manager_reports_overview_path(), class: 'dropdown-item' do %>
+      <i class='fas fa-chart-bar text-primary'></i> <%= t(:reports_dashboard) %> <span class='text-muted text-sm'></span>
+    <% end %>
+    </li>
+    <li>
+      <%= link_to new_staff_manager_reports_teachings_by_date_range_path, class:'dropdown-item' do %>
+        <span class='far fa-calendar-alt text-primary'></span> <%= t(:teachings_by_date) %>
+      <% end %>
+    </li>
+  </ul>
+</li>

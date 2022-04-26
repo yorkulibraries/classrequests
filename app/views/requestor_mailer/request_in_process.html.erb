@@ -1,0 +1,45 @@
+<h1>Your Class Request is being reviewed and is in process.</h1>
+
+<p>You will be notified once an instructor/librarian has been assigned.</p>
+<p>If you have any further questions, please contact the assigned instructor listed below or <a href="mailto:<%= Setting.director_email %>"><%= Setting.director_name %></a >, <%= Setting.director_position %>, <a href="mailto: <%= Setting.director_email %>"><%= Setting.director_email %></a>.</p><br/>
+
+
+<h2>Request Details</h2>
+<hr/>
+<table>
+  <tbody>
+  <tr>
+    <td><strong>Faculty/Department:</strong></td>
+    <td><%= @request.faculty %> / <%= @request.subject %></td>
+  </tr>
+  <tr>
+    <td><strong>Course/Section:</strong></td>
+    <td>
+      <%= @request.academic_year %> : [<%= @request.faculty_abbrev %> / <%= @request.subject_abbrev %> <%= @request.course_number %>]: <%= @request.course_title %><em><%= t(:title_not_provided) if @request.course_title == '' %></em> -
+      <%= defined?(@request.section_name_or_about) ? truncate(@request.section_name_or_about, length: 25) : 'Untitled Section' %>
+    </td>
+  </tr>
+  <tr>
+    <td>Preferred Date / Time</td>
+    <td><%= @request.preferred_date.strftime('%b %d, %Y') %> / <%= @request.preferred_time.strftime('%I:%M %p') rescue nil %></td>
+  </tr>
+  <tr>
+    <td>Alternate Date / Time</td>
+    <td><%= @request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= @request.alternate_time.strftime('%I:%M %p') rescue nil %></td>
+  </tr>
+  <tr>
+    <td>Duration & Location</td>
+    <td><%= @request.duration.text %> | <%= @request.location_preference.text %></td>
+  </tr>
+  <tr>
+  </tbody>
+
+</table>
+<hr>
+
+<h3>Have a great day!</h3>
+<p>----------------</p>
+<p><strong>Library Class Request Messenger</strong></p>
+
+
+<p><strong>THIS AN AUTOMATIC NOTIFICATION, DO NOT REPLY TO THIS EMAIL.</strong><p>

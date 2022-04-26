@@ -1,0 +1,21 @@
+<div class="card w-90">
+  <%= simple_form_for([:staff, :admin, @department]) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="card-body">
+      <p class="small lead text-secondary"><%= t(:fields_marked_are_mandatory) %></p>
+      <div class="row mt-3">
+        <%= f.input :name %>
+      </div>
+      <div class="row mt-3">
+        <%= f.input :branch_division %>
+      </div>
+    </div>
+
+    <div class="form-actions card-footer">
+      <%= f.button :submit, class: "btn btn-success" %>
+      <%= link_to "Cancel", staff_admin_departments_path, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>

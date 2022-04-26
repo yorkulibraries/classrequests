@@ -1,0 +1,214 @@
+/* Inspiration from Start Bootstrap - Simple Sidebar and then went from there. (https://startbootstrap.com/template-overviews/simple-sidebar)1 */
+body {
+  overflow-x: hidden;
+}
+
+/* Used in navbrand */
+.vertical-divider {
+  border-left: 2px solid $gray-300;
+  height: 35px;
+  display: inline-block;
+  padding-left: 5px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+//aside li.menu-item.show a.dropdown-toggle::after {
+//  content: '\f077' !important; /* the different icon */
+//}
+
+
+/*
+ * Bootstrap by default is Mobile first, therefore any design not in
+ * media query applies to app or mobile first.
+ */
+
+// Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px)
+@media only screen and (max-width: 600px) {
+  .sidebar-toggler {
+    padding: 0.25rem 0.75rem;
+    padding: 0.6rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    // background-color: transparent;
+  }
+
+}
+
+.sidebar-toggler {
+  background-color: $york-grey-lighter;
+  &:hover { background-color: $york-grey-light; }
+}
+
+aside {
+  background: $white;
+  display: none;
+}
+
+#page-content-wrapper {
+  min-width: 0;
+  flex: 3;
+}
+#sidebar-wrapper {
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+
+  // Hide Desktop heading
+  .sidebar-heading { display: none; }
+
+  .sidebar-items {
+    margin-top: 30px;
+
+    .nav-item {
+      border-bottom: 1px solid $york-grey-medium;
+
+      a {
+        text-decoration: none;
+        color: $dark;
+        padding-left: 20px;
+
+        i { padding-right: 15px; }
+
+        &:hover { background-color: $york-grey-light; }
+        &:active, &:focus { background-color: $secondary; color: $white; }
+
+      }
+    }
+    .inner-nav {
+      padding: 15px 0;
+      background-color: $york-grey-light;
+
+      .nav-item {
+        border-bottom: none;
+        border-radius: 0px;
+
+        // i { padding-right: 5px; }
+        a {
+          padding-top: 0px;
+          padding-bottom: 0px;
+          &:hover { background-color: $secondary; color: $white;}
+        }
+      }
+
+    }
+  }
+
+}
+
+#sidebar-wrapper .nav-link[data-bs-target].collapsed:after {
+    border: none;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 700;
+    content: '\f078';
+    vertical-align: 0;
+    font-size: 12px;
+    padding-left: 15px;
+
+}
+#sidebar-wrapper .nav-link[data-bs-target]:not(.collapsed):after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 700;
+    content: '\f077';
+    vertical-align: 0;
+    font-size: 12px;
+    padding-left: 15px;
+
+}
+
+
+/*
+ * Collapsed sidebar css
+ */
+#wrapper.toggled #sidebar-wrapper {
+  flex: 100%;
+  display: block;
+
+  .sidebar-close {
+    display: inline-block;
+    text-align: right;
+  }
+
+  .sidebar-heading-toggled {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 10px;
+    width: 70%;
+    border-bottom: 1px solid $primary;
+
+    .navbar-brand {
+      margin-right: 0px;
+    }
+  }
+
+}
+
+/*
+ * Desktop / Medium-Large css
+ */
+@media (min-width: 768px) {
+  aside {
+    background-color: #061d38;
+    background-color: #fff;
+    display: flex;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    flex: 3;
+  }
+
+  #sidebar-wrapper {
+    flex: 0.6;
+    min-height: 100vh;
+
+    .sidebar-heading {
+      color: #fff;
+      display: block;
+      padding-left: 15px;
+      border-bottom: 1px solid $primary;
+    }
+    // Hide mobile heading
+    .sidebar-heading-toggled { display: none; }
+  }
+
+  // Hide the mobile close button
+  #wrapper #sidebar-wrapper .sidebar-close,
+  #wrapper.toggled #sidebar-wrapper .sidebar-close {
+    display: none;
+  }
+
+  /*
+   * Collapsed Desktop CSS *
+   */
+  #wrapper.toggled #sidebar-wrapper {
+    flex: 0;
+    padding-left: 0px;
+
+    .sidebar-items {  display: none; }
+
+    .sidebar-heading { display: none; }
+
+    .sidebar-heading-toggled {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      width: 100%;
+      padding-left: 0;
+
+      .navbar-brand {
+        margin-right: 0px;
+      }
+    }
+  }
+
+
+
+  // #sidebar-wrapper .navbar-toggler {
+  //   border-radius: 0px;
+  // }
+
+}

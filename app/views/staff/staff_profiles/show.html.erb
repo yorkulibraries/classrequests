@@ -1,0 +1,61 @@
+<div class='row'>
+  <div class='col'>
+    <% page_title t(:staff_profile) %>
+    <h1><%= t(:staff_profile_of) %> <%= current_user.name %></h1>
+    <hr class='primary'/>
+  </div>
+</div>
+<div class='btn-toolbar justify-content-left' role='toolbar' aria-label='Toolbar with button groups'>
+  <div class='btn-group me-2' role='group' aria-label='First group'>
+    <%= link_to operators_index_path(), class: 'btn btn-sm btn-info' do %>
+      <span class='fas fa-hand-point-left'></span> <%= t(:return_to_my_dashboard) %>
+    <% end %>
+    <%= link_to edit_staff_staff_profile_path(@staff_profile), class: 'btn btn-sm btn-primary' do %>
+      <%= t(:edit) %>
+    <% end %>
+  </div>
+</div>
+
+<div class='row mt-2'>
+  <div class='col'>
+    <div class='card mb-3 mt-3'>
+      <div class='card-body'>
+        <div class='row'>
+          <div class='col-md-6 col-sm-12 mb-1'>
+            <h5 class='text-primary'><%= t(:profile) %></h5>
+            <p class='text-muted small mb-0'>
+              <%= t(:specializtion_job_title) %>: <br/><span class='fw-bold text-dark'><%= @staff_profile.specializtion_job_title %></span>
+            </p>
+            <p class='text-muted small mb-0'>
+              <%= t(:bio) %>: <br/><span class='fw-bold text-dark'><%= @staff_profile.profile_bio %></span>
+            </p>
+          </div>
+          <div class='col-md-6 col-sm-12 mb-1'>
+            <h5 class='text-primary'><%= t(:other_details) %></h5>
+            <p class='text-muted small mb-0'>
+              <%= t(:profile_type) %>: <span class='fw-bold text-dark'><%= @staff_profile.role.humanize.titleize %></span>
+            </p>
+            <p class='text-muted small mb-0'>
+              <%= t(:department) %>: <span class='fw-bold text-dark'><%= @staff_profile.department.name %></span>
+            </p>
+            <p class='text-muted small mb-0'>
+              <%= t(:user_id_id) %>: <span class='fw-bold text-dark'><%= @staff_profile.user_id %></span>
+            </p>
+            <p class='text-muted small mb-0'>
+              <%= t(:approved?) %>: <span class='fw-bold text-dark'><%= (@staff_profile.is_approved?) ? I18n.t(:yes) : I18n.t(:no) %></span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class='card-footer'>
+        <div class='btn-toolbar justify-content-left' role='toolbar' aria-label='Toolbar with button groups'>
+          <div class='btn-group me-2' role='group' aria-label='First group'>
+            <%= link_to edit_staff_staff_profile_path(@staff_profile), class: 'btn btn-sm btn-primary' do %>
+              <%= t(:edit) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

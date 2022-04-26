@@ -1,0 +1,99 @@
+<h1>A library class has been requested in your liaison area(s).</h1>
+<p>Please follow up with the faculty member within 5 business days.</p>
+
+<p><%= simple_format h(@message) %></p>
+
+Please <strong>REPLY</strong> to this message to confirm your receipt of this new request.
+
+Thank you.
+
+
+<p><em>Request details below...</em></p>
+
+<h2>Submission Data</h2>
+<h3>CONTACT INFORMATION</h3>
+<hr/>
+<table class='table'>
+  <tbody>
+    <tr>
+      <td><strong>I am a YorkU:</strong></td>
+      <td><%= @request.patron_type %></td>
+    </tr>
+    <tr>
+      <td><strong>First Name:</strong></td>
+      <td><%= @request.first_name %></td>
+    </tr>
+    <tr>
+      <td><strong>Last Name:</strong></td>
+      <td><%= @request.last_name %></td>
+    </tr>
+    <tr>
+      <td><strong>Email:</strong></td>
+      <td><%= @request.email %></td>
+    </tr>
+    <tr>
+      <td><strong>Phone:</strong</td>
+      <td><%= @request.phone %></td>
+    </tr>
+    <tr>
+      <td><strong>Academic Year:</strong></td>
+      <td><%= @request.academic_year %></td>
+    </tr>
+    <tr>
+      <td><strong>Faculty:</strong></td>
+      <td><%= @request.faculty_abbrev %> - <%= @request.faculty %></td>
+    </tr>
+    <tr>
+      <td><strong>Dept/Subject:</strong></td>
+      <td><%= @request.subject_abbrev %> - <%= @request.subject %></td>
+    </tr>
+    <tr>
+      <td><strong>Course Number:</strong></td>
+      <td><%= @request.course_number %></td>
+    </tr>
+    <tr>
+      <td><strong>Course Title:</strong></td>
+      <td><%= @request.course_title %></td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+<h3>SECTION DETAILS</h3>
+<hr/>
+<table>
+  <thead>
+    <tr class='bg-secondary'>
+      <th><b>Sections</b></th>
+      <th><b># of Students</b></th>
+      <th><b>Preferred</b></th>
+      <th><b>Alternative</b></th>
+      <th><b>Duration</b></th>
+      <th><b>Location Pref.</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @request.sections.each do |section| %>
+    <tr>
+      <td style='text-align: center;'><%= section.name %></td>
+      <td style='text-align: center;'><%= section.number_of_students %></td>
+      <td style='text-align: center;'><%= section.preferred_date.strftime('%b %d, %Y') rescue nil %> / <%= section.preferred_time.strftime('%I:%M %p') rescue nil %></td>
+      <td style='text-align: center;'><%= section.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= section.alternate_time.strftime('%I:%M %p') rescue nil %></td>
+      <td style='text-align: center;'><%= section.duration %></td>
+      <td style='text-align: center;'><%= section.location_preference %></td>
+    </tr>
+    <tr>
+      <td><b>Note: </b></td>
+      <td colspan='5'><%= section.note %><br/></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
+<br/>
+<p>If you have any further questions, please contact <a href="mailto:<%= Setting.director_email %>"><%= Setting.director_name %></a >, <%= Setting.director_position %>, <a href="mailto: <%= Setting.director_email %>"><%= Setting.director_email %></a>.</p><br/>
+
+<h3>Have a great day!</h3>
+<p>----------------</p>
+<p><strong>Library Class Request Messenger</strong></p>

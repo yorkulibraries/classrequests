@@ -1,0 +1,135 @@
+<div class='row'>
+  <div class='col'>
+    <h1><%= t(:application_settings) %>
+    <hr class="primary"/>
+  </div>
+</div>
+<%= simple_form_for([:staff, :admin, Setting.new], html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <p class="small lead text-secondary"><%= t(:fields_marked_are_mandatory) %></p>
+  <div class="card mb-3 shadow p-2 rounded">
+    <div class="card-body">
+      <div class="card-title"><h2><%= t(:general_preferences) %></h2><hr class="secondary" /></div>
+      <hr/>
+      <div class="row mt-3">
+        <div class=col-md-8 col-sm-12"><%= f.input :release_version, input_html: {value: Setting.release_version}, readonly: true %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :app_name, hint: t('setting.app_name_hint'), input_html: {value: Setting.app_name}, required: true %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :web_host, hint: t('setting.web_host_hint'), input_html: {value: Setting.web_host} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :logo_url, hint: t('setting.logo_url'), input_html: {value: Setting.logo_url} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :mail_logo_url, hint: t('setting.mail_logo_url'), input_html: {value: Setting.mail_logo_url} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :library_homepage_url, hint: t('setting.library_homepage_url_hint'), input_html: {value: Setting.library_homepage_url} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :university_homepage_url, hint: t('setting.university_homepage_url_hint'), input_html: {value: Setting.university_homepage_url} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :login_banner_url, hint: t('setting.login_banner'), input_html: {value: Setting.login_banner_url} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :homepage_banner_url, hint: t('setting.homepage_banner'), input_html: {value: Setting.homepage_banner_url} %></div>
+      </div>
+
+      <!-- <div class="row mt-3">
+        <%= f.input :default_locale %>
+        field :enable_annoucements, default: false, type: :boolean
+        field :enable_notifications, default: false, type: :boolean
+      </div> -->
+
+    </div>
+  </div>
+  <div class='card mb-3 shadow p-2 rounded'>
+    <div class="card-body">
+      <div class="card-title text-primary"><h2><%= t(:messages) %></h2><hr class="secondary" /></div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :global_notice, as: :text, hint: t(:global_notice_on_all_pages), input_html: {value: Setting.global_notice} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :welcome_message, as: :text, input_html: {value: Setting.welcome_message} %></div>
+      </div>
+      <hr/>
+      <div class="row mt-3">
+        <p><strong><%= t('setting.director_hint') %></strong></p>
+        <div class="col-md-8 col-sm-12"><%= f.input :director_name, as: :string, input_html: {value: Setting.director_name} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :director_position, as: :string, input_html: {value: Setting.director_position} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :director_email, as: :string, input_html: {value: Setting.director_email} %></div>
+      </div>
+      <hr/>
+      <p><strong><%= t(:specific_library_contacts) %></strong></p>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :archives_contact, as: :string, input_html: {value: Setting.archives_contact} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :law_contact, as: :string, input_html: {value: Setting.law_contact} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :all_contact, as: :string, input_html: {value: Setting.all_contact} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :questions_inquiries_contact, as: :string, input_html: {value: Setting.questions_inquiries_contact} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :other_campus_contact, as: :string, input_html: {value: Setting.other_campus_contact} %></div>
+      </div>
+    </div>
+  </div>
+  <div class='card mb-3 shadow p-2 rounded'>
+    <div class="card-body">
+      <div class="card-title text-secondary"><h2><%= t(:mail_and_notifications) %></h2><hr class="secondary" /></div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :system_from_name, hint: t('from_name') %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :system_from_email, hint: t('from_email') %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :new_request_notification, as: :text, hint: t('setting.notification_hint'), input_html: {value: Setting.new_request_notification.join("\n")} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :cancel_request_notification, as: :text, hint: t('setting.notification_hint'), input_html: {value: Setting.cancel_request_notification.join("\n")} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :manager_emails, as: :text, hint: t('setting.notification_hint'), input_html: {value: Setting.manager_emails.join("\n")} %></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-8 col-sm-12"><%= f.input :system_admin_emails, as: :text, hint: t('setting.notification_hint'), input_html: {value: Setting.system_admin_emails.join("\n")} %></div>
+      </div>
+    </div>
+  </div>
+  <div class='card mb-3 shadow p-2 rounded'>
+    <div class="card-body">
+      <div class="card-title"><h2><%= t(:authorizations) %></h2><hr class="secondary" /></div>
+      <div class="row mt-3">
+        <%= f.input :enable_devise_database_auth, as: :boolean %>
+      </div>
+      <div class="row mt-3">
+        <%= f.input :enable_staff_access_request, as: :boolean %>
+      </div>
+      <div class="row mt-3">
+        <%= f.input :enable_devise_PPY, as: :boolean %>
+      </div>
+    </div>
+  </div>
+  <div class='card mb-3 shadow p-2 rounded'>
+    <div class="card-body">
+      <div class="form-actions card-footer">
+        <%= f.button :submit, 'Save Settings', class: "btn btn-success" %>
+        <%= link_to "Cancel", staff_admin_settings_path, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+<% end %>

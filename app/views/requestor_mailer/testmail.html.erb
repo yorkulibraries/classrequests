@@ -1,0 +1,130 @@
+<!-- <h1>Hello </h1> -->
+<h2>Thank you for submitting a request for a library class.</h2>
+<p>We will contact you within five business days</p><br/>
+
+<h3>Submission Data</h3>
+<!-- <ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Patron type</div>
+        <%= @request.patron_type %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">First name</div>
+        <%= @request.first_name %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Last name</div>
+        <%= @request.last_name %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Email</div>
+        <%= @request.email %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Phone</div>
+        <%= @request.phone %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Academic year</div>
+        <%= @request.academic_year %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Faculty</div>
+        <%= @request.faculty %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Faculty abbrev</div>
+        <%= @request.faculty_abbrev %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Subject</div>
+        <%= @request.subject %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Subject abbrev</div>
+        <%= @request.subject_abbrev %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Course title</div>
+        <%= @request.course_title %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Course number</div>
+        <%= @request.course_number %>
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div class="d-flex w-100 justify-content-between">
+      <div class="font-weight-bold">Submitted by</div>
+        <%= @request.submitted_by %>
+    </div>
+  </li>
+</ul> -->
+<p>I am a: <b><%= @request.patron_type %></b></p>
+<p>First Name: <b><%= @request.first_name %></b></p>
+<p>Last Name: <b><%= @request.last_name %></b></p>
+<p>Email: <b><%= @request.email %></b></p>
+<p>Phone: <b><%= @request.phone %></b></p>
+<p>Academic year: <b><%= @request.academic_year %></b></p>
+<p>Faculty: <b><%= @request.faculty_abbrev %> - <%= @request.faculty %></b></p>
+<p>Subject: <b><%= @request.subject_abbrev %> - <%= @request.subject %></b></p>
+<p>Course number: <b><%= @request.course_number %></b></p>
+<p>Course Title: <b><%= @request.course_title %></b></p>
+
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Sections</th>
+      <th># of Students</th>
+      <th>Preferred</th>
+      <th>Alternative</th>
+      <th>Duration</th>
+      <th>Location Pref.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @request.sections.each do |section| %>
+    <tr>
+      <td><%= section.name %></td>
+      <td><%= section.number_of_students %></td>
+      <td><%= section.preferred_date.strftime("%b %d, %Y") rescue nil %> / <%= section.preferred_time.strftime("%I:%M %p") rescue nil %></td>
+      <td><%= section.alternate_date.strftime("%b %d, %Y") rescue nil %> / <%= section.alternate_time.strftime("%I:%M %p") rescue nil %></td>
+      <td><%= section.duration %></td>
+      <td><%= section.location_preference %></td>
+    </tr>
+    <tr>
+      <td>Note</td>
+      <td colspan="5"><%= section.note %></td>
+    </tr>
+    <% end %>  
+  </tbody>
+</table>
+
+
+<p>Have a great day!</p>
+
+-----------------------------------
+<p><strong>Library Class Request Messenger</strong></p>

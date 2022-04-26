@@ -1,0 +1,11 @@
+<% if @request.errors.size == 0 %>
+
+  $('#edit_staff_manager_lead_assignment_response #lead_assignment_response_form').modal('hide');
+  $('#edit_staff_manager_lead_assignment_response #lead_assignment_response_form').remove
+
+<% else %>
+$('#edit_staff_manager_lead_assignment_response #lead_assignment_response_form').modal('hide');
+$('#edit_staff_manager_lead_assignment_response #lead_assignment_response_form').replaceWith("<%= escape_javascript(render 'form', formats: [:html]) %>");
+$('#edit_staff_manager_lead_assignment_response #lead_assignment_response_form').modal('show');
+
+<% end %>

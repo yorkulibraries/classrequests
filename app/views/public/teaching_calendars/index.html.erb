@@ -1,0 +1,87 @@
+
+<div class='row'>
+  <div class='col-md-12 col-sm-12'>
+    <% page_title 'Teaching Public Calendar' %>
+    <h1><%= yield(:page_title) %></h1>
+    <hr class='primary'/>
+  </div>
+</div>
+<div class='row d-none d-md-block d-lg-block .d-xl-block'>
+  <div class='col-md-12'>
+    <!-- <div class='jumbotron pt-3 bg-white'> -->
+    <div class='p-3 mb-4 bg-light rounded-3'>
+
+      <%= month_calendar attribute: :preferred_date, events: @teachings do |date, teaching_sessions| %>
+        <%= date.strftime('%d') %>
+
+        <ul class='list-group list-group-flush'>
+        <% teaching_sessions.each do |session| %>
+          <li class='list-group-item calendar-event <%= session.status %> small'>
+            <%= session.name %><br/>
+            <%= session.preferred_time.strftime('%I:%M %p') rescue nil %>
+            <% if session.lead_instructor %>
+              <br/>1:<%= session.lead_instructor.name rescue nil %>
+            <% end %>
+            <% if session.second_instructor %>
+              <br/>2:<%= session.second_instructor.name rescue nil %>
+            <% end %>
+            <% if session.third_instructor %>
+              <br/>3:<%= session.third_instructor.name rescue nil %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col'>
+    <!-- <div class='jumbotron pt-3 bg-white'> -->
+    <div class='p-3 mb-4 bg-light rounded-3'>
+      <h2>Teaching of the Month</h2>
+      <hr class='primary'/>
+      <div class='row justify-content-md-center p-10 mb-2'>
+        <div class='col text-start'><a href="/en/public/teaching_calendars?start_date=<%= @today.last_month.at_beginning_of_month %>" class='btn btn-primary'>Previous</a></div>
+        <div class='col text-center'><h2><%= @today.strftime('%B') %></h2></div>
+        <div class='col text-end'><a href="/en/public/teaching_calendars?start_date=<%= @today.next_month.at_beginning_of_month %>" class='btn btn-primary'>Next</a></div>
+      </div>
+      <ul class='list-group sections'>
+        <% @teachings.each do |section| %>
+          <li class='list-group-item p-3'>
+            <dl class='data-dl-md'>
+              <div class='row'>
+                <dt class='col-lg-2 col-md-2 col-sm-12'>Event</dt>
+                <dd class='col-lg-3 col-md-3 col-sm-12'><%= section.name %></dd>
+                <dt class='col-lg-2 col-md-3 col-sm-12'>Lead Library Instructor</dt>
+                <dd class='col-lg-2 col-md-3 col-sm-12'>
+                  <% if section.lead_instructor %>
+                    1: <%= section.lead_instructor.name rescue nil %>
+                  <% end %>
+                  <% if section.second_instructor %>
+                    <br/>2: <%= section.second_instructor.name rescue nil %>
+                  <% end %>
+                  <% if section.third_instructor %>
+                    <br/>3: <%= section.third_instructor.name rescue nil %>
+                  <% end %>
+                </dd>
+                <dt class='col-lg-1 col-md-2 col-sm-12'>Location</dt>
+                <dd class='col-lg-2 col-md-3 col-sm-12'><%= section.location_preference.text %></dd>
+
+                <!-- <dt class='col-lg-1 col-md-2 col-sm-12'>Status</dt>
+                <dd class='col-lg-1 col-md-2 col-sm-12'><span class='badge badge-pill badge-<%= section.status.downcase.parameterize %>'><%= section.status %></span></dd> -->
+              </div>
+              <div class='row'>
+                <dt class='col-lg-2 col-md-2 col-sm-12'>Start Date / Time </dt>
+                <dd class='col-lg-3 col-md-3 col-sm-12'><%= section.preferred_date rescue nil %> / <%= section.preferred_time.strftime('%I:%M %p') rescue nil %></dd>
+                <dt class='col-lg-1 col-md-1 col-sm-12'>Duration</dt>
+                <dd class='col-lg-2 col-md-2 col-sm-12'><%= section.duration.text %></dd>
+              </div>
+            </dl>
+          </li>
+
+        <% end %>
+      </ul>
+    </div> <!-- jumbo -->
+  </div> <!-- col -->
+</div> <!-- row -->

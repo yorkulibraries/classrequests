@@ -1,0 +1,29 @@
+// alert(<%= @teaching_request.errors %>);
+// console.log(<%= @teaching_request.errors.size %>);
+console.log("<%= j JSON.pretty_generate(@teaching_request.valid?).html_safe %>");
+ // if @teaching_request.errors.size == 0 @teaching_request.valid?
+<% if @teaching_request.errors.size == 0 %>
+  $('#edit_staff_manager_assign_request_lead #assign_request_lead_form').modal('hide');
+  $('#edit_staff_manager_assign_request_lead #assign_request_lead_form').remove
+  console.log('I am in if VALID');
+  $('.modal').remove();
+  $('.modal-backdrop').remove();
+
+
+
+<% else %>
+console.log('I am in if INVALID. Show me errors!');
+
+console.log("<%= j JSON.pretty_generate(@active_instructors.inspect).html_safe %>");
+$('#edit_staff_manager_assign_request_lead #assign_request_lead_form').modal('hide');
+$('#edit_staff_manager_assign_request_lead #assign_request_lead_form').replaceWith("<%= escape_javascript(render 'form', formats: [:html]) %>");
+$('#edit_staff_manager_assign_request_lead #assign_request_lead_form').modal('show');
+<% @active_instructors = User.includes(:staff_profile).references(:staff_profiles).where(staff_profiles: {role: [0,1]}).where(is_active: true).order(:first_name) %>
+
+$('.request-chosen').chosen({
+  no_results_text: 'No Result Found',
+  width: '100%',
+  allow_single_deselect:true
+});
+
+<% end %>

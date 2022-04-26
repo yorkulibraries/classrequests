@@ -1,0 +1,29 @@
+<%= form_with(model: [:staff, :admin, staff_profile], local: true) do |form| %>
+  <% if staff_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(staff_profile.errors.count, "error") %> prohibited this staff_profile from being saved:</h2>
+
+      <ul>
+      <% staff_profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <% if [:staff, :admin, staff_profile].persisted? %>
+      <div class="float-right">
+        <%= link_to 'Destroy', [:staff, :admin, staff_profile], method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if [:staff, :admin, staff_profile].persisted? %>
+      <%= link_to "Cancel", [:staff, :admin, staff_profile], class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", staff_admin_staff_profiles_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

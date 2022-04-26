@@ -1,0 +1,69 @@
+
+<aside id='sidebar-wrapper' class='flex-column'>
+
+  <!-- Sidebar Content -->
+  <div id='sidebar-content' class=''>
+    <div class='sidebar-heading'>
+      <a class='navbar-brand' href="<%= root_url %>">
+        <!-- YorkULogo_Ver_rgb -->
+        <img src="<%= image_url('YorkULogo_Ver_rgb.jpg') %>" height='54px' class='' alt=''>
+        <!-- <img src=' image_url('YorkULogo_Hor_186-svg.svg') ' height='24px' class='' alt=''> -->
+
+        <div class='vertical-divider'></div>
+        <span class='brand-name d-inline-block p-1'> <%= (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR' %></span>
+      </a>
+    </div>
+    <!-- Close and Brand -->
+    <div class='sidebar-heading-toggled'>
+      <a class='navbar-brand' href="<%= root_url %>">
+        <img src="<%= image_url('YorkULogo_Ver_rgb.jpg') %>" height='54px' class='d-inline-block align-middle logo' alt=''>
+      </a>
+    </div>
+    <div class='sidebar-close'>
+      <button class='btn btn-secondary' id='inner-menu-toggle' type='button' aria-controls='sidebar-wrapper' aria-expanded='false' aria-label='Toggle Sidebar'>
+        <%= t(:close) %> <i class='fas fa-skull-circle'></i>
+      </button>
+    </div>
+
+    <!-- Sidebar Nav -->
+    <div class='sidebar-items'>
+      <ul class='nav flex-column'>
+        <li class='nav-item'>
+          <%= link_to staff_manager_dashboard_path(), class: 'nav-link' do %>
+            <i class='fas fa-columns'></i> <%= t(:dashboard) %>
+          <% end %>
+        </li>
+        <li class='nav-item'>
+          <%= link_to staff_manager_teaching_requests_path(), class: 'nav-link' do %>
+            <i class='fas fa-list'></i> <%= t(:view_all_requests) %>
+          <% end %>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link collapsed' href='#submenu1' data-bs-toggle='collapse' data-bs-target='#submenu1'>
+            <i class='fas fa-chart-bar'></i> <%= t(:Reports) %>
+          </a>
+          <div class='collapse' id='submenu1' aria-expanded='false'>
+            <ul class='nav inner-nav flex-column'>
+              <li class='nav-item'>
+                <a class='nav-link' href=''>
+                  <i class='fas fa-chalkboard-teacher'></i> <%= t(:teachings_by_date) %> - COMING SOON
+                   <!-- new_staff_manager_reports_teachings_by_date_range_path  -->
+                </a>
+              </li>
+              <li class='nav-item'>
+                <%= link_to public_teaching_calendars_path, class:'dropdown-item' do %>
+                  <i class='fa fa-calendar'></i> <%= t(:teaching_calendar) %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class='nav-item'>
+          <%= link_to root_url, class: 'nav-link' do %>
+            <i class='fas fa-cogs'></i> <%= t(:system) %> <span class='text-muted'>[coming soon]</span>
+          <% end %>
+        </li>
+      </ul>
+    </div> <!-- /#sidebar-items -->
+  </div> <!-- /#sidebar-content -->
+</aside> <!-- /#sidebar-wrapper -->

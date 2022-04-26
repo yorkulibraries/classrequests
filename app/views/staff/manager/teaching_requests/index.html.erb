@@ -1,0 +1,162 @@
+<div class='row'>
+  <div class='col'>
+    <% page_title 'Manage Requests' %>
+    <%= content_tag :h1, yield(:page_title) %>
+    <hr class='primary'/>
+  </div>
+</div>
+<!-- REQUESTS TOOLBAR -->
+<div class='btn-toolbar justify-content-center p-3' role='toolbar' aria-label='Toolbar with button groups'>
+  <div class='btn-group me-2' role='group' aria-label='First group'>
+    <%= link_to staff_manager_teaching_requests_path(sort: t(:all)),
+      class: 'btn btn-sm #{is_active(t(:all), 'btn')}' do %>
+      <%= 'All Requests' %> <span class='badge bg-secondary'><%= @teaching_requests_valid_count rescue nil %></span>
+    <% end %>
+  </div>
+  <div class='btn-group me-2' role='group' aria-label='Second group'>
+    <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.new_request.text),
+      class: "btn btn-sm #{is_active(TeachingRequest.status.new_request.text, 'btn')}" do %>
+      <%= TeachingRequest.status.new_request.text %> <span class="badge badge-<%= TeachingRequest.status.new_request.text.parameterize %>"><%= TeachingRequest.where(status: TeachingRequest.status.new_request.value).count %></span>
+    <% end %>
+    <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.in_process.text),
+      class: "btn btn-sm #{is_active(TeachingRequest.status.in_process.text, 'btn')}" do %>
+        <%= TeachingRequest.status.in_process.text %> <span class="badge badge-<%= TeachingRequest.status.in_process.text.parameterize %> text-dark"><%= TeachingRequest.where(status: TeachingRequest.status.in_process.value).count %></span>
+    <% end %>
+    <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.assigned.text),
+      class: "btn btn-sm #{is_active(TeachingRequest.status.assigned.text, 'btn')}" do %>
+        <%= TeachingRequest.status.assigned.text %> <span class="badge badge-<%= TeachingRequest.status.assigned.text.parameterize %>"><%= TeachingRequest.where(status: TeachingRequest.status.assigned.value).count %> </span>
+    <% end %>
+  </div>
+  <div class='btn-group me-5' role='group' aria-label='Third group'>
+    <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.unfulfilled.text),
+      class: "btn btn-sm #{is_active(TeachingRequest.status.unfulfilled.text, 'btn')}" do %>
+        Unfulfilled:  <span class="badge badge-<%= TeachingRequest.status.unfulfilled.text.parameterize %>"><%= TeachingRequest.where(status: TeachingRequest.status.unfulfilled.value).count %></span>
+    <% end %>
+    <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.deleted.text),
+      class: "btn btn-sm #{is_active(TeachingRequest.status.deleted.text, 'btn')}" do %>
+       Deleted:  <span class="badge badge-<%= TeachingRequest.status.deleted.text.parameterize %>"><%= TeachingRequest.where(status: TeachingRequest.status.deleted.value).count %></span>
+    <% end %>
+    <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.not_submitted.text),
+      class: "btn btn-sm #{is_active(TeachingRequest.status.not_submitted.text, 'btn')}" do %>
+      Not Submitted: <span class="badge badge-<%= TeachingRequest.status.not_submitted.text.parameterize %>"><%= TeachingRequest.where(status: TeachingRequest.status.not_submitted.value).count %></span>
+    <% end %>
+  </div>
+</div>
+<!-- END OF REQUESTS TOOLBAR -->
+
+<!-- PAGINATION -->
+<%= paginate @teaching_requests, theme: 'bootstrap-5',
+                 pagination_class: 'pagination-sm flex-wrap justify-content-center mt-3' %>
+
+<div class='row mb-2'>
+  <div class='col'>
+    <% if @teaching_requests.count == 0 %>
+      <div class='card mb-3 shadow p-2 rounded'>
+        <div class='card-body'>
+          <h3 class='text-muted'> <%= t(:there_are_no_requests) %> <% if params[:sort] %>
+               with <span class='text-muted'><%= params[:sort] %></span> status
+            <% end %>.</h3>
+        </div>
+      </div>
+    <% end %>
+    <% @teaching_requests.each do |request| %>
+    <div class='card mb-3 mt-3'>
+      <div class='card-header'>
+        <div class='row'>
+          <div class='col fw-bold'><%= t(:teaching_request_id) %>: <%= request.id %></div>
+          <div class='col text-end'><span class="badge badge-pill badge-<%= request.status.text.parameterize %>"><%= request.status.text %></span></div>
+        </div>
+      </div>
+      <div class='card-body'>
+        <div class='row'>
+          <!-- column -->
+          <div class='col-md-3'>
+            <h5 class='text-primary'><%= t(:people) %></h5>
+            <p class='mb-0 fw-bold small'><%= request.first_name %> <%= request.last_name %> [<%= request.patron_type %>]</p>
+            <p class='text-muted small mb-0'>
+              <%= t(:email) %>: <span class='fw-bold text-dark'><%= request.email %></span></p>
+            <p class='text-muted small mb-0'><%= t(:assigned_instructors) %>: </p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.lead_instructor.name rescue nil%></p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.second_instructor.full_name rescue nil%></p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.third_instructor.full_name rescue nil%></p>
+          </div>
+          <!-- column -->
+          <div class='col-md-6'>
+            <h5 class='text-primary'><%= t(:request_info) %></h5>
+            <p class='fw-bold small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= request.faculty %> / <%= request.subject %>"><%= request.academic_year %> - [<%= request.faculty_abbrev %> / <%= request.subject_abbrev %> <%= request.course_number %>]: <%= request.course_title %><em><%= t(:title_not_provided) if request.course_title == '' %></em> </p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:section) %>:
+              <span class='fw-bold text-dark'> <%= defined?(request.section_name_or_about) ? truncate(request.section_name_or_about, length: 25) : 'Untitled Section' %>
+              </span>
+            </p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:number_of_students) %>:
+              <span class='fw-bold text-dark'><%= request.number_of_students %></span>
+            </p>
+
+            <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= request.request_note.to_plain_text %>"><%= t(:note) %>: <span class='fw-bold text-dark'><%= truncate(strip_tags(request.request_note.to_plain_text), length: 25) %></span></p>
+          </div>
+          <!-- column -->
+          <div class='col-md-3'>
+            <h5 class='text-primary'><%= t(:other_details) %></h5>
+            <p class='text-muted small mb-0'><%= t(:dates) %>:</p>
+
+              <p class='fw-bold small mb-0 text-dark'><%= request.preferred_date.strftime('%b %d, %Y') %> / <%= request.preferred_time.strftime('%I:%M %p') rescue nil %></p>
+              <p class='fw-bold small mb-0 text-dark'><%= request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= request.alternate_time.strftime('%I:%M %p') rescue nil %></p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:duration) %>:
+              <span class='fw-bold text-dark'><%= request.duration.text %></span>
+            </p>
+            <p class='text-muted small mb-0'><%= t(:location) %>:
+              <span class='fw-bold text-dark'><%= request.location_preference.text %></span>
+            </p>
+          </div>
+        </div>
+       </div> <!-- card-body -->
+       <div class='card-footer text-muted'>
+         <div class='row'>
+           <div class='col text-start'>
+             <%= link_to staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-info', remote: false do %>
+              <i class='fas fa-eye'></i> <%= t(:view_request_details) %>
+             <% end %>
+             <%= link_to edit_staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-secondary', remote: false do %>
+              <i class='fas fa-edit'></i> <%= t(:edit_request_details) %>
+             <% end %>
+           </div>
+           <div class='col text-end'>
+             <% if !request.lead_instructor %>
+               <%= link_to edit_staff_manager_assign_request_lead_path(id: request.id), class: 'btn btn-sm btn-success', remote: true do %>
+                 <%= t(:assign_request_lead) %>
+                 <i class='fa fa-bolt'></i>
+               <% end %>
+            <% else %>
+
+              <p><%= t(:request_assigned_awaiting_response) if !request.status.assigned? %>
+            <% end %>
+            <% if request.assignment_responses.count > 0 %>
+                <%= link_to staff_teaching_request_assignment_responses_path(request), class: 'btn btn-sm btn-info', remote: false do %>
+                  <%= t(:view_response_log) %>
+                  <i class='fa fa-list'></i>
+                <% end %>
+            <% end %>
+         </div>
+         <!--
+         <%= link_to [:staff, :manager, teaching_request], method: :delete,
+             data: { confirm: 'Are you sure?', toggle: 'tooltip', title: 'delete' },
+             class: 'btn text-white btn-danger'  do %>
+               <i class='fas fa-times-circle'></i> <%= t(:delete) %>
+         <% end %>
+         -->
+       </div>
+     </div>
+   </div> <!-- card close -->
+   <% end %>
+ </div>
+</div>
+
+<!-- PAGINATION -->
+<%= paginate @teaching_requests, theme: 'bootstrap-5',
+                 pagination_class: 'pagination-sm flex-wrap justify-content-center mt-3' %>

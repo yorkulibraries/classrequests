@@ -1,0 +1,151 @@
+// $navbar-default-bg: #312312;
+// $light-orange: #ff8c00;
+// $navbar-default-color: $light-orange;
+//custom override for libstar
+// @import 'libstar';
+
+@import 'default/_yorku-colors';
+@import 'bootstrap/scss/bootstrap';
+@import 'default/_yorku-component-colors';
+@import 'default/navbar';
+// @import 'bootstrap';
+//@import 'bootstrap/scss/bootstrap';
+
+@import 'default/sticky-footer';
+@import 'default/announcements';
+
+/* Wide Sidebar is wider and will only show YorkU logo on collapse */
+@import 'default/wide-sidebar';
+
+@import 'default/chosen-bootstrap-libstar';
+
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'simple_calendar';
+@import 'trix/dist/trix';
+@import 'actiontext';
+// @import 'bootstrap-email';
+
+// /* Wide Sidebar is wider and will only show YorkU logo on collapse */
+// @import 'default/wide-sidebar';
+// // @import 'default/sidepanel';
+//
+// /* Compact Sidebar will show the icons and names on collapse */
+// // @import 'default/compact-sidebar';
+//
+// @import 'default/navbar';
+//
+// // Fixes bootstrap nav-brand container overlap
+// @include media-breakpoint-down(xs) {
+//   .container {
+//     margin-left: 0;
+//     margin-right: 0;
+//   }
+// }
+//
+// // Masquerade alert shouldn't have a bottom margin
+// body > .alert {
+//   margin-bottom: 0;
+// }
+//
+
+// @import 'jquery-ui/jquery-ui.min.css';
+// @import 'jquery-ui/jquery-ui.structure.min.css';
+// @import 'jquery-ui/jquery-ui.theme.min.css';
+
+//
+/***************************************/
+/* APP STYLES **************************/
+/***************************************/
+body {
+  // background: asset-url('dust_scratches.png');
+  background: asset-url('whitey.png');
+  background-color: #d7d9d7;
+
+}
+hr {
+  border-width: 2px;
+  height: 0.5px;
+  border-top: 1px solid $primary;
+
+  &.primary {
+    background-color: $primary;
+    border-top: 1px solid $primary;
+    height: 0.5px;
+  }
+  &.secondary {
+    background-color: $secondary;
+    border-top: 1px solid $secondary;
+    height: 0.5px;
+  }
+  &.info {
+    background-color: $info;
+    border-top: 1px solid $info;
+    height: 0.5px;
+  }
+  &.dark {
+    background-color: $dark;
+    border-top: 1px solid $dark;
+    height: 0.5px;
+  }
+  &.light {
+    background-color: $light;
+    border-top: 1px solid $light;
+    height: 0.5px;
+  }
+
+}
+.in_the_class_colour {
+  background-color: lighten($warning, 40%);;
+  border-top: 1px solid $warning;
+  height: 0.2px;
+}
+.in_the_library_colour {
+  background-color: lighten($purple, 40%);
+  border-top: 1px solid $purple;
+  height: 0.2px;
+}
+.online_colour {
+  background-color: lighten($info, 50%);
+  border-top: 1px solid $info;
+  height: 0.2px;
+  // color: $white;
+}
+.pre_recorded_colour {
+  background-color: lighten($success, 50%);
+  border-top: 1px solid $success;
+  height: 0.2px;
+}
+.off_campus_colour {
+  background-color: lighten($teal, 40%);
+  border-top: 1px solid $teal;
+  height: 0.2px;
+}
+.to_be_determined_colour {
+  background-color: lighten($orange, 40%);
+  border-top: 1px solid $orange;
+  height: 0.2px;
+}
+
+/******** FLATPICKR CUSTOM ********/
+
+.flatpickr-time .numInputWrapper {
+  background: $light;
+}
+
+.flatpickr-time input:hover, .flatpickr-time .flatpickr-am-pm:hover, .flatpickr-time input:focus, .flatpickr-time .flatpickr-am-pm:focus {
+  background: lighten($primary, 45%);
+
+}
+
+/******* END OF FLATPICKR ******/
+
+pre kbd { background-color: $gray-200; }
+
+.global-alert {
+  position: relative;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}

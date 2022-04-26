@@ -1,0 +1,49 @@
+<!-- <div class='row'>
+  <div class='col-md-12 col-sm-12'>
+  <h1><%= t(:library_class_request_home) %></h1>
+  <hr class='primary'/>
+  </div>
+</div> -->
+
+<div class='p-5 mb-4 bg-light rounded-3'>
+
+  <h1 class='display-4'><%= t(:library_class_request_form) %></h1>
+  <hr class='primary'/>
+
+  <h3><small class=''><%= t(:libraries_offer) %></small><br/><small class='text-danger'><%= t(:libraries_notice) %></small></h3>
+  <ul>
+    <li><%= raw t(:for_archives_and_special_collection, scope: :libraries_offer_bullets) %> <%== Setting.archives_contact %></li>
+    <!-- <li><%= t(:for_frost_and_glendon, scope: :libraries_offer_bullets) %> <%== Setting.other_campus_contact %></li> -->
+    <li><%= raw t(:for_osgoode_law, scope: :libraries_offer_bullets) %> <%== Setting.law_contact %></li>
+    <li><%= t(:for_all_other, scope: :libraries_offer_bullets) %> <%== Setting.all_contact %></li>
+  </ul>
+
+  <h3><small><%=t (:request_schedule) %>:</small></h3>
+  <ul>
+    <li><%= t(:for_fall, scope: :request_schedule_bullets) %><strong><%= t(:fall_date, scope: :request_schedule_bullets) %></strong></li>
+    <li><%= t(:for_winter, scope: :request_schedule_bullets) %></li>
+    <li><%= t(:for_summer, scope: :request_schedule_bullets) %></li>
+    <li><%= raw t(:for_questions_and_suggestions, scope: :request_schedule_bullets) %> <%== Setting.questions_inquiries_contact %></li>
+  </ul>
+  <p><strong><%= t(:special_request_form_note) %></strong></p>
+  <hr class='primary my-4'/>
+
+  <!-- <h3 class='text-center'>All users are required to login with Passport York </h3> -->
+
+  <div class='row mt-2'>
+    <div class='col col-lg-4 col-md-4 col-sm-12 col-xs-12'>
+      <%= link_to new_user_teaching_request_path, class: 'btn btn-lg btn-success w-100' do %>
+        <span><i class='fa fa-graduation-cap mr-2'></i> <%= t(:get_started, scope: :button) %></span>
+      <% end %>
+      </div>
+    <!-- <div class='col col-md-4'></div> -->
+    <div class='col offset-md-4 col-lg-4 col-md-4 col-sm-12 col-xs-12'>
+      <%= link_to staff_dashboard_path, class: 'btn btn-lg btn-dark w-100' do %>
+        <i class='fas fa-sign-in-alt' aria-hidden='true'></i> <%= t(:login_as_yul_staff) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='d-flex justify-content-between'>
+  </div>
+</div> <!-- jumbo -->

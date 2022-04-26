@@ -1,0 +1,291 @@
+
+<h1><%= @greetings %></h1>
+<hr class='primary'></hr>
+
+<% if !@pending_approvals.nil? && @pending_approvals.count != 0  %>
+<div class='row'>
+  <div class='col'>
+    <div class='card mb-3 shadow p-2 rounded'>
+      <div class='card-body'>
+        <h2 class='card-title'><%= t(:pending_approvals) %>: </h2>
+        <hr class='secondary' />
+        <% @pending_approvals.each do |pa| %>
+          <%= simple_form_for([:staff, :manager, pa], url: staff_manager_approve_staff_accounts_path, html: { class: '' }, method: :patch) do |f| %>
+            <%= f.error_notification %>
+            <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+            <dl class='row mt-3'>
+              <div class='col-md-2'>
+                <dt class='col'><span class='text-muted'><%= t(:UID) %></span></dt>
+                <hr class='my-0 secondary'/>
+                <dd> <%= pa.user_id %></dd>
+              </div>
+              <div class='col-md-2'>
+                <dt class='col'><span class='text-muted'><%= t(:name) %></span></dt>
+                <hr class='my-0 secondary'/>
+                <dd><%= pa.user.full_name %></dd>
+              </div>
+              <div class='col-md-2'>
+                <dt class='col'><span class='text-muted'><%= t(:dept) %></span>:</dt>
+                <hr class='my-0 secondary'/>
+                <dd><%= pa.department.name %></dd>
+              </div>
+
+              <dd class='col-md-1'>
+                <span class='text-muted'><%= t(:approve?) %></span>:
+                <hr class='my-0 secondary'/>
+                <%= f.input :is_approved, label: false, input_html: {class: 'text-center', style: 'margin-left:0.5rem; font-size: 1.2rem;'} %></dd>
+              <dd class='col-md-2'>
+                <%= f.input :role, label: t(:role), label_html: {class: 'text-muted mb-1'}, input_html: {style: 'font-size: 0.9rem', class:''} %>
+              </dd>
+              <!-- <dt class='col'></dt> -->
+              <dd class='col-md-2'><span class='text-muted'><%= t(:action) %></span>: <br/><%= f.input :id, as: :hidden %><hr class='mt-0 mb-1 secondary'/><%= f.button :submit, class: 'btn btn-sm btn-success' %></dd>
+
+              <!-- COMMENTED OUT UNLESS MANAGER SHOULD HAVE ACCESS TO USERS
+                <tr><th scope='row'><%= t(:in_active_users) %></th></tr>
+              <% if !@inactive_users.nil? && @inactive_users.count != 0  %>
+                <% @inactive_users.each do |iu| %>
+                <tr>
+                  <th scope='row'><%= iu.id %></th>
+                  <td class='small'><%= iu.full_name %></td>
+                  <td class='small'><%= iu.staff_profile.department.name %></td>
+                  <td class='small'><%= iu.is_active%></td>
+                </tr>
+                <% end %>
+              <% end %>
+              <tr>
+                <th scope='row'><a href="<%= staff_manager_dashboard_path() %>"><%= t(:manage_users) %> (coming soon)</a></th>
+              </tr>
+              -->
+
+            </dl>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<% if @new_teaching_requests.count != 0 %>
+<div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
+  <div class='card-body'>
+    <h2 class='card-title'><%= t(:new_requests) %></h2>
+    <hr class='secondary' />
+    <div class='table-responsive'>
+      <table class='table table-sm table-striped table-hover text-center'>
+        <thead>
+          <th class='small'><%= t(:request_info) %></th>
+          <th class='small'><%= t(:students_no) %></th>
+          <th class='small'><%= t(:preferred_date) %></th>
+          <th class='small'><%= t(:duration) %></th>
+          <th class='small'><%= t(:location) %></th>
+          <th class='small'><%= t(:status) %></th>
+          <th class='small'><%= t(:lead_instructor) %></th>
+          <th class='small'><%= t(:options) %></th>
+          <th />
+        </thead>
+        <tbody>
+          <% @new_teaching_requests.each do |request| %>
+          <tr>
+            <td class='small'><%= request.name %></td>
+            <td class='small'><%= request.number_of_students %></td>
+            <td class='small'><%= request.preferred_date.strftime('%b %d, %Y') rescue nil %> / <%= up_request.preferred_time.strftime('%I:%M %p') rescue nil %></td>
+            <td class='small'><%= request.duration.text %></td>
+            <td class='small'><%= request.location_preference.text %></td>
+            <td class='small'><span class='badge badge-pill badge-<%= request.status.downcase.parameterize %>'><%= request.status.text %></span></td>
+            <td class='small'>
+              <% if request.lead_instructor %>
+                <%= request.lead_instructor.name rescue nil %>
+              <% else %>
+                <%= link_to edit_staff_manager_assign_request_lead_path(id: request.id), class: 'btn btn-sm btn-success', remote: true do %>
+                  <%= t(:assign_request_lead) %>
+                  <i class='fa fa-bolt'></i>
+                <% end %>
+              <% end %>
+            </td>
+            <td colspan='2'>
+              <%= link_to staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-info' do %>
+                <i class='fas fa-eye'></i>
+              <% end %>
+              <%= link_to edit_staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-secondary' do %>
+                <i class='fas fa-edit'></i>
+              <% end %>
+              <%= link_to staff_mark_deleted_teaching_request_path(id: request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it deleted?'}, class:'btn btn-sm btn-danger' do %>
+                <i class='fas fa-times-circle'></i>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<div class='card mb-3 shadow p-2 rounded'>
+  <div class='card-body'>
+    <h2 class='card-title'><%= t(:assign_as_lead) %></h2>
+    <h3 class='card-subtitle mb-2 text-muted'><%= t(:lead_and_assigned_requests) %></h3>
+    <hr class='secondary'></hr>
+    <div class='table-responsive'>
+      <table class='table table-sm table-striped table-hover text-center'>
+        <thead>
+          <th class='small'><%= t(:request_info) %></th>
+          <th class='small'><%= t(:students_no) %></th>
+          <th class='small'><%= t(:preferred_date) %></th>
+          <th class='small'><%= t(:duration) %></th>
+          <th class='small'><%= t(:location) %></th>
+          <th class='small'><%= t(:status) %></th>
+          <th class='small'><%= t(:lead_instructor) %></th>
+          <th class='small'><%= t(:options) %></th>
+          <th />
+        </thead>
+        <tbody>
+          <% @my_teaching_requests.each do |request| %>
+          <tr>
+            <td class='small'><%= request.name %></td>
+            <td class='small'><%= request.number_of_students %></td>
+            <td class='small'><%= request.preferred_date.strftime('%b %d, %Y') rescue nil %> / <%= up_request.preferred_time.strftime('%I:%M %p') rescue nil %></td>
+            <td class='small'><%= request.duration.text %></td>
+            <td class='small'><%= request.location_preference.text %></td>
+            <td class='small'><span class='badge badge-pill badge-<%= request.status.downcase.parameterize %>'><%= request.status.text %></span></td>
+            <td class='small'><%= request.lead_instructor.name rescue nil %></td>
+            <td colspan='2'>
+              <%= link_to staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-info' do %>
+                <i class='fas fa-eye'></i>
+              <% end %>
+              <% if request.status == TeachingRequest.status.assigned %>
+                <%= link_to edit_staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-secondary' do %>
+                  <i class='fas fa-edit'></i>
+                <% end %>
+                <%= link_to staff_mark_deleted_teaching_request_path(id: request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it deleted?'}, class:'btn btn-sm btn-danger' do %>
+                  <i class='fas fa-times-circle'></i>
+                <% end %>
+              <% end %>
+              <% if request.status == TeachingRequest.status.new_request ||
+                    request.status == TeachingRequest.status.in_process %>
+                <%= link_to edit_staff_manager_lead_assignment_response_path(request), class: 'btn btn-sm btn-secondary', remote: true do %>
+                  <%= t(:respond) %>
+                  <i class='fas fa-thumbs-up'></i>
+                  <i class='fas fa-thumbs-down'></i>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
+  <div class='card-body'>
+    <h2 class='card-title'><%= t(:my_upcoming_classes) %></h2>
+    <hr class='secondary' />
+    <% if @upcoming_teaching_requests.count == 0 %>
+      <h3 class='text-muted'><%= t(:there_are_no_upcoming_requests) %></h3>
+    <% else %>
+      <% request = nil %>
+      <% @upcoming_teaching_requests.each do |request| %>
+    <div class='card mb-3 mt-3'>
+      <div class='card-header'>
+        <div class='row'>
+          <div class='col fw-bold'><%= t(:teaching_request_id) %>: <%= request.id %></div>
+          <div class='col text-end'><span class="badge badge-pill badge-<%= request.status.text.parameterize %>"><%= request.status.text %></span></div>
+        </div>
+      </div>
+      <div class='card-body'>
+        <div class='row'>
+          <!-- column -->
+          <div class='col-md-3'>
+            <h5 class='text-primary'><%= t(:people) %></h5>
+            <p class='mb-0 fw-bold small'><%= request.first_name %> <%= request.last_name %> [<%= request.patron_type %>]</p>
+            <p class='text-muted small mb-0'>
+              <%= t(:email) %>: <span class='fw-bold text-dark'><%= request.email %></span></p>
+            <p class='text-muted small mb-0'><%= t(:assigned_instructors) %>: </p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.lead_instructor.name rescue nil%></p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.second_instructor.full_name rescue nil%></p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.third_instructor.full_name rescue nil%></p>
+          </div>
+          <!-- column -->
+          <div class='col-md-6'>
+            <h5 class='text-primary'><%= t(:request_info) %></h5>
+            <p class='fw-bold small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title='<%= request.faculty %> / <%= request.subject %>'><%= request.academic_year %> - [<%= request.faculty_abbrev %> / <%= request.subject_abbrev %> <%= request.course_number %>]: <%= request.course_title %><em><%= t(:title_not_provided) if request.course_title == '' %></em> </p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:section) %>:
+              <span class='fw-bold text-dark'> <%= defined?(request.section_name_or_about) ? truncate(request.section_name_or_about, length: 25) : 'Untitled Section' %>
+              </span>
+            </p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:number_of_students) %>:
+              <span class='fw-bold text-dark'><%= request.number_of_students %></span>
+            </p>
+
+            <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title='<%= request.request_note.to_plain_text %>'><%= t(:note) %>: <span class='fw-bold text-dark'><%= truncate(strip_tags(request.request_note.to_plain_text), length: 25) %></span></p>
+          </div>
+          <!-- column -->
+          <div class='col-md-3'>
+            <h5 class='text-primary'><%= t(:other_details) %></h5>
+            <p class='text-muted small mb-0'><%= t(:dates) %>:</p>
+
+              <p class='fw-bold small mb-0 text-dark'><%= request.preferred_date.strftime('%b %d, %Y') %> / <%= request.preferred_time.strftime('%I:%M %p') rescue nil %></p>
+              <p class='fw-bold small mb-0 text-dark'><%= request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= request.alternate_time.strftime('%I:%M %p') rescue nil %></p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:duration) %>:
+              <span class='fw-bold text-dark'><%= request.duration.text %></span>
+            </p>
+            <p class='text-muted small mb-0'><%= t(:location) %>:
+              <span class='fw-bold text-dark'><%= request.location_preference.text %></span>
+            </p>
+          </div>
+        </div>
+       </div> <!-- card-body -->
+       <div class='card-footer text-muted'>
+         <div class='row'>
+           <div class='col text-start'>
+             <%= link_to edit_staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-secondary', remote: false do %>
+              <i class='fas fa-edit'></i> <%= t(:edit_request_details) %>
+             <% end %>
+           </div>
+           <div class='col text-end'>
+             <%= link_to staff_mark_done_teaching_request_path(id: request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it done?'}, class:'btn btn-sm btn-success' do %>
+               <%= t(:mark_it_done) %>
+               <i class='fas fa-smile-beam'></i>
+             <% end %>
+             <%= link_to staff_mark_unfulfilled_teaching_request_path(id: request.id), method: :patch, data: {confirm: 'Are you sure you want to make it unfulfilled?'}, class:'btn btn-sm btn-warning' do %>
+               <%= t(:mark_it_unfulfilled) %>
+               <i class='fas fa-sad-tear text-light'></i>
+             <% end %>
+             <%= link_to staff_mark_deleted_teaching_request_path(id: request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it deleted?'}, class:'btn btn-sm btn-danger' do %>
+               <%= t(:mark_it_deleted) %>
+               <i class='fas fa-times-circle'></i>
+             <% end %>
+         </div>
+
+<!--         <%= link_to edit_staff_manager_teaching_request_path(request), class: 'btn btn-sm btn-secondary', remote: true   do %>
+           <i class='fa fa-pencil'></i> <%= t(:edit) %>
+         <% end %>
+-->
+         <p></p>
+
+         <!--
+         <%= link_to [:staff, :manager, request], method: :delete,
+             data: { confirm: 'Are you sure?', toggle: 'tooltip', title: 'delete' },
+             class: 'btn text-white btn-danger'  do %>
+               <i class='fas fa-times-circle'></i> <%= t(:delete) %>
+         <% end %>
+         -->
+       </div>
+     </div>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+</div> <!-- Upcoming Requests wrapper -->

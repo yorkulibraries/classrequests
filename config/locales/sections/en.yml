@@ -1,0 +1,55 @@
+## REQUESTS ENGLISH TRANSLATIONS
+
+en:
+  requested_sections_page_title: "Requested Sections"
+  requested_sections_html: 'Requested Section<span class="text-muted">(</span>s<span class="text-muted">)</span>'
+  location_of_library_class: "Location of Library Class"
+  # empty_sections_card_paragraph: "Library classes can be offered in library-instruction labs (up to 30 students) or in your classroom. If you would like the library class to be delivered in your classroom, please provide the room number."
+  empty_sections_card_paragraph: "Due to the COVID-19 situation, we will be offering only online classes for the Summer 2020 term"
+  currently_no_sections: "Currently there are no sections added for this request"
+  please_add_at_least_one_section: "Please add at least 1 section to continue."
+  add_section: "Add Section"
+  add_another_section: "Add Another Section"
+  adding_new_section: "Adding New Section"
+  updating_section: "Updating Section"
+  section_information: "Section Information"
+  class_preferences: "Class Preferences"
+  submit_my_request: "Submit My Request"
+  update_my_request: "Update My Request"
+  section_name_or_about: "Section number / letter"
+  number_of_students: "Number of students"
+  preferred_date_time: "Preferred date / time"
+  preferred_time: "Preferred start time"
+  alternate_date_time: "Alternate date / time"
+  alternate_time: "Alternate start time"
+  duration_of_library_class: "Duration of library class"
+  location_preferences: "Location/Format Preference"
+  note: "Note"
+  simple_form:
+    labels:
+      section:
+        section_name_or_about: "Section number / letter"
+        number_of_students: "Number of students"
+        preferred_date: "" # default label
+        preferred_time: "Preferred start time"
+        alternate_date: "" # default label
+        alternate_time: "Alternate start time"
+        duration: "Duration of library session"
+        location_preference: "Location/Format Preference" # default label
+        note: "Please provide any course information that you feel is relevant, such as a brief course description, an assignment description, or any other content that will help the library deliver a tailored session for your students."
+    hints:
+      section:
+        section_name_or_about: "" #no hint
+        number_of_students: "" #no hint
+        preferred_date: "" #no hint
+        preferred_time: "" #no hint
+        alternate_date: "" #no hint
+        alternate_time: "" #no hint
+        duration: "in minutes"
+        # location_preference: "Library Classroom (max 30) or Building and Room #"
+        location_preference: "the zoom id will be shared once the librarian / archivist finalized the details with you. preference"
+        note: ""
+    # prompt:
+    # placeholders:
+    # error_notification:
+    #   default_message: "Please review the problems below:"

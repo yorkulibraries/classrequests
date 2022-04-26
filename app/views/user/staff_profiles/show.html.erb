@@ -1,0 +1,34 @@
+<p id='notice'><%= notice %></p>
+
+<p>
+  <strong>Specializtion job title:</strong>
+  <%= @staff_profile.specializtion_job_title %>
+</p>
+
+<p>
+  <strong>Profile bio:</strong>
+  <%= @staff_profile.profile_bio %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @staff_profile.role %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @staff_profile.department_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @staff_profile.user_id %>
+</p>
+
+<p>
+  <strong>Is approved:</strong>
+  <%= @staff_profile.is_approved %>
+</p>
+
+<%= link_to 'Edit', edit_staff_profile_path(@staff_profile) %> |
+<%= link_to 'Back', staff_profiles_path %>

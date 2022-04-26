@@ -1,0 +1,23 @@
+en:
+  setting:
+    app_name_hint: "E.g. LIBSTAR"
+    web_host_hint: "https://localhost:3000"
+    delivery_method_hint: ":sendmail or :smtp"
+    mail_port: "smtp is 1025, sendmail leave it blank or 3000"
+    from_email: "Sender/From Email"
+    from_name: "Sender/From Name"
+    notification_hint: "For multiple, add one email per line"
+    director_hint: "This infomation will show up in the footer of the notification emails to user"
+    logo_url: "Upload file to assets/images/ and list filename here."
+    mail_logo_url: "Upload file to assets/images/ and list filename here. Avoid svg."
+  helpers:
+    submit:
+      setting:
+        create: "Save Settings"
+        update: "Update Settings"
+  simple_form:
+    # hints:
+    #   setting:
+    #     notification_hint: "For multiple, add one email per line - did not work"
+    # prompts:
+    #   setting:

@@ -1,0 +1,37 @@
+<h1>A New Staff Account Request</h1>
+<br/>
+
+<table class='table'>
+  <tbody>
+    <tr>
+      <td>First Name:</td>
+      <td><strong><%= @user.first_name %></strong></td>
+    </tr>
+    <tr>
+      <td>Last Name:</td>
+      <td><strong><%= @user.last_name %></strong></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><strong><%= @user.email %></strong></td>
+    </tr>
+    <tr>
+      <td>Username:</td>
+      <td><strong><%= @user.username rescue nil %></strong></td>
+    </tr>
+    <tr>
+      <td>Group:</td>
+      <td><strong><%= @user.user_group %></strong></td>
+    </tr>
+    <tr>
+      <td>Verified:</td>
+      <td><strong><%= @user.is_verified %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<a href="<%= operators_index_url(host: Setting.web_host) %>">Libstar Login</a>
+
+<h3>Have a great day!</h3>
+<p>----------------</p>
+<p><strong>Library Class Request Messenger</strong></p>

@@ -1,0 +1,248 @@
+github personal repo-token
+
+eb8f62b50e776b4ac11f424f24e7a752b9211cab
+
+
+
+i like this colour:#e2ddd6
+
+TODO List  - Updated MARCH 22
+=====================
+- GENERAL
+  - Change navbar to recognize logged in user or staff  - DONE (test it more)
+  - hide user/pass (database) in production or settings option
+  - Auto remove bootstrap notices
+  - lange selector in navbard
+  - mobile testing
+  - tablet testing
+  - systems test for workflow
+  - remove 40 minutes from teaching requests - DONE
+  - drop old tables
+  - add rails-settings-cached for app settings
+  -
+
+- USER
+  - No more multiple sections/sessions - done
+  - Auto fill personal details - done
+  - PPY authentication - done but not tested
+  - Notify on Assigned =>
+
+- MAILING SETUP
+  1. User's Submission of request
+    - RequestorMailer content updated - done
+    - Notification on status update - done
+    -
+  2. Manager's Assignment to Staff/Librarian - done
+  3. Staff/Librarian Response to Manager
+    3.1 If accepted, also notify User/Requestor if assigned - done
+    3.2 If declined, notify Manager only. - done + status == new_request
+
+  4. User cancel's the request
+    4.1 Notify Manager - For now, email Dana
+    4.2 Notify Instructor/Staff/Librarian if assigned. - Done
+
+  5. Staff/Librarian cancel's the request
+    5.1 Notify User and Manager - For now, email dana
+
+  6. Manager cancels the request
+    6.1 Notify User
+    6.2 Notify Staff/Librarian if assigned
+
+
+- ADMIN
+  - Assign Lead
+  - Auto Send notification on new assignment
+  - Run Reports
+  - Dashboard
+    - Staff requests
+    - New Class Requests / Unassigned
+    - Upcoming Classes
+    -
+
+- STAFF
+  - Notification on assignment
+  - New Interface to accept class assignment
+    - Auto Send notification to ADMIN
+    - Auto Send notification to USER
+    - Change Status to Assigned
+  - Dashboard
+    - New Assigned Requests Notices
+    - Upcoming Classes
+    - Recent Classes
+  - Editing Request
+    - Mark is Done
+    - Mark it unfulfilled
+    - Mark it deleted.
+
+
+- REPORTS
+  - 2021-2022 IL Stats
+    - Total Number of Classes
+      - Of these, how many online, pre-recorded
+    - Total Students Taught
+
+  - Classes Faculty
+    - AP, ED , ES etc.
+
+  - Classes by Instructors
+    - Name | Classes
+    - Average
+
+  Classes Stats
+  - By Status
+  - By Month
+  - By Faculty
+
+
+
+
+
+
+
+
+
+AUG-SEPT TODO List
+=====================
+- Staff
+  - Staff Profiles
+    1. User::Request Staff Access - Done
+    2. Notify Admins - Skipped
+    3. Admin::Approve Staff - Done
+    4. Notify Staff - Skipped
+    5. Staff has new sidebar
+    6. Request staff account - show if already requested. Send reminder
+    7. Request Staff Account - hide if approved
+    8. Add 'Edit my staff profile' in dropdown
+    9.
+    Admin has CRUD functionality
+
+  - Dashboard
+    - ONLY ACCESS TO STAFF USERS
+    - Submit a Class Request
+    - Submit a Training Request
+    - Request a Training
+    - Upcoming Classes
+    - Upcoming Training
+    - Recent Classes (show 3) -> separate page
+    - Recent Training (show 3) -> separate page
+
+  - Manager
+    - ONLY ACCESS TO MANAGERS
+    - List of Requests + sections - done with possible tweaking left
+    - Be able to edit requests - Yes
+    - Be able to update status / assign instructors - Yes
+    - Update form interface - not sure, come back to this
+    - Be able to edit specific section - yes but on submit not updating the list. Because new code of 2/loop vs list
+    - Send notification on assignment - DONE
+    - Email instructors - Yes
+    - Teaching Calendar - Yes
+    - Be able to edit Sections - DONE
+    - Reports
+      - Teaching Requests by date - Done
+
+
+- User/Patron
+  FLOW
+    1. Get Started
+    2.
+      2.1.0. Already logged in, go to requests OR
+      2.2.0. Go to Dashboard via login
+        2.2.1 Dashboard: Click Request new class
+    3. New Request
+      3.1.0. Fill in contact info if not already filled by login
+      3.2.0. Course Information
+    4. Requested Sections
+      4.1.0. Add Section
+        4.1.0. New Section
+          4.1.1-x
+            * Section Num, # of students,
+            * Preferred Date, Preferred start, Alt Date start,
+            * Duration, Location/format, Other info
+
+      4.2.0. Delete Section (optional if in error)
+  - Requests
+    - Sometimes screen stay dark!
+    - Fix error on section pop up.
+  - Dashboard - Done for now (TODO: redirect delete option to cancel request form)
+  - Request Class (belongs to user?)
+  - Continue existing request
+  -
+
+
+- Maintenace
+  - Clean up incomplete requests older than 2 months
+  - Change Session In-Process to Completed if past 2 months the date of session
+  - Daily check if all sessions of a request have been completed, then mark request as completed.
+
+
+NICE TO HAVE FEATURES
+- Notification Bar, auto disappear
+- Show front page info on "Request a Library Class"
+- Dropdown arrow on Preferred Dates, Alt. Dates, Location/Format
+
+
+
+
+
+Progress so far on New Version
+=================================
+- Upgraded to rails 5.1 -> 6.2 + ruby 2.3->2.6+
+- Added PPY auth
+- Added auto registration via PPY params
+- was able to get chosen plugin to work in 6.2
+-
+-
+
+Todo
+- Replace Jquery with FLATPICKR plugin - DONE
+- go through public workflow
+- show staff their teachings on dashboard
+- be able to update status of the session
+-
+
+Meeting July 28 2021
+=================================
+- Remove or hide in-library class from locations
+- "In-Library class is <strong>NOT</strong> available for Fall 2021."
+
+
+
+
+Meeting in 2020
+====================
+- Add 2021-2022 courses
+- Change duration of session to be a drop down - 30, 45, 60, 60+
+- Change Location/Format Preference - change to drop down
+  - In-Class, In-Library, Online Live, Pre-recorded
+  - The details will be finialized with the librarian / archivist
+- both make both fields mandatory
+- Remove stephanie from notification
+- Sync email template with web thank you page -- that is, remove review in 5 days
+
+
+For New version
+- A way to know if librarian viewed the assigned class or acknowledgement
+- A way for librarian to manage their classes within the system
+- Create PPY for faculty request submission
+- Ability for faculty to manage their Classrequests
+- Ability to duplicate request with change of year
+- More reports (see Dana)
+- Add new status called "Notified Librarian/Archivist" - Adding a new acknowledgement status
+- Ability for Manager to nudge notified librarian/archivist OR Automated after 5 days
+
+-
+
+
+Inspirational heart of the campus recognized for its expertise in knowledge creation, its transformative approaches to student success, and its infrastructure and engagement in the research and scholarly enterprise.
+
+School of the Arts, Media, Performance & Design
+Faculty of Education
+Faculty of Environmental & Urban Change
+Glendon
+Faculty of Graduate Studies
+Faculty of Health
+Lassonde School of Engineering
+Faculty of Liberal Arts & Professional Studies
+Osgoode Hall Law School
+Schulich School of Business
+Faculty of Science

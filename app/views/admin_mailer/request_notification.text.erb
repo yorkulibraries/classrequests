@@ -1,0 +1,34 @@
+<!-- <h1>Hello </h1> -->
+A New Library Request has been submitted.
+
+Submission Data
+
+CONTACT INFORMATION
+=========================
+I am a: <%= @request.patron_type %>
+First Name: <%= @request.first_name %>
+Last Name: <%= @request.last_name %>
+Email: <%= @request.email %>
+Phone: <%= @request.phone %>
+Academic year: <%= @request.academic_year %>
+Faculty: <%= @request.faculty_abbrev %> - <%= @request.faculty %>
+Subject: <%= @request.subject_abbrev %> - <%= @request.subject %>
+Course number: <%= @request.course_number %>
+Course Title: <%= @request.course_title %>
+
+REQUEST DETAILS
+=========================
+Course/Section:
+<%= @request.faculty %> / <%= @request.subject %> <%= @request.academic_year %> - [<%= @request.faculty_abbrev %> / <%= @request.subject_abbrev %> <%= @request.course_number %>]: <%= @request.course_title %><em><%= t(:title_not_provided) if @request.course_title == '' %></em> -
+<%= defined?(@request.section_name_or_about) ? truncate(@request.section_name_or_about, length: 25) : 'Untitled Section' %>
+Preferred Date / Time: <%= @request.preferred_date.strftime('%b %d, %Y') %> / <%= @request.preferred_time.strftime('%I:%M %p') rescue nil %>
+Alternate Date / Time: <%= @request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= @request.alternate_time.strftime('%I:%M %p') rescue nil %>
+Duration & Location: <%= @request.duration.text %> | <%= @request.location_preference.text %>
+Assigned Instructors: You will be notificed once request has been assigned.
+
+<p>If you have any further questions, please contact <a href="mailto:<%= Setting.director_email %>"><%= Setting.director_name %></a >, <%= Setting.director_position %>, <a href="mailto: <%= Setting.director_email %>"><%= Setting.director_email %></a>.</p><br/>
+
+Have a great day!
+
+-----------------------------------
+Library Class Request Messenger

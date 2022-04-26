@@ -1,0 +1,62 @@
+<% if request.xhr? %>
+<div class='modal sfade' role='dialog' id='assignment_response_form'>
+  <div class='modal-dialog modal-lg' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h4 class='modal-title text-primary'>
+          <%= 'Lead Assignment Response' %>
+        </h4>
+        <button type='button' class='close' data-bs-dismiss='modal'>
+          <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span>
+        </button>
+
+      </div> <!-- modal-header close -->
+      <div class='modal-body' id='section_form_body'>
+        <%= simple_form_for([:staff, @teaching_request, @assignment_response], html: { class: 'form-vertical' }, wrapper: :vertical_form, remote: true) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <div class='row'>
+            <div class='col-md-10 col-sm-12'>
+              <p class="small"><span class='fa fa-exclamation glyphicon glyphicon-exclamation-sign'></span> Fields marked with * are mandatory.</p>
+              <%= f.input :response, as: :radio_buttons, item_wrapper_class: 'form-check radio-inline', input_html: {style: 'clear: both'} %>
+              <%= f.input :comment_or_reason, hint: 'optional' %>
+              <%= f.input :teaching_request_id, input_html: {value: @teaching_request.id }, as: :hidden %>
+              <%= f.input :user_id, input_html: {value: current_user.id }, as: :hidden %>
+            </div>
+          </div>
+          <%= f.simple_fields_for :teaching_request, @teaching_request do |tr| %>
+            <%= tr.input :status, as: :hidden %>
+          <% end %>
+
+          <hr/>
+          <div class='form-actions'>
+            <%= f.button :submit, 'Submit Response', class: 'btn btn-md btn-success' %>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancel</button>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div> <!-- modal-content -->
+  </div>
+</div> <!-- modal -->
+<!--  input_html: {class: 'form-select request-chosen'} -->
+
+<% else %>
+
+  <div class='card'>
+    <div class='card-body'>
+      <%= simple_form_for([:staff, @teaching_request, @assignment_response], html: { class: 'form-vertical' }, wrapper: :vertical_form, remote: false) do |f| %>
+      <%= f.input :response, as: :radio_buttons, item_wrapper_class: 'form-check radio-inline', input_html: {style: 'clear: both'} %>
+      <%= f.input :comment_or_reason %>
+      <%= f.input :teaching_request, input_html: {value: @teaching_request.id }, as: :hidden%>
+      <%= f.input :user, input_html: {value: current_user.id }, as: :hidden %>
+      <%= f.button :submit, 'Submit Response', class: 'btn btn-md btn-success', as: :hidden %>
+      <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancel</button>
+
+      <% end %>
+  <!-- -->
+    </div> <!-- card body close -->
+  </div> <!-- card close -->
+
+<% end %> <!-- end of xhr check -->

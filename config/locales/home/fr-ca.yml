@@ -1,0 +1,22 @@
+## REQUESTS ENGLISH TRANSLATIONS
+
+fr-ca:
+  library_class_request_home: "Formulaire de demande d’atelier"
+  library_class_request_form: "Formulaire de demande d’atelier"
+  libraries_offer: "Les bibliothèques offrent des cours de formation pour aider vos étudiants à perfectionner leurs compétences de recherche dans toutes les disciplines."
+  libraries_notice: "Pendant l’interruption des services sur place, les bibliothèques offriront leurs services d’enseignement en ligne pour le trimestre d’automne."
+  libraries_offer_bullets:
+    for_archives_and_special_collection: "Pour organiser un atelier avec les Archives et collections spéciales, communiquez avec."
+    for_frost_and_glendon: "For Frost Library at Glendon campus, please contact "
+    for_osgoode_law: "Pour organiser un atelier avec la Bibliothèque de droit, communiquez avec "
+    for_all_other: "Pour toute autre demande d’atelier, veuillez utiliser ce formulaire en ligne."
+  request_schedule: "Dates Limites"
+  request_schedule_bullets:
+    for_fall: "Pour le trimestre d’automne et les cours d’un an, veuillez soumettre votre demande avant le 15 août."
+    for_winter: "Pour le trimestre d’hiver, veuillez soumettre votre demande avant le 1er décembre."
+    for_summer: "Pour le trimestre d’été, veuillez soumettre votre demande avant le 15 mai."
+    for_questions_and_suggestions: "Vos questions et vos commentaires peuvent être acheminés à : "
+  special_request_form_note: "*Si votre demande est reçue après les dates limites susmentionnées, veuillez noter qu'il nous faut au moins trois semaines pour la planification d’un atelier."
+  button:
+    request_library_class: "Demande d’atelier"
+    admin_access: "Accès administrateur d'application"

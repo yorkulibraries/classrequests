@@ -1,0 +1,44 @@
+## REQUESTS ENGLISH TRANSLATIONS
+
+en:
+  new_library_class_request: "New Library Class Request"
+  contact_information: "Contact Information"
+  course_information: "Course Information"
+  teaching_by_date: "Teaching By Date"
+  teaching_calendar: "Teaching Calendar"
+  simple_form:
+    labels:
+      request:
+        username: "Username"
+        patron_type: "I am a YorkU…"
+        first_name: "First Name"
+        last_name: "Last Name"
+        email: "Email"
+        phone: "Contact Phone"
+        academic_year: "Academic Year"
+        faculty_abbrev: "Faculty"
+        subject_abbrev: "Department / Subject"
+        course_number: "Course Number"
+        course_title: "Course Title"
+        faculty: "Faculty"
+        subject: "Department / Subject"
+        submitted_by: "Submitted By"
+        status: "Status"
+    hints:
+      request:
+        email: "Email of the person filling this form out"
+        phone: "416-736-2100 or x12345"
+        academic_year: "1. Select academic year"
+        faculty_abbrev: "2. Select A Faculty"
+        subject_abbrev: "3. Select A Dept/Subject"
+        course_number: "e.g. 4501 or 0000 if not a course"
+        course_title: "e.g. Introduction to Economics"
+    prompt:
+      request:
+        academic_year: "Select Academic Year"
+        faculty_abbrev: "Select A Faculty"
+        subject_abbrev: "Select A Department/Subject"
+    # placeholders:
+    #
+    # error_notification:
+    #   default_message: "Please review the problems below:"

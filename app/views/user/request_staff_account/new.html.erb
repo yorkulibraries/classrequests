@@ -1,0 +1,58 @@
+<div class='row'>
+  <div class='col'><h1><%= t(:request_staff_account) %></h1></div>
+</div>
+  <hr class='primary'/>
+
+<div class='row'>
+  <div class='col'>
+    <div class='bg-secondary text-warning p-3 mb-3 rounded-1'>
+      <p>This request form is meant for New Library Staff members, who have been tasked to teach classes or administer the application. Anyone else not in this category will be rejected or abuse shall result in a ban from the application!</p>
+      <p>Only fill this form if you a librarian or library staff member</p>
+    </div>
+
+    <%= render 'form', staff_profile: @staff_profile %>
+  </div>
+  <div class='col-4'>
+    <div class='card'>
+      <div class='card-body'>
+        <div class='card-title'><h2><%= t(:my_profile) %></h2></div>
+        <ul class='list-group list-group-flush'>
+          <li class='list-group-item'>
+            <span class='text-muted'><%= t(:iam_identification) %></span>
+            <span class='fw-normal float-end'><%= current_user.iam_identification %></span>
+          </li>
+          <li class='list-group-item'>
+            <span class='text-muted'><%= t(:username) %></span>
+            <span class='fw-normal float-end'><%= current_user.username %></span>
+          </li>
+          <li class='list-group-item'>
+            <span class='text-muted'><%= t(:email) %></span>
+            <span class='fw-normal float-end'><%= current_user.email %></span>
+          </li>
+          <li class='list-group-item'>
+            <span class='text-muted'><%= t(:first_name) %></span>
+            <span class='fw-normal float-end'><%= current_user.first_name %></span>
+          </li>
+          <li class='list-group-item'>
+            <span class='text-muted'><%= t(:last_name) %></span>
+            <span class='fw-normal float-end'><%= current_user.last_name %></span>
+          </li>
+          <li class='list-group-item'>
+            <span class='text-muted'><%= t(:phone) %></span>
+            <span class='fw-normal float-end'><%= current_user.contact_phone %></span>
+          </li>
+          <li class='list-group-item'>
+            <span class='text-muted'><%= t(:group) %></span>
+            <span class='fw-normal float-end'><%= current_user.user_group %></span>
+          </li>
+        </ul>
+        <div class='card-footer text-muted'>
+          <%= link_to edit_user_registration_path,
+              class: 'btn btn-secondary '  do %>
+                <i class='fa fa-pencil'></i> <%= t(:edit_account) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

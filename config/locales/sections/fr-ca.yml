@@ -1,0 +1,52 @@
+## REQUESTS ENGLISH TRANSLATIONS
+
+fr-ca:
+  requested_sections_page_title: "Sous divisions du cours"
+  requested_sections_html: 'Sous divisions du cours <small><span class="text-muted">(</span>c-.-à.-d. section, laboratoire, groupe de discussion<span class="text-muted">)</span></small>'
+  location_of_library_class: "Le Lieu"
+  empty_sections_card_paragraph: "Nous pouvons visiter votre salle de classe ou recevoir des groupes (jusqu'à 30 étudiants) dans les laboratoires informatiques des Bibliothèques *(les espaces et commodités varient selon chaque succursale)."
+  currently_no_sections: "Veuillez ajouter une section de cours pour continuer."
+  please_add_at_least_one_section: "Pour compléter votre demande, veuillez ajouter au moins une section pour votre cours."
+  add_section: "Ajouter une section"
+  add_another_section: "Ajouter une autre section"
+  adding_new_section: "Ajouter une section"
+  updating_section: "De mise à jour section"
+  section_information: "Détails de la section"
+  class_preferences: "Vos préférences"
+  submit_my_request: "Soumettre ma demande"
+  section_name_or_about: "Le numéro/ code de la section"
+  number_of_students: "Le nombre d’étudiants"
+  preferred_date_time: "La date et l'heure préféré"
+  preferred_time: "L’heure de départ"
+  alternate_date_time: "La date et l'heure rechange"
+  alternate_time: "L’heure de départ"
+  duration_of_library_class: "La durée de l’atelier"
+  location_preferences: "Le lieu"
+  note: "Note"
+  simple_form:
+    labels:
+      section:
+        section_name_or_about: "Le numéro/ code de la section"
+        number_of_students: "Le nombre d’étudiants"
+        preferred_date: "La date désirée"
+        preferred_time: "L’heure de départ"
+        alternate_date: "La date de rechange"
+        alternate_time: "L’heure de départ"
+        duration: "La durée de l’atelier"
+        location_preference: "Le lieu"
+        note: "Nos ateliers sont conçus selon vos besoins et ceux de vos étudiants. Afin de nous aider à planifier votre session, nous vous demandons de partager de plus amples renseignements (c-.-à.-d. une brève description du cours, une description d’un devoir, etc.)."
+    hints:
+      section:
+        section_name_or_about: "" #no hint
+        number_of_students: "" #no hint
+        preferred_date: "" #no hint
+        preferred_time: "" #no hint
+        alternate_date: "" #no hint
+        alternate_time: "" #no hint
+        duration: "(en minutes)"
+        location_preference: "Visite animée en bibliothèque ou Visite animée en salle de classe (veuillez fournir votre numéro de salle et le nom du bâtiment)"
+        note: ""
+    # prompt:
+    # placeholders:
+    # error_notification:
+    #   default_message: "Please review the problems below:"

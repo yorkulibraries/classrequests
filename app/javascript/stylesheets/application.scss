@@ -1,0 +1,64 @@
+
+// @import 'app/assets/stylesheets/default/_yorku-colors';
+// @import 'bootstrap';
+// @import 'app/assets/stylesheets/default/_yorku-component-colors';
+// pre kbd { background-color: $gray-200; } // Awesome Print tweak in bootstrap for code block
+
+////@import 'app/assets/stylesheets/default/navbar';
+// @import 'bootstrap';
+//@import 'bootstrap/scss/bootstrap';
+
+////@import 'app/assets/stylesheets/default/sticky-footer';
+////@import 'app/assets/stylesheets/default/announcements';
+
+/* Wide Sidebar is wider and will only show YorkU logo on collapse */
+////@import 'app/assets/stylesheets/default/wide-sidebar';
+
+// @import 'app/assets/stylesheets/default/chosen-bootstrap-libstar.scss';
+// @import 'app/javascript/stylesheets/chosen-bootstrap-libstar.scss';
+
+// @import 'default/sidepanel';
+
+/* Compact Sidebar will show the icons and names on collapse */
+// @import 'default/compact-sidebar';
+
+// @import 'default/navbar';
+
+// // Fixes bootstrap nav-brand container overlap
+// @include media-breakpoint-down(xs) {
+//   .container {
+//     margin-left: 0;
+//     margin-right: 0;
+//   }
+// }
+// @import 'jquery-ui';
+// @import 'jquery-ui/datepicker';
+// @import 'jquery-ui/theme';
+
+// hr {
+//   border-width: 2px;
+//   height: 0.2px;
+//   border-top: 1px solid $primary;
+//
+//   &.primary {
+//     background-color: $primary;
+//     height: 0.2px;
+//   }
+//   &.secondary {
+//     background-color: $secondary;
+//     height: 0.2px;
+//   }
+//   &.info {
+//     background-color: $info;
+//     height: 0.2px;
+//   }
+//   &.dark {
+//     background-color: $dark;
+//     height: 0.2px;
+//   }
+//   &.light {
+//     background-color: $light;
+//     height: 0.2px;
+//   }
+//
+// }

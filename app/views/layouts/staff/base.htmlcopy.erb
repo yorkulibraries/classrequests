@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'shared/head' %>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <nav id="sidebar">
+        <div class="sidebar-header">
+          <h3>LEGOBOX SIDEBAR</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+          <p>Some Dummy Heading</p>
+          <li class="active dropdown">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li><a href="page1"></li>
+                <li><a href="page2"></li>
+                <li><a href="page3"></li>
+                <li><a href="page4"></li>
+              </ul>
+          </li>
+          <li><a href="#">About</a></li>
+          <li class="">
+            <a href="#secondSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Second</a>
+              <ul class="collapse list-unstyled" id="secondSubmenu">
+                <li><a href="page5"></li>
+                <li><a href="page6"></li>
+                <li><a href="page7"></li>
+                <li><a href="page8"></li>
+              </ul>
+          </li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Login/Whatever </a></li>
+          <li class="nav-item dropdown">
+            <%= link_to "#", id: "navbar-dropdown", class: "nav-link dropdown-toggle", data: { target: "nav-account-dropdown", toggle: "dropdown" }, aria: { haspopup: true, expanded: false } do %>
+              <%= image_tag gravatar_image_url(current_user.email, size: 40), height: 20, width: 20, class: "rounded" %>
+            <% end %>
+            <div id="nav-account-dropdown" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbar-dropdown" id="nav-account-dropdown">
+              <% if !current_user.staff_profile.blank? %>
+                <%= link_to "Admin Area", admin_root_path, class: "dropdown-item" %>
+              <% end %>
+
+              <%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+
+        </ul>
+        <ul class="list-unstyled CTAs">
+          <li><a href="#" class="btn btn-sm btn-primary">Download</a></li>
+          <div id='mydiv' style='display:none'>
+             TEST
+           </div>
+        </ul>
+      </nav>
+
+      <div class="content">
+        <div class="container">
+          <%= render 'shared/navbar_dashboard' %>
+          <%= render 'shared/notices' %>
+          <%= yield %>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+    </div>
+    <%= render 'shared/footer' %>
+    <!-- <script>
+      $(document).ready(function(){
+
+      });
+
+    </script> -->
+  </body>
+</html>

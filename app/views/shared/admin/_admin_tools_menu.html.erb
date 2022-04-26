@@ -1,0 +1,24 @@
+<li class='nav-item dropdown'>
+  <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+    <i class='fas fa-user-astronaut text-primary' aria-hidden='true'></i> <%= t(:admin) %>
+  </a>
+  <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+    <%= link_to staff_admin_dashboard_path, class: 'dropdown-item' do %>
+      <i class='fas fa-list text-primary' aria-hidden='true'></i> <%= t(:admin_dashboard) %>
+    <% end %>
+    <div class='dropdown-divider'></div>
+    <%= link_to staff_admin_users_path, class: 'dropdown-item' do %>
+      <i class='fas fa-user text-primary' aria-hidden='true'></i> <%= t(:manage_users) %>
+    <% end %>
+    <%= link_to staff_admin_departments_path, class: 'dropdown-item' do %>
+      <i class='fas fa-home text-primary' aria-hidden='true'></i> <%= t(:manage_departments) %>
+    <% end %>
+    <%= link_to staff_admin_reports_overview_path, class: 'dropdown-item' do %>
+      <i class='fas fa-chart-bar text-primary' aria-hidden='true'> </i> <%= t(:admin_reports) %>
+    <% end %>
+    <%= link_to staff_admin_settings_path, class: 'dropdown-item' do %>
+      <i class='fas fa-cog text-primary' aria-hidden='true'> </i> <%= t(:app_settings) %>
+    <% end %>
+
+  </div>
+</li>

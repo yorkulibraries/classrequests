@@ -1,0 +1,51 @@
+
+----------------------------------
+--- <%- Setting.app_name %> ---
+----------------------------------
+
+
+Hi <%= @request.first_name %>,
+
+Thank you for submitting a request for a library class.</h5>
+We will review your request and get in touch with you as soon as possible.</h5>
+
+*************************************************
+
+-------------------
+| Submission Data |
+-------------------
+
+CONTACT INFORMATION
+=========================
+I am a: <%= @request.patron_type %>
+First Name: <%= @request.first_name %>
+Last Name: <%= @request.last_name %>
+Email: <%= @request.email %>
+Phone: <%= @request.phone %>
+Academic year: <%= @request.academic_year %>
+Faculty: <%= @request.faculty_abbrev %> - <%= @request.faculty %>
+Subject: <%= @request.subject_abbrev %> - <%= @request.subject %>
+Course number: <%= @request.course_number %>
+Course Title: <%= @request.course_title %>
+
+REQUEST DETAILS
+=========================
+Course/Section:
+<%= @request.faculty %> / <%= @request.subject %> <%= @request.academic_year %> - [<%= @request.faculty_abbrev %> / <%= @request.subject_abbrev %> <%= @request.course_number %>]: <%= @request.course_title %><%= t(:title_not_provided) if @request.course_title == '' %> -
+<%= defined?(@request.section_name_or_about) ? truncate(@request.section_name_or_about, length: 25) : 'Untitled Section' %>
+Preferred Date / Time: <%= @request.preferred_date.strftime('%b %d, %Y') %> / <%= @request.preferred_time.strftime('%I:%M %p') rescue nil %>
+Alternate Date / Time: <%= @request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= @request.alternate_time.strftime('%I:%M %p') rescue nil %>
+Duration & Location: <%= @request.duration.text %> | <%= @request.location_preference.text %>
+Assigned Instructors: You will be notificed once request has been assigned.
+
+If you have any further questions, please contact the assigned instructor listed below or <%= Setting.director_name %>, <%= Setting.director_position %>, <%= Setting.director_email %>
+
+
+<a href="<%= operators_index_url(host: Setting.web_host) %>" target='_blank'><%= Setting.app_name %> <%= t(:dashboard) %></a>
+
+Have a great day!
+
+-----------------------------------
+Library <%= Setting.app_name %> Messenger
+
+** THIS AN AUTOMATIC NOTIFICATION, DO NOT REPLY TO THIS EMAIL. **

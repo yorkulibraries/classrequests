@@ -1,0 +1,77 @@
+## Teaching Request Translations
+
+en:
+  all: "All"
+  no_emails_are_sent: "This form is for staff only and can be used to backlog classes. No emails are sent on form update."
+  helpers:
+    submit:
+      teaching_request:
+        create: "Submit My Request"
+        update: "Update My Request"
+      cancel_request:
+        create: "Submit Cancel Request"
+  enumerize:
+    defaults:
+      patron_type:
+        faculty: "Faculty Member / Course Director"
+        librarian: "Librarian / Archivist"
+        staff: "Staff"
+        other: "Other"
+        unknown: "Unknown"
+      status:
+        not_submitted: "Not Submitted"
+        new_request: "New Request"
+        in_process: "In Process"
+        assigned: "Assigned"
+        unfulfilled: "Unfulfilled"
+        deleted: "Deleted"
+    teaching_request:
+      duration:
+        thirty: "30 minutes"
+        forty: "40 minutes"
+        sixty: "60 minutes"
+        sixty_plus: "more than 60 minutes"
+        ninety: "90 minutes"
+        one_twenty: "120 minutes"
+        one_eighty: "180 minutes"
+        one_eighty_plus: "more than 180+ minutes"
+      location_preference:
+        online: "Online Live"
+        pre_recorded: "Pre-Recorded"
+        in_the_class: "In the Class"
+        in_the_library: "In the Library"
+  simple_form:
+    labels:
+      teaching_request:
+        username: "Username"
+        patron_type: "I am a YorkU…"
+        first_name: "First Name"
+        last_name: "Last Name"
+        email: "Email"
+        phone: "Contact Phone"
+        academic_year: "Academic Year"
+        faculty_abbrev: "Faculty"
+        subject_abbrev: "Department / Subject"
+        course_number: "Course Number"
+        course_title: "Course Title"
+        faculty: "Faculty"
+        subject: "Department / Subject"
+        location_preference: "Location/Format Preference"
+        submitted_by: "Submitted By"
+        status: "Status"
+        submit:
+          create: "Submit My Request Punk!"
+    hints:
+      teaching_request:
+        email: "Email of the person filling this form out"
+        phone: "416-736-2100 or x12345"
+        academic_year: "1. Select academic year"
+        faculty_abbrev: "2. Select A Faculty"
+        subject_abbrev: "3. Select A Dept/Subject"
+        course_number: "e.g. 4501 or 0000 if not a course"
+        course_title: "e.g. Introduction to Economics"
+    prompt:
+      teaching_request:
+        academic_year: "Select Academic Year"
+        faculty_abbrev: "Select A Faculty"
+        subject_abbrev: "Select A Department/Subject"

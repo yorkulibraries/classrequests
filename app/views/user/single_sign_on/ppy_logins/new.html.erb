@@ -1,0 +1,51 @@
+<div class='row mb-2'>
+  <div class='col-sm-11'>
+    <h1>PPY Login</h1>
+    <hr class='primary'/>
+  </div>
+</div>
+<div class='row mb-3'>
+  <div class='col'>
+    <div class='card'>
+      <div class='card-body'>
+        <% if @patron && @patron != nil %>
+          <h3 class='card-title text-primary'>PPY User Info</h3>
+            <%= @patron.ai(html: true) %>
+          <hr/>
+        <% else %>
+          <h4 class='text-danger'>Unable to Login with Passport York</h4>
+        <% end %>
+      </div>
+      <div class='card-footer'>
+        <%= link_to root_path, class: 'btn btn-lg btn-success' do %>
+          <i class='fa fa-graduation-cap'></i> <%= t('Home') %>
+        <% end %>
+      </div>
+    </div>
+  </div> <!-- column -->
+</div> <!-- row -->
+
+<div class='row mt-5'>
+
+  <br/>
+  CYIN: <%= request.headers['HTTP_PYORK_CYIN'] %>
+  <br/>
+  FIRST NAME: <%= request.headers['HTTP_PYORK_FIRST_NAME'] %>
+  <br/>
+  EMAIL: <%= request.headers['HTTP_PYORK_EMAIL'] %>
+  <br/>
+  REMOTE_USER: <%= request.env['HTTP_REMOTE_USER'] %>
+  ***********************************************************
+  <hr>
+  ***********************************************************
+  <%= request.session['cas'].ai(html: true)
+  %>
+  <br/>
+  **********************************************************
+  ENV: <%= #request.env.inspect
+  %>
+
+  <br/>
+  <%= #request.headers.ai(multiline: true)
+  %>
+</div>

@@ -1,0 +1,108 @@
+
+<div class='row'>
+  <div class='col'>
+    <% page_title t(:teaching_request) %>
+    <%= content_tag :h1, yield(:page_title) %>
+    <hr class='primary'/>
+  </div>
+</div>
+<div class='btn-toolbar justify-content-left' role='toolbar' aria-label='Toolbar with button groups'>
+  <div class='btn-group me-2' role='group' aria-label='First group'>
+    <%= link_to staff_manager_teaching_requests_path(), class: 'btn btn-sm btn-info' do %>
+      <span class='fas fa-hand-point-left'></span> <%= t(:return_to_requests_dashboard) %>
+    <% end %>
+    <%= link_to edit_staff_manager_teaching_request_path(@teaching_request), class: 'btn btn-sm btn-primary' do %>
+      <%= t(:edit) %>
+    <% end %>
+  </div>
+</div>
+<% request = @teaching_request %>
+
+<div class='row mt-2'>
+  <div class='col'>
+    <div class='card mb-3 mt-3'>
+    <!-- <div class='card text-white bg-secondary mb-3'> -->
+      <div class='card-header'>
+        <div class='row'>
+          <div class='col fw-bold'><%= t(:teaching_request_id) %>: <%= request.id %></div>
+          <div class='col text-end'><span class='badge badge-pill badge-<%= request.status.text.parameterize %>'><%= request.status.text %></span></div>
+        </div>
+      </div>
+      <div class='card-body'>
+        <div class='row'>
+          <!-- column -->
+          <div class='col-md-3'>
+            <h5 class='text-primary'><%= t(:people) %></h5>
+            <p class='mb-0 fw-bold small'><%= request.first_name %> <%= request.last_name %> [<%= request.patron_type %>]</p>
+            <p class='text-muted small mb-0'>
+              <%= t(:email) %>: <span class='fw-bold text-dark'><%= request.email %></span></p>
+            <p class='text-muted small mb-0'><%= t(:assigned_instructors) %>: </p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.lead_instructor.name rescue nil%></p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.second_instructor.full_name rescue nil%></p>
+            <p class='fw-bold small mb-0 text-dark'><%= request.third_instructor.full_name rescue nil%></p>
+          </div>
+        <!-- </div>
+        <div class='row'> -->
+          <!-- column -->
+          <div class='col-md-6'>
+            <h5 class='text-primary'><%= t(:request_info) %></h5>
+            <p class='fw-bold small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= request.faculty %> / <%= request.subject %>"><%= request.academic_year %> - [<%= request.faculty_abbrev %> / <%= request.subject_abbrev %> <%= request.course_number %>]: <%= request.course_title %><em><%= t(:title_not_provided) if request.course_title == '' %></em> </p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:section) %>:
+              <span class='fw-bold text-dark'> <%= defined?(request.section_name_or_about) ? truncate(request.section_name_or_about, length: 25) : 'Untitled Section' %>
+              </span>
+            </p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:number_of_students) %>:
+              <span class='fw-bold text-dark'><%= request.number_of_students %></span>
+            </p>
+
+          </div>
+        <!-- </div>
+        <div class='row'> -->
+          <!-- column -->
+          <div class='col-md-3'>
+            <h5 class='text-primary'><%= t(:other_details) %></h5>
+            <p class='text-muted small mb-0'><%= t(:dates) %>:</p>
+
+              <p class='fw-bold small mb-0 text-dark'><%= request.preferred_date.strftime('%b %d, %Y') %> / <%= request.preferred_time.strftime('%I:%M %p') rescue nil %></p>
+              <p class='fw-bold small mb-0 text-dark'><%= request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= request.alternate_time.strftime('%I:%M %p') rescue nil %></p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:duration) %>:
+              <span class='fw-bold text-dark'><%= request.duration.text %></span>
+            </p>
+            <p class='text-muted small mb-0'><%= t(:location) %>:
+              <span class='fw-bold text-dark'><%= request.location_preference.text %></span>
+            </p>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-md-12 col-sm-12'>
+            <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= truncate(strip_tags(request.request_note.to_plain_text), length: 25) %>"><%= t(:request_note) %>: <span class='fw-bold text-dark'><%= request.request_note %></span></p>
+          </div>
+        </div>
+        <div class='row'>
+          <!-- column -->
+          <div class='col-md-12'>
+            <h5 class='text-primary'><%= t(:staff_only_fields) %></h5>
+            <p class='text-muted small mb-0'><%= t(:submitted_by) %>: <span class='fw-bold text-dark'><%= request.submitted_by %></span></p>
+            <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= truncate(strip_tags(request.instructor_notes.to_plain_text), length: 25) %>"><%= t(:instructor_notes) %>: <span class='fw-bold text-dark'><%= request.instructor_notes %></span></p>
+          </div>
+        </div>
+
+       </div> <!-- card-body -->
+       <div class='card-footer text-muted'>
+         <div class='row'>
+           <div class='col text-start'>
+             <%= link_to edit_staff_teaching_request_path(request), class: 'btn btn-sm btn-secondary', remote: false do %>
+              <i class='fas fa-edit'></i> <%= t(:edit_request_details) %>
+             <% end %>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+A library class has been requested in your liaison area(s).
+
+Please follow up with the faculty member within 5 business days.
+
+<%= simple_format h(@message) %>
+
+Please REPLY to this message to confirm your receipt of this new request.
+
+Thank you.
+
+Request details below...
+
+Submission Data
+
+CONTACT INFORMATION
+=========================
+I am a: <%= @request.patron_type %>
+First Name: <%= @request.first_name %>
+Last Name: <%= @request.last_name %>
+Email: <%= @request.email %>
+Phone: <%= @request.phone %>
+Academic year: <%= @request.academic_year %>
+Faculty: <%= @request.faculty_abbrev %> - <%= @request.faculty %>
+Subject: <%= @request.subject_abbrev %> - <%= @request.subject %>
+Course number: <%= @request.course_number %>
+Course Title: <%= @request.course_title %>
+
+SECTION DETAILS
+=========================
+<% @request.sections.each do |section| %>
+  Sections: <%= section.name %>
+  # of Students: <%= section.number_of_students %>
+  Preferred: <%= section.preferred_date.strftime('%b %d, %Y') rescue nil %> / <%= section.preferred_time.strftime('%I:%M %p') rescue nil %>
+  Alternative: <%= section.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= section.alternate_time.strftime('%I:%M %p') rescue nil %>
+  Duration: <%= section.duration %>
+  Location Pref.: <%= section.location_preference %>
+  Note: <%= section.note %>
+<% end %>
+
+<p>If you have any further questions, please contact <a href="mailto:<%= Setting.director_email %>"><%= Setting.director_name %></a >, <%= Setting.director_position %>, <a href="mailto: <%= Setting.director_email %>"><%= Setting.director_email %></a>.</p><br/>
+
+Have a great day!
+
+-----------------------------------
+Library Class Request Messenger

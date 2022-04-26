@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'shared/head' %>
+  </head>
+
+  <body>
+
+    <!-- LAYOUT WRAPPER -->
+
+    <div class='d-flex' id='wrapper'>
+      <!-- Sidebar -->
+      <%= #render 'staff/sidebar'
+      %>
+
+      <!-- Page Content -->
+      <div id='page-content-wrapper' class='d-flex flex-column'>
+        <%= render 'staff/navbar' %>
+        <div class='container-fluid p-4'>
+          <%= render 'shared/notices' %>
+          <%= yield %>
+        </div>
+
+        <footer id='sticky-footer' class='footer bg-dark text-white py-2'>
+          <div class='container px-md-0'>
+            <%= render 'shared/footer' %>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h1><%= t(:users_list) %></h1>
+    <hr class="primary" />
+  </div>
+
+  <!-- <div class="col-sm-6 text-right">
+  <%= link_to root_path, class: 'btn btn-primary' do %>
+    Add New User
+  <% end %>
+  </div> -->
+</div>
+<!--
+t.string "name"
+t.string "branch_division"
+t.datetime "created_at", precision: 6, null: false
+t.datetime "updated_at", precision: 6, null: false
+end -->
+<div class="table-responsive bg-light p-4">
+  <table class="table table-sm table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th><%= t(:user_uid) %></th>
+        <th><%= t(:user_name) %></th>
+        <th><%= t(:first_name) %></th>
+        <th><%= t(:last_name) %></th>
+        <th><%= t(:email) %></th>
+        <th><%= t(:contact_phone) %></th>
+        <th><%= t(:alternate_email) %></th>
+        <th><%= t(:user_source) %></th>
+        <th><%= t(:user_group) %></th>
+        <th><%= t(:iam_identification) %></th>
+        <th><%= t(:is_active) %></th>
+        <th><%= t(:is_verified) %></th>
+        <th><%= t(:created_at) %></th>
+        <th><%= t(:updated_at) %></th>
+        <th><%= t(:note) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <%= content_tag :tr, id: dom_id(user), class: dom_class(user) do %>
+          <td><%= user.id %> | <%= user.user_uid %></td>
+          <td><%= user.username %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.contact_phone %></td>
+          <td><%= user.alternate_email %></td>
+          <td><%= user.user_source %></td>
+          <td><%= user.user_group %></td>
+          <td><%= user.iam_identification %></td>
+          <td><%= user.is_active %></td>
+          <td><%= user.is_verified %></td>
+          <td><%= user.created_at.strftime('%Y-%m-%d at %I:%M%p') %></td>
+          <td><%= user.updated_at.strftime('%Y-%m-%d at %I:%M%p') %></td>
+          <td><%= user.note %></td>
+          <td>
+            <%= link_to staff_admin_user_path(user), class: "btn btn-sm btn-info" do %>
+              <i class='fas fa-eye'></i>
+            <% end %>
+          </td>
+          <td><%= link_to edit_staff_admin_user_path(user), class: "btn btn-sm btn-info" do %>
+            <i class='fas fa-edit'></i>
+          <% end %></td>
+          <td><%= link_to [:staff, :admin, user], method: :delete,
+              data: { confirm: 'Are you sure?', toggle: "tooltip", title: 'delete' },
+              class: 'btn text-white btn-danger'  do %>
+                <i class="fas fa-times-circle"></i> <%= t(:delete) %>
+          </td>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

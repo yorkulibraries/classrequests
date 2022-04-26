@@ -1,0 +1,41 @@
+<div class='card'>
+  <div class='card-body'>
+    <p class='small lead text-secondary'><%= t(:fields_marked_are_mandatory) %></p>
+
+    <%= simple_form_for([:user, @staff_profile], url: user_request_staff_account_index_path) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <div class='form-inputs'>
+        <div class='mt-3'>
+          <%= f.input :specializtion_job_title %>
+        </div>
+        <div class='mt-3'>
+          <%= f.input :profile_bio %>
+        </div>
+        <div class='mt-3'>
+        </div>
+        <div class='mt-3'>
+          <%= f.input :role, as: :hidden %>
+        </div>
+        <div class='mt-3'>
+          <%= f.association :department , label_method: :name, value_method: :id, include_blank: false, input_html: {class: 'form-select request-chose'}  %>
+        </div>
+        <div class='mt-3'>
+          <%= f.association :user, label_method: :user_label, value_method: :id, include_blank: false, disabled: false, as: :hidden %>
+          <!-- input_html: {value_method: :id} -->
+
+        </div>
+        <div class='mt-3'>
+          <%= f.input :is_approved, as: :hidden %>
+        </div>
+      </div>
+
+      <div class='mt-5'>
+        <%= f.button :submit, class: 'btn btn-md btn-success' %>
+        <%= link_to 'Cancel', user_dashboard_path, class:'ml-3 btn btn-danger' %>
+      </div>
+    <% end %>
+  <br/>
+  </div> <!-- card body close -->
+</div> <!-- card close -->

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1> <%= t(:admin_dashboard) %></h1>
+    <hr class="primary"/>
+  </div>
+</div>
+<h1><%= @greetings %></h1>
+
+<div class="row">
+  <div class="col">
+    <div class="card mb-3 shadow p-2 rounded">
+      <div class="card-body">
+        <h2 class="card-title"><%= t(:pending_approvals) %>: </h2>
+        <hr class="secondary" />
+        <div class="responsive-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">UID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Approval Status</th>
+                <th scope="col" colspan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @pending_approvals.nil? || @pending_approvals.count == 0  %>
+                <tr>
+                  <td scope="row"><a href="<%= staff_admin_users_path %>"><%= t(:manage_users) %></a></td>
+                </tr>
+              <% else %>
+                <% @pending_approvals.each do |pa| %>
+                <tr>
+                  <th scope="row"><%= pa.user_id %></th>
+                  <td><%= pa.user.full_name %></td>
+                  <td><%= pa.department.name %></td>
+                  <td><%= pa.is_approved %></td>
+                  <td>
+                    <%= link_to t(:approve_staff),
+                      staff_manager_approve_staff_accounts_path({staff_profile_id: pa.id, is_approved: true}),
+                      method: :patch, class: "btn btn-sm btn-success",
+                      data: { turbolinks: false } %>
+                  </td>
+                  <td><a href="<%= staff_admin_users_path %>" class="btn btn-sm btn-secondary"><%= t(:manage_users) %></a></td>
+                </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

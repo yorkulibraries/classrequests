@@ -1,0 +1,88 @@
+<!--Public Navbar -->
+<nav class='navbar navbar-yul navbar-expand-lg navbar-light bg-white px-2 py-1'>
+  <a class='navbar-brand d-block' href="<%= root_url %>">
+    <img src="<%= image_url(Setting.logo_url) %>" height='32px' class='' alt=''> <span class='brand-name d-inline-block'> <div class='vertical-divider'></div>  <%= (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR' %></span>
+  </a>
+  <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
+    <span class='navbar-toggler-icon'></span>
+  </button>
+  <div class='collapse navbar-collapse' id='navbarNavDropdown'>
+    <ul class='navbar-nav'>
+      <li class='nav-item'>
+        <%= link_to root_path, class: 'nav-link' do %>
+          <i class='fas fa-home text-primary' aria-hidden='true'></i> <%= t(:home) %>
+        <% end %>
+      </li>
+      <li class='nav-item'>
+         <%= link_to new_user_teaching_request_path, class: 'nav-link' do %>
+         <i class='fas fa-chalkboard-teacher text-primary' aria-hidden='true'></i> <%= t(:request_library_class) %>
+         <% end %>
+     </li>
+      <% if user_signed_in? %>
+        <li class='nav-item'>
+          <%= link_to operators_index_path, class: 'nav-link' do %>
+            <i class='fas fa-user text-primary' aria-hidden='true'></i> <%= t(:my_dashboard) %>
+          <% end %>
+        </li>
+      <% end %>
+        <li class='nav-item'><%= link_to public_teaching_calendars_path, class:'nav-link' do %>
+          <i class='fas fa-table text-primary'></i> <%= t(:teaching_overview_calendar) %>
+        <% end %>
+        </li>
+    </ul>
+    <ul class='navbar-nav ms-auto'>
+
+      <li class='nav-item dropdown'>
+        <%= link_to '#', id: 'navbar-lang-dropdown', class: 'nav-link dropdown-toggle', data: { 'bs-target': 'nav-lang-dropdown', 'bs-toggle': 'dropdown' }, aria: { haspopup: true, expanded: false } do %>
+          <%= t(I18n.locale.upcase) %>
+          <% I18n.available_locales.map { |locale| I18n.t('language_name', locale: locale) } %>
+        <% end %>
+        <div id='nav-lang-dropdown' class='dropdown-menu' aria-labelledby='navbar-dropdown' id='nav-lang-dropdown'>
+          <% if I18n.locale == :en %>
+            <%= link_to t('FR-CA'), { locale: 'fr-ca' }, {class: 'dropdown-item'}%>
+          <% else %>
+            <%= link_to t('EN'), { locale: :en }, {class: 'dropdown-item'} %>
+          <% end %>
+        </div>
+      </li>
+
+      <% if Setting.enable_annoucements %>
+        <li class='nav-item'><%= link_to 'What\'s New', announcements_path, class: "nav-link #{unread_announcements(current_user)}" %></li>
+      <% end %>
+
+      <% if user_signed_in? %>
+
+        <% if Setting.enable_notifications %>
+          <li class='nav-item'>
+            <%= link_to notifications_path, class: 'nav-link' do %><span><i class='far fa-bell' aria-hidden='true'></i></span><% end %>
+          </li>
+        <% end %>
+
+        <li class='nav-item dropdown'>
+          <%= link_to '#', id: 'public-account-navbar-dropdown', class: 'nav-link dropdown-toggle', data: { 'bs-target': 'nav-account-dropdown', 'bs-toggle': 'dropdown' }, aria: { haspopup: true, expanded: false } do %>
+            <%= image_tag gravatar_image_url(current_user.email, size: 40), height: 20, width: 20, class: 'rounded' %>
+          <% end %>
+          <div id='nav-account-dropdown' class='dropdown-menu dropdown-menu-end' aria-labelledby='navbar-dropdown' id='nav-account-dropdown'>
+            <% if current_user %>
+              <%= link_to current_user.username, operators_index_url, class: 'dropdown-item' %>
+            <% end %>
+
+            <%= link_to 'Edit Account', edit_user_registration_path, class: 'dropdown-item' %>
+            <div class='dropdown-divider'></div>
+            <% if Rails.env.development?  %>
+              <%= link_to 'Logout', destroy_user_session_path, method: :get, class: 'dropdown-item' %>
+            <% else %>
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+            <% end %>
+          </div>
+        </li>
+      <% else %>
+        <% if true %> <!-- ADD CONFIG VARIABLE CHECK on SIGN UPs ENABLED -->
+          <!-- <li class='nav-item'><%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %></li> -->
+        <% end %>
+        <li class='nav-item'><%= link_to 'Login', new_user_session_path, class: 'nav-link' %></li>
+      <% end %>
+    </ul>
+
+  </div>
+</nav>

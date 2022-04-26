@@ -1,0 +1,5 @@
+<td class='align-middle'><%= request.name %> <span class='small text-muted'>[<%= request.number_of_students %> <%= t(:students) %>]</span></td>
+<td class='align-middle'><%= request.preferred_date.strftime('%b %d, %Y') rescue nil %> / <%= request.preferred_time.strftime('%I:%M %p') rescue nil %> <span class='small text-muted'>[<%= request.duration.text.titleize %>]</span></td>
+<td class='align-middle'><%= request.location_preference.text %></td>
+<td class='align-middle'><span class='badge badge-pill badge-<%= request.status.downcase.parameterize %>'><%= request.status.text %></span></td>
+<td class='align-middle'><%= request.lead_instructor.name rescue nil %></td>

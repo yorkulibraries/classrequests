@@ -1,0 +1,10 @@
+en:
+  simple_form:
+    options:
+      staff_profile:
+        role:
+          not_set: 'Not Set'
+          staff_instructor: 'Staff Instructor'
+          student_staff: 'Student Staff'
+          administrator: 'Administrator'
+          manager: 'Manager'

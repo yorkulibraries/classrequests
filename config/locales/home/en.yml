@@ -1,0 +1,26 @@
+## REQUESTS ENGLISH TRANSLATIONS
+en:
+  library_class_request_home: "Library Class Request Home"
+  library_class_request_form: "Library Class Request Form"
+  libraries_offer: "The Libraries offer Information Literacy (IL) classes in all disciplines."
+  libraries_notice: "During the suspension of the physical library services, we will offer online IL teaching options."
+  libraries_offer_bullets:
+    for_archives_and_special_collection: "For Archives and Special Collections, please contact "
+    for_frost_and_glendon: "For Frost Library at Glendon campus, please contact "
+    for_osgoode_law: "For Osgoode Law Library, please contact "
+    for_all_other: "For all other classes, please contact "
+  request_schedule: "Library Class Request Schedule"
+  request_schedule_bullets:
+    for_fall: "For Fall and year-long classes, please submit your request by "
+    fall_date: "August 15th."
+    for_winter: "For Winter classes, please submit your request by December 1st."
+    for_summer: "For Summer classes, please submit your request by May 15th."
+    for_questions_and_suggestions: "For questions and suggestions, please contact "
+  special_request_form_note: "Please note that we need at least three weeks for scheduling purposes."
+  button:
+    request_library_class: "Request Library Class"
+    admin_access: "Admin Access"
+  menu:
+    admin_access: "Admin Access"
+    logout: "Logout"
+    request_list: "Requests"

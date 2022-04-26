@@ -1,0 +1,82 @@
+<% if request.xhr? %>
+<div class='modal' role='dialog' id='assign_request_lead_form'> <!-- sfade removed -->
+  <div class='modal-dialog modal-lg' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h4 class='modal-title'>
+          <%= 'Assigning Request Leads' %>
+        </h4>
+        <button type='button' class='close' data-bs-dismiss='modal'>
+          <span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span>
+        </button>
+
+      </div> <!-- modal-header close -->
+      <div class='modal-body' id='section_form_body'>
+        <%= simple_form_for([:staff, :manager, @teaching_request], url: staff_manager_assign_request_lead_path, html: { class: 'form-horizontal' }, wrapper: :horizontal_form, remote: true) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+          <div class='row mt-3'>
+            <h4 class='card-title text-primary'>Request Information</h4>
+            <hr class='w-50 ml-0' />
+          </div>
+          <div class='row'>
+            <div class='col-md-4 col-sm-12'>
+              <%= @teaching_request.first_name %> <%= @teaching_request.last_name %> <span class='text-muted'>[<%= @teaching_request.patron_type %>]</span>
+            </div>
+            <div class='col-md-4 col-sm-12'><%= @teaching_request.email %></div>
+            <div class='col-md-4 col-sm-12'>
+              <%= @teaching_request.faculty_abbrev %>/ <%= @teaching_request.subject_abbrev %>
+              <%= @teaching_request.course_number %> <%= @teaching_request.academic_year %>
+            </div>
+          </div>
+
+          <div class='row mt-3'>
+            <div class='col-md-10 col-sm-12'>
+              <h4 class='card-title text-primary'><%= t(:assign_request_lead) %></h4>
+              <hr class='w-50 ml-0' />
+            </div>
+          </div>
+          <div class='row mt-2'>
+            <div class='col-md-10 col-sm-12'>
+              <%= f.input :lead_instructor_id, collection: @active_instructors,
+                    label_method: :full_name, value_method: :id,
+                    input_html: {autocomplete: 'off', class: 'request-chosen'} %>
+            </div>
+          </div>
+          <div class='row mt-2'>
+            <div class='col-md-10 col-sm-12'>
+              <%= f.input :second_instructor_id, collection: @active_instructors,
+                      label_method: :full_name, value_method: :id,
+                      input_html: {autocomplete: 'off', class: 'request-chosen'} %>
+            </div>
+          </div>
+          <div class='row mt-2'>
+            <div class='col-md-10 col-sm-12'>
+              <%= f.input :third_instructor_id, collection: @active_instructors,
+                      label_method: :full_name, value_method: :id,
+                      input_html: {autocomplete: 'off', class: 'request-chosen'} %>
+            </div>
+          </div>
+          <hr/>
+          <div class='form-actions'>
+            <%= f.button :submit, 'Assign Leads', class: 'btn btn-md btn-success', 'data-bs-dismiss': 'model' %>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cancel</button>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div> <!-- modal-content -->
+  </div>
+</div> <!-- modal -->
+
+<% else %>
+
+  <div class='card'>
+    <div class='card-body'>
+      <h1>HTML FORM SHOULD BE HERE!!!! </h1>
+    </div> <!-- card body close -->
+  </div> <!-- card close -->
+
+<% end %> <!-- end of xhr check -->

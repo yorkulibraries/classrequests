@@ -1,0 +1,106 @@
+
+<aside id="sidebar-wrapper" class="flex-column">
+
+  <!-- Sidebar Content -->
+  <div id="sidebar-content" class="">
+    <div class="sidebar-heading">
+      <a class="navbar-brand" href="<%= root_url %>">
+        <!-- YorkULogo_Ver_rgb -->
+        <img src="<%= image_url('YorkULogo_Ver_rgb.jpg') %>" height="54px" class="" alt="">
+        <!-- <img src=" image_url('YorkULogo_Hor_186-svg.svg') " height="24px" class="" alt=""> -->
+
+        <div class="vertical-divider"></div>
+        <span class="brand-name d-inline-block p-1"> <%= (Setting.app_name.present?) ? Setting.app_name : "LIBSTAR" %></span>
+      </a>
+    </div>
+    <!-- Close and Brand -->
+    <div class="sidebar-heading-toggled">
+      <a class="navbar-brand" href="<%= root_url %>">
+        <img src="<%= image_url('YorkULogo_Ver_rgb.jpg') %>" height="54px" class="d-inline-block align-middle logo" alt="">
+      </a>
+    </div>
+    <div class="sidebar-close">
+      <button class="btn btn-secondary" id="inner-menu-toggle" type="button" aria-controls="sidebar-wrapper" aria-expanded="false" aria-label="Toggle Sidebar">
+        <%= t(:close) %> <i class="fas fa-skull-circle"></i>
+      </button>
+    </div>
+
+    <!-- Sidebar Nav -->
+    <div class="sidebar-items">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <%= link_to staff_dashboard_path(), class: 'nav-link' do %>
+            <i class="fas fa-columns"></i> <%= t(:dashboard) %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+
+          <a class="nav-link collapsed" href="#staffclassrequest" data-bs-toggle="collapse" data-bs-target="#staffclassrequest">
+            <i class="fas fa-book-reader"></i> <%= t(:log_teachings) %>
+          </a>
+          <div class="collapse" id="staffclassrequest" aria-expanded="false">
+            <ul class="nav inner-nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <i class="far fa-dot-circle fa-xs"></i> <%= t(:submit_a_request) %>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <i class="far fa-dot-circle fa-xs"></i> <%= t(:upcoming_classes) %>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <i class="far fa-dot-circle fa-xs"></i> <%= t(:past_classes) %>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#staffreports" data-bs-toggle="collapse" data-bs-target="#staffreports">
+            <i class="fas fa-star-of-life"></i> <%= t(:Reports) %>
+          </a>
+          <div class="collapse" id="staffreports" aria-expanded="false">
+            <ul class="nav inner-nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <i class="far fa-dot-circle fa-xs"></i> <%= t('my_classes') %> [coming soon]
+                </a>
+              </li>
+              <!--
+              <li class="nav-item">
+
+                <a class="nav-link collapsed" href="#submenu1sub1" data-bs-toggle="collapse" data-bs-target="#submenu1sub1">
+                  <i class="far fa-dot-circle fa-xs"></i> Customers
+                </a>
+                <div class="collapse small" id="submenu1sub1" aria-expanded="false">
+                  <ul class="flex-column nav ps-4">
+                    <li class="nav-item">
+                      <a class="nav-link" href="">
+                        <i class="far fa-clock"></i> Daily </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="fas fa-chart-bar"></i> Charts </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="">
+                          <i class="far fa-compass"></i> Areas </a>
+                      </li>
+                  </ul>
+                </div>
+              </li>
+              -->
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div> <!-- /#sidebar-items -->
+  </div> <!-- /#sidebar-content -->
+</aside> <!-- /#sidebar-wrapper -->

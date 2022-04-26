@@ -1,0 +1,27 @@
+<div class='container ax-left'>
+  <div class='card my-10'>
+    <div class='card-body'>
+      <%= image_tag attachments["#{Setting.mail_logo_url}"].url, alt: "#{Setting.app_name}", class: 'img-fluid h-16 w-auto ax-left mb-1' %>
+      <hr class='text-red-700 bg-red-400 my-1' />
+      <h1 class='h3 mt-3 mb-2'>Hi <%= @request.lead_instructor.first_name %>,</h1>
+      <h5 class='text-gray-700 lh-base'>A library class has been requested in your liaison area(s).</h5>
+      <h5 class='text-danger pb-3'>Please follow up with the faculty member within 5 business days. Thank you!</h5>
+      <p class='text-gray-700'><em>See more details in app.</em></p>
+      <a class='btn btn-success' href="<%= operators_index_url(host: Setting.web_host) %>" target='_blank'><%= t(:login_and_confirm) %></a>
+      <!-- <p class='text-gray-700 mt-3'><em>Request details below...</em></p> -->
+
+      <div class='space-y-3 mt-3'>
+        <div class='bg-gray-100 p-4'>
+          <%= render partial: 'shared/mailer/show_contact_fields', locals: {:@request => @request} %>
+        </div>
+        <div class='bg-gray-100 p-3'>
+          <%= render partial: 'shared/mailer/show_request_information_fields', locals: {:@request => @request} %>
+        </div>
+      </div>
+      <p class='text-gray-700 mt-3'>If you have any further questions, please contact <a href="mailto:<%= Setting.director_email %>"><%= Setting.director_name %></a >, <%= Setting.director_position %>, <a href="mailto: <%= Setting.director_email %>"><%= Setting.director_email %></a>.</p><br/>
+
+      <%= render partial: 'shared/mailer/auto_notification_footer' %>
+
+    </div>
+  </div>
+</div>

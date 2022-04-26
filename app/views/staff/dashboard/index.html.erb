@@ -1,0 +1,162 @@
+<div class='row'>
+  <div class='col-sm-12'>
+    <% page_title 'Staff Dashboard' %>
+    <h1><%= @greetings %></h1>
+    <hr class='primary'/>
+  </div>
+  <div class='col-sm-3' style=''>
+      <!-- Space here left for any progress bars, info, notifications etc -->
+  </div>
+</div>
+
+<% if current_user.staff_profile.is_approved? %>
+  <% if @lead_assignments.count != 0 %>
+  <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
+    <div class='card-body'>
+      <h2 class='card-title'><%= t(:assigned_as_lead) %></h2>
+      <h3 class='card-subtitle mb-2 text-muted'><%= t(:lead_and_assigned_requests) %></h3>
+      <hr class='secondary'/>
+      <div class='table-responsive'>
+        <table class='table table-sm table-striped table-hover text-center mt-3'>
+          <thead>
+            <th class='small'><%= t(:request_info) %></th>
+            <th class='small'><%= t(:preferred_date) %></th>
+            <th class='small'><%= t(:location) %></th>
+            <th class='small'><%= t(:status) %></th>
+            <th class='small'><%= t(:lead_instructor) %></th>
+            <th colspan="2" style="min-width: 180px"><%= t(:options) %></th>
+          </thead>
+          <tbody>
+            <% @lead_assignments.each do |request| %>
+            <tr>
+              <%= render partial: 'shared/teaching_request/common_table_fields', locals: {request: request} %>
+
+              <td colspan='4'>
+                <% if request.status == TeachingRequest.status.assigned %>
+                  <%= link_to edit_user_teaching_request_path(request), class: 'btn btn-sm btn-secondary mr-1 mb-1' do %>
+                    <i class='fas fa-edit' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:view) %>'></i>
+                  <% end %>
+                <% end %>
+                <% if request.status == TeachingRequest.status.new_request ||
+                      request.status == TeachingRequest.status.in_process %>
+                  <%= link_to new_staff_teaching_request_assignment_response_path(request), class: 'btn btn-sm btn-secondary mr-1 mb-1', remote: true do %>
+                    <%= t(:respond) %>
+                    <i class='fas fa-thumbs-up' data-bs-toggle='tooltip' data-bs-placement='top' title='<%= t(:respond_to_assignment) %>'></i>
+                    <i class='fas fa-thumbs-down'></i>
+                  <% end %>
+                <% end %>
+                <%= link_to staff_teaching_request_path(request), class: 'btn btn-sm btn-info mr-1 mb-1' do %>
+                  <i class='fa fa-eye' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:view) %>'></i>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <!-- My Teaching Request -->
+  <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
+    <div class='card-body'>
+      <h2 class='card-title'><%= t(:my_teaching_requests) %></h2>
+      <hr class='secondary'/>
+      <% if @my_teaching_requests.count == 0 %>
+        <h3><%= t(:no_teaching_requests) %></h3>
+      <% else %>
+      <div class='table-responsive'>
+        <table class='table table-sm table-striped table-hover text-center mt-3'>
+          <thead>
+            <th class='small'><%= t(:request_info) %></th>
+            <th class='small'><%= t(:preferred_date) %></th>
+            <th class='small'><%= t(:location) %></th>
+            <th class='small'><%= t(:status) %></th>
+            <th class='small'><%= t(:lead_instructor) %></th>
+            <th colspan="4" style="min-width: 180px"><%= t(:options) %></th>
+          </thead>
+          <tbody>
+          <% @my_teaching_requests.each do |my_request| %>
+            <tr>
+              <%= render partial: 'shared/teaching_request/common_table_fields', locals: {request: my_request} %>
+              <td colspan='4' class='align-middle'>
+                <%= link_to staff_teaching_request_path(my_request), class: 'btn btn-sm btn-info mr-1 mb-1' do %>
+                    <i class='fa fa-eye' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:view) %>'></i>
+                <% end %>
+                <% if my_request.status == TeachingRequest.status.assigned %>
+                  <%= link_to edit_staff_teaching_request_path(my_request), class: 'btn btn-sm btn-secondary mr-1 mb-1' do %>
+                    <i class='fas fa-edit' data-bs-toggle='tooltip' data-bs-placement='top' title='<%= t(:edit) %>'></i>
+                  <% end %>
+                  <%= link_to staff_mark_done_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it done?'}, class:'btn btn-sm btn-success mr-1 mb-1' do %>
+                    <i class='fas fa-check' data-bs-toggle='tooltip' data-bs-placement='bottom' title='<%= t(:mark_done) %>'></i>
+                  <% end %>
+                <% end %>
+                <% if current_user.staff_profile.role.value > 2 %> <!-- if manager or admin -->
+                  <%= link_to staff_mark_deleted_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it deleted?'}, class:'btn btn-sm btn-danger mr-1 mb-1' do %>
+                    <i class='fas fa-times-circle' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:mark_deleted) %>'></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to new_user_cancel_request_path(teaching_request_id: my_request, user_id: current_user.id), class: 'btn btn-sm btn-danger mr-1 mb-1' do %>
+                      <i class='fas fa-times-circle' data-bs-toggle='tooltip' data-bs-placement='right' title='<%= t(:cancel_request) %>'></i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <% end %>
+    </div>
+  </div> <!-- My Teaching Requests wrapper -->
+
+  <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
+    <div class='card-body'>
+      <h2 class='card-title'><%= t(:upcoming_classes) %></h2>
+      <hr class='secondary'/>
+      <% if @upcoming_teaching_requests.count == 0 %>
+        <h3 class='text-muted'><%= t(:there_are_no_upcoming_requests) %></h3>
+      <% else %>
+      <div class='table-responsive'>
+        <table class='table table-sm table-striped table-hover text-center mt-3'>
+          <thead>
+            <th class='small'><%= t(:request_info) %></th>
+            <th class='small'><%= t(:preferred_date) %></th>
+            <th class='small'><%= t(:location) %></th>
+            <th class='small'><%= t(:status) %></th>
+            <th class='small'><%= t(:lead_instructor) %></th>
+            <th colspan="4" style="min-width: 180px"><%= t(:options) %></th>
+          </thead>
+          <tbody>
+          <% @upcoming_teaching_requests.each do |up_request| %>
+            <tr>
+              <%= render partial: 'shared/teaching_request/common_table_fields', locals: {request: up_request} %>
+              <td colspan='4' class='align-middle'>
+                <%= link_to staff_teaching_request_path(up_request), class: 'btn btn-sm btn-info mr-1 mb-1' do %>
+                    <i class='fa fa-eye' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:view) %>'></i>
+                <% end %>
+                <%= link_to new_user_cancel_request_path(teaching_request_id: up_request, user_id: current_user.id), class: 'btn btn-sm btn-danger mr-1 mb-1' do %>
+                    <i class='fas fa-times-circle' data-bs-toggle='tooltip' data-bs-placement='right' title='<%= t(:cancel_request) %>'></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <% end %>
+    </div>
+  </div> <!-- Upcoming Requests wrapper -->
+<% else %>
+<div class='card'>
+  <div class='card-body'>
+    <h2 class='card-title'><%= t(:not_yet_authorized) %></h2>
+    <!-- <h3 class='card-subtitle mb-2 text-muted'><%= t(:lead_and_assigned_requests) %></h3> -->
+    <hr class='secondary'/>
+    <%= link_to user_dashboard_path(), class: 'btn btn-info' do %>
+      <span class='fas fa-hand-point-left'></span> <%= t(:go_back_to_user_dashboard) %>
+    <% end %>
+  </div>
+</div>
+<% end %>

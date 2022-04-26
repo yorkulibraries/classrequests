@@ -1,0 +1,16 @@
+
+<!-- <h1>New Library Class Request</h1> -->
+<!-- <div class='alert alert-danger'>Classrequests will be undergoing maintenance June 29th between 2pm - 3:30pm. <br/> Please avoid doing any submissions during this period. Thank you. </div> -->
+<div class='row'>
+  <div class='col-md-9 col-sm-12'>
+    <h1><%= t(:new_library_class_request) %></h1>
+    <hr class='primary'/>
+  </div>
+  <!-- <div class='col-md-3 col-sm-12'>
+    <p><strong>Progress</strong></p>
+    <%= render partial: 'shared/progress_bar', locals: {progress_so_far: '10%'} %>
+  </div> -->
+</div>
+<!-- render 'form', request: @teaching_request  -->
+<%= render 'form', teaching_request: @teaching_request %>
+<br/>

@@ -1,0 +1,36 @@
+/*
+* YorkU Colors Reference *
+------------------------
+york-grey-dark:   #686260;
+york-grey-medium: #B7AEA9;
+york-grey-pewter: #D6CFCA;
+york-grey-light:  #E8E4DF;
+york-grey-lighter: #FAFAFA;
+york-red-pms-186: #E31837;
+york-red-medium:  #B82025;
+york-red-dark:    #8C0000;
+york-light-blue:  #ACE6F8;
+york-bright-blue: #3AC2EF;
+*/
+
+$primary:       #e31837; //#cc2030;      /* original $blue */
+$secondary:     #666666; /* $gray-700 ;   * original gray-600 */
+$success:       #35B01C;
+$info:          #0071bc; //#004A8D; // #CBC1A0; //#158475; /*#5575AB; */     /* original $cyan */
+$warning:       #FFE202; //#D36B21; /*#F1DBB0*/     /* original $yellow */
+$danger:        #FC5412; //#E31837; /* Pink Peacock - https://www.w3schools.com/colors/colors_trends.asp */
+$light:         $gray-100;
+$dark:          $gray-800;
+////$link-color:    $green;
+//
+//
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  info: $info,
+  warning: $warning,
+  danger: $danger,
+  light: $light,
+  dark: $dark
+);

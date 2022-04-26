@@ -1,0 +1,54 @@
+<div class="card w-90">
+  <%= simple_form_for([:staff, :admin, @user], html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div class="card-body">
+      <p class="small lead text-secondary"><%= t(:fields_marked_are_mandatory) %></p>
+      <div class="row mt-3">
+        <%= f.input :first_name %>
+      </div>
+      <div class="row mt-3">
+        <%= f.input :last_name %>
+      </div>
+
+      <% for attribute in @user.attributes.keys %>
+        <!-- <p><%= attribute.humanize %> <%= @user.attributes[attribute].to_s %></p> -->
+
+        <div class="row mt-3">
+          <!-- attribute.to_s  -->
+          <% if attribute == 'announcements_last_read_at' || attribute == 'last_sign_in_at' || attribute == 'current_sign_in_at' || attribute == 'updated_at' || attribute == 'created_at' || attribute == 'reset_password_sent_at' || attribute == 'remember_created_at' %>
+
+            <%= f.input attribute, as: :string, html5: false,
+                    input_html: {class: "", data: { behaviour: 'flatpickr-datetime'}} %>
+
+          <% elsif attribute == 'encrypted_password' %>
+          <!-- do nothing -->
+          <% elsif attribute == 'reset_password_token' %>
+             <!-- f.input attribute  -->
+            </div>
+            <div class="row mt-3">
+              <%= f.input :password %>
+            </div>
+            <div class="row mt-3">
+              <%= f.input :password_confirmation, input_html: {autocomplete: "off"} %>
+            </div>
+            <div class="row mt-3">
+
+          <% else %>
+
+            <%= f.input attribute %>
+
+          <% end %>
+
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="form-actions card-footer">
+      <%= f.button :submit, class: "btn btn-success" %>
+      <%= link_to "Cancel", staff_admin_users_path, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,64 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: "hsimpson"
+  patron_type: 1
+  first_name: "Homer"
+  last_name: "Simpson"
+  email: "hsimpson@mailinator.com"
+  phone: ""(416)-222-4432"
+  academic_year: "2021-2022"
+  faculty: Glendon
+  faculty_abbrev: GL
+  subject: "Intro to Math"
+  subject_abbrev: MATH
+  course_title: This is a fake course
+  course_number: 1234
+  submitted_by: MyString
+  submitted_on_behalf: MyString
+  section_name_or_about: MyString
+  number_of_students: 1
+  preferred_date: 2021-11-26
+  preferred_time: 2021-11-26 10:47:27
+  alternate_date: 2021-11-26
+  alternate_time: 2021-11-26 10:47:27
+  duration: "30"
+  location_preference: "Online"
+  lead_instructor_id: 1
+  second_instructor_id: 1
+  third_instructor_id: 1
+  status: "Not Submitted"
+  request_note: "Requestor Notes"
+  instructor_notes: "Instructor Notes"
+  user_id: 123456789
+
+two:
+  username: MyString
+  patron_type: 1
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  academic_year: MyString
+  faculty: MyString
+  faculty_abbrev: MyString
+  subject: MyString
+  subject_abbrev: MyString
+  course_title: MyString
+  course_number: 1
+  submitted_by: MyString
+  submitted_on_behalf: MyString
+  section_name_or_about: MyString
+  number_of_students: 1
+  preferred_date: 2021-11-26
+  preferred_time: 2021-11-26 10:47:27
+  alternate_date: 2021-11-26
+  alternate_time: 2021-11-26 10:47:27
+  duration: MyString
+  location_preference: MyString
+  lead_instructor_id: 1
+  second_instructor_id: 1
+  third_instructor_id: 1
+  status: MyString
+  request_note: MyText
+  instructor_notes: MyText

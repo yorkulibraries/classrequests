@@ -1,0 +1,52 @@
+<p id='notice'><%= notice %></p>
+
+<h1>Requests</h1>
+
+<div class='table-responsive'>
+  <table class='table table-striped table-sm'>
+    <thead class='thead-primary'>
+      <tr>
+          <th scope='col'>Patron type</th>
+          <th scope='col'>First name</th>
+          <th scope='col'>Last name</th>
+          <th scope='col'>Email</th>
+          <th scope='col'>Phone</th>
+          <th scope='col'>Academic year</th>
+          <th scope='col'>Faculty</th>
+          <th scope='col'>Faculty abbrev</th>
+          <th scope='col'>Subject</th>
+          <th scope='col'>Subject abbrev</th>
+          <th scope='col'>Course title</th>
+          <th scope='col'>Course number</th>
+          <th scope='col'>Submitted by</th>
+          <th colspan='3'></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @requests.each do |request| %>
+        <tr>
+            <td><%= request.patron_type %></td>
+            <td><%= request.first_name %></td>
+            <td><%= request.last_name %></td>
+            <td><%= request.email %></td>
+            <td><%= request.phone %></td>
+            <td><%= request.academic_year %></td>
+            <td><%= request.faculty %></td>
+            <td><%= request.faculty_abbrev %></td>
+            <td><%= request.subject %></td>
+            <td><%= request.subject_abbrev %></td>
+            <td><%= request.course_title %></td>
+            <td><%= request.course_number %></td>
+            <td><%= request.submitted_by %></td>
+            <td><%= link_to 'Show', user_request_path(request), class: 'btn btn-sm btn-primary' %></td>
+          <td><%= link_to 'Edit', edit_user_request_path(request), class: 'btn btn-sm btn-secondary' %></td>
+          <td><%= link_to 'Destroy', user_request_path(request), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<br>
+
+<%= link_to 'New Public Request', new_public_request_path, class: 'btn btn-md btn-success' %>

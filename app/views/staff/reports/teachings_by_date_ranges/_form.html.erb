@@ -1,0 +1,33 @@
+<%= simple_form_for(:teachings_by_date_ranges,
+    url: staff_reports_teachings_by_date_ranges_path,
+    html: { class: 'form-horizontal' }, wrapper: :horizontal_form) do |f| %>
+    <div class='row mt-2'>
+      <div class='col-sm-12 text-value'>
+          <%= f.input :start_date, as: :string, html5: false, required:false,
+                  input_html: {class: '', data: { behaviour: 'flatpickr-date'}}
+                  #,hint: 'Section Preferred Dates'
+                  %>
+      </div>
+    </div> <!-- row -->
+    <div class='row mt-2'>
+      <div class='col-sm-12 text-value'>
+        <%= f.input :end_date, as: :string, html5: false, required:false,
+                input_html: {class: '', data: { behaviour: 'flatpickr-date'}}
+                #,hint: 'Section Preferred Dates'
+                %>
+      </div>
+    </div> <!-- row -->
+    <div class='row mt-2'>
+      <div class='col-sm-12 text-value'>
+        <%= f.input :status, as: :select, collection: @status_list_enum,
+              include_blank: true, required:false, label_method: :first, value_method: :second,
+              input_html: {class: 'form-select request-chosen'} %>
+      </div>
+    </div> <!-- row -->
+    <hr/>
+    <div class='row'>
+      <div class='form-actions'>
+        <%= f.button :submit, 'Run Report', class: 'btn btn-success' %>
+      </div>
+    </div> <!-- row -->
+<% end %>

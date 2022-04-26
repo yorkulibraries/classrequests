@@ -1,0 +1,8 @@
+## THANK YOU FRENCH TRANSLATIONS
+fr-ca:
+  thank_you: "Merci!"
+  request_submitted: "Nous avons reçu votre demande de cours."
+  will_review_and_get_in_touch: "Nous examinerons votre demande et vous répondrons dès que possible."
+  futher_questions_html: "Veuillez contacter <a href='mailto:dcraig@yorku.ca'>Dana Craig </a> (Director of Student Learning & Academic Success, <a href='mailto:dcraig@yorku.ca'>dcraig@yorku.ca </a>) si vous avez d'autres questions."
+  # futher_questions: "Veuillez contacter Dana Craig (Director of Student Learning & Academic Success, dcraig@yorku.ca) si vous avez d'autres questions."
+  submit_another_request: "Soumettre une autre demande"

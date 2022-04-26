@@ -1,0 +1,94 @@
+
+<div class='card bg-white w-75 m-auto mt-5 p-4'>
+
+  <div class='card-body'>
+    <div class='card-title'><h1 class='text-center'>Account</h1></div>
+
+    <div class='row mt-3'>
+      <div class='col-lg-6 col-md-6 ms-auto me-auto'>
+        <!-- <h1 class='text-center'>Account</h1> -->
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render partial: 'devise/shared/error_messages', resource: resource %>
+
+          <% if resource.user_source == 'ppy' %>
+            <dl style='background: #fafafa;'>
+              <div class='row'>
+                <div class='col'><dt>Username</dt></div>
+                <div class='col'><dd><%= resource.username %></dd></div>
+              </div>
+              <div class='row'>
+                <div class='col'><dt>User Group</dt></div>
+                <div class='col'><dd><%= resource.user_group %></dd></div>
+              </div>
+            </dl>
+          <% else %>
+            <div class='form-group mb-3'>
+              <%= f.text_field :username, class: 'form-control', placeholder: 'Username' %>
+            </div>
+            <div class='form-group mb-3'>
+              <%= f.text_field :user_group, class: 'form-control', placeholder: 'User Group' %>
+            </div>
+          <% end %>
+
+          <div class='form-group mb-3'>
+            <%= f.select(:iam_identification, TeachingRequest.patron_type.options, {}, {class: 'form-select'}) %>
+          </div>
+
+          <div class='form-group mb-3'>
+            <%= f.email_field :email, class: 'form-control', placeholder: 'Email Address' %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div class='alert alert-warning'>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class='form-group mb-3'>
+            <%= f.text_field :first_name,  class: 'form-control', placeholder: 'First Name' %>
+          </div>
+
+          <div class='form-group mb-3'>
+            <%= f.text_field :last_name,  class: 'form-control', placeholder: 'Last Name' %>
+          </div>
+
+          <div class='form-group mb-3'>
+            <%= f.text_field :contact_phone,  class: 'form-control', placeholder: 'Phone' %>
+          </div>
+
+          <div class='form-group mb-3'>
+            <%= f.email_field :alternate_email,  class: 'form-control', placeholder: 'Alternate Email' %>
+          </div>
+
+          <!-- devise_parameter_sanitizer.permit(:account_update, keys: [:username, :first_name, :last_name, :contact_phone, :user_uid, :alternate_email, :user_source, :user_group, :note, :announcements_last_read_at, :is_active, :is_verified] ) -->
+
+          <% if resource.user_source == 'db' %>
+
+            <h3 class='text-center'>Change Password</h3>
+            <div class='form-group mb-3'>
+              <%= f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password'  %>
+              <p class='form-text text-muted'><small>Leave password blank if you don't want to change it</small></p>
+            </div>
+
+            <div class='form-group mb-3'>
+              <%= f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Confirm Password'  %>
+            </div>
+
+            <h4 class='text-center'>Enter your current password to confirm your changes</h4>
+            <div class='form-group mb-3'>
+              <%= f.password_field :current_password, autocomplete: 'off', class: 'form-control', placeholder: 'Current Password'  %>
+              <p class='form-text text-muted'><small>We need your current password to confirm your changes</small></p>
+            </div>
+
+          <% end %>
+
+          <div class='form-group mb-3 col-12'>
+            <%= f.submit 'Save Changes', class: 'btn btn-lg btn-block btn-primary' %>
+          </div>
+
+        <% end %>
+        <hr>
+
+        <p class='text-center'><%= link_to 'Deactivate my account', registration_path(resource_name), data: { confirm: 'Are you sure? You cannot undo this.' }, method: :delete %></p>
+      </div>
+    </div>
+  </div>
+</div>
