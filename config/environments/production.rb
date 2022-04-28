@@ -99,8 +99,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  web_host = (Setting.web_host.blank?) ? Setting.web_host : "classrequests.library.yorku.ca" 
-  config.action_mailer.default_url_options = { host: web_host }
+  config.action_mailer.default_url_options = { host: 'classrequests.library.yorku.ca' }
   config.action_mailer.delivery_method = :sendmail #Setting.delivery_method.parameterize.underscore.to_sym #:sendmail
 
   # Inserts middleware to perform automatic connection switching.

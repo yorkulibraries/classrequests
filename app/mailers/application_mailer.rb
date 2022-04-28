@@ -1,5 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  # default from: 'noreply@library.yorku.ca'
   default from: email_address_with_name(Setting.system_from_email, Setting.system_from_name)
   # layout 'mailer'
   layout 'bootstrap-mailer'

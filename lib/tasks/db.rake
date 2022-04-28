@@ -78,14 +78,14 @@ namespace :db do
 
   task create_production_users: :environment do
 
-    user_record = User.where(email: 'sadaqain@yorku.ca').first
+    user_record = User.where(email: 'jdoe1234@yorku.ca').first
     if !user_record
       user = User.new
-      user.first_name = 'Ali'
-      user.last_name = 'Sadaqain'
-      user.email = 'sadaqain@yorku.ca'
-      user.password = 'ASADAQAIN!@#$'
-      user.password_confirmation = 'ASADAQAIN!@#$'
+      user.first_name = 'John'
+      user.last_name = 'Doe'
+      user.email = 'jdoe1234@yorku.ca'
+      user.password = 'JOHND!@#$'
+      user.password_confirmation = 'JOHND!@#$'
       user.user_source = 'ppy'
       user.user_group = 'STAFF'
       user.is_verified = true
@@ -99,7 +99,7 @@ namespace :db do
 
   ### STAFF PROFILES!
   task create_production_profiles: :environment do
-    user_record = User.where(email: 'sadaqain@yorku.ca').first
+    user_record = User.where(email: 'jdoe1234@yorku.ca').first
     # puts user_record.ai
 
     if user_record

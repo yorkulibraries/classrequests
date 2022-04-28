@@ -38,11 +38,11 @@ TODO List  - Updated MARCH 22
     3.2 If declined, notify Manager only. - done + status == new_request
 
   4. User cancel's the request
-    4.1 Notify Manager - For now, email Dana
+    4.1 Notify Manager - For now, email
     4.2 Notify Instructor/Staff/Librarian if assigned. - Done
 
   5. Staff/Librarian cancel's the request
-    5.1 Notify User and Manager - For now, email dana
+    5.1 Notify User and Manager - For now, email
 
   6. Manager cancels the request
     6.1 Notify User
@@ -226,7 +226,7 @@ For New version
 - Create PPY for faculty request submission
 - Ability for faculty to manage their Classrequests
 - Ability to duplicate request with change of year
-- More reports (see Dana)
+- More reports (TBD)
 - Add new status called "Notified Librarian/Archivist" - Adding a new acknowledgement status
 - Ability for Manager to nudge notified librarian/archivist OR Automated after 5 days
 

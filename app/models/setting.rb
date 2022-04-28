@@ -56,7 +56,7 @@ class Setting < RailsSettings::Base
   #   send_all: true,
   #   logging: true,
   #   sender_name: 'Library Messenger',
-  #   sender_email: 'noreply@library.yorku.ca'
+  #   sender_email: 'noreply@domain.ca'
   # }
 
 
