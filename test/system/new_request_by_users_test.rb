@@ -17,7 +17,7 @@ class NewRequestByUsersTest < ApplicationSystemTestCase
 
   test "visiting the new user request" do
     visit new_user_teaching_request_url
-    assert_selector "h1", text: "New Teaching Requests"
+    assert_selector "h1", text: "New Library Class Request"
   end
 
 end

@@ -45,7 +45,7 @@ yarn-debug.log*
 vendor/bundle
 
 #Sample Data
-/lib/assets/classrequests_data_feb25*
+/lib/assets/classrequests_data_*
 /lib/assets/course_faculties.csv
 /lib/assets/course_subjects.csv
 /lib/assets/course_subjects_new.csv

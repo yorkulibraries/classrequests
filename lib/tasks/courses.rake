@@ -10,6 +10,7 @@ namespace :courses do
     Rake::Task['courses:delete_institute_data'].invoke
     Rake::Task['courses:load_ical_data'].invoke
     Rake::Task['courses:remove_duplicate_courses'].invoke
+    Rake::Task['courses:populate_missing_data'].invoke
 
   end
 

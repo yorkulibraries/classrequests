@@ -17,17 +17,17 @@ FROM requests r, sections s, requests_sections rs where s.status in (1,3,4,6) an
 (select 'username', 'patron_type', 'first_name', 'last_name', 'email', 'phone', 'academic_year', 'faculty', 'faculty_abbrev', 'subject', 'subject_abbrev', 'course_title', 'course_number', 'submitted_by', 'section_name_or_about', 'number_of_students', 'preferred_date', 'preferred_time', 'alternate_date', 'alternate_time', 'duration', 'location_preference', 'lead_instructor_id', 'second_instructor_id', 'third_instructor_id','status', 'created_at', 'updated_at')
 UNION
 (Select r.username, r.patron_type, r.first_name, r.last_name, r.email, r.phone, r.academic_year, r.faculty, r.faculty_abbrev, r.subject, r.subject_abbrev, r.course_title, r.course_number, r.submitted_by, s.section_name_or_about, s.number_of_students, s.preferred_date, s.preferred_time, s.alternate_date, s.alternate_time, s.duration, s.location_preference, s.lead_instructor_id, s.second_instructor_id, s.third_instructor_id,s.status, s.created_at, s.updated_at
-INTO OUTFILE '/var/lib/mysql-files/classrequests_data_feb25-headers-withoutnote.txt'
-FIELDS TERMINATED BY ';'
+INTO OUTFILE '/var/lib/mysql-files/classrequests_data_may27-headers-withoutnotes.csv'
+FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\r\n'
+LINES TERMINATED BY '\n'
 FROM requests r, sections s, requests_sections rs where s.status in (1,3,4,6) and rs.request_id=r.id and rs.section_id = s.id)
 
 
 SELECT 'ID', 'Username', 'Email', 'First Name', 'Last Name', 'Is Active', 'Created', 'Updated'
 UNION
 (SELECT id, username, email, first_name, last_name, is_active, created_at, updated_at
-INTO OUTFILE '/var/lib/mysql-files/classrequests_data_feb25-users.csv'
+INTO OUTFILE '/var/lib/mysql-files/classrequests_data_may27-users.csv'
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n'
