@@ -45,7 +45,8 @@ namespace :courses do
 
     #data_file = File.join(Rails.root, 'lib', 'assets', 'yuCourses_2018_19_20.json')
     # data_file = File.join(Rails.root, 'lib', 'assets', 'yuCourses_2020_only.json')
-    data_file = File.join(Rails.root, 'lib', 'assets', 'yuCourses_2021_only.json')
+    # data_file = File.join(Rails.root, 'lib', 'assets', 'yuCourses_2021_only.json')
+    data_file = File.join(Rails.root, 'lib', 'assets', 'yuCourses_2022_only.json')
     #data_file = File.join(Rails.root, 'lib', 'assets', 'yuCourses_2018_2019_2020_only.json')
 
     records = JSON.parse(File.read(data_file))

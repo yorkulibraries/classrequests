@@ -17,7 +17,7 @@ class User::TeachingRequestsController < User::BaseController
     # @teaching_request = TeachingRequest.new
     @teaching_request = current_user.teaching_requests.new(first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username, email: current_user.email, submitted_by: current_user.full_name, patron_type: 0)
 
-    show_acad_years = ["#{2.year.ago.year}-#{1.year.ago.year}","#{1.year.ago.year}-#{Date.today.year}"]
+    show_acad_years = ["#{2.year.ago.year}-#{1.year.ago.year}","#{1.year.ago.year}-#{Date.today.year}","#{Date.today.year}-#{1.year.from_now.year}"]
     @academic_years = InstituteCourse.select('distinct(academic_year)').where(academic_year: show_acad_years).to_a
 
     @course_faculties = {}
