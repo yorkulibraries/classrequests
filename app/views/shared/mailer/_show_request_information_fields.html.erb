@@ -1,31 +1,31 @@
 <h5 class='text-red-700'>Request Information</h5>
 <!-- <hr /> -->
 <dl class='row'>
-  <dt class='col-3 text-gray-700 fw-700'>Faculty/Dept.:</dt>
-  <dd class='col-9'><%= @request.faculty %> / <%= @request.subject %></dd>
+  <dt class='col-md-3 col-sm-12 text-gray-700 fw-700'>Faculty/Dept.:</dt>
+  <dd class='col-md-9 col-sm-12'><%= @request.faculty %> / <%= @request.subject %></dd>
 </dl>
 <dl class='row'>
-<dt class='col-3 text-gray-700 fw-700'>Course/Section:</dt>
-<dd class='col-9'>
+<dt class='col-md-3 col-sm-12 text-gray-700 fw-700'>Course/Section:</dt>
+<dd class='col-md-9 col-sm-12'>
   <%= @request.academic_year %> : [<%= @request.faculty_abbrev %> / <%= @request.subject_abbrev %> <%= @request.course_number %>]: <%= @request.course_title %><em><%= t(:title_not_provided) if @request.course_title == '' %></em> -
   <%= defined?(@request.section_name_or_about) ? truncate(@request.section_name_or_about, length: 25) : 'Untitled Section' %>
 </dd>
 </dl>
 <dl class='row'>
-  <dt class='col-3 text-gray-700 fw-700'>Preferred Time:</dt>
-  <dd class='col-9'><%= @request.preferred_date.strftime('%b %d, %Y') %> / <%= @request.preferred_time.strftime('%I:%M %p') rescue nil %></dd>
+  <dt class='col-md-3 col-sm-12 text-gray-700 fw-700'>Preferred Time:</dt>
+  <dd class='col-md-9 col-sm-12'><%= @request.preferred_date.strftime('%b %d, %Y') %> / <%= @request.preferred_time.strftime('%I:%M %p') rescue nil %></dd>
 </dl>
 <dl class='row'>
-  <dt class='col-3 text-gray-700 fw-700'>Alternate Time:</dt>
-  <dd class='col-9'><%= @request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= @request.alternate_time.strftime('%I:%M %p') rescue nil %></dd>
+  <dt class='col-md-3 col-sm-12 text-gray-700 fw-700'>Alternate Time:</dt>
+  <dd class='col-md-9 col-sm-12'><%= @request.alternate_date.strftime('%b %d, %Y') rescue nil %> / <%= @request.alternate_time.strftime('%I:%M %p') rescue nil %></dd>
 </dl>
 <dl class='row'>
-  <dt class='col-3 text-gray-700 fw-700'>Duration:</dt>
-  <dd class='col-9'><%= @request.duration.text %></dd>
+  <dt class='col-md-3 col-sm-12 text-gray-700 fw-700'>Duration:</dt>
+  <dd class='col-md-9 col-sm-12'><%= @request.duration.text %></dd>
 </dl>
 <dl class='row'>
-  <dt class='col-3 text-gray-700 fw-700'>Location:</dt>
-  <dd class='col-9'><%= @request.location_preference.text %></dd>
+  <dt class='col-md-3 col-sm-12text-gray-700 fw-700'>Location:</dt>
+  <dd class='col-md-9 col-sm-12'><%= @request.location_preference.text %></dd>
 </dl>
 <p class='pt-1 text-gray-700 fw-700'>Assigned Instructors:</p>
   <ul>
