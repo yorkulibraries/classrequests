@@ -16,7 +16,7 @@ namespace :fake do
     require 'faker'
     require 'populator'
 
-    admin = User.find_or_create_by!(username: 'superlibrarian', first_name: 'Super', last_name: 'Admin', email: 'superlibrarian@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'superlibrarian@mailinator.com').first
+    admin = User.find_or_create_by!(username: 'superadmin', first_name: 'Super', last_name: 'Admin', email: 'superadmin@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'superadmin@mailinator.com').first
     manager = User.find_or_create_by!(username: 'pskinner', first_name: 'Principal', last_name: 'Skinner', email: 'skinner@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'skinner@mailinator.com').first
     faculty = User.find_or_create_by!(username: 'edna', first_name: 'Edna', last_name: 'Krabappel', email: 'Edna@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'db',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'edna@mailinator.com').first
     librarian = User.find_or_create_by!(username: 'mhouten', first_name: 'Milhouse', last_name: 'Van Houten', email: 'milhouse@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'milhouse@mailinator.com').first
@@ -26,7 +26,7 @@ namespace :fake do
 
       # user_record = User.where(email: 'superlibrarian@mailinator.com').first
 
-    admin_users = [User.where(email: 'superlibrarian@mailinator.com').first]
+    admin_users = [User.where(email: 'superadmin@mailinator.com').first]
     manager_users = [User.where(email: 'skinner@mailinator.com').first]
     librarian = User.where(email: 'milhouse@mailinator.com').first
     librarian_2 = User.where(email: 'bart@mailinator.com').first
@@ -92,7 +92,7 @@ namespace :fake do
     # enumerize :duration, in: { thirty: "30", forty: "40", sixty: "60", sixty_plus: "60+" }
     # enumerize :location_preference, in: [:online, :pre_recorded, :in_the_class, :in_the_library, :off_campus, :to_be_determined], default: :to_be_determi
 
-    email_list = ["superlibrarian@mailinator.com", "skinner@mailinator.com", "Edna@mailinator.com", "milhouse@mailinator.com", "bart@mailinator.com", "lisa@mailinator.com", 'barney@mailinator.com' ]
+    email_list = ["superadmin@mailinator.com", "skinner@mailinator.com", "Edna@mailinator.com", "milhouse@mailinator.com", "bart@mailinator.com", "lisa@mailinator.com", 'barney@mailinator.com' ]
 
     course = InstituteCourse.find(InstituteCourse.pluck(:id).sample)
     # user = users.sample

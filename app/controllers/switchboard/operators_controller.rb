@@ -4,8 +4,13 @@ class Switchboard::OperatorsController < ApplicationController
   def index
     if current_user && !current_user.staff_profile
       redirect_to user_dashboard_path
-    elsif current_user && current_user.staff_profile
+
+    elsif current_user != nil && current_user.staff_profile && current_user.staff_profile.is_approved == false
+      redirect_to user_dashboard_path, alert: I18n.t('redirect_to_user_dashboard_staff_access_is_pending')
+
+    elsif current_user && current_user.staff_profile && current_user.staff_profile.is_approved == true
       redirect_to staff_dashboard_path
+
       # if current_user.staff_profile.student_staff? || current_user.staff_profile.staff_instructor?
       #   redirect_to staff_dashboard_path, notice: 'Welcome Staff to #{current_user.first_name} LibSTAR Dashboard'
       # elsif current_user.staff_profile.manager?

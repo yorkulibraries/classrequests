@@ -3,8 +3,8 @@
 fr-ca:
   library_class_request_home: "Formulaire de demande d’atelier"
   library_class_request_form: "Formulaire de demande d’atelier"
-  libraries_offer: "Les bibliothèques offrent des cours de formation pour aider vos étudiants à perfectionner leurs compétences de recherche dans toutes les disciplines."
-  libraries_notice: "Pendant l’interruption des services sur place, les bibliothèques offriront leurs services d’enseignement en ligne pour le trimestre d’automne."
+  libraries_offer: ""
+  libraries_notice: ""
   libraries_offer_bullets:
     for_archives_and_special_collection: "Pour organiser un atelier avec les Archives et collections spéciales, communiquez avec."
     for_frost_and_glendon: "For Frost Library at Glendon campus, please contact "

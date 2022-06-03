@@ -10,12 +10,12 @@
   <h1 class='display-4'><%= t(:library_class_request_form) %></h1>
   <hr class='primary'/>
 
-  <h3><small class=''><%= t(:libraries_offer) %></small><br/><small class='text-danger'><%= t(:libraries_notice) %></small></h3>
+  <!-- <h3><small class=''><%= t(:libraries_offer) %></small><br/><small class='text-danger'><%= t(:libraries_notice) %></small></h3> -->
   <ul>
     <li><%= raw t(:for_archives_and_special_collection, scope: :libraries_offer_bullets) %> <%== Setting.archives_contact %></li>
     <!-- <li><%= t(:for_frost_and_glendon, scope: :libraries_offer_bullets) %> <%== Setting.other_campus_contact %></li> -->
     <li><%= raw t(:for_osgoode_law, scope: :libraries_offer_bullets) %> <%== Setting.law_contact %></li>
-    <li><%= t(:for_all_other, scope: :libraries_offer_bullets) %> <%== Setting.all_contact %></li>
+    <li><%= t(:for_all_other, scope: :libraries_offer_bullets) %>
   </ul>
 
   <h3><small><%=t (:request_schedule) %>:</small></h3>

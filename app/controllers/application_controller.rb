@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   # root_path is there as a backup
   def after_sign_in_path_for(resource)
     flash.clear
-    flash[:notice] = 'Signed in successfully'
+    flash[:success] = 'Signed in successfully'
     operators_index_url
     # root_url
   end
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
 
     elsif current_user != nil && current_user.staff_profile && current_user.staff_profile.is_approved == false
         logger.debug "I have a profile, but I am not approved, didn't bother with admin check"
-        @access = 'user'
+        @access = 'staff_under_review' #to catch those situations of a staff member down-graded to user.
 
     elsif current_user != nil && current_user.staff_profile &&
       current_user.staff_profile.is_approved == true &&

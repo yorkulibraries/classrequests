@@ -48,6 +48,8 @@ en:
   staff_dashboard: 'Staff Dashboard'
   manager_dashboard: 'Manager Dashboard'
   admin_dashboard: 'Admin Dashboard'
+  access_denied_staff_access_is_pending: 'Access Denied: Staff Account Request is Pending'
+  redirect_to_user_dashboard_staff_access_is_pending: "Redirecting to User Dashboard, Your Staff Request is Pending."
   button:
     next: 'Next'
     save_and_continue: 'Save and Continue'

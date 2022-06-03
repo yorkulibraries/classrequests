@@ -3,7 +3,7 @@
     <div class='card-body'>
       <%= image_tag attachments["#{Setting.mail_logo_url}"].url, alt: "#{Setting.app_name}", class: 'img-fluid h-16 w-auto ax-left mb-1' %>
       <hr class='text-red-700 bg-red-400 my-1' />
-      <h1 class='h3 mt-3 mb-2'>Hi <%= @request.first_name %>,</h1>
+      <h1 class='h3 mt-3 mb-2'>Hi,</h1>
       <h5 class='text-success'>A New Library Request has been submitted.</h5>
       <h5 class='text-gray-700 lh-base'>Please review and assign it to an instructor.</h5>
       <div class='space-y-3 mt-3'>

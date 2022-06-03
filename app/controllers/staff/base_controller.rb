@@ -10,6 +10,10 @@ class Staff::BaseController < ApplicationController
     if @access == 'staff' || @access == 'manager' || @access == 'admin'
       # do nothing
       logger.debug "I am #{@access}"
+    elsif @access == 'staff_under_review'
+      logger.debug "I am #{@access}"
+      redirect_to user_dashboard_path, alert: I18n.t('access_denied_staff_access_is_pending')
+
     else
       logger.debug "Forbidden"
        render(:file => File.join(Rails.root, 'public/403.html'), :status => 403, :layout => false)
