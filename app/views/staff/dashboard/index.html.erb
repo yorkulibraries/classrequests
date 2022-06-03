@@ -9,6 +9,20 @@
   </div>
 </div>
 
+<% if current_user.staff_profile.role.manager? %>
+<div class='mb-3'>
+  <%= link_to staff_manager_dashboard_path, class: "btn btn-sm btn-secondary mb-2" do %>
+    <i class='fas fa-columns text-primary'></i> <%= t(:manager_dashboard) %>
+  <% end %>
+  <%= link_to staff_manager_teaching_requests_path(), class: "btn btn-sm btn-secondary mb-2" do %>
+    <i class='fas fa-list text-primary'></i> <%= t(:requests_dashboard) %>
+  <% end %>
+  <%= link_to staff_manager_reports_overview_path(), class: "btn btn-sm btn-secondary mb-2" do %>
+    <i class='fas fa-chart-bar text-primary'></i> <%= t(:reports_dashboard) %>
+  <% end %>
+<% end %>
+</div>
+
 <% if current_user.staff_profile.is_approved? %>
   <% if @lead_assignments.count != 0 %>
   <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>

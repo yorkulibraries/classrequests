@@ -12,7 +12,7 @@ class TeachingRequest < ApplicationRecord
   has_many :cancel_requests, dependent: :destroy
 
   ## ENUMS
-  enumerize :patron_type, in: { faculty: 0, librarian: 1, staff: 4, other: 9 }, default: :other
+  enumerize :patron_type, in: { faculty: 0, librarian_staff: 1, other: 9 }, default: :other
   enumerize :status, in: { not_submitted: 0, new_request: 1, in_process: 2, assigned: 3, done: 4, unfulfilled: 6, deleted: 9 }, default: :not_submitted
 
   # DURATIONS = {'30':'30', '45':'45', '60':'60', '60+':'60+'}

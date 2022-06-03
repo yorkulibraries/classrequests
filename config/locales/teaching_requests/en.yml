@@ -14,7 +14,7 @@ en:
     defaults:
       patron_type:
         faculty: "Faculty Member / Course Director"
-        librarian: "Librarian / Archivist"
+        librarian_staff: "Librarian / Archivist / Staff" 
         staff: "Staff"
         other: "Other"
         unknown: "Unknown"
