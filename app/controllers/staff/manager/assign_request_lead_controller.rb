@@ -19,7 +19,7 @@ class Staff::Manager::AssignRequestLeadController < ApplicationController
 
         Rails.logger.debug "LEAD EMAIL inside response: #{@lead_email}"
         ## SEND ASSIGNED LEAD INSTRUCTOR EMAIL
-        AdminMailer.assign_instructor_for_request(@teaching_request, @lead_email).deliver_now if @teaching_request.lead_instructor
+        StaffMailer.assign_instructor_for_request(@teaching_request, @lead_email).deliver_now if @teaching_request.lead_instructor
 
         ## SEND ASSIGNED SECONDARY INSTRUCTOR EMAIL (no reponse is needed, talk to lead)
         # AdminMailer.assign_instructor_for_request(@teaching_request, @emails).deliver_now

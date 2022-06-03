@@ -14,11 +14,11 @@ class AdminMailerPreview < ActionMailer::Preview
   #   AdminMailer.new_staff_account_notification(user)
   # end
 
-  def assign_instructor_for_request
-    request = TeachingRequest.where.not(lead_instructor_id: nil).sample
-    email = request.lead_instructor.email
-    AdminMailer.assign_instructor_for_request(request, email)
-  end
+  # def assign_instructor_for_request
+  #   request = TeachingRequest.where.not(lead_instructor_id: nil).sample
+  #   email = request.lead_instructor.email
+  #   AdminMailer.assign_instructor_for_request(request, email)
+  # end
 
 
   def cancel_request_notification
