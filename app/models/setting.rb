@@ -7,7 +7,7 @@ class Setting < RailsSettings::Base
   scope :application do
 
     ## App-Info
-    field :app_name, default: 'LIBSTAR', validates: { presence: true, length: { in: 2..20 } }
+    field :app_name, default: 'LIBSTAR', validates: { presence: true, length: { in: 2..35 } }
     field :library_homepage_url, default: ''
     field :university_homepage_url, default: ''
     field :default_locale, default: 'en', type: :string

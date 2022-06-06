@@ -20,8 +20,9 @@
   <%= link_to staff_manager_reports_overview_path(), class: "btn btn-sm btn-secondary mb-2" do %>
     <i class='fas fa-chart-bar text-primary'></i> <%= t(:reports_dashboard) %>
   <% end %>
-<% end %>
 </div>
+<% end %>
+
 
 <% if current_user.staff_profile.is_approved? %>
   <% if @lead_assignments.count != 0 %>
