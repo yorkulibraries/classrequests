@@ -1,20 +1,10 @@
 <nav class='navbar navbar-yul navbar-expand-lg navbar-light bg-white px-2 py-1'>
-  <!-- <a class='nav-link' data-widget='pushmenu' id='menu-toggle' href='#' class='btn btn-secondary'><i class='fas fa-columns'></i></a> -->
-
   <a class='navbar-brand' href="<%= root_url %>">
-    <!-- YorkULogo_Ver_rgb -->
-    <!-- <img src="<%= image_url('YorkULogo_Ver_rgb.jpg') %>" height='54px' class='' alt=''> -->
     <img src="<%= image_url('YorkULogo_Hor_186-svg.svg') %>" height='32px' class='' alt=''>
-
     <div class='vertical-divider'></div>
     <span class='brand-name d-inline-block p-1'> <%= (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR' %></span>
   </a>
 
-  <!-- <%= link_to (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR', root_path, class: 'navbar-brand d-block d-sm-block d-md-none' %>
-  <a class='navbar-brand d-block d-sm-block d-md-none' href="<%= root_url %>">
-    <img src="<%= image_url('YorkULogo_Ver_rgb.jpg') %>" height='60px' class='' alt=''> <span class='brand-name d-inline-block'> <div class='vertical-divider'></div>  <%= (Setting.app_name.present?) ? Setting.app_name : 'LIBSTAR' %></span>
-  </a>
--->
   <button class='navbar-toggler' type='button' data-bs-target='collapse' data-bs-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
     <span class='navbar-toggler-icon'></span>
   </button>
