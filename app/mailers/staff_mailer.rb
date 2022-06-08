@@ -17,7 +17,7 @@ class StaffMailer < ApplicationMailer
     @message = message
     reply = past_tense(@response).humanize
     attachments.inline["#{Setting.mail_logo_url}"] = File.read("#{Rails.root}/app/assets/images/#{Setting.mail_logo_url}")
-    bootstrap_mail(to: @lead_email, subject: "Class Lead Assignment: #{reply}")
+    bootstrap_mail(to: Setting.manager_emails, subject: "Class Lead Assignment: #{reply}")
 
     # mail(from: lead_email, to: Setting.manager_emails, subject: "Class Lead Assignment: #{reply} ") do |format|
         # format.html
