@@ -25,13 +25,13 @@ class RequestorMailer < ApplicationMailer
 
   end
 
-  def cancel_request_confirmation(request, requestor='')
+  def cancel_request_confirmation(request, requestor=nil)
     @request = request
-    if requestor && requestor != nil
-      patron_email = requestor.email
-    else
+    # if requestor && requestor != nil
+    #   patron_email = requestor.email
+    # else
       patron_email = @request.email
-    end
+    # end
     attachments.inline["#{Setting.mail_logo_url}"] = File.read("#{Rails.root}/app/assets/images/#{Setting.mail_logo_url}")
     bootstrap_mail(to: patron_email, subject: 'AUTO CONFIMATION: Your class request has been cancelled')
 

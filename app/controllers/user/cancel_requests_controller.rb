@@ -19,7 +19,7 @@ class User::CancelRequestsController < User::BaseController
       if @cancel_request.save
 
         ## SEND ASSIGNED LEAD INSTRUCTOR EMAIL
-        if @cancel_request.reason
+        if @cancel_request.reason && @cancel_request.reason != '' && @cancel_request.reason != nil
           message = @cancel_request.reason
         else
           message = 'No comment / reason given'
