@@ -10,11 +10,11 @@ class User::DashboardController < User::BaseController
 
     #Not Submitted Requests
     @incomplete_requests = Request.where('status = ?', 0)
-    @new_teaching_requests = current_user.teaching_requests.where('status = ?', 1)
+    @new_teaching_requests = current_user.teaching_requests.where(status: ['1','2','3']).where('preferred_date > ?', Date.today-1)
     # @incomplete_sections = @incomplete_requests.sections
 
     #Upcoming Requests
-    @upcoming_teaching_requests = current_user.teaching_requests.where('preferred_date BETWEEN ? AND ?', Date.today-1, Date.today+30).where(status: ['2','3'])
+    @upcoming_teaching_requests = current_user.teaching_requests.where('preferred_date BETWEEN ? AND ?', Date.today, Date.today+30).where(status: ['2','3'])
 
     # @upcoming_sessions = Section.joins(:requests_sections).where('preferred_date BETWEEN ? AND ?', Date.today-1, Date.today+14).where('request_id IN (?)', @request_ids)
 

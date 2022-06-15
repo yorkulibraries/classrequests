@@ -16,6 +16,8 @@ class Staff::DashboardController < Staff::BaseController
 
     @lead_assignments = TeachingRequest.where(status: TeachingRequest.status.in_process).and(TeachingRequest.where(lead_instructor: current_user))
 
+    @my_new_teaching_requests = current_user.teaching_requests.where(status: ['1','2','3']).where('preferred_date > ?', Date.today-1)
+
     @upcoming_teaching_requests = TeachingRequest.where('preferred_date BETWEEN ? AND ?', Date.today-1, Date.today+14).where(lead_instructor: current_user).or(TeachingRequest.where(second_instructor: current_user)).or(TeachingRequest.where(third_instructor: current_user)).where(status: :assigned)
     # where(lead_instructor: current_user, status: TeachingRequest.status.assigned)
 
