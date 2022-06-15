@@ -1,19 +1,25 @@
 <h5 class='text-red-700'>Contact / Course Information</h5>
-<dl class='row'>
-  <dt class='col-md-6 col-sm-12 text-gray-700 fw-700'>I am a YorkU:</dt>
-  <dd class='col-md-6 col-sm-12'><%= @request.patron_type %></dd>
-  <dt class='col-md-3 col-sm-12 text-gray-700 fw-700'>Email:</dt>
-  <dd class='col-md-9 col-sm-12'><%= @request.email %></dd>
-</dl>
-<dl class='row'>
-  <dt class='col-md-6 col-sm-12 text-gray-700 fw-700'>First Name:</dt>
-  <dd class='col-md-6 col-sm-12'><%= @request.first_name %></dd>
-  <dt class='col-md-3 col-sm-12 text-gray-700 fw-700'>Phone:</dt>
-  <dd class='col-md-9 col-sm-12'><%= @request.phone %></dd>
-</dl>
-<dl class='row'>
-  <dt class='col-md-6 col-sm-12 text-gray-700 fw-700'>Last Name:</dt>
-  <dd class='col-md-6 col-sm-12'><%= @request.last_name %></dd>
-  <dt class='col-md-6 col-sm-12 text-gray-700 fw-700'></dt>
-  <dd class='col-md-6 col-sm-12'></dd>
-</dl>
+<div class='row mt-2'>
+  <div class='col-md-6 col-sm-12'>
+    <div class='text-gray-700 fw-700'>I am a YorkU:</div>
+    <div class='pl-2'><%= @request.patron_type.text %></div>
+  </div>
+<!-- </div>
+<div class='row mt-2'> -->
+  <div class='col-md-6 col-sm-12'>
+    <div class='text-gray-700 fw-700'>Email:</div>
+    <div class='pl-2'><%= @request.email %></div>
+  </div>
+</div>
+<div class='row mt-2'>
+  <div class='col-md-4 col-sm-12'>
+    <div class='text-gray-700 fw-700'>Name:</div>
+    <div class='pl-2'><%= @request.first_name %> <%= @request.last_name %></div>
+  </div>
+<!-- </div>
+<div class='row mt-2'> -->
+  <div class='col-md-4 col-sm-12'>
+    <div class='text-gray-700 fw-700'>Phone:</div>
+    <div class='pl-2'><%= @request.phone %></div>
+  </div>
+</div>
