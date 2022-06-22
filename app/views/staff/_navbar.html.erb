@@ -59,10 +59,11 @@
         <% end %>
         <% if user_signed_in? %>
 
-        <% if Setting.enable_staff_access_request %>
+        <!--
+          <% if Setting.enable_staff_access_request%>
          <li class='nav-item'><%= link_to 'Request Staff Access', new_user_request_staff_account_path, class: 'nav-link' %></li>
-        <% end %>
-
+         <% end %>
+        -->
         <% if Setting.enable_notifications %>
          <li class='nav-item'>
           <%= link_to notifications_path, class: 'nav-link' do %>
