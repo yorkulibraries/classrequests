@@ -6,17 +6,35 @@
     <hr class="primary"/>
   </div>
 </div>
-  <div class="card-body mt-3">
-    <dl class="dl-horizontal">
-      <dt class="text-muted" ><%= t(:name) %></dt>
-      <dd class="fw-bold"><%= @user.name %></dd>
-      <dt class="text-muted"><%= t(:branch_division) %></dt>
-      <dd class="fw-bold"><%= @user.password %></dd>
-    </dl>
+  <div class="card-body w-75">
+    <h3>Account Fields</h3>
+    <div class="table-responsive mt-3 mb-3">
+      <table class="table table-striped">
+        <tr><td><%= t(:name) %></td><td><%= @user.name %></td></tr>
 
-    <% for attribute in @user.attributes.keys %>
-      <p><%= attribute.humanize %> <%= @user.attributes[attribute].to_s %></p>
+        <% for attribute in @user.attributes.keys %>
+        <tr>
+          <td><%= attribute.humanize %></td>
+          <td><%= @user.attributes[attribute].to_s %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+    <% if @user.staff_profile %>
+      <h3>User Staff Profile Fields</h3>
+      <div class="table-responsive mt-3 mb-3">
+        <table class="table table-striped">
+          <% for nested_attribute in @user.staff_profile.attributes.keys %>
+          <tr>
+            <td><%= nested_attribute.humanize %></td>
+            <td><%= @user.staff_profile.attributes[nested_attribute].to_s %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
     <% end %>
+
 
   </div>
   <div class="card-footer">

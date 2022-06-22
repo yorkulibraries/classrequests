@@ -8,11 +8,6 @@
         <i class='fas fa-chalkboard-teacher text-primary'></i> <%= t(:log_a_teaching_request) %>
       <% end %>
     </li>
-    <li>
-      <%= link_to new_user_teaching_request_path, class: 'dropdown-item' do %>
-        <span><i class='fa fa-graduation-cap text-primary'></i> <%= t(:log_a_teaching_request_as_user) %></span>
-      <% end %>
-    </li>
     <div class='dropdown-divider'></div>
     <li><%= link_to staff_reports_overview_path, class: 'dropdown-item' do %>
       <i class='fas fa-chart-bar text-primary'></i> <%= t(:my_reports) %> <span class='text-muted text-sm'></span>

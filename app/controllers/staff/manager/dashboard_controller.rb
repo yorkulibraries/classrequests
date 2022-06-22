@@ -12,7 +12,7 @@ class Staff::Manager::DashboardController < Staff::Manager::BaseController
 
     @active_instructors = User.includes(:staff_profile).references(:staff_profiles).where.not(staff_profiles: {role: [0,1]}).where(is_active: true).order(:first_name)
 
-    @pending_approvals = StaffProfile.where('is_approved = ?', false) #.where('is_active = ?', false)
+    @pending_approvals = StaffProfile.where('is_approved = ?', false).or(StaffProfile.where('role = ?', 0)) #.where('is_active = ?', false)
     @inactive_users = User.where('is_active = ?', false)
 
     @lead_assignments = TeachingRequest.where(status: TeachingRequest.status.in_process).and(TeachingRequest.where(lead_instructor: current_user))

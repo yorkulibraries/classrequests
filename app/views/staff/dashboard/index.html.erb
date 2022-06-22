@@ -63,7 +63,7 @@
   <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
     <div class='card-body'>
       <h2 class='card-title'><%= t(:assigned_as_lead) %></h2>
-      <h3 class='card-subtitle mb-2 text-muted'><%= t(:lead_and_assigned_requests) %></h3>
+      <!-- <h3 class='card-subtitle mb-2 text-muted'><%= t(:lead_and_assigned_requests) %></h3> -->
       <hr class='secondary'/>
       <div class='table-responsive'>
         <table class='table table-sm table-striped table-hover text-center mt-3'>
@@ -201,7 +201,6 @@
 <div class='card'>
   <div class='card-body'>
     <h2 class='card-title'><%= t(:not_yet_authorized) %></h2>
-    <!-- <h3 class='card-subtitle mb-2 text-muted'><%= t(:lead_and_assigned_requests) %></h3> -->
     <hr class='secondary'/>
     <%= link_to user_dashboard_path(), class: 'btn btn-info' do %>
       <span class='fas fa-hand-point-left'></span> <%= t(:go_back_to_user_dashboard) %>

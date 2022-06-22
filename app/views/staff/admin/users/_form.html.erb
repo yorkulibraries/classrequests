@@ -4,13 +4,14 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
     <div class="card-body">
+      <h3 class='text-primary'><%= @user.name %> User Account</h3>
       <p class="small lead text-secondary"><%= t(:fields_marked_are_mandatory) %></p>
-      <div class="row mt-3">
+      <!-- <div class="row mt-3">
         <%= f.input :first_name %>
       </div>
       <div class="row mt-3">
         <%= f.input :last_name %>
-      </div>
+      </div> -->
 
       <% for attribute in @user.attributes.keys %>
         <!-- <p><%= attribute.humanize %> <%= @user.attributes[attribute].to_s %></p> -->
@@ -44,6 +45,35 @@
         </div>
       <% end %>
 
+      <!-- simple_fields_for [:user, @staff_profile] do |sp| -->
+      <% if @user.staff_profile %>
+        <h3>Staff Profile</h3>
+
+        <%= f.simple_fields_for :staff_profile do |sp| %>
+          <div class='form-inputs'>
+            <div class='mt-3'>
+              <%= sp.input :specializtion_job_title %>
+            </div>
+            <div class='mt-3'>
+              <%= sp.input :profile_bio %>
+            </div>
+            <div class='mt-3'>
+            </div>
+            <div class='mt-3'>
+               <%= sp.input :role %>
+            </div>
+            <div class='mt-3'>
+              <%= sp.association :department %>
+            </div>
+            <div class='mt-3'>
+              <%= sp.association :user, as: :hidden %>
+            </div>
+            <div class='mt-3'>
+              <%= sp.input :is_approved %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="form-actions card-footer">

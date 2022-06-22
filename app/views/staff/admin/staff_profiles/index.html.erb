@@ -1,37 +1,96 @@
-
-
-
 <div class="row">
-  <div class="col-sm-6">
-    <h1>Staff_profiles</h1>
-  </div>
+  <div class="col-sm-12 col-md-6">
+    <% page_title t(:staff_profiles) %>
+    <h1><%= t(:staff_profiles) %></h1>
+    <hr class="primary"/>
 
   <div class="col-sm-6 text-right">
     Add New Staff profile
+    <%= link_to new_staff_admin_department_path, class: 'btn btn-success' do %>
+      <%= t(:add_new_department) %>
+    <% end %>
   </div>
 </div>
+<!--
+t.string "name"
+t.string "branch_division"
+t.datetime "created_at", precision: 6, null: false
+t.datetime "updated_at", precision: 6, null: false
+end -->
+<div class="table-responsive bg-light p-4">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th><%= t(:department_name) %></th>
+        <th><%= t(:department_branch_division) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @staff_profiles.each do |staff_profile| %>
+        <%= content_tag :tr, id: dom_id(staff_profile), class: dom_class(staff_profile) do %>
+          <td><%= staff_profile.specializtion_job_title %></td>
+          <td><%= staff_profile.profile_bio %></td>
+          <td><%= staff_profile.role %></td>
+          <td><%= staff_profile.department_id %></td>
+          <td><%= staff_profile.user_id %></td>
+          <td><%= staff_profile.is_approved %></td>
+          <td><%= staff_profile.created_at %></td>
+          <td><%= staff_profile.updated_at %></td>
+              <td><%= link_to 'Show', staff_admin_staff_profile_path(staff_profile) %></td>
+
+          <td>
+            <%= link_to staff_admin_staff_profile_path(staff_profile) , class: "btn btn-sm btn-info" do %>
+              <i class='fas fa-eye'></i>
+            <% end %>
+          </td>
+          <td><%= link_to edit_staff_admin_staff_profile_path(staff_profile), class: "btn btn-sm btn-info" do %>
+            <i class='fas fa-edit'></i>
+          <% end %></td>
+          <td><%= link_to [:staff, :admin, staff_profile], method: :delete,
+              data: { confirm: 'Are you sure?', toggle: "tooltip", title: 'delete' },
+              class: 'btn text-white btn-danger'  do %>
+                <i class="fas fa-times-circle"></i> <%= t(:delete) %>
+          </td>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
 
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-    
 
-            
+
+
           <th></th>
-        
+
       </tr>
     </thead>
 
     <tbody>
       <% @staff_profiles.each do |staff_profile| %>
         <%= content_tag :tr, id: dom_id(staff_profile), class: dom_class(staff_profile) do %>
-          
 
-          
-          
-            <td><%= link_to 'Show', staff_profile %></td>
-          
+        t.string "specializtion_job_title"
+        t.text "profile_bio"
+        t.string "role", default: "0", null: false
+        t.bigint "department_id", null: false
+        t.bigint "user_id", null: false
+        t.boolean "is_approved", default: false
+        t.datetime "created_at", precision: 6, null: false
+        t.datetime "updated_at", precision: 6, null: false
+        t.index ["department_id"], name: "index_staff_profiles_on_department_id"
+        t.index ["user_id"], name: "index_staff_profiles_on_user_id"
+
+            <td><%= link_to 'Show', staff_admin_staff_profile_path(staff_profile) %></td>
+
         <% end %>
       <% end %>
     </tbody>

@@ -105,6 +105,7 @@ class Staff::Admin::UsersController < Staff::Admin::BaseController
       :is_active,
       :is_verified,
       :announcements_last_read_at,
-      :note, :password, :password_confirmation)
+      :note, :password, :password_confirmation,
+      staff_profile_attributes: [:specializtion_job_title, :profile_bio, :role, :department_id, :user_id, :is_approved])
   end
 end
