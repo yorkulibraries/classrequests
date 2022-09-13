@@ -17,6 +17,7 @@ module Libstar
     config.libstar_version = 2.0
 
     config.load_defaults 6.1
+config.hosts << "classrequests.me.ca"
 
     # Configuration for the application, engines, and railties goes here.
     #

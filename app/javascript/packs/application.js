@@ -92,7 +92,9 @@ $(document).on('turbolinks:load', () => {
   flatpickr("[data-behaviour='flatpickr-time']", {
     enableTime: true,
     noCalendar: true,
-    dateFormat: 'H:i',
+    altInput: true,
+    altFormat: "H:i",
+    dateFormat: 'Y-m-d H:i',
     minTime: '8:00',
     maxTime: '19:30',
     minuteIncrement: 30

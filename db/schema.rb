@@ -12,9 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_04_06_145045) do
 
-  create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
-    t.text "body", size: :long
+    t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -22,17 +22,17 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -44,13 +44,13 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "announcements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
     t.string "announcement_type"
     t.string "name"
@@ -59,20 +59,20 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "assignment_responses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "assignment_responses", force: :cascade do |t|
     t.string "response"
     t.text "comment_or_reason"
-    t.bigint "teaching_request_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "teaching_request_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["teaching_request_id"], name: "index_assignment_responses_on_teaching_request_id"
     t.index ["user_id"], name: "index_assignment_responses_on_user_id"
   end
 
-  create_table "cancel_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "teaching_request_id", null: false
+  create_table "cancel_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "teaching_request_id", null: false
     t.text "reason"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -80,14 +80,14 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.index ["user_id"], name: "index_cancel_requests_on_user_id"
   end
 
-  create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "departments", force: :cascade do |t|
     t.string "name"
     t.string "branch_division"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "institute_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "institute_courses", force: :cascade do |t|
     t.string "faculty"
     t.string "faculty_abbrev"
     t.string "subject"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notifications", force: :cascade do |t|
     t.bigint "recipient_id"
     t.bigint "actor_id"
     t.datetime "read_at"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "requests", force: :cascade do |t|
     t.string "username"
     t.integer "patron_type"
     t.string "first_name"
@@ -134,21 +134,21 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.index ["status"], name: "index_requests_on_status"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
-  create_table "requests_sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "request_id"
-    t.bigint "section_id"
+  create_table "requests_sections", force: :cascade do |t|
+    t.integer "request_id"
+    t.integer "section_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["request_id"], name: "index_requests_sections_on_request_id"
     t.index ["section_id"], name: "index_requests_sections_on_section_id"
   end
 
-  create_table "sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "sections", force: :cascade do |t|
     t.string "section_name_or_about"
     t.integer "number_of_students"
     t.date "preferred_date"
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.index ["status"], name: "index_sections_on_status"
   end
 
-  create_table "settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "settings", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
     t.datetime "created_at", precision: 6, null: false
@@ -175,12 +175,12 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
-  create_table "staff_profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "staff_profiles", force: :cascade do |t|
     t.string "specializtion_job_title"
     t.text "profile_bio"
     t.string "role", default: "0", null: false
-    t.bigint "department_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "department_id", null: false
+    t.integer "user_id", null: false
     t.boolean "is_approved", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.index ["user_id"], name: "index_staff_profiles_on_user_id"
   end
 
-  create_table "teaching_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "teaching_requests", force: :cascade do |t|
     t.string "username"
     t.string "patron_type"
     t.string "first_name"
@@ -219,14 +219,14 @@ ActiveRecord::Schema.define(version: 2022_04_06_145045) do
     t.string "status"
     t.text "request_note"
     t.text "instructor_notes"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["status"], name: "index_teaching_requests_on_status"
     t.index ["user_id"], name: "index_teaching_requests_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

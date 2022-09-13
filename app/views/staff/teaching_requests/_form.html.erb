@@ -105,7 +105,7 @@
       </div>
 
       <div class='row mt-3'>
-        <%= f.input :duration, collection: TeachingRequest.duration.options(except: :sixty_plus), include_blank: false,
+        <%= f.input :duration, collection: TeachingRequest.duration.options(except: [:thirty, :sixty_plus]), include_blank: false,
               input_html: {autocomplete: 'off', class: 'form-select request-chosen' }
               %>
       </div>
