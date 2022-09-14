@@ -64,6 +64,16 @@ $(document).on('turbolinks:load', () => {
 
   });
 
+  $('#teaching_request_location_preference_in_the_class').change(function() {
+    var org_label = $(this).siblings('label').text();
+    if($(this).prop('checked')) {
+      // alert($(this).siblings('label').text());
+      // $(this).siblings('label').html(org_label + " - If possible, could you specify the room number in the following field. Thanks!");
+      $('.teaching_request_room').parent().effect( "highlight", {color:"#FFCCCB"}, 8000 );
+    }
+    
+  });
+
   //Bootstrap Alerts to fade after 5 seconds -- for turbolinks v5
   $('.alert').delay(5000).fadeOut(500, function(){
     $('.alert').alert('close');

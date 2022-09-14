@@ -22,5 +22,8 @@ class Staff::Manager::DashboardController < Staff::Manager::BaseController
     #Upcoming Requests
     @upcoming_teaching_requests = TeachingRequest.where('preferred_date BETWEEN ? AND ?', Date.today-1, Date.today+14).where(status: :assigned)
 
+    # TODO: Future add cancel requests to dashboard
+    # @cancel_requests = CancelRequest.includes(:teaching_request).references(:teaching_requests).where.not(teaching_requests: {status: [:unfulfilled, :deleted]})
+
   end
 end

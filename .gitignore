@@ -33,6 +33,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/database.yml
+/config/secrets.yml
+/config/app_settings.yml
+
 
 /public/packs
 /public/packs-test
