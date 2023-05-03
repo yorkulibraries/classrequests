@@ -17,6 +17,9 @@ class HomepageTest < ApplicationSystemTestCase
   test "visit index" do
     visit root_url
     assert_selector "h1", text: "Library Class Request Form"
+    # http://classrequests.me.ca/en/user/teaching_requests/new
+    # assert_selector(:css, 'a[href="/en/user/teaching_requests/new"]')
+    find_link('Get Started')
   end
 
   # test 'sign_in_user' do

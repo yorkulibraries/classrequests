@@ -50,10 +50,7 @@ vendor/bundle
 
 #Sample Data
 /lib/assets/classrequests_data_*
-/lib/assets/course_faculties.csv
-/lib/assets/course_subjects.csv
 /lib/assets/course_subjects_new.csv
-/lib/assets/yuCourses*.json
 
 #Temp-backups
 *.bk
