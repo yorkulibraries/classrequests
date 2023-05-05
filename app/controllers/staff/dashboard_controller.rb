@@ -23,6 +23,10 @@ class Staff::DashboardController < Staff::BaseController
 
     @my_teaching_requests = TeachingRequest.where(lead_instructor: current_user).or(TeachingRequest.where(second_instructor: current_user)).or(TeachingRequest.where(third_instructor: current_user)).where(status: :assigned)
 
+    current_year = Date.today.year 
+    # May 1 Current Year to April 30 Current+1
+    @my_completed_teaching_requests = TeachingRequest.where('preferred_date BETWEEN ? AND ?', Date.new(current_year,5,1),Date.new(current_year+1,4,30)).where(lead_instructor: current_user).or(TeachingRequest.where(second_instructor: current_user)).or(TeachingRequest.where(third_instructor: current_user)).where(status: :done)
+
 
   end
 end

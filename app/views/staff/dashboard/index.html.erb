@@ -197,6 +197,63 @@
       <% end %>
     </div>
   </div> <!-- Upcoming Requests wrapper -->
+
+  <!-- My Done Teaching Request -->
+  <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
+    <div class='card-body'>
+      <h2 class='card-title'><%= t(:my_teaching_requests_completed) %></h2>
+      <h4 class='card-subtitle text-muted'><%= t(:current_fiscal_year_may_to_april) %></h4>
+      <p class='text-muted fst-italic'>
+      <hr class='secondary'/>
+      <% if @my_completed_teaching_requests.count == 0 %>
+        <h3><%= t(:no_teaching_requests_completed_this_fiscal_year) %></h3>
+      <% else %>
+      <div class='table-responsive'>
+        <table class='table table-sm table-striped table-hover text-center mt-3'>
+          <thead>
+            <th class='small'><%= t(:request_info) %></th>
+            <th class='small'><%= t(:preferred_date) %></th>
+            <th class='small'><%= t(:location) %></th>
+            <th class='small'><%= t(:status) %></th>
+            <th class='small'><%= t(:lead_instructor) %></th>
+            <th colspan="4" style="min-width: 180px"><%= t(:options) %></th>
+          </thead>
+          <tbody>
+          <% @my_completed_teaching_requests.each do |my_request| %>
+            <tr>
+              <%= render partial: 'shared/teaching_request/common_table_fields', locals: {request: my_request} %>
+              <td colspan='4' class='align-middle'>
+                <%= link_to staff_teaching_request_path(my_request), class: 'btn btn-sm btn-info mr-1 mb-1' do %>
+                    <i class='fa fa-eye' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:view) %>'></i>
+                <% end %>
+                <% if my_request.status == TeachingRequest.status.assigned %>
+                  <%= link_to edit_staff_teaching_request_path(my_request), class: 'btn btn-sm btn-secondary mr-1 mb-1' do %>
+                    <i class='fas fa-edit' data-bs-toggle='tooltip' data-bs-placement='top' title='<%= t(:edit) %>'></i>
+                  <% end %>
+                  <%= link_to staff_mark_done_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it done?'}, class:'btn btn-sm btn-success mr-1 mb-1' do %>
+                    <i class='fas fa-check' data-bs-toggle='tooltip' data-bs-placement='bottom' title='<%= t(:mark_done) %>'></i>
+                  <% end %>
+                <% end %>
+                <% if current_user.staff_profile.role.value > 2 %> <!-- if manager or admin -->
+                  <%= link_to staff_mark_deleted_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it deleted?'}, class:'btn btn-sm btn-danger mr-1 mb-1' do %>
+                    <i class='fas fa-times-circle' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:mark_deleted) %>'></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to new_user_cancel_request_path(teaching_request_id: my_request, user_id: current_user.id), class: 'btn btn-sm btn-danger mr-1 mb-1' do %>
+                      <i class='fas fa-times-circle' data-bs-toggle='tooltip' data-bs-placement='right' title='<%= t(:cancel_request) %>'></i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <p><small class='text-muted fst-italic'>(<%= t(:for_other_fiscal_years_see_reports)%>)</small></p>
+      </div>
+      <% end %>
+    </div>
+  </div> <!-- My Done Teaching Requests wrapper -->
+
 <% else %>
 <div class='card'>
   <div class='card-body'>

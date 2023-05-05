@@ -27,6 +27,7 @@ class TeachingRequest < ApplicationRecord
   ## VALIDATIONS
   validates :patron_type, :first_name, :last_name, :email, :academic_year, :faculty_abbrev, :subject_abbrev, :course_number, :status, presence: true
   validates :number_of_students, :preferred_date, :preferred_time, :duration, :location_preference, presence: true
+  validates :request_note, presence: true #, if: lambda { self.status.new_request? }
 
   # validates :lead_assignment_response, presence: true, if: lambda {!self.lead_instructor_id.empty? && self.status == self.status.in_process.value}
 

@@ -149,3 +149,9 @@ pre kbd { background-color: $gray-200; }
   border: 1px solid transparent;
   border-radius: 0.25rem;
 }
+
+/** PaperClip Icon on Note Fields **/
+.trix-button.trix-button--icon.trix-button--icon-attach {
+  background-color: lightgreen;
+  border-color: green;
+}
