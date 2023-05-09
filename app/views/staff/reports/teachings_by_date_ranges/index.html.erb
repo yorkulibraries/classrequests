@@ -34,6 +34,7 @@
             <th scope='col'>Time [Duration]</th>
             <th scope='col'>Course Code</th>
             <th scope='col'>YUL Lead</th>
+            <th scope='col'>Type of Instruction</th>
             <th scope='col'>Faculty Instructor</th>
             <th scope='col'># of Stds</th>
             <th scope='col'>Status</th>
@@ -54,6 +55,11 @@
               1: <%= res.lead_instructor.name if res.lead_instructor_id rescue nil  %><br/>
               2: <%= res.second_instructor.name if res.second_instructor_id rescue nil %><br/>
               3:<%= res.third_instructor.name if res.third_instructor_id rescue nil %>
+            </td>
+            <td> 
+              <% if !res.type_of_instructions.blank?  %> 
+                <%= res.type_of_instructions.map(&:name).join(', ')  %> 
+              <% end %>
             </td>
             <td><%= res.first_name %> <%= res.last_name %></td>
             <td><%= res.number_of_students %></td>

@@ -11,6 +11,11 @@ class TeachingRequest < ApplicationRecord
   has_many :assignment_responses, dependent: :destroy
   has_many :cancel_requests, dependent: :destroy
 
+  has_many :teaching_type_of_instructions, dependent: :destroy
+  has_many :type_of_instructions, through: :teaching_type_of_instructions
+
+  accepts_nested_attributes_for :teaching_type_of_instructions, reject_if: proc { |a| a[:teaching_request_id].blank? }, allow_destroy: true
+
   ## ENUMS
   enumerize :patron_type, in: { faculty: 0, librarian_staff: 1, other: 9 }, default: :other
   enumerize :status, in: { not_submitted: 0, new_request: 1, in_process: 2, assigned: 3, done: 4, unfulfilled: 6, deleted: 9 }, default: :not_submitted
@@ -19,7 +24,7 @@ class TeachingRequest < ApplicationRecord
   enumerize :duration, in: { thirty: '30', sixty: '60', sixty_plus: '60+', ninety: '90', one_twenty: '120', one_eighty: '180', one_eighty_plus: '180+' }
   # LOCATION_FORMATS = {'Online Live':'Online Live', 'Pre-recorded':'Pre-recorded', 'In-Class':'In-Class', 'In-Library':'In-Library'}
   enumerize :location_preference, in: [:online, :pre_recorded, :in_the_class, :in_the_library, :off_campus, :to_be_determined], default: :to_be_determined
-
+  
   ## VIRTUAL ATTRIBUTE
   # attribute :lead_assignment_response, :boolean
 

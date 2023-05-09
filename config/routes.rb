@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+  
   # namespace :user do
   #   get 'cancel_requests/new'
   #   get 'cancel_requests/create'
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]
   resources :institute_courses
-
+  # resources :teaching_type_of_instructions
 
   ######################
   ####### PUBLIC #######
@@ -105,6 +107,7 @@ Rails.application.routes.draw do
         get 'reports/overview', to: 'reports#index'
         resources :departments
         resources :staff_profiles
+        resources :type_of_instructions
 
         resources :users, except: [:new, :create]
         resource :settings

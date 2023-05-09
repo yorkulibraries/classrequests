@@ -83,6 +83,21 @@ hr {
     border-top: 1px solid $info;
     height: 0.5px;
   }
+  &.success {
+    background-color: $success;
+    border-top: 1px solid $success;
+    height: 0.5px;
+  }
+  &.warning {
+    background-color: $warning;
+    border-top: 1px solid $warning;
+    height: 0.5px;
+  }
+  &.danger {
+    background-color: $danger;
+    border-top: 1px solid $danger;
+    height: 0.5px;
+  }
   &.dark {
     background-color: $dark;
     border-top: 1px solid $dark;

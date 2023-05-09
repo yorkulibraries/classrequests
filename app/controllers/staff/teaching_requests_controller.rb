@@ -112,7 +112,7 @@ class Staff::TeachingRequestsController < Staff::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teaching_request_params
-      params.require(:teaching_request).permit(:username, :patron_type, :first_name, :last_name, :email, :phone, :academic_year, :faculty, :faculty_abbrev, :subject, :subject_abbrev, :course_title, :course_number, :submitted_by, :submitted_on_behalf, :section_name_or_about, :number_of_students, :preferred_date, :preferred_time, :alternate_date, :alternate_time, :duration, :location_preference, :room, :lead_instructor_id, :second_instructor_id, :third_instructor_id, :request_note, :instructor_notes, :status, :user_id,)
+      params.require(:teaching_request).permit(:username, :patron_type, :first_name, :last_name, :email, :phone, :academic_year, :faculty, :faculty_abbrev, :subject, :subject_abbrev, :course_title, :course_number, :submitted_by, :submitted_on_behalf, :section_name_or_about, :number_of_students, :preferred_date, :preferred_time, :alternate_date, :alternate_time, :duration, :location_preference, :room, :lead_instructor_id, :second_instructor_id, :third_instructor_id, :request_note, :instructor_notes, :status, :user_id,type_of_instruction_ids: [])
 
     end
 

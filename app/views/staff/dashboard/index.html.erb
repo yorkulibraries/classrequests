@@ -42,7 +42,7 @@
           <tr>
             <%= render partial: 'shared/teaching_request/common_table_fields', locals: {request: request} %>
             <td colspan='2' class='align-middle'>
-              <%= link_to user_teaching_request_path(request), class: 'btn btn-sm btn-info mt-1 mb-1' do %>
+              <%= link_to staff_teaching_request_path(request), class: 'btn btn-sm btn-info mt-1 mb-1' do %>
                   <i class='fa fa-eye' data-bs-toggle='tooltip' data-bs-placement='left' title='<%= t(:view) %>'></i>
               <% end %>
               <%= link_to new_user_cancel_request_path(teaching_request_id: request, user_id: current_user.id), class: 'btn btn-sm btn-danger mt-1 mb-1' do %>
@@ -60,11 +60,11 @@
 
 <% if current_user.staff_profile.is_approved? %>
   <% if @lead_assignments.count != 0 %>
-  <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
+  <div class='section-list-wrapper card mb-3 shadow p-2 rounded border border-primary border-1'>
     <div class='card-body'>
       <h2 class='card-title'><%= t(:assigned_as_lead) %></h2>
       <!-- <h3 class='card-subtitle mb-2 text-muted'><%= t(:lead_and_assigned_requests) %></h3> -->
-      <hr class='secondary'/>
+      <hr class='danger border-3'/>
       <div class='table-responsive'>
         <table class='table table-sm table-striped table-hover text-center mt-3'>
           <thead>
@@ -111,7 +111,7 @@
   <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
     <div class='card-body'>
       <h2 class='card-title'><%= t(:my_teaching_requests) %></h2>
-      <hr class='secondary'/>
+      <hr class='secondary border-3'/>
       <% if @my_teaching_requests.count == 0 %>
         <h3><%= t(:no_teaching_requests) %></h3>
       <% else %>
@@ -160,10 +160,11 @@
     </div>
   </div> <!-- My Teaching Requests wrapper -->
 
+  <!-- Upcoming Requests -->
   <div class='section-list-wrapper card mb-3 shadow p-2 rounded'>
     <div class='card-body'>
       <h2 class='card-title'><%= t(:upcoming_classes) %></h2>
-      <hr class='secondary'/>
+      <hr class='warning border-3'/>
       <% if @upcoming_teaching_requests.count == 0 %>
         <h3 class='text-muted'><%= t(:there_are_no_upcoming_requests) %></h3>
       <% else %>
@@ -203,8 +204,7 @@
     <div class='card-body'>
       <h2 class='card-title'><%= t(:my_teaching_requests_completed) %></h2>
       <h4 class='card-subtitle text-muted'><%= t(:current_fiscal_year_may_to_april) %></h4>
-      <p class='text-muted fst-italic'>
-      <hr class='secondary'/>
+      <hr class='success border-3'/>
       <% if @my_completed_teaching_requests.count == 0 %>
         <h3><%= t(:no_teaching_requests_completed_this_fiscal_year) %></h3>
       <% else %>

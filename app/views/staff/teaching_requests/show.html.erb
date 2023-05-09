@@ -85,11 +85,21 @@
             <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= truncate(strip_tags(request.request_note.to_plain_text), length: 25) %>"><%= t(:request_note) %>: <span class='fw-bold text-dark'><%= request.request_note %></span></p>
           </div>
         </div>
+        <div class='row'><div class='col'><h5 class='text-primary'><%= t(:staff_only_fields) %></h5></div></div>
         <div class='row'>
           <!-- column -->
-          <div class='col-md-12'>
-            <h5 class='text-primary'><%= t(:staff_only_fields) %></h5>
+          <div class='col-md-3'>
             <p class='text-muted small mb-0'><%= t(:submitted_by) %>: <span class='fw-bold text-dark'><%= request.submitted_by %></span></p>
+            <p class='text-muted small mb-0'><%= t(:type_of_instruction) %>: </p>
+            <% if request.type_of_instructions && request.type_of_instructions != nil %>
+              <ul>
+                <% request.type_of_instructions.each do |tofi| %>
+                  <li><span class='fw-bold small text-dark'><%= tofi.name %></span></li>
+                <% end %>
+              </ul>
+            <% end %>  
+          </div>
+          <div class='col-md-9'>
             <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= truncate(strip_tags(request.instructor_notes.to_plain_text), length: 25) %>"><%= t(:instructor_notes) %>: <span class='fw-bold text-dark'><%= request.instructor_notes %></span></p>
           </div>
         </div>

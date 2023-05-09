@@ -6,6 +6,7 @@ namespace :db do
 
   task load_defaults: :environment do
     Rake::Task["db:load_default_departments"].invoke
+    Rake::Task["db:load_default_type_of_instructions"].invoke
   end
 
 
@@ -44,6 +45,21 @@ namespace :db do
 
     puts Department.all.count.ai
 
+  end
+
+  task load_default_type_of_instructions: :environment do 
+    puts "Creating Types of Instruction"
+    start_count = TypeOfInstruction.all.count 
+
+    t_of_i = TypeOfInstruction.find_or_initialize_by(name: "Workshop / Co-curricular" ).save!
+    t_of_i = TypeOfInstruction.find_or_initialize_by(name: "General Orientation" ).save!
+    t_of_i = TypeOfInstruction.find_or_initialize_by(name: "Course Related" ).save!
+    t_of_i = TypeOfInstruction.find_or_initialize_by(name: "Functional Instruction" ).save!
+    t_of_i = TypeOfInstruction.find_or_initialize_by(name: "Guest Lecture" ).save!
+    t_of_i = TypeOfInstruction.find_or_initialize_by(name: "Other" ).save!
+    end_count = TypeOfInstruction.all.count 
+    difference = end_count - start_count
+    puts "Created: #{difference} Type of Instructions"
   end
 
   # t.string "email", default: "", null: false

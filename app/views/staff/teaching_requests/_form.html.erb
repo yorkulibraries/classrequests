@@ -155,6 +155,9 @@
                 input_html: {autocomplete: 'off', class: 'request-chosen'} %>
       </div>
       <div class='row mt-3'>
+        <%= f.input :type_of_instruction_ids, as: :check_boxes, collection: TypeOfInstruction.pluck(:name, :id), wrapper: :horizontal_collection, label: "Type of instruction", include_blank: false, input_html: { multiple: true } %>
+      </div>
+      <div class='row mt-3'>
         <%= f.input :instructor_notes, as: :rich_text_area %>
       </div>
       <div class='row mt-3'>

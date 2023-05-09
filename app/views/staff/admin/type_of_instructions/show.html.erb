@@ -1,0 +1,15 @@
+<div class="page-header">
+  <%= link_to staff_admin_type_of_instructions_path, class: 'btn btn-secondary' do %>
+    All Type_of_instructions
+  <% end %>
+  <%= link_to edit_staff_admin_type_of_instruction_path(@type_of_instruction), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show type_of_instruction</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @type_of_instruction.name %></dd>
+
+</dl>
