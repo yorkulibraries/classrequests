@@ -1,14 +1,14 @@
 wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "Teachings By Date Range") do |sheet|
-
-	## Create the header row
-  sheet.add_row ["TR-ID", "Section", "Date Requested", "Preferred Date","Start Time","Duration","Course Code","YUL Lead", "YorkU Instructor", "Number of Students", "Status", "Request Note"]
-
-	## Create entries for each item
+	# Create the header row
+  sheet.add_row ["TR-ID", "Section", "Date Requested", "Preferred Date","Start Time","Duration","Course Code","YUL Lead", "Type of Instruction", "YorkU Instructor", "Number of Students", "Status", "Request Note"]
+# Create entries for each item
   @results.each do |res|
 
-		sheet.add_row [res.id, res.section_name_or_about, res.created_at.strftime("%b %d, %Y"), "#{res.preferred_date.to_time.strftime("%b %d, %Y") rescue nil}", "#{res.preferred_time.to_time.strftime("%I:%M %p") rescue nil}","#{res.duration.text}","#{res.academic_year} - #{res.faculty_abbrev}/ #{res.subject_abbrev} #{res.course_number}", "L: #{res.lead_instructor.name rescue nil } | 2: #{res.second_instructor.name rescue nil} | 3: #{res.third_instructor.name rescue nil}", "#{res.first_name} #{res.last_name}", res.number_of_students, res.status, res.request_note ]
+    tofi = res.type_of_instructions.map(&:name).join(' | ')
 
+		sheet.add_row [res.id, res.section_name_or_about, res.created_at.strftime("%b %d, %Y"), res.preferred_date.to_time.strftime("%b %d, %Y"), "#{res.preferred_time.to_time.strftime("%I:%M %p")}","#{res.duration.text}","#{res.academic_year} - #{res.faculty_abbrev}/ #{res.subject_abbrev} #{res.course_number}", "L: #{res.lead_instructor.name rescue nil } | 2: #{res.second_instructor.name rescue nil} | 3: #{res.third_instructor.name rescue nil}", "#{tofi rescue nil}", "#{res.first_name} #{res.last_name}", res.number_of_students, res.status, res.request_note ]
+    
   end
 end

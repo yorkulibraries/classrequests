@@ -30,11 +30,12 @@
           <tr class='table-success'>
             <th scope='col text-center'>ID</th>
             <th scope='col'><%= t(:section) %></th>
-            <th scope='col'><%= t(:pate_requested) %></th>
+            <th scope='col'><%= t(:date_requested) %></th>
             <th scope='col'><%= t(:preferred_date) %></th>
             <th scope='col'><%= t(:time_parsed) %> [<%= t(:duration) %>]</th>
             <th scope='col'><%= t(:course_code) %></th>
             <th scope='col'><%= t(:YUL_lead) %></th>
+            <th scope='col'><%= t(:type_of_instruction) %></th>
             <th scope='col'><%= t(:faculty_instructor) %></th>
             <th scope='col'><%= t(:no_of_stds) %></th>
             <th scope='col'><%= t(:status)%></th>
@@ -55,6 +56,11 @@
               1: <%= res.lead_instructor.name if res.lead_instructor_id rescue nil  %><br/>
               2: <%= res.second_instructor.name if res.second_instructor_id rescue nil %><br/>
               3:<%= res.third_instructor.name if res.third_instructor_id rescue nil %>
+            </td>
+            <td> 
+              <% if !res.type_of_instructions.blank?  %> 
+                <%= res.type_of_instructions.map(&:name).join(', ')  %> 
+              <% end %>
             </td>
             <td><%= res.first_name %> <%= res.last_name %></td>
             <td><%= res.number_of_students %></td>

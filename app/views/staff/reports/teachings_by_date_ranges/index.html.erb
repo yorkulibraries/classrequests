@@ -28,16 +28,16 @@
         <thead>
           <tr class='table-success'>
             <th scope='col text-center'>ID</th>
-            <th scope='col'>Section</th>
-            <th scope='col'>Date Requested</th>
-            <th scope='col'>Preferred Date</th>
-            <th scope='col'>Time [Duration]</th>
-            <th scope='col'>Course Code</th>
-            <th scope='col'>YUL Lead</th>
-            <th scope='col'>Type of Instruction</th>
-            <th scope='col'>Faculty Instructor</th>
-            <th scope='col'># of Stds</th>
-            <th scope='col'>Status</th>
+            <th scope='col'><%= t(:section) %></th>
+            <th scope='col'><%= t(:date_requested) %></th>
+            <th scope='col'><%= t(:preferred_date) %></th>
+            <th scope='col'><%= t(:time_parsed) %> [<%= t(:duration) %>]</th>
+            <th scope='col'><%= t(:course_code) %></th>
+            <th scope='col'><%= t(:YUL_lead) %></th>
+            <th scope='col'><%= t(:type_of_instruction) %></th>
+            <th scope='col'><%= t(:faculty_instructor) %></th>
+            <th scope='col'><%= t(:no_of_stds) %></th>
+            <th scope='col'><%= t(:status)%></th>
             <!-- <th scope='col'>Actions</th> -->
           </tr>
         </thead>
@@ -85,9 +85,9 @@
       <div class='col-md-10 col-sm-12'>
         <h5 class='text-info'>No Sessions for the date range</h5>
         <dl class='row'>
-          <dt class='col text-muted'>Preferred Date Start:</dt>
+          <dt class='col text-muted'><%= t(:preferred_date_start) %>:</dt>
           <dd class='col'><%= @start_date.to_time.strftime('%b %d, %Y') rescue nil %></dd>
-          <dt class='col text-muted'>Preferred Date End:</dt>
+          <dt class='col text-muted'><%= t(:preferred_date_end) %>:</dt>
           <dd class='col'><%= @end_date.to_time.strftime('%b %d, %Y') rescue nil %></dd>
         </dl>
       </div>

@@ -155,10 +155,10 @@
                 input_html: {autocomplete: 'off', class: 'request-chosen'} %>
       </div>
       <div class='row mt-3'>
-        <%= f.input :type_of_instruction_ids, as: :check_boxes, collection: TypeOfInstruction.pluck(:name, :id), wrapper: :horizontal_collection, label: "Type of instruction", include_blank: false, input_html: { multiple: true } %>
+        <%= f.input :type_of_instruction_ids, as: :check_boxes, collection: TypeOfInstruction.pluck(:name, :id), wrapper: :horizontal_collection, label: 'Type of instruction(s)', include_blank: false, input_html: { multiple: true }, hint: '^ Check all that apply ^' %>
       </div>
       <div class='row mt-3'>
-        <%= f.input :instructor_notes, as: :rich_text_area %>
+        <%= f.input :instructor_notes, as: :rich_text_area, hint: 'Main topics covered, notes, reminders or any attachments for next time...etc.', placeholder: "type your notes here" %>
       </div>
       <div class='row mt-3'>
         <%= f.input :submitted_by %>
