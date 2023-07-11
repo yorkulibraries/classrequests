@@ -36,7 +36,7 @@ FactoryBot.define do
     last_name { Faker::Name.unique.last_name }
     email { "#{first_name}.#{last_name}@mailinator.com".downcase }
     password { Faker::Internet.password }
-    username {"#{first_name.str.chr}#{last_name}"}
+    username {"#{first_name[0]}#{last_name}"}
     # first_name {'Homer'}
     # last_name {'Simpson'}
   end

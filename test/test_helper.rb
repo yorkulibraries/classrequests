@@ -4,6 +4,11 @@ require "rails/test_help"
 require 'capybara/rails'
 # require 'capybara/rails'
 # require 'capybara/minitest'
+require 'factory_bot'
+require 'shoulda'
+require 'enumerize/integrations/rspec'
+  
+
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
@@ -16,6 +21,13 @@ class ActiveSupport::TestCase
   include Devise::Test::IntegrationHelpers
   include Capybara::DSL
 
+  # include Devise::TestHelpers
+  include Shoulda::Matchers::ActiveRecord
+  extend Shoulda::Matchers::ActiveRecord
+  include Shoulda::Matchers::ActiveModel
+  extend Shoulda::Matchers::ActiveModel
+
+  extend Enumerize::Integrations::RSpec
 
   # Add more helper methods to be used by all tests here...
 end

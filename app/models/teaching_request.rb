@@ -25,23 +25,18 @@ class TeachingRequest < ApplicationRecord
   # LOCATION_FORMATS = {'Online Live':'Online Live', 'Pre-recorded':'Pre-recorded', 'In-Class':'In-Class', 'In-Library':'In-Library'}
   enumerize :location_preference, in: [:online, :pre_recorded, :in_the_class, :in_the_library, :off_campus, :to_be_determined], default: :to_be_determined
   
-  ## VIRTUAL ATTRIBUTE
-  # attribute :lead_assignment_response, :boolean
-
-
   ## VALIDATIONS
   validates :patron_type, :first_name, :last_name, :email, :academic_year, :faculty_abbrev, :subject_abbrev, :course_number, :status, presence: true
   validates :number_of_students, :preferred_date, :preferred_time, :duration, :location_preference, presence: true
   validates :request_note, presence: true #, if: lambda { self.status.new_request? }
 
-  # validates :lead_assignment_response, presence: true, if: lambda {!self.lead_instructor_id.empty? && self.status == self.status.in_process.value}
-
   # validates :assign_request_lead_update, presence: true, if: lambda {!self.lead_instructor_id.empty? && self.status == self.status.in_process.value}
 
-  validates :lead_instructor_id, presence: true, if: lambda {self.lead_instructor_id.blank? && self.status.in_process?}
-
-
   validates_format_of :email, with: /\A[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i
+
+  validates :lead_instructor_id, presence: true, if: lambda {self.lead_instructor_id.nil? && (self.status == 2)}
+
+  # validates :lead_instructor_id, presence: true, if: -> { self.lead_instructor_id.nil? && self.status.in_process? }
 
   ## PAGING (kaminari)
   paginates_per 20

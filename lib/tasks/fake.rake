@@ -16,13 +16,26 @@ namespace :fake do
     require 'faker'
     require 'populator'
 
-    admin = User.find_or_create_by!(username: 'superadmin', first_name: 'Super', last_name: 'Admin', email: 'superadmin@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'superadmin@mailinator.com').first
-    manager = User.find_or_create_by!(username: 'pskinner', first_name: 'Principal', last_name: 'Skinner', email: 'skinner@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'skinner@mailinator.com').first
-    faculty = User.find_or_create_by!(username: 'edna', first_name: 'Edna', last_name: 'Krabappel', email: 'Edna@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'db',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'edna@mailinator.com').first
-    librarian = User.find_or_create_by!(username: 'mhouten', first_name: 'Milhouse', last_name: 'Van Houten', email: 'milhouse@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'milhouse@mailinator.com').first
-    librarian_2 = User.find_or_create_by!(username: 'bsimpson', first_name: 'Bart', last_name: 'Simpson', email: 'bart@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'bart@mailinator.com').first
-    librarian_3 = User.find_or_create_by!(username: 'lsimpson', first_name: 'Lisa', last_name: 'Simpson', email: 'lisa@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'lisa@mailinator.com').first
-    librarian_4 = User.find_or_create_by!(username: 'bgumble', first_name: 'Barney', last_name: 'Gumble', email: 'barney@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'barney@mailinator.com').first
+    lb_password = Devise::Encryptor.digest(User, 'libstar'),
+    
+
+    admin = User.create(username: 'superadmin', first_name: 'Super', last_name: 'Admin', email: 'superadmin@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'superadmin@mailinator.com').first
+    manager = User.create(username: 'pskinner', first_name: 'Principal', last_name: 'Skinner', email: 'skinner@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'skinner@mailinator.com').first
+    faculty = User.create(username: 'edna', first_name: 'Edna', last_name: 'Krabappel', email: 'Edna@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'db',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'edna@mailinator.com').first
+    librarian = User.create(username: 'mhouten', first_name: 'Milhouse', last_name: 'Van Houten', email: 'milhouse@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'milhouse@mailinator.com').first
+    librarian_2 = User.create(username: 'bsimpson', first_name: 'Bart', last_name: 'Simpson', email: 'bart@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'bart@mailinator.com').first
+    librarian_3 = User.create(username: 'lsimpson', first_name: 'Lisa', last_name: 'Simpson', email: 'lisa@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'lisa@mailinator.com').first
+    librarian_4 = User.create(username: 'bgumble', first_name: 'Barney', last_name: 'Gumble', email: 'barney@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'barney@mailinator.com').first
+
+    # admin = User.find_or_create_by!(username: 'superadmin', first_name: 'Super', last_name: 'Admin', email: 'superadmin@mailinator.com', encrypted_password: lb_password,  user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'superadmin@mailinator.com').first
+    # manager = User.find_or_create_by!(username: 'pskinner', first_name: 'Principal', last_name: 'Skinner', email: 'skinner@mailinator.com', encrypted_password: lb_password,  user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'skinner@mailinator.com').first
+    # faculty = User.find_or_create_by!(username: 'edna', first_name: 'Edna', last_name: 'Krabappel', email: 'Edna@mailinator.com', encrypted_password: lb_password,  user_source: 'db',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'edna@mailinator.com').first
+    # librarian = User.find_or_create_by!(username: 'mhouten', first_name: 'Milhouse', last_name: 'Van Houten', email: 'milhouse@mailinator.com', encrypted_password: lb_password,  user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'milhouse@mailinator.com').first
+    # librarian_2 = User.find_or_create_by!(username: 'bsimpson', first_name: 'Bart', last_name: 'Simpson', email: 'bart@mailinator.com', encrypted_password: lb_password,  user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'bart@mailinator.com').first
+    # librarian_3 = User.find_or_create_by!(username: 'lsimpson', first_name: 'Lisa', last_name: 'Simpson', email: 'lisa@mailinator.com', encrypted_password: lb_password,  user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'lisa@mailinator.com').first
+    # librarian_4 = User.find_or_create_by!(username: 'bgumble', first_name: 'Barney', last_name: 'Gumble', email: 'barney@mailinator.com', encrypted_password: lb_password,  user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'barney@mailinator.com').first
+
+
 
       # user_record = User.where(email: 'superlibrarian@mailinator.com').first
 
@@ -99,10 +112,15 @@ namespace :fake do
     staff_users = User.where("id in (SELECT sp.user_id from staff_profiles sp) AND email like '%mailinator.com'")
     patron_users = User.where("id not in (SELECT sp.user_id from staff_profiles sp) AND email like '%mailinator.com'")
     locations = [:online, :pre_recorded, :in_the_class, :in_the_library, :off_campus, :to_be_determined]
-    durations = ["30", "40", "60", "60+"]
-    status_not_new = ['2', '3', '4', '6']
-    status_assigned_in_process_only = ['2', '3']
+    # durations = ["30", "40", "60", "60+"]
+    durations = { thirty: '30', sixty: '60', sixty_plus: '60+', ninety: '90', one_twenty: '120', one_eighty: '180', one_eighty_plus: '180+' }
 
+    status_not_new = {in_process: 2, assigned: 3, done: 4, unfulfilled: 6, deleted: 9 }
+    # status_not_new = ['2', '3', '4', '6']
+    status_assigned_in_process_only = {in_process: 2, assigned: 3 }
+    # status_assigned_in_process_only = ['2', '3']
+
+    
     # puts course.ai
     # puts user.ai
     # puts patron.ai
@@ -149,7 +167,7 @@ namespace :fake do
       tr.preferred_time = preferred_time_parsed,
       tr.alternate_date = alternate_date_parsed,
       tr.alternate_time = alternate_time_parsed,
-      tr.duration = durations.sample,
+      tr.duration = durations.to_a.sample.last,
       tr.location_preference = locations.sample,
       # tr.lead_instructor_id = '',
       # tr.second_instructor_id = '',
@@ -177,7 +195,7 @@ namespace :fake do
       preferred_time_parsed = DateTime.parse(Faker::Time.between_dates(from: preferred_date_parsed, to: preferred_date_parsed + 5, format: :default)).strftime('%I:%M:%S')
       alternate_date_parsed = Faker::Date.between(from: Date.today, to: Date.today + 90) #=> #<Date: 2014-09-24>
       alternate_time_parsed = DateTime.parse(Faker::Time.between_dates(from: alternate_date_parsed, to: alternate_date_parsed + 5, format: :default)).strftime('%I:%M:%S')
-      status_id = status_assigned_in_process_only.sample
+      status_id = status_assigned_in_process_only.to_a.sample.last
       # status_not_new.sample
 
       # Faker::Config.locale = 'en-CA'
@@ -205,7 +223,7 @@ namespace :fake do
       tr.preferred_time = preferred_time_parsed,
       tr.alternate_date = alternate_date_parsed,
       tr.alternate_time = alternate_time_parsed,
-      tr.duration = durations.sample,
+      tr.duration = durations.to_a.sample.last,
       tr.location_preference = locations.sample,
       tr.lead_instructor_id = staff.id,
       # tr.second_instructor_id = '',
@@ -231,7 +249,7 @@ namespace :fake do
       preferred_time_parsed = DateTime.parse(Faker::Time.between_dates(from: preferred_date_parsed, to: preferred_date_parsed + 5, format: :default)).strftime('%I:%M:%S')
       alternate_date_parsed = Faker::Date.between(from: Date.today, to: Date.today + 90) #=> #<Date: 2014-09-24>
       alternate_time_parsed = DateTime.parse(Faker::Time.between_dates(from: alternate_date_parsed, to: alternate_date_parsed + 5, format: :default)).strftime('%I:%M:%S')
-      status_id = status_not_new.sample
+      status_id = status_not_new.to_a.sample.last
       # status_not_new.sample
 
       # Faker::Config.locale = 'en-CA'
@@ -258,7 +276,7 @@ namespace :fake do
       tr.preferred_time = preferred_time_parsed,
       tr.alternate_date = alternate_date_parsed,
       tr.alternate_time = alternate_time_parsed,
-      tr.duration = durations.sample,
+      tr.duration = durations.to_a.sample.last,
       tr.location_preference = locations.sample,
       tr.lead_instructor_id = staff.id,
       tr.second_instructor_id = staff_users.sample.id,
