@@ -14,10 +14,9 @@ class UserDashboardTest < ApplicationSystemTestCase
 
   test 'user dashboard' do
     visit root_url
-    # click_on 'My Dashboard'
+    click_on 'My Dashboard'
+    assert_text "#{@patron.first_name} #{@patron.last_name}"
     # assert_text "#{assigns(:current_user).first_name} #{assigns(:current_user).last_name}'s Dashboard" 
   end
-
-  
 
 end

@@ -59,4 +59,21 @@ FactoryBot.define do
 
   end
 
+  factory :prof_john_doe, class: User do 
+    email { "prof_john_doe@mailinator.com" }
+    username {"profjdoe"}
+    password { 'profjdoe' }
+    first_name {'John'}
+    last_name {'Doe'}
+    contact_phone {'416-222-2345'}
+    is_active { true}
+    is_verified { false}
+    user_uid { 111222333}
+    alternate_email { Faker::Internet.email}
+    user_source { "db"}
+    user_group { "Faculty"}
+    iam_identification { "YorkU Instructor"}
+    note { Faker::Lorem.paragraph(sentence_count: 2)}
+  end
+
 end
