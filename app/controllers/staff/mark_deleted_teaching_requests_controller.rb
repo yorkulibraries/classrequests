@@ -20,7 +20,11 @@ class Staff::MarkDeletedTeachingRequestsController < Staff::BaseController
 
         format.html { redirect_to staff_teaching_request_path(@teaching_request), sort: @teaching_request.status.text, notice: 'Teaching Request was marked deleted. Faculty Notificed.' }
       else
-        format.html { render :edit }
+        format.html { 
+          flash[:error] = "ERROR: Teaching Request mark done failed! -- #{@teaching_request.errors.full_messages.to_sentence}" 
+          
+          redirect_to staff_dashboard_path 
+          }
       end
     end
   end
