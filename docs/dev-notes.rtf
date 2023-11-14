@@ -12,16 +12,3 @@ https://modheader.com/p/NobwRAhgDlCmB2ATAsge0bMAuAZhANgM6wA0YARhAMYDWA5gE6oCuSAw
 
 November 2021
 https://modheader.com/p/NobwRAhgDlCmB2ATAsge0bMAuAZhANgM6wA0YARhAMYDWA5gE6oCuSAwqvqg9mAMQAWAAwCAzAEYcYMjgCW+AC6wGhbMAC6ZABawIGFWvBVUAWxMIFvaWAQRy+WImwKGzUmHgRzvAAoBNAHkAJQBpAH02PwBJADlrADcCN14AJiEU8SEsoXEwAF8SI1NzeEssMGtbe0dnV3dPb3KggFFkAIAVZrCAVQBlZqCEpMxyqEITWQUtfMKwYzMLKzIqhycsFzcyBpGwf2DwgDEooN72sJiAQWRmofxk8p8mHFhCQm4ZooXSpZtParWNvUvDs9qEwgAZC6nc5XG5kRJ3Ha9CZTD5zYqLcqVP6rWqbDzA3yBMGtC5RcG3e5gMYorQAARMEHksk8Cm4ADp5mj5iUyhVljiaus6ltCQ9ieF2n4fHCwAiqQdqMxFABPfKaMBaWQYDhfMqAsgMF5QAASun0qiwGjIhC03AU7UmDl4uTISgAHgoOFweOU+DgA4HrAonTtFVRlQoVQACZCwEzkZTWZgMfBBWBQfDUeMWS0aArgAgAdwgKsIAXgePc0DgSDQGGweCI7kotEYLHYnHefuEYkk1jkimUeY1Oj0w8M6L1PxWQqbxFFjV2Eoi0Ti8OGqXSmWyKW5GO+WIFdlxuAIC4JS5abU6PX6gw3iN4hD0EAAjkz4ABaPQTSsFqdeRnQU1nnIEl1BQ5jmhS5rkpHYLkQP992nI9fhPOdz3AkEV0hGDYXg3helfD8WRQoC0NnUCsMXHD9jCUlyUI8oX0Qd9P3ZX8WQZJl8BZCA2QYTlTHIzF+XQ-5Gxoy86LBKUZWYsBegUCAA3VbRtVgXUKINMAjUIU1zQnK0NVte1HQUZ1yldMAPS9LtfX4QMgzdUNeEQv9Y3jRMeDIFM0wzLMqBzUoRwAmsEBQdARjAshW3oJhWEQb1u34XsJCkGR5CUAwTO0IzctAQCxOxDDqObWiiXoyJYkUtIMmyIRRFEw9xKoqSKpk3hrw6Lo+gGRSkIgTw6CTACeRK49JLPTrtiqsEjhOM5YNleUdgAEWGiAWr5UrptirrxXovDloIx8qWQLbRp4caD12qbTwOuajpJZAyQpc6diGkblB45lWQ5LlbtQtqQI6i9nuXej5NWzdynDSM1TyUdNO0zFdP0wzx0K0y7QYB03Os4NYE9FLHP9ZzMtswmwD8bpwVjK6kz81N00zbNeTC9QgA
-
-
-
-TO FIX OLD REQUEST NOTES MISSING DATA.
-
-select at.id, at.name, at.body, at.record_id, tr.lead_instructor_id, u.first_name, u.email from teaching_requests as tr, users as u, action_text_rich_texts as at where name='request_note' and body='' and record_id in (select id from teaching_requests where status=3) and tr.lead_instructor_id=u.id;
-
-
-select at.id, name,body, record_id, lead_instructor_id, second_instructor_id, third_instructor_id from action_text_rich_texts as at,teaching_requests where name='request_note' and body='' and at.record_id = teaching_requests.id order by record_id; 
-
-select at.id, name,body, record_id, lead_instructor_id, second_instructor_id, third_instructor_id from action_text_rich_texts as at,teaching_requests where name='request_note' and body='' and at.record_id = teaching_requests.id order by record_id, lead_instructor_id;
-
-select at.id, name,body, record_id, lead_instructor_id, second_instructor_id, third_instructor_id from action_text_rich_texts as at,teaching_requests where name='request_note' and body='' and at.record_id = teaching_requests.id and teaching_requests.status <> 9 order by record_id, lead_instructor_id;
