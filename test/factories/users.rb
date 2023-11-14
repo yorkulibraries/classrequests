@@ -36,7 +36,7 @@ FactoryBot.define do
     last_name { Faker::Name.unique.last_name }
     email { "#{first_name}.#{last_name}@mailinator.com".downcase }
     password { Faker::Internet.password }
-    username {"#{first_name.str.chr}#{last_name}"}
+    username {"#{first_name[0]}#{last_name}"}
     # first_name {'Homer'}
     # last_name {'Simpson'}
   end
@@ -57,6 +57,23 @@ FactoryBot.define do
     iam_identification { "YorkU Instructor"}
     note { Faker::Lorem.paragraph(sentence_count: 2)}
 
+  end
+
+  factory :prof_john_doe, class: User do 
+    email { "prof_john_doe@mailinator.com" }
+    username {"profjdoe"}
+    password { 'profjdoe' }
+    first_name {'John'}
+    last_name {'Doe'}
+    contact_phone {'416-222-2345'}
+    is_active { true}
+    is_verified { false}
+    user_uid { 111222333}
+    alternate_email { Faker::Internet.email}
+    user_source { "db"}
+    user_group { "Faculty"}
+    iam_identification { "YorkU Instructor"}
+    note { Faker::Lorem.paragraph(sentence_count: 2)}
   end
 
 end

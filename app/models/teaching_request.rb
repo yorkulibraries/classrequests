@@ -38,7 +38,8 @@ class TeachingRequest < ApplicationRecord
 
   # validates :assign_request_lead_update, presence: true, if: lambda {!self.lead_instructor_id.empty? && self.status == self.status.in_process.value}
 
-  validates :lead_instructor_id, presence: true, if: lambda {self.lead_instructor_id.blank? && self.status.in_process?}
+  # validates :lead_instructor_id, presence: true, if: lambda {self.lead_instructor_id.blank? && self.status.in_process?}
+  validates :lead_instructor_id, presence: true, if: lambda {self.lead_instructor_id.nil? && (self.status == 2)}
 
 
   validates_format_of :email, with: /\A[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i

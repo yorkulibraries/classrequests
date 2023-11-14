@@ -1,7 +1,7 @@
 require "test_helper"
 
 class AssignmentResponseTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  should belong_to(:teaching_request)
+  should belong_to(:user)
 end
