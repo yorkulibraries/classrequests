@@ -299,6 +299,7 @@ namespace :courses do
     puts "INSERTING OTHER OPTIONS"
     ## Add Other for all faculties
     grouped = InstituteCourse.all.group(:faculty_abbrev, :academic_year)
+    # grouped = InstituteCourse.select("academic_year, faculty_abbrev, faculty, subject, subject_abbrev, number, academic_term, COUNT (*) as count").group(:faculty_abbrev, :academic_year)
     grouped.each do |ic|
       new_course_record = InstituteCourse.new(
         academic_year: ic.academic_year,

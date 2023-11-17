@@ -1,0 +1,72 @@
+version: '3.8'
+
+networks:
+  development: 
+  # test: 
+
+volumes:
+  db_data:
+  gem_cache: 
+  shared_data:
+  mysql_data:
+
+services:
+
+  classrequests_mysql_db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - shared_data:/var/shared
+    container_name: classrequests_mysql_db
+    # networks:
+    #   - development
+    environment:
+      MYSQL_ROOT_PASSWORD: classrequests
+      MYSQL_DATABASE: classrequests_development
+      MYSQL_USER: classrequests
+      MYSQL_PASSWORD: classrequests
+      # MYSQL_ROOT_HOST: classrequests_mysql_db
+    ports:
+      - 3306:3306
+
+  classrequests_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: classrequests_app
+    volumes:
+      - .:/var/app
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems 
+    # networks:
+    #   - development
+    ports:
+      - 3000:3000
+    stdin_open: true 
+    tty: true
+    env_file: .env.development
+    # entrypoint: /usr/bin/dev-entrypoint.sh
+    entrypoint: /usr/local/dev-entrypoint.sh 
+    command: ['rails', 's', '-p', '3000', '-b', '0.0.0.0']
+    depends_on:
+      - classrequests_mysql_db  
+  
+  # mariadb 
+  # classrequests_db:
+  #   image: mariadb
+  #   restart: always
+  #   container_name: classrequests_db
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #     - shared_data:/var/shared
+  #   networks:
+  #     - development
+  #   environment:
+  #     MARIADB_ROOT_PASSWORD: "classrequests"
+  #     # MARIADB_DATABASE: "classrequests_development"s
+  #   ports:
+  #     - 3306:3306
+
+  # web
+  
