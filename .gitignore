@@ -62,7 +62,9 @@ vendor/bundle
 
 # Docker files
 docker-compose-*
+docker-compose*
 Dockerfile*
 dev-docker-entrypoint.sh
 .env.development*
 .env.test*
+.env.development

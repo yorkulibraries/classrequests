@@ -1,4 +1,5 @@
 require_relative "boot"
+
 require "rails/all"
 # require_relative "../app/models/setting"
 # Require the gems listed in Gemfile, including any gems
@@ -7,16 +8,10 @@ Bundler.require(*Rails.groups)
 
 module Libstar
   class Application < Rails::Application
-    # config.application_name = Rails.application.class.module_parent_name
-    # if Setting.app_name.present?
-    #   config.application_name = Setting.app_name
-    # else
-    #   config.application_name = 'LIBSTAR'
-    # end
     # Initialize configuration defaults for originally generated Rails version.
     config.libstar_version = 2.0
-
     config.load_defaults 6.1
+    # config.load_defaults 7.0
     config.hosts << "127.0.0.1"
     config.hosts << "classrequests.me.ca"
     config.hosts << "classrequests.library.yorku.ca"
@@ -29,17 +24,16 @@ module Libstar
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
     config.generators do |g|
-        g.orm             :active_record
-        g.template_engine :erb
-        g.test_framework  :shoulda, fixture: false
-        g.stylesheets     false
-        g.javascripts     false
-        g.helper          false
+      g.orm             :active_record
+      g.template_engine :erb
+      g.test_framework  :shoulda, fixture: false
+      g.stylesheets     false
+      g.javascripts     false
+      g.helper          false
 
-        # Add a fallback!
-        g.fallbacks[:shoulda] = :test_unit
+      # Add a fallback!
+      g.fallbacks[:shoulda] = :test_unit
     end
     config.i18n.default_locale = :en
     config.i18n.fallbacks = [:en]

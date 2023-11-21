@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_08_154343) do
+ActiveRecord::Schema.define(version: 2023_11_20_201103) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_154343) do
     t.text "metadata"
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
+    t.string "checksum"
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_154343) do
     t.index ["user_id"], name: "index_teaching_requests_on_user_id"
   end
 
-  create_table "teaching_type_of_instructions", charset: "utf8mb3", force: :cascade do |t|
+  create_table "teaching_type_of_instructions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "teaching_request_id", null: false
     t.bigint "type_of_instruction_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_154343) do
     t.index ["type_of_instruction_id"], name: "index_teaching_type_of_instructions_on_type_of_instruction_id"
   end
 
-  create_table "type_of_instructions", charset: "utf8mb3", force: :cascade do |t|
+  create_table "type_of_instructions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

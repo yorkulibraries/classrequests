@@ -6,19 +6,19 @@ networks:
 
 volumes:
   db_data:
-  gem_cache: 
+  # gem_cache: 
   shared_data:
   mysql_data:
 
 services:
 
-  classrequests_mysql_db:
+  classreq_mysql_db:
     image: mysql:8.0
     restart: always
     volumes:
       - mysql_data:/var/lib/mysql
-      - shared_data:/var/shared
-    container_name: classrequests_mysql_db
+      # - shared_data:/var/shared
+    container_name: classreq_mysql_db
     # networks:
     #   - development
     environment:
@@ -30,27 +30,26 @@ services:
     ports:
       - 3306:3306
 
-  classrequests_app:
+  classreq_app2:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    container_name: classrequests_app
+      dockerfile: Dockerfile.2.7-7.0.dev
+    container_name: classreq_app2
     volumes:
       - .:/var/app
-      - shared_data:/var/shared
-      - gem_cache:/usr/local/bundle/gems 
+      # - shared_data:/var/shared
     # networks:
     #   - development
     ports:
       - 3000:3000
-    stdin_open: true 
+    # stdin_open: true 
     tty: true
     env_file: .env.development
     # entrypoint: /usr/bin/dev-entrypoint.sh
     entrypoint: /usr/local/dev-entrypoint.sh 
     command: ['rails', 's', '-p', '3000', '-b', '0.0.0.0']
     depends_on:
-      - classrequests_mysql_db  
+      - classreq_mysql_db  
   
   # mariadb 
   # classrequests_db:
