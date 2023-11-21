@@ -59,3 +59,10 @@ vendor/bundle
 .browserslistrc
 .gitattributes
 .ruby-version
+
+# Docker files
+docker-compose-*
+Dockerfile*
+dev-docker-entrypoint.sh
+.env.development*
+.env.test*
