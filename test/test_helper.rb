@@ -6,7 +6,8 @@ require 'capybara/rails'
 # require 'capybara/minitest'
 require 'factory_bot'
 require 'shoulda'
-require 'enumerize/integrations/rspec'
+# require 'enumerize'
+
   
 
 
@@ -28,6 +29,7 @@ class ActiveSupport::TestCase
   include Shoulda::Matchers::ActiveModel
   extend Shoulda::Matchers::ActiveModel
 
+  require 'enumerize/integrations/rspec'
   extend Enumerize::Integrations::RSpec
 
   # Add more helper methods to be used by all tests here...

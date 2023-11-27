@@ -4,6 +4,20 @@ require 'date'
 namespace :fake do
   desc "Prepopulate Some Data"
 
+  task factory_users: :environment do 
+    require 'factory_bot'
+    # FactoryBot.find_definitions
+    include FactoryBot::Syntax::Methods
+
+    # create(:valid_patron)
+    # create(:prof_john_doe)
+    create(:librarian_jane_doe)
+
+    puts 'Fake users created successfully.'
+  end
+
+
+
   task generate: :environment do
     Rake::Task["fake:create_fake_users"].invoke
     Rake::Task["fake:create_dummy_requests"].invoke

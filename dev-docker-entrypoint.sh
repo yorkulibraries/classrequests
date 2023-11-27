@@ -9,7 +9,7 @@ bundle check || bundle install
 
 #remove pid from previous session (puma server)
 
-rm -f $APP_PATH/tmp/pids/server.pid
+rm -f $WEB_APP_PATH/tmp/pids/server.pid
 
 # run anything by prepending bundle exec to the passed command
 

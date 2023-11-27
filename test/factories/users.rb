@@ -68,7 +68,7 @@ FactoryBot.define do
     contact_phone {'416-222-2345'}
     is_active { true}
     is_verified { false}
-    user_uid { 111222333}
+    user_uid { 222111333}
     alternate_email { Faker::Internet.email}
     user_source { "db"}
     user_group { "Faculty"}
@@ -76,4 +76,20 @@ FactoryBot.define do
     note { Faker::Lorem.paragraph(sentence_count: 2)}
   end
 
+  factory :librarian_jane_doe, class: User do 
+    email { "librarian@mailinator.com" }
+    username {"libstar"}
+    password { 'libstar' }
+    first_name {'Jane'}
+    last_name {'Doe'}
+    contact_phone {'416-222-1234'}
+    is_active { true}
+    is_verified { false}
+    user_uid { 333222111}
+    alternate_email { Faker::Internet.email}
+    user_source { "db"}
+    user_group { "Staff"}
+    iam_identification { "Librarian / Archivist / Staff"}
+    note { Faker::Lorem.paragraph(sentence_count: 2)}
+  end
 end

@@ -3,7 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # ruby '2.6.9'
 # ruby '3.0.3'
-ruby '2.7.6'
+# ruby '2.7.6'
+ruby '3.1.4'
 
 ###############
 #### CORE #####
@@ -66,8 +67,9 @@ gem 'font-awesome-sass', '~> 5.15.1'
 # gem 'chosen-rails', '~> 1.9.0'
 gem 'devise', '~> 4.8', '>= 4.8.0'
 gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped', branch: 'bootstrap5'
-gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
-gem 'mini_magick', '~> 4.11', '>= 4.11.0'
+# gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
+gem 'gravatar_image_tag', github: 'Envek/gravatar_image_tag', branch: 'fix/deprecation-warnings'
+# gem 'mini_magick', '~> 4.11', '>= 4.11.0'
 ## For paging of viewing data.
 gem 'kaminari', '~> 1.2' #, :git => 'https://github.com/kaminari/kaminari'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
@@ -76,7 +78,9 @@ gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 gem 'awesome_print', require: 'ap'
 
 # For Enum
-gem 'enumerize', '~> 2.4'
+# gem 'enumerize', '~> 2.4'
+gem 'enumerize', '~> 2.5'
+
 
 # For application settings
 gem 'rails-settings-cached', '~> 2.8'
@@ -117,10 +121,18 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '6.2.0'
   gem 'faker', '~> 2.18.0'
-  gem 'populator', git: 'https://github.com/norikt/populator.git'
+  # gem 'populator', git: 'https://github.com/norikt/populator.git'
+  gem 'populator', git: 'https://github.com/ShareWis/populator'
   gem 'rubocop', '~> 1.18', require: false
   gem 'shoulda', '~> 4.0'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'shoulda-context', '~> 2.0.0'
+  # gem 'shoulda', '~> 5.0'
+  # gem 'shoulda-matchers', '~> 5.3'
+  # gem 'shoulda-context', '~> 2.0.0'
+  
   # gem 'launchy'
+
+  #had to add rspec for enumerize/integrations/rspec call for "should enumerize(xyz)" tests
+  gem "rspec-rails" 
 end

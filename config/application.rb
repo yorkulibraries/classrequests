@@ -10,8 +10,8 @@ module Libstar
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.libstar_version = 2.0
-    config.load_defaults 6.1
-    # config.load_defaults 7.0
+    # config.load_defaults 6.1
+    config.load_defaults 7.0
     config.hosts << "127.0.0.1"
     config.hosts << "classrequests.me.ca"
     config.hosts << "classrequests.library.yorku.ca"

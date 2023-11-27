@@ -5,8 +5,8 @@ networks:
   # test: 
 
 volumes:
-  db_data:
-  # gem_cache: 
+  # db_data:
+  gem_cache: 
   shared_data:
   mysql_data:
 
@@ -33,11 +33,12 @@ services:
   classreq_app2:
     build:
       context: .
-      dockerfile: Dockerfile.2.7-7.0.dev
+      dockerfile: Dockerfile.3.1-7.0.8-deb.dev
     container_name: classreq_app2
     volumes:
       - .:/var/app
       # - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
     # networks:
     #   - development
     ports:
@@ -45,27 +46,7 @@ services:
     # stdin_open: true 
     tty: true
     env_file: .env.development
-    # entrypoint: /usr/bin/dev-entrypoint.sh
     entrypoint: /usr/local/dev-entrypoint.sh 
-    command: ['rails', 's', '-p', '3000', '-b', '0.0.0.0']
+    command: ['rails', 's', '-p', '3000', '-b', '0.0.0.0'] 
     depends_on:
       - classreq_mysql_db  
-  
-  # mariadb 
-  # classrequests_db:
-  #   image: mariadb
-  #   restart: always
-  #   container_name: classrequests_db
-  #   volumes:
-  #     - db_data:/var/lib/mysql
-  #     - shared_data:/var/shared
-  #   networks:
-  #     - development
-  #   environment:
-  #     MARIADB_ROOT_PASSWORD: "classrequests"
-  #     # MARIADB_DATABASE: "classrequests_development"s
-  #   ports:
-  #     - 3306:3306
-
-  # web
-  
