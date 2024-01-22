@@ -28,7 +28,7 @@ class NewRequestByUsersTest < ApplicationSystemTestCase
     
     # assert has_content?('John')
     # assert have_field('First Name', with: 'John')
-    assert_has_content 'First Name'
+    assert_content 'First Name'
   end
 
   

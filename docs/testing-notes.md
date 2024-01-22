@@ -39,9 +39,20 @@
   * App Settings
 
 
+* **UPGRADING NOTES**
+Node 16+ info.
+You will get an error on webpacker compile for anything higher than node 16.
+Workaround for now:
+export NODE_OPTIONS=--openssl-legacy-provider
+bundle exec rails assets:precompile RAILS_ENV=test
+bundle exec rails test:system
 
 
-
+* **TESTING**
+1. docker-compose up
+2. another terminal:  docker-compose exec -e SELENIUM_REMOTE_HOST=chrome-server classreq_test2 bash
+3. bundle exec rails test:system OR
+4. Run Specific System Test: bundle exec rails test test/system/teaching_requests_test.rb
 
 
 

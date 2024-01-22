@@ -9,7 +9,10 @@ require_relative "../../app/models/setting"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  
+  # config.hosts << "libstar.library.yorku.ca"
+  # config.hosts << "localhost"
+  
   # Turn false under Spring and add config.action_view.cache_template_loading = true
   config.cache_classes = true
 

@@ -4,6 +4,9 @@ require_relative "../../app/models/setting"
 Rails.application.configure do
   # appname = Rails.application.class.module_parent_name
   config.hosts << "libstar.library.yorku.ca"
+  # config.hosts << "127.0.0.1"
+  config.hosts << "classrequests.me.ca"
+  # config.hosts << "classrequests-dev.library.yorku.ca"
 
   # DEVISE ADDITION
   config.action_mailer.delivery_method = :smtp # Setting.delivery_method.parameterize.underscore.to_sym #:sendmail

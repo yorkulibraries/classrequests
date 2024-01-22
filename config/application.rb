@@ -12,10 +12,10 @@ module Libstar
     config.libstar_version = 2.0
     # config.load_defaults 6.1
     config.load_defaults 7.0
-    config.hosts << "127.0.0.1"
-    config.hosts << "classrequests.me.ca"
-    config.hosts << "classrequests.library.yorku.ca"
-    config.hosts << "classrequests-dev.library.yorku.ca"
+    # config.hosts << "127.0.0.1"
+    # config.hosts << "classrequests.me.ca"
+    # config.hosts << "classrequests.library.yorku.ca"
+    # config.hosts << "classrequests-dev.library.yorku.ca"
 
     # Configuration for the application, engines, and railties goes here.
     #

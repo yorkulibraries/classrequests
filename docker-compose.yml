@@ -7,7 +7,7 @@ networks:
 volumes:
   # db_data:
   gem_cache: 
-  shared_data:
+  # shared_data:
   mysql_data:
 
 services:
@@ -33,7 +33,7 @@ services:
   classreq_app2:
     build:
       context: .
-      dockerfile: Dockerfile.3.1-7.0.8-deb.dev
+      dockerfile: Dockerfile.dev
     container_name: classreq_app2
     volumes:
       - .:/var/app
@@ -45,8 +45,43 @@ services:
       - 3000:3000
     # stdin_open: true 
     tty: true
+    environment: 
+      RAILS_ENV: development
+      SELENIUM_REMOTE_HOST: chrome-server
     env_file: .env.development
     entrypoint: /usr/local/dev-entrypoint.sh 
     command: ['rails', 's', '-p', '3000', '-b', '0.0.0.0'] 
     depends_on:
       - classreq_mysql_db  
+
+  classreq_test2:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: classreq_test2
+    volumes:
+      - .:/var/app
+      # - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+      - /var/app/tmp
+    # networks:
+    #   - development
+    ports:
+      - 4000:4000
+    # stdin_open: true 
+    tty: true
+    environment: 
+      RAILS_ENV: test
+      SELENIUM_REMOTE_HOST: chrome-server
+      SERVER_HOST_NAME: classreq_test2
+    # depends_on:
+    #   - classreq_mysql_db
+    links:
+      - chrome-server
+  
+  chrome-server:
+    image: selenium/standalone-chrome:96.0
+    # SELENIUM_REMOTE_URL=http://localhost:4444/wd/hub bin/rails test:system
+    ports:
+      - "7900:7900"
+      - "4444:4444"

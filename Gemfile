@@ -88,7 +88,7 @@ gem 'rails-settings-cached', '~> 2.8'
 # For Bootstrap Like emails  (installs htmlbeautifier, css_parser, premailer, bootstrap-email)
 # Ref: https://bootstrapemail.com/docs/usage
 # Online Editor: https://app.bootstrapemail.com/editor?version=1
-gem 'bootstrap-email', '~> 1.1'
+gem 'bootstrap-email', '~> 1.4' #bump to 1.4 after init testing
 
 ## Action Text Attachements and active storage. Note: UBUNTU RUN: sudo apt-get install imagemagick on server
 gem 'image_processing', '~> 1.2'
@@ -106,10 +106,10 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.34'
-  gem 'selenium-webdriver'
+  gem 'capybara', '>= 3.39'
+  gem 'selenium-webdriver', '~> 4.15'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers', '~> 4.6.0'
+  # gem 'webdrivers', '~> 4.6.0'
 end
 
 group :development, :test do

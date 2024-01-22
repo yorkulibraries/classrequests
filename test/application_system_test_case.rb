@@ -27,11 +27,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
   #
   Capybara.register_driver(:chrome) do |app|
-    options = Selenium::WebDriver::Chrome::Options.new(args: %w[window-size=1400,1000])
+    options = Selenium::WebDriver::Chrome::Options.new(args: %w[window-size=1400,1000 disable-gpu no-sandbox disable-dev-shm-usage])
     Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: options)
   end
 
-    Capybara.save_path = "tmp/"
+    Capybara.save_path = "test-screenshots"
 
   if ENV['WITHHEAD']
     driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
@@ -39,7 +39,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     #   option.add_argument("--window-size=1920,1080")
     #   # screen_size: [1400, 1400], disable-gpu no-sandbox disable-dev-shm-usage
     # end
+  elsif ENV['SELENIUM_REMOTE_HOST'] 
+    puts "Using Remote / Docker"
+    driven_by :selenium, using: :chrome, screen_size: [1400, 1400], options: {
+      browser: :remote,
+      url: "http://#{ENV.fetch("SELENIUM_REMOTE_HOST")}:4444"
+    }
   else
+    puts "Using Headless"
     driven_by :selenium, using: :headless_chrome do |option|
       option.add_argument('--no-sandbox')
       option.add_argument('--headless')

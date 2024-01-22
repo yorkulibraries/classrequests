@@ -45,6 +45,11 @@ import 'chosen-js/chosen.css'
 import '../stylesheets/chosen-bootstrap-libstar';
 *************** */
 
+import 'packs/custom/trix-editor-overrides'
+require('trix')
+require('@rails/actiontext')
+
+
 $(document).on('turbolinks:load', () => {
   $('.request-chosen').chosen({
     no_results_text: 'No Result Found',
@@ -161,6 +166,3 @@ document.addEventListener('turbolinks:load', () => {
 // });
 
 // $(function(){})
-import 'packs/custom/trix-editor-overrides'
-require('trix')
-require('@rails/actiontext')
