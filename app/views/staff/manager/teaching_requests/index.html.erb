@@ -63,6 +63,8 @@
       <div class='card-header'>
         <div class='row'>
           <div class='col fw-bold'><%= t(:teaching_request_id) %>: <%= request.id %></div>
+          <div class='col text-muted'><%= t(:submitted) %>: <%= request.created_at.strftime('%b %d, %Y - %I:%M %p') %> </div>
+          <div class='col text-muted'><%= t(:last_update) %>: <%= request.updated_at.strftime('%b %d, %Y - %I:%M %p') %> </div>
           <div class='col text-end'><span class="badge badge-pill badge-<%= request.status.text.parameterize %>"><%= request.status.text %></span></div>
         </div>
       </div>
@@ -93,6 +95,11 @@
             <p class='text-muted small mb-0'>
               <%= t(:number_of_students) %>:
               <span class='fw-bold text-dark'><%= request.number_of_students %></span>
+            </p>
+
+            <p class='text-muted small mb-0'>
+              <%= t(:campus_location) %>:
+              <span class='fw-bold text-dark'><%= request.campus_location.name rescue nil %></span>
             </p>
 
             <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= request.request_note.to_plain_text %>"><%= t(:note) %>: <span class='fw-bold text-dark'><%= truncate(strip_tags(request.request_note.to_plain_text), length: 25) %></span></p>

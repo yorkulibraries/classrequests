@@ -38,6 +38,9 @@
       <h4 class='card-title text-primary'><%= t(:course_information) %></h4>
       <hr class='w-50 ml-0' />
       <div class='row mt-3'>
+        <%= f.association :campus_location, collection: CampusLocation.all, include_blank: true, selected: f.object.campus_location_id || CampusLocation.find_by(name: 'Keele').try(:id), input_html: {class: 'form-select request-chosen'} %>
+      </div>
+      <div class='row mt-3'>
         <%= f.input :academic_year, collection: @academic_years,
                     prompt: t(:academic_year, scope: [:simple_form, :prompt, :request]),
                     label_method: :academic_year, value_method: :academic_year,

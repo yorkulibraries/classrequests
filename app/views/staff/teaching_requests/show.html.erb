@@ -59,6 +59,11 @@
               <span class='fw-bold text-dark'><%= request.number_of_students %></span>
             </p>
 
+            <p class='text-muted small mb-0'>
+              <%= t(:campus_location) %>:
+              <span class='fw-bold text-dark'><%= request.campus_location.name rescue nil %></span>
+            </p>
+
             <!-- <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= truncate(strip_tags(request.request_note.to_plain_text), length: 25) %>"><%= t(:request_note) %>: <span class='fw-bold text-dark'><%= request.request_note %></span></p> -->
           </div>
         <!-- </div>

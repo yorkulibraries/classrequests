@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  teaching_request: one
-  type_of_instruction: one
-
-two:
-  teaching_request: two
-  type_of_instruction: two

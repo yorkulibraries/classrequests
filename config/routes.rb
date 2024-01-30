@@ -108,7 +108,7 @@ Rails.application.routes.draw do
         resources :departments
         resources :staff_profiles
         resources :type_of_instructions
-
+        resources :campus_locations
         resources :users, except: [:new, :create]
         resource :settings
       end

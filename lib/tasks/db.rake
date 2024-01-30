@@ -7,6 +7,7 @@ namespace :db do
   task load_defaults: :environment do
     Rake::Task["db:load_default_departments"].invoke
     Rake::Task["db:load_default_type_of_instructions"].invoke
+    Rake::Task["db:load_default_campus_locations"].invoke
   end
 
 
@@ -135,4 +136,24 @@ namespace :db do
     end
   end
 
+  ## DEFAULT CAMPUS LOCATIONS
+  task load_default_campus_locations: :environment do 
+    # Seed data for CampusLocations
+    CampusLocation.create(name: 'Keele', address: "198 York Blvd, North York, ON M3J 2S5")
+    CampusLocation.create(name: 'Glendon', address: "2275 Bayview Ave, North York, ON M4N 3M6" )
+    CampusLocation.create(name: 'Markham', address: "1 University Blvd., Unionville, ON L6G 0A1")
+    CampusLocation.create(name: 'Other', address: "")
+  end
+
+  task set_update_existing_teaching_requests_to_keele: :environment do
+    # Find or create the 'Keele' CampusLocation
+    keele_campus_location = CampusLocation.find_or_create_by(name: 'Keele')
+
+    # Update existing TeachingRequests to be associated with 'Keele' campus
+    TeachingRequest.all.each do |teaching_request|
+      teaching_request.update(campus_location: keele_campus_location)
+    end
+  end
+
+  
 end

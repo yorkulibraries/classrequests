@@ -49,6 +49,7 @@ en:
         last_name: "Last Name"
         email: "Email"
         phone: "Contact Phone"
+        campus_location: "Campus Location"
         academic_year: "Academic Year"
         faculty_abbrev: "Faculty"
         subject_abbrev: "Department / Subject"

@@ -129,8 +129,7 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     # end
 
     # Simulate selecting a date from the Flatpickr calendar
-    select_flatpickr_date('#teaching_request_preferred_date', '26')
-    
+    select_flatpickr_date('#teaching_request_preferred_date', '28')
     ## Click on the input field created by flatpickr to pop calendar
     find('#teaching_request_preferred_time', visible: false).sibling('input').click
     assert_selector('.flatpickr-calendar .flatpickr-time .flatpickr-hour')
@@ -140,8 +139,7 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     page.send_keys(:enter)
     
     # Alternative date
-    select_flatpickr_date('#teaching_request_alternate_date', '28')
-
+    select_flatpickr_date('#teaching_request_alternate_date', '30')
     find('#teaching_request_alternate_time', visible: false).sibling('input').click
     assert_selector('.flatpickr-calendar .flatpickr-time .flatpickr-hour')
     find('.flatpickr-calendar .flatpickr-time .flatpickr-hour').set('13')
@@ -168,7 +166,8 @@ class TeachingRequestsTest < ApplicationSystemTestCase
 
     click_on "Submit My Request"
 
-    click_on "Confirm"
+    sleep(2) # 2 seconds
+    click_on 'Confirm'
 
     # Quit current window
     Capybara.current_session.quit

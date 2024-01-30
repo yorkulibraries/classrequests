@@ -5,6 +5,7 @@ class TeachingRequest < ApplicationRecord
 
   ## RELATIONSHIPS
   belongs_to :user, optional: true
+  belongs_to :campus_location, optional: true
   belongs_to :lead_instructor, foreign_key: 'lead_instructor_id', class_name: 'User', optional: true
   belongs_to :second_instructor, foreign_key: 'second_instructor_id', class_name: 'User', optional: true
   belongs_to :third_instructor, foreign_key: 'third_instructor_id', class_name: 'User', optional: true

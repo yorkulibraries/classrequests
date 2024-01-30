@@ -93,6 +93,9 @@ gem 'bootstrap-email', '~> 1.4' #bump to 1.4 after init testing
 ## Action Text Attachements and active storage. Note: UBUNTU RUN: sudo apt-get install imagemagick on server
 gem 'image_processing', '~> 1.2'
 
+## Searching and Sorting
+gem 'ransack', '~> 4.1'
+
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'

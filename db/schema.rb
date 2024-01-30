@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_20_201103) do
-
+ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -27,7 +26,7 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -40,7 +39,7 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -51,12 +50,12 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
   end
 
   create_table "announcements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.string "announcement_type"
     t.string "name"
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "assignment_responses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -64,18 +63,25 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.text "comment_or_reason"
     t.bigint "teaching_request_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["teaching_request_id"], name: "index_assignment_responses_on_teaching_request_id"
     t.index ["user_id"], name: "index_assignment_responses_on_user_id"
+  end
+
+  create_table "campus_locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cancel_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "teaching_request_id", null: false
     t.text "reason"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["teaching_request_id"], name: "index_cancel_requests_on_teaching_request_id"
     t.index ["user_id"], name: "index_cancel_requests_on_user_id"
   end
@@ -83,8 +89,8 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
   create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "branch_division"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "institute_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -101,19 +107,19 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.string "title"
     t.string "title2"
     t.string "section"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "recipient_id"
     t.bigint "actor_id"
-    t.datetime "read_at"
+    t.datetime "read_at", precision: nil
     t.string "action"
     t.bigint "notifiable_id"
     t.string "notifiable_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -132,8 +138,8 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.integer "course_number"
     t.string "submitted_by"
     t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "user_id", null: false
     t.index ["status"], name: "index_requests_on_status"
     t.index ["user_id"], name: "index_requests_on_user_id"
@@ -142,8 +148,8 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
   create_table "requests_sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "request_id"
     t.bigint "section_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["request_id"], name: "index_requests_sections_on_request_id"
     t.index ["section_id"], name: "index_requests_sections_on_section_id"
   end
@@ -160,8 +166,8 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.text "note"
     t.integer "lead_instructor_id"
     t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "second_instructor_id"
     t.integer "third_instructor_id"
     t.index ["status"], name: "index_sections_on_status"
@@ -170,8 +176,8 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
   create_table "settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
@@ -182,8 +188,8 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.bigint "department_id", null: false
     t.bigint "user_id", null: false
     t.boolean "is_approved", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_staff_profiles_on_department_id"
     t.index ["user_id"], name: "index_staff_profiles_on_user_id"
   end
@@ -220,8 +226,10 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.text "request_note"
     t.text "instructor_notes"
     t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "campus_location_id"
+    t.index ["campus_location_id"], name: "index_teaching_requests_on_campus_location_id"
     t.index ["status"], name: "index_teaching_requests_on_status"
     t.index ["user_id"], name: "index_teaching_requests_on_user_id"
   end
@@ -229,29 +237,29 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
   create_table "teaching_type_of_instructions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "teaching_request_id", null: false
     t.bigint "type_of_instruction_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["teaching_request_id"], name: "index_teaching_type_of_instructions_on_teaching_request_id"
     t.index ["type_of_instruction_id"], name: "index_teaching_type_of_instructions_on_type_of_instruction_id"
   end
 
   create_table "type_of_instructions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "user_uid"
@@ -265,7 +273,7 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
     t.string "iam_identification", default: "YorkU Instructor"
     t.boolean "is_active", default: true
     t.boolean "is_verified", default: false
-    t.datetime "announcements_last_read_at"
+    t.datetime "announcements_last_read_at", precision: nil
     t.text "note"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -284,6 +292,7 @@ ActiveRecord::Schema.define(version: 2023_11_20_201103) do
   add_foreign_key "requests_sections", "sections"
   add_foreign_key "staff_profiles", "departments"
   add_foreign_key "staff_profiles", "users"
+  add_foreign_key "teaching_requests", "campus_locations"
   add_foreign_key "teaching_type_of_instructions", "teaching_requests"
   add_foreign_key "teaching_type_of_instructions", "type_of_instructions"
 end
