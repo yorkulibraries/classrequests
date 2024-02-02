@@ -43,6 +43,20 @@ class Staff::Manager::CancelRequestsController < Staff::Manager::BaseController
     end
   end
 
+  def destroy
+    respond_to do |format|
+      if @cancel_request.destroy
+        format.html { redirect_to staff_manager_cancel_requests_path, notice: 'Cancel Request was successfully deleted.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to staff_manager_cancel_requests_path, notice: 'Cancel Request could not be deleted.' }
+        format.json { render json: @cancel_request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
   private
 
     # def cancel_request_params
@@ -60,6 +74,7 @@ class Staff::Manager::CancelRequestsController < Staff::Manager::BaseController
     # Only allow a list of trusted parameters through.
     def cancel_request_params
       params.require(:cancel_request).permit(:reason, :teaching_request_id, :user_id, teaching_request_attributes: [:id, :status] )
+      # params.require(:cancel_request).permit(:reason )
     end
 
 end

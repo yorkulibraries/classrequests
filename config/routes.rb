@@ -97,6 +97,8 @@ Rails.application.routes.draw do
           resources :teachings_by_date_ranges, only: [:index, :new, :create]
         end
 
+        resources :cancel_requests
+
       end
 
       ######################

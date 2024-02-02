@@ -66,13 +66,15 @@ en:
       teaching_request:
         email: "Email of the person filling this form out"
         phone: "416-736-2100 or x12345"
-        academic_year: "1. Select academic year"
-        faculty_abbrev: "2. Select A Faculty"
-        subject_abbrev: "3. Select A Dept/Subject"
+        campus_location: "1. Select a Campus"
+        academic_year: "2. Select academic year"
+        faculty_abbrev: "3. Select A Faculty"
+        subject_abbrev: "4. Select A Dept/Subject"
         course_number: "e.g. 4501 or 0000 if not a course"
         course_title: "e.g. Introduction to Economics"
     prompt:
       teaching_request:
+        campus_location: "Select a Campus"
         academic_year: "Select Academic Year"
         faculty_abbrev: "Select A Faculty"
         subject_abbrev: "Select A Department/Subject"

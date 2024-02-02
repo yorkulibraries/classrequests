@@ -13,6 +13,11 @@
         <i class='fas fa-list text-primary'></i> <%= t(:requests_dashboard) %>
       <% end %>
     </li>
+    <li>
+      <%= link_to staff_manager_cancel_requests_path(), class: 'dropdown-item' do %>
+        <i class='fas fa-list text-primary'></i> <%= t(:cancelled_requests) %>
+      <% end %>
+    </li>
     <div class='dropdown-divider'></div>
     <li><%= link_to staff_manager_reports_overview_path(), class: 'dropdown-item' do %>
       <i class='fas fa-chart-bar text-primary'></i> <%= t(:reports_dashboard) %> <span class='text-muted text-sm'></span>
