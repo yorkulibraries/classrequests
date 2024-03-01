@@ -10,7 +10,7 @@ class Public::TeachingCalendarsController < ApplicationController
 
       # @teachings = Section.where(preferred_date: @start_date..@end_date, status: Section.statuses[Section::IN_PROCESS]).order(:preferred_date, :preferred_time, :section_name_or_about)
 
-      @teachings = TeachingRequest.where(preferred_date: @start_date..@end_date, status: [:in_process, :assigned]).order(:preferred_date, :preferred_time, :section_name_or_about)
+      @teachings = TeachingRequest.where(preferred_date: @start_date..@end_date, status: [:in_process, :assigned, :done]).order(:preferred_date, :preferred_time, :section_name_or_about)
 
       # @teachings = TeachingRequest.where(preferred_date: @start_date..@end_date, status: :in_process).order(:preferred_date, :preferred_time, :section_name_or_about)
 
@@ -18,13 +18,13 @@ class Public::TeachingCalendarsController < ApplicationController
 
     else
       @today = Date.today
-      @start_date = @today.at_beginning_of_month
-      @end_date = @start_date.next_month
+      @start_date = @today.beginning_of_year
+      @end_date = @start_date.end_of_year
       # @teachings = Section.all
       # @teachings = Section.where(preferred_date: @start_date..@end_date).order(:preferred_date, :preferred_time, :section_name_or_about)
       # @teachings = Section.where(preferred_date: @start_date..@end_date, status: Section.statuses[Section::IN_PROCESS]).order(:preferred_date, :preferred_time, :section_name_or_about)
 
-      @teachings = TeachingRequest.where(preferred_date: @start_date..@end_date, status: [:in_process, :assigned]).order(:preferred_date, :preferred_time, :section_name_or_about)
+      @teachings = TeachingRequest.where(preferred_date: @start_date..@end_date, status: [:in_process, :assigned, :done]).order(:preferred_date, :preferred_time, :section_name_or_about)
     end
   end
 

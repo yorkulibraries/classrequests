@@ -185,6 +185,7 @@ $theme-colors: map-merge($theme-colors, $yorku-colors);
   table .today { background-color: lighten($primary, 30%); }
   .calendar-event.in_process { background-color: lighten($warning, 40%); }
   .calendar-event.assigned { background-color: lighten($success, 50%); }
+  .calendar-event.done { background-color: lighten($blue, 50%); }
   .list-group-item {
     padding: 0.5rem 0.75rem;
   }

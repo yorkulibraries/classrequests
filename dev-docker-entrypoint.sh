@@ -12,5 +12,5 @@ bundle check || bundle install
 rm -f $WEB_APP_PATH/tmp/pids/server.pid
 
 # run anything by prepending bundle exec to the passed command
-
+bundle exec rails assets:precompile
 bundle exec ${@}

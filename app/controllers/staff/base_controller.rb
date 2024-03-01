@@ -7,7 +7,7 @@ class Staff::BaseController < ApplicationController
   def check_access
 
     logger.debug "STAFF BASE = ACCESS: #{@access}"
-    if @access == 'staff' || @access == 'manager' || @access == 'admin'
+    if @access == 'staff' || @access == 'manager' || @access == 'admin' || @access == 'director'
       # do nothing
       logger.debug "I am #{@access}"
     elsif @access == 'staff_under_review'

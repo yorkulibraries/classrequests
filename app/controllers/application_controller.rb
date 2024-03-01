@@ -54,8 +54,14 @@ class ApplicationController < ActionController::Base
 
     elsif current_user != nil && current_user.staff_profile &&
       current_user.staff_profile.is_approved == true &&
+      (current_user.staff_profile.role.director?)
+        logger.debug 'I have a director profile, I am approved but I am not an admin'
+        @access = 'director'
+
+    elsif current_user != nil && current_user.staff_profile &&
+      current_user.staff_profile.is_approved == true &&
       (current_user.staff_profile.role.staff_instructor?)
-        logger.debug 'I have a profile, I am approved but I am not an admin'
+        logger.debug 'I have a staff profile, I am approved but I am not an admin'
         @access = 'staff'
 
     elsif current_user && !current_user.staff_profile

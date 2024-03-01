@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-  
-  
   # namespace :user do
   #   get 'cancel_requests/new'
   #   get 'cancel_requests/create'
@@ -62,11 +59,13 @@ Rails.application.routes.draw do
     namespace :staff do
       get 'dashboard', to: 'dashboard#index'
       get 'reports/overview', to: 'reports#index'
+      get 'departmental_reports/overview', to: 'departmental_reports#index'
 
       resources :staff_profiles, except: [:index, :destroy]
 
       namespace :reports do
         resources :teachings_by_date_ranges, only: [:index, :new, :create]
+        resources :teachings_by_dept_date_ranges, only: [:index, :new, :create]
       end
 
       ## staff/teaching_requests
@@ -80,6 +79,9 @@ Rails.application.routes.draw do
         resources :assignment_responses
       end
 
+      ######################
+      ###### MANAGER #######
+      ######################
       namespace :manager do
         get 'dashboard', to: 'dashboard#index'
         get 'reports/overview', to: 'reports#index'
@@ -95,6 +97,7 @@ Rails.application.routes.draw do
 
         namespace :reports do
           resources :teachings_by_date_ranges, only: [:index, :new, :create]
+          resources :teachings_by_dept_date_ranges, only: [:index, :new, :create]
         end
 
         resources :cancel_requests

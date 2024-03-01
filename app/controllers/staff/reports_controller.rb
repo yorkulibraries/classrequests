@@ -16,6 +16,8 @@ class Staff::ReportsController < Staff::BaseController
 
       @teachings_this_year = TeachingRequest.where(preferred_date: "#{start_of_the_year}".."#{end_of_the_year}",).where(lead_instructor: current_user, status: [:assigned, :done]).or(TeachingRequest.where(second_instructor: current_user, status: [:assigned, :done])).or(TeachingRequest.where(third_instructor: current_user, status: [:assigned, :done])).count
 
+      @teachings_lifetime = TeachingRequest.where(lead_instructor: current_user, status: [:assigned, :done]).or(TeachingRequest.where(second_instructor: current_user, status: [:assigned, :done])).or(TeachingRequest.where(third_instructor: current_user, status: [:assigned, :done])).count
+
     end
   end
 end

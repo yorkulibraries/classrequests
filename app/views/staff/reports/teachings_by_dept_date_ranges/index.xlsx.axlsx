@@ -1,0 +1,26 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Teachings By Dept Date Range") do |sheet|
+  # wrap = wb.sheet.styles.add_style alignment: {wrap_text: true}
+	# Create the header row
+  sheet.add_row ["TR-ID", "Section", "Date Requested", "Preferred Date","Start Time","Duration","Course Code","YUL Lead","YUL Dept","Type of Instruction","YorkU Instructor","Number of Students","Status","Request Note"]
+  # Create entries for each item
+  @results.inspect
+  @results.each do |res|
+    
+    if res.lead_instructor_id
+      lead = "#{res.lead_instructor.name} (#{res.lead_instructor.staff_profile.department.name})"
+    end
+    if res.second_instructor_id
+      second = "#{res.second_instructor.name} ( #{res.second_instructor.staff_profile.department.name} )"
+    end
+    if res.third_instructor_id
+      third = "#{res.third_instructor.name} (#{res.third_instructor.staff_profile.department.name})"
+    end
+
+    tofi = res.type_of_instructions.map(&:name).join(' | ')
+
+		sheet.add_row [res.id, res.section_name_or_about, res.created_at.strftime("%b %d, %Y"), res.preferred_date.to_time.strftime("%b %d, %Y"), "#{res.preferred_time.to_time.strftime("%I:%M %p")}","#{res.duration.text}","#{res.academic_year} - #{res.faculty_abbrev}/ #{res.subject_abbrev} #{res.course_number}", "L: #{lead rescue nil } | \r\n2: #{second rescue nil} | 3: \r\n#{third rescue nil}", "#{tofi rescue nil}", "#{res.first_name} #{res.last_name}", res.number_of_students, res.status, res.request_note ]
+    
+  end
+end
