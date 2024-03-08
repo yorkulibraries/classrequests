@@ -3,13 +3,11 @@ require 'date'
 
 namespace :db do
 
-
   task load_defaults: :environment do
     Rake::Task["db:load_default_departments"].invoke
     Rake::Task["db:load_default_type_of_instructions"].invoke
     Rake::Task["db:load_default_campus_locations"].invoke
   end
-
 
   task load_default_departments: :environment do
     puts "Creating Default Departments"
@@ -63,36 +61,6 @@ namespace :db do
     puts "Created: #{difference} Type of Instructions"
   end
 
-  # t.string "email", default: "", null: false
-  # t.string "encrypted_password", default: "", null: false
-  # t.string "reset_password_token"
-  # t.datetime "reset_password_sent_at"
-  # t.datetime "remember_created_at"
-  # t.datetime "created_at", precision: 6, null: false
-  # t.datetime "updated_at", precision: 6, null: false
-  # t.integer "sign_in_count", default: 0, null: false
-  # t.datetime "current_sign_in_at"
-  # t.datetime "last_sign_in_at"
-  # t.string "current_sign_in_ip"
-  # t.string "last_sign_in_ip"
-  # t.string "user_uid"
-  # t.string "username"
-  # t.string "first_name"
-  # t.string "last_name"
-  # t.string "contact_phone"
-  # t.string "alternate_email"
-  # t.string "user_source", default: "db"
-  # t.string "user_group", default: ""
-  # t.string "iam_identification", default: "YorkU Instructor"
-  # t.boolean "is_active", default: true
-  # t.boolean "is_verified", default: false
-  # t.datetime "announcements_last_read_at"
-  # t.text "note"
-  # t.index ["email"], name: "index_users_on_email", unique: true
-  # t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  # t.index ["user_uid"], name: "index_users_on_user_uid"
-  # t.index ["username"], name: "index_users_on_username"
-
   task create_production_users: :environment do
 
     user_record = User.where(email: 'admin@mailinator.com').first
@@ -101,16 +69,19 @@ namespace :db do
       user.first_name = 'Admin'
       user.last_name = 'Doe'
       user.email = 'admin@mailinator.com'
-      user.password = 'ADMIN!@#$'
-      user.password_confirmation = 'ADMIN!@#$'
+      user.password = 'ADMIN12345'
+      user.password_confirmation = 'ADMIN12345'
       user.user_source = 'db'
       user.user_group = 'STAFF'
       user.is_verified = true
       user.save!
 
       puts "Created user #{user.first_name} #{user.last_name}"
+      puts "Username: admin@mailinator.com"
+      puts "Password: ADMIN12345"
+
     else
-      puts "User #{user_record.name} already exists, skipping"
+      puts "#{user_record.name} already exists, skipping"
     end
   end
 
@@ -126,7 +97,7 @@ namespace :db do
         staff_role = StaffProfile.new
         staff_role.user = user_record
         staff_role.department = Department.first #note-to-self,create departments first
-        staff_role.role = 4
+        staff_role.role = 9
         staff_role.is_approved = true
         staff_role.save!
         puts "Added staff profile for #{user_record.name} with role #{staff_role.role}"

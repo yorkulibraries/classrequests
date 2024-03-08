@@ -9,6 +9,7 @@ volumes:
   gem_cache: 
   # shared_data:
   mysql_data:
+  node-modules: # Need this for webpacker/yarn to keep in container
 
 services:
 
@@ -39,6 +40,7 @@ services:
       - .:/var/app
       # - shared_data:/var/shared
       - gem_cache:/usr/local/bundle/gems
+      - node-modules:/var/app/node_modules
     # networks:
     #   - development
     ports:

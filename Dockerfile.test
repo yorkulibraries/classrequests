@@ -9,13 +9,11 @@ ENV TMP_PATH /tmp/
 ENV RAILS_LOG_TO_STDOUT true 
 ENV RAILS_PORT 3000
 
-COPY ./dev-docker-entrypoint.sh /usr/local/dev-entrypoint.sh 
-RUN chmod +x /usr/local/dev-entrypoint.sh 
+# COPY ./dev-docker-entrypoint.sh /usr/local/dev-entrypoint.sh 
+# RUN chmod +x /usr/local/dev-entrypoint.sh 
 
-COPY ./test-docker-entrypoint.sh /usr/local/test-entrypoint.sh 
-RUN chmod +x /usr/local/test-entrypoint.sh 
-
-
+# COPY ./test-docker-entrypoint.sh /usr/local/test-entrypoint.sh 
+# RUN chmod +x /usr/local/test-entrypoint.sh 
 
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 build-essential curl git default-libmysqlclient-dev libssl-dev sqlite3 libsqlite3-dev libvips vim \
