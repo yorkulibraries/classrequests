@@ -23,3 +23,4 @@ rails g scaffold Staff::AssignmentResponse response:string comment_or_reason:tex
 rails g model CancelRequest user:references request:references reason:text  
 
 rails g controller User::CancelRequests new create
+
