@@ -33,7 +33,10 @@ class TeachingRequest < ApplicationRecord
   ## VALIDATIONS
   validates :patron_type, :first_name, :last_name, :email, :academic_year, :faculty_abbrev, :subject_abbrev, :course_number, :status, presence: true
   validates :number_of_students, :preferred_date, :preferred_time, :duration, :location_preference, presence: true
-  validates :request_note, presence: true #, if: lambda { self.status.new_request? }
+
+  # Validate rich text content
+  validate :request_note_content
+  # validates :request_note, presence: true #, if: lambda { self.status.new_request? }
 
   # validates :lead_assignment_response, presence: true, if: lambda {!self.lead_instructor_id.empty? && self.status == self.status.in_process.value}
 
@@ -54,5 +57,14 @@ class TeachingRequest < ApplicationRecord
 
   def full_name
     return "#{self.id}: #{self.last_name}, #{self.first_name} #{self.email} - #{self.faculty_abbrev}/#{self.subject_abbrev} #{self.course_number} [#{self.academic_year}] - #{self.course_title.truncate(100) if self.course_title} "
+  end
+
+  private
+
+  # Custom validation method to check for rich text content
+  def request_note_content
+    if request_note.blank? || request_note.body.blank?
+      errors.add(:request_note, "can't be empty")
+    end
   end
 end

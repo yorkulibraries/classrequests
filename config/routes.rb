@@ -85,6 +85,7 @@ Rails.application.routes.draw do
       namespace :manager do
         get 'dashboard', to: 'dashboard#index'
         get 'reports/overview', to: 'reports#index'
+        get 'subject_reports/overview', to: 'subject_reports#index'
 
         resources :teaching_requests #, only: [:index, :edit, :update]
         resources :requests do
@@ -98,6 +99,7 @@ Rails.application.routes.draw do
         namespace :reports do
           resources :teachings_by_date_ranges, only: [:index, :new, :create]
           resources :teachings_by_dept_date_ranges, only: [:index, :new, :create]
+          resources :teachings_by_subjects, only: [:index, :new, :create]
         end
 
         resources :cancel_requests

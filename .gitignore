@@ -69,3 +69,5 @@ Dockerfile.3*
 
 # TESTING DATA
 test-screenshots
+production-storage/
+storage.bkup.tar

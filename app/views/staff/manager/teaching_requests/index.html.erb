@@ -25,6 +25,10 @@
       class: "btn btn-sm #{is_active(TeachingRequest.status.assigned.text, 'btn')}" do %>
         <%= TeachingRequest.status.assigned.text %> <span class="badge badge-<%= TeachingRequest.status.assigned.text.parameterize %>"><%= TeachingRequest.where(status: TeachingRequest.status.assigned.value).count %> </span>
     <% end %>
+    <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.done.text),
+      class: "btn btn-sm #{is_active(TeachingRequest.status.done.text, 'btn')}" do %>
+        <%= TeachingRequest.status.done.text %> <span class="badge badge-<%= TeachingRequest.status.done.text.parameterize %>"><%= TeachingRequest.where(status: TeachingRequest.status.done.value).count %> </span>
+    <% end %>
   </div>
   <div class='btn-group me-5 mb-2' role='group' aria-label='Third group'>
     <%= link_to staff_manager_teaching_requests_path(sort: TeachingRequest.status.unfulfilled.text),
@@ -44,6 +48,9 @@
 <!-- END OF REQUESTS TOOLBAR -->
 
 <!-- PAGINATION -->
+<% if params[:sort] == 'All'%>
+<div class='row'><small class='text-muted text-center'>All Requests <strong>excludes</strong> Deleted and Not Submitted</small></div>
+<% end %>
 <%= paginate @teaching_requests, theme: 'bootstrap-5',
                  pagination_class: 'pagination-sm flex-wrap justify-content-center mt-3' %>
 

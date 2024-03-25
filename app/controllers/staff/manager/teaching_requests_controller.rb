@@ -9,6 +9,8 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
       @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.in_process.value).order(created_at: :desc).page params[:page]
     elsif params[:sort] && params[:sort] == TeachingRequest.status.assigned.text
       @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.assigned.value).order(created_at: :desc).page params[:page]
+    elsif params[:sort] && params[:sort] == TeachingRequest.status.done.text
+      @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.done.value).order(created_at: :desc).page params[:page]
     elsif params[:sort] && params[:sort] == TeachingRequest.status.unfulfilled.text
       @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.unfulfilled.value).order(created_at: :desc).page params[:page]
     elsif params[:sort] && params[:sort] == TeachingRequest.status.deleted.text
@@ -16,9 +18,9 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
     elsif params[:sort] && params[:sort] == TeachingRequest.status.not_submitted.text
       @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.not_submitted.value).order(created_at: :desc).page params[:page]
     elsif params[:sort] && params[:sort] == t(:all)
-      @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.new_request.value).or(TeachingRequest.where(status: TeachingRequest.status.in_process.value )).or(TeachingRequest.where(status: TeachingRequest.status.assigned.value)).order(created_at: :desc).page params[:page]
+      @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.new_request.value).or(TeachingRequest.where(status: TeachingRequest.status.in_process.value )).or(TeachingRequest.where(status: TeachingRequest.status.assigned.value)).or(TeachingRequest.where(status: TeachingRequest.status.done.value)).order(created_at: :desc).page params[:page]
     else
-      @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.new_request.value).or(TeachingRequest.where(status: TeachingRequest.status.in_process.value)).order(created_at: :desc).page params[:page]
+      @teaching_requests = TeachingRequest.all.order(created_at: :desc).page params[:page]
     end
 
     # @teaching_requests = TeachingRequest.all

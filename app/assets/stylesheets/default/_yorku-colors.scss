@@ -170,7 +170,10 @@ $theme-colors: map-merge($theme-colors, $yorku-colors);
 // .badge-dark       { background-color: $dark; }
 
 
-.badge-archived {}
+.badge-archived {
+  background-color: $york-grey-dark;
+  color: $white;
+}
 
 .badge-deleted, .badge-cancelled {
   background-color: $danger;

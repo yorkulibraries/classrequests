@@ -28,6 +28,7 @@ end -->
         <th><%= t(:user_source) %></th>
         <th><%= t(:user_group) %></th>
         <th><%= t(:iam_identification) %></th>
+        <th><%= t(:department) %></th>
         <th><%= t(:is_active) %></th>
         <th><%= t(:is_verified) %></th>
         <th><%= t(:created_at) %></th>
@@ -45,6 +46,7 @@ end -->
           <td><%= user.user_source %></td>
           <td><%= user.user_group %></td>
           <td><%= user.iam_identification %></td>
+          <td><%= user.staff_profile.department.name rescue nil %></td>
           <td><%= user.is_active %></td>
           <td><%= user.is_verified %></td>
           <td><%= user.created_at.strftime('%Y-%m-%d at %I:%M%p') %></td>

@@ -31,7 +31,9 @@ class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseControlle
       @status = params[:status]
       @department = params[:department]
       @department_name = Department.where(id: params[:department]).pluck(:name).join(', ')
-      @department_staff_members = StaffProfile.includes(:user).where(department_id: params[:department])
+      # @department_staff_members = StaffProfile.includes(:user).where(department_id: params[:department])
+      @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] })
+
 
       @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: @department_staff_members, status: [:assigned, :done]).or(TeachingRequest.where(second_instructor: @department_staff_members, status: [:assigned, :done])).or(TeachingRequest.where(third_instructor: @department_staff_members, status: [:assigned, :done]))
 
@@ -42,7 +44,8 @@ class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseControlle
       @status = params[:status]
       @department = params[:department]
       @department_name = Department.where(id: @department).pluck(:name).join(', ')
-      @department_staff_members = StaffProfile.includes(:user).where(department_id: @department)
+      @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] })
+
 
       @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: @department_staff_members, status: @status).or(TeachingRequest.where(second_instructor: @department_staff_members, status: @status)).or(TeachingRequest.where(third_instructor: @department_staff_members, status: @status))
 
