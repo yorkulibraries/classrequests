@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# ruby '2.6.9'
-# ruby '3.0.3'
-# ruby '2.7.6'
-ruby '3.1.4'
+ruby File.read('.ruby-version').strip
 
 ###############
 #### CORE #####

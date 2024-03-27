@@ -8,14 +8,6 @@ Rails.application.configure do
   config.hosts << "classrequests.me.ca"
   # config.hosts << "classrequests-dev.library.yorku.ca"
 
-  # DEVISE ADDITION
-  config.action_mailer.delivery_method = :smtp # Setting.delivery_method.parameterize.underscore.to_sym #:sendmail
-  config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
-  # mailcatcher -f --http-ip 0.0.0.0"
-
-  # web_host = (Setting.web_host.blank?) ? Setting.web_host : "localhost:3000"
-
-  config.action_mailer.default_url_options = { host: 'localhost:3000'  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
