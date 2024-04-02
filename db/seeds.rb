@@ -72,6 +72,7 @@ if (Rails.env == 'development')
       user.user_source = 'db'
       user.user_group = 'STAFF'
       user.is_verified = true
+      user.user_uid = '666669420'
       user.save!
 
       puts "Created user #{user.first_name} #{user.last_name}"

@@ -16,8 +16,6 @@ There are 3 containers created: **web**, **db** and **mailcatcher**
 
 # Access the front end web app
 
-http://localhost:3009/
-
 By default, the application will listen on port 3004 and runs with RAILS_ENV=development.
 
 To access the application in Chrome browser, you will need to add the ModHeader extension to your Chrome browser.
@@ -26,6 +24,11 @@ Header: PYORK_USER
 Value: admin (or manager or whatever user you want to mimic)
 
 For convenience, you can import the ModHeader profile from the included ModHeader_admin.json. 
+
+Now you can login as if you have been authenticated by PY.
+
+http://localhost:3009/users/ppy_login
+
 
 # Access mailcatcher web app
 
