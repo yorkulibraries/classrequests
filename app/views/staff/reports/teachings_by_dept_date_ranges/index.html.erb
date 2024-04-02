@@ -24,10 +24,11 @@
     </div>
     <h5 class='text-primary'>Report Results</h5>
     <div class='table-responsive'>
-      <h3><%= @department_name if @department_name %></h3>
+      <h3><%= @department != '' ? "#{@department_name}" : t(:all_departments)%></h3>
       <table class='table table-striped table-sm table-hover'>
         <thead>
           <tr class='table-success'>
+            <th scope='col text-center'>No#</th>
             <th scope='col text-center'>ID</th>
             <th scope='col'><%= t(:section) %></th>
             <th scope='col'><%= t(:date_requested) %></th>
@@ -43,9 +44,10 @@
           </tr>
         </thead>
         <tbody>
-          <% @results.each do |res| %>
+          <% @results.each_with_index do |res, index| %>
           <!-- <tr><%= res.ai(html: true)%></tr> -->
           <tr>
+            <th scope='row text-center'><%= index + 1 %> </th>
             <th scope='row text-center'><%= res.id %> </th>
             <th scope='row text-justify'><%= res.section_name_or_about %></th>
             <td><%= res.created_at.strftime('%b %d, %Y') %></td>

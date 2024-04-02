@@ -32,10 +32,15 @@ class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseControlle
       @department = params[:department]
       @department_name = Department.where(id: params[:department]).pluck(:name).join(', ')
       # @department_staff_members = StaffProfile.includes(:user).where(department_id: params[:department])
-      @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] })
+      # @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] })
+      @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] }).pluck(:id)
 
 
-      @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: @department_staff_members, status: [:assigned, :done]).or(TeachingRequest.where(second_instructor: @department_staff_members, status: [:assigned, :done])).or(TeachingRequest.where(third_instructor: @department_staff_members, status: [:assigned, :done]))
+      # @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: @department_staff_members, status: [:assigned, :done]).or(TeachingRequest.where(second_instructor: @department_staff_members, status: [:assigned, :done])).or(TeachingRequest.where(third_instructor: @department_staff_members, status: [:assigned, :done]))
+
+      @results = TeachingRequest.where(status: [3,4])
+                                .where(preferred_date: @start_date..@end_date)
+                                .where('lead_instructor_id IN (?) OR second_instructor_id IN (?) OR third_instructor_id IN (?)', @department_staff_members, @department_staff_members, @department_staff_members)
 
     when params[:start].present? && params[:end].present? && params[:status].present? && params[:department].present?
       # Case 3: Department yes, Status yes
@@ -44,10 +49,15 @@ class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseControlle
       @status = params[:status]
       @department = params[:department]
       @department_name = Department.where(id: @department).pluck(:name).join(', ')
-      @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] })
+      # @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] })
+      @department_staff_members = User.joins(:staff_profile).where(staff_profiles: { department_id: params[:department] }).pluck(:id)
 
 
-      @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: @department_staff_members, status: @status).or(TeachingRequest.where(second_instructor: @department_staff_members, status: @status)).or(TeachingRequest.where(third_instructor: @department_staff_members, status: @status))
+      # @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: @department_staff_members, status: @status).or(TeachingRequest.where(second_instructor: @department_staff_members, status: @status)).or(TeachingRequest.where(third_instructor: @department_staff_members, status: @status))
+      
+      @results = TeachingRequest.where(status: 4)
+                                .where(preferred_date: @start_date..@end_date)
+                                .where('lead_instructor_id IN (?) OR second_instructor_id IN (?) OR third_instructor_id IN (?)', @department_staff_members, @department_staff_members, @department_staff_members)
 
     when params[:start].present? && params[:end].present? && params[:status].present? && params[:department].blank?
       # Case 4: Department no, Status yes
@@ -57,58 +67,14 @@ class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseControlle
       @department = params[:department]
 
       @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(status: @status) 
+      # SELECT `teaching_requests`.* FROM `teaching_requests` WHERE `teaching_requests`.`preferred_date` BETWEEN '2024-03-01' AND '2024-04-02' AND `teaching_requests`.`status` = 4
 
     else
       # Case 5 
       flash.now[:warning] = "No Results"
       @results = {}
     end
-
-  # case
-  # when params[:start].blank? && params[:end].blank? && params[:status].blank? && params[:department].blank?
-  #   logger.debug 'Params present but no values -- first if'
-  #   @results = TeachingRequest.where.not(status: TeachingRequest.status.deleted) #('status != ?', TeachingRequest.status.deleted)
-
-  # when params[:start].present? && params[:end].blank? && params[:status].blank? && params[:department].blank?
-  #   # Case 1: Start is present
-  #   @start_date = params[:start]
-  #   logger.debug 'only start date present - elsif #1'
-  #   @results = TeachingRequest.where("preferred_date > ?", @start_date).where.not(status: TeachingRequest.status.deleted) #('status != ?', TeachingRequest.status.deleted)
-
-  # when params[:start].blank? && params[:end].present? && params[:status].blank? && params[:department].blank?
-  #   # Case 2: End is present
-  #   @end_date = params[:start]
-  #   logger.debug 'only end date present - elsif #1'
-  #   @results = TeachingRequest.where("preferred_date < ?", @end_date).where.not(status: TeachingRequest.status.deleted) #('status != ?', TeachingRequest.
-
-  # when params[:start].blank? && params[:end].blank? && params[:status].present? && params[:department].blank?
-  #   # Case 3: Status is present
-  #   @status = params[:status]
-  #   logger.debug 'only status present - elsif #1'
-  #   @results = TeachingRequest.where(status: @status) 
-
-  # when params[:start].blank? && params[:end].blank? && params[:status].blank? && params[:department].present?
-  #   # Case 4: Department is present
-  #   @department = Department.where(id: params[:department]).pluck(:name).join(', ')
-
-  #   @department_staff_members = StaffProfile.includes(:user).where(department_id: params[:department])
-
-  #   @results = TeachingRequest.where(lead_instructor: @department_staff_members, status: [:assigned, :done]).or(TeachingRequest.where(second_instructor: @department_staff_members, status: [:assigned, :done])).or(TeachingRequest.where(third_instructor: @department_staff_members, status: [:assigned, :done])).where.not(status: TeachingRequest.status.deleted)
-
-  # when params[:start].present? && params[:end].present? && params[:status].present? && params[:department].present?
-  #   # Case 5: All parameters are present
-  #   @department = Department.where(params[:department]).pluck(:name)
-  #   @department_staff_members = StaffProfile.includes(:user).where(department_id: params[:department])
-  #   @start_date = params[:start]
-  #   @end_date = params[:end]
     
-  #   @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: @department_staff_members, status: params[:status]).or(TeachingRequest.where(second_instructor: @department_staff_members, status: params[:status])).or(TeachingRequest.where(third_instructor: @department_staff_members, status: params[:status])).where.not(status: params[:status])
-  # else
-  #   # Error: Invalid combination of parameters
-  #   logger.debug 'I am in else '
-  #   logger.debug 'No Results Found'
-  #   @results = {}
-  # end
     respond_to do |format|
       format.html
       # format.csv { send_data @results.to_csv }

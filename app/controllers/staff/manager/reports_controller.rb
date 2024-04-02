@@ -8,7 +8,7 @@ class Staff::Manager::ReportsController < Staff::Manager::BaseController
       start_of_the_year = Date.new(year,1,1)
       end_of_the_year = Date.new(year,12,31)
 
-      @status_list_enum = TeachingRequest.status.options(except: [:not_submitted, :deleted])
+      @status_list_enum = TeachingRequest.status.options(except: [:not_submitted])
 
       @teachings_last_month = TeachingRequest.where(preferred_date: "#{start_of_the_previous_month}".."#{start_of_the_current_month}", status: [:assigned, :done]).count
 

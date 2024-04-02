@@ -3,7 +3,7 @@
 <div class='row'>
   <div class='col-md-12 col-sm-12'>
     <% page_title 'Teaching By Subjects' %>
-    <h1><%= yield(:page_title) %> [In-Development]</h1>
+    <h1><%= yield(:page_title) %></h1>
     <hr class='primary'/>
   </div>
 </div>
@@ -17,6 +17,89 @@
       </div>
       <div class='card-body p-0'>
         <%= render 'form' %>
+      </div>
+    </div>
+    <div class='card bg-white p-4'>
+      <div class='card-title'>
+        <h2><%= t(:all_teaching_counts_by_faculty) %></h2>
+        <hr class='primary' />
+      </div>
+      <div class='card-body p-0'>
+        <table class='table table-striped table-sm align-middle text-center'>
+          <thead class='table-info'>
+            <tr>
+              <th scope='col'><%= t(:faculty) %></th>
+              <th scope='col'><%= t(:abbrev) %></th>
+              <th scope='col'><%= t(:teachings) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @counts_by_faculty.each do |f| %>
+            <tr>
+              <td><%= f.faculty %></td>
+              <td><%= f.faculty_abbrev %></td>
+              <td><%= f.teachings %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class='col-sm-12 col-md-6'>
+    <div class='card bg-white p-4'>
+      <div class='card-title'>
+        <h2><%= t(:all_teaching_counts_by_faculty) %></h2>
+        <hr class='primary' />
+      </div>
+      <div class='card-body p-0'>
+        <table class='table table-striped table-sm align-middle text-center'>
+          <thead class='table-info'>
+            <tr>
+              <th scope='col'><%= t(:subject) %></th>
+              <th scope='col'><%= t(:abbrev) %></th>
+              <th scope='col'><%= t(:teachings) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @counts_by_subject.each do |f| %>
+            <tr>
+              <td><%= f.subject %></td>
+              <td><%= f.subject_abbrev %></td>
+              <td><%= f.teachings %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class='col-sm-12 col-md-6'>
+    <div class='card bg-white p-4'>
+      <div class='card-title'>
+        <h2><%= t(:all_teaching_counts_by_faculty) %></h2>
+        <hr class='primary' />
+      </div>
+      <div class='card-body p-0'>
+        <table class='table table-striped table-sm align-middle text-center'>
+          <thead class='table-info'>
+            <tr>
+              <th scope='col'><%= t(:faculty) %></th>
+              <th scope='col'><%= t(:abbrev) %></th>
+              <th scope='col'><%= t(:teachings) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @counts_by_faculty.each do |f| %>
+            <tr>
+              <td><%= f.faculty %></td>
+              <td><%= f.faculty_abbrev %></td>
+              <td><%= f.teachings %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

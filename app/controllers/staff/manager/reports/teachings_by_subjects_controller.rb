@@ -6,71 +6,58 @@ class Staff::Manager::Reports::TeachingsBySubjectsController < ApplicationContro
     logger.debug "Start: #{params[:start]}"
     logger.debug "End: #{params[:end]}"
     logger.debug "Status: #{params[:status]}"
-    logger.debug "Department: #{params[:subject]}"
+    logger.debug "Subject: #{params[:subject]}"
 
     case
+    #Case 1: Missing Start/End Dates or all blank
     when (params[:start].blank? && params[:end].blank? && params[:status].blank? && params[:department].blank?) || (params[:start].blank? || params[:end].blank?)
-      # Case 1: Missing Start/End Dates or all blank
+      logger.debug "Case 1: Missing Start/End Dates or all blank"
       flash.now[:error] = "Start date and end date are required fields."
       render action: "index"
       return
 
-    # Case 1: Only Dates
+    #Case 2: Only Dates
     when params[:start].present? && params[:end].present? && params[:status].blank? && params[:subject].blank?
+      logger.debug "Case 2: Only Dates"
       @start_date = params[:start]
       @end_date = params[:end]
       @status = params[:status]
       @subject = params[:subject]
 
       @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(status: [:assigned, :done]) 
-    # Case 2: Subject yes, Status no
+      
+    #Case 3: Subject yes, Status no"
     when params[:start].present? && params[:end].present? && params[:status].blank? && params[:subject].present?
+      logger.debug "Case 3: Subject yes, Status no"
       @start_date = params[:start]
       @end_date = params[:end]
       @status = params[:status]
       @subject= params[:subject]
       @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(subject: @subject).where.not(status: TeachingRequest.status.deleted)
-      # @department_name = Department.where(id: params[:department]).pluck(:name).join(', ')
-      # @department_staff_members = StaffProfile.includes(:user).where(department_id: params[:department])
-
-    # Case 3: Subject yes, Status yes
-    # Case 4: Subject no, Status yes
+    
+    # Case 4: Subject yes, Status yes
+    when params[:start].present? && params[:end].present? && params[:status].present? && params[:subject].present?
+      logger.debug "Case 4: Subject yes, Status yes"
+      @start_date = params[:start]
+      @end_date = params[:end]
+      @status = params[:status]
+      @subject= params[:subject]
+      @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(subject: @subject).where(status: @status)
+  
+    # Case 5: Subject no, Status yes
+    when params[:start].present? && params[:end].present? && params[:status].present? && params[:subject].blank?
+      logger.debug "Case 5: Subject no, Status yes"
+      @start_date = params[:start]
+      @end_date = params[:end]
+      @status = params[:status]
+      @subject= params[:subject]
+      @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(status: @status)
     else
-      # Case 5 
+      # Case 6
+      logger.debug "Case 6: No Results"
       flash.now[:warning] = "No Results"
       @results = {}
     end
-
-    # if (params[:start] && params[:end] && params[:status]) && (params[:start] == '' || params[:end] == '') && (params[:status] = '')
-
-    #   logger.debug 'Params present but no values -- first if'
-    #   @results = TeachingRequest.where.not(status: TeachingRequest.status.deleted) #('status != ?', TeachingRequest.status.deleted)
-
-
-    # elsif (params[:start] && params[:end]) && (params[:start] != '' && params[:end] != '') && (!params[:status] || params[:status] == '')
-
-    #   logger.debug 'No Status Provided -- I am in elsif #1'
-    #   @start_date = params[:start]
-    #   @end_date = params[:end]
-
-    #   # @results = TeachingRequest.where('preferred_date BETWEEN ? AND ? AND status != ?', @start_date, @end_date, TeachingRequest.status.deleted)
-    #   @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where.not(status: TeachingRequest.status.deleted)
-
-    #   # .where(Section.where.not(status: Section::UNFULFILLED)
-    # elsif (params[:start] && params[:end] && params[:status]) && (params[:start] != '' && params[:end] != '' && params[:status] != '')
-    #   logger.debug 'All three provided -- I am in elsif #2'
-
-    #   @start_date = params[:start]
-    #   @end_date = params[:end]
-    #   @status = params[:status]
-
-    #   # status_value = TeachingRequest.status.find_value(@status).value
-    #   # @results = TeachingRequest.where('preferred_date BETWEEN ? AND ? AND status = ?', @start_date, @end_date, @status)
-    #   @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(status: @status)
-
-    # else
-    #   logger.debug 'No Results Found or Invalid Dates/Status -- in else'
-    #   @results = {}
 
     # end
     respond_to do |format|
@@ -82,18 +69,21 @@ class Staff::Manager::Reports::TeachingsBySubjectsController < ApplicationContro
   end
 
   def new
-    @subjects_list = TeachingRequest.all.pluck(:id, :subject, :subject_abbrev)
+    @status_list_enum = TeachingRequest.status.options(except: [:not_submitted, :deleted])
+    @subjects_list = InstituteCourse.distinct.pluck(:subject, :subject_abbrev)
+    @counts_by_faculty = TeachingRequest.select('faculty, faculty_abbrev, COUNT(*) as teachings').group('faculty, faculty_abbrev').order('teachings DESC')
+    @counts_by_subject = TeachingRequest.select('subject, subject_abbrev, COUNT(*) as teachings').where.not(status: TeachingRequest.status.deleted).group('subject, subject_abbrev').order('teachings DESC')
   end
 
   def create
-    if params[:teachings_by_subject]
-      @start_date = params[:teachings_by_subject][:start_date]
-      @end_date = params[:teachings_by_subject][:end_date]
-      @status = params[:teachings_by_subject][:status]
-      @department = params[:teachings_by_subject][:subject]
+    if params[:teachings_by_subjects]
+      @start_date = params[:teachings_by_subjects][:start_date]
+      @end_date = params[:teachings_by_subjects][:end_date]
+      @status = params[:teachings_by_subjects][:status]
+      @subject = params[:teachings_by_subjects][:subject]
       respond_to do |format|
         format.html {
-          redirect_to staff_manager_reports_teachings_by_subject_path(start: @start_date, end: @end_date, status: @status, subject: @subject)
+          redirect_to staff_manager_reports_teachings_by_subjects_path(start: @start_date, end: @end_date, status: @status, subject: @subject)
         }
       end
     end
