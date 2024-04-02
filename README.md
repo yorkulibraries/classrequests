@@ -16,7 +16,7 @@ There are 3 containers created: **web**, **db** and **mailcatcher**
 
 # Access the front end web app
 
-By default, the application will listen on port 3004 and runs with RAILS_ENV=development.
+By default, the application will listen on port 3009 and runs with RAILS_ENV=development.
 
 To access the application in Chrome browser, you will need to add the ModHeader extension to your Chrome browser.
 
