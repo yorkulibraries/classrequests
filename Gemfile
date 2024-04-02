@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# ruby '2.6.9'
-# ruby '3.0.3'
-# ruby '2.7.6'
-ruby '3.1.4'
+ruby File.read('.ruby-version').strip
 
 ###############
 #### CORE #####
@@ -130,11 +127,8 @@ group :development, :test do
   gem 'shoulda', '~> 4.0'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'shoulda-context', '~> 2.0.0'
-  # gem 'shoulda', '~> 5.0'
-  # gem 'shoulda-matchers', '~> 5.3'
-  # gem 'shoulda-context', '~> 2.0.0'
-  
-  # gem 'launchy'
+  gem 'database_cleaner-active_record'
+  gem 'rails-controller-testing'
 
   #had to add rspec for enumerize/integrations/rspec call for "should enumerize(xyz)" tests
   gem "rspec-rails" 

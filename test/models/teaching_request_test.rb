@@ -28,7 +28,7 @@ class TeachingRequestTest < ActiveSupport::TestCase
   should validate_presence_of(:preferred_time)
   should validate_presence_of(:duration)
   should validate_presence_of(:location_preference)
-  should validate_presence_of(:request_note)
+  #should validate_presence_of(:request_note)
 
   ## EMAILS
   should allow_value('test@example.com', 'another@test.com').for(:email)

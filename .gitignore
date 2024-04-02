@@ -32,7 +32,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/database.yml
 /config/secrets.yml
 /config/app_settings.yml
 
@@ -58,7 +57,6 @@ vendor/bundle
 .DS_Store
 .browserslistrc
 .gitattributes
-.ruby-version
 
 # Docker files
 docker-compose-*
@@ -69,5 +67,9 @@ Dockerfile.3*
 
 # TESTING DATA
 test-screenshots
+
+*.env
+!.env
+
 production-storage/
 storage.bkup.tar

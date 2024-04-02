@@ -1,87 +1,10 @@
-require "test_helper"
-require "capybara/rails"
-require "selenium/webdriver"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  # driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
-
-  ## NOTES ###
-    # Don't forget to install chromedriver: sudo apt-get install chromium-chromedriver 
-  ## END OF NOTES ##
-
-  include Warden::Test::Helpers
-  Warden.test_mode!
-
-  # provides devise methods such as login_session
-  include Devise::Test::IntegrationHelpers
-
-  # To test mailers
-  include ActionMailer::TestHelper
-
-  # removes noisy logs when launching tests
-  Capybara.server = :puma, { Silent: true }
-
-  Capybara.register_driver :headless_chrome do |app|
-    options = Selenium::WebDriver::Chrome::Options.new(args: %w[headless window-size=1400,1000 disable-gpu no-sandbox disable-dev-shm-usage])
-    Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: options)
-  end
-  #
-  Capybara.register_driver(:chrome) do |app|
-    options = Selenium::WebDriver::Chrome::Options.new(args: %w[window-size=1400,1000 disable-gpu no-sandbox disable-dev-shm-usage])
-    Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: options)
-  end
-
-    Capybara.save_path = "test-screenshots"
-
-  if ENV['WITHHEAD']
-    driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
-    # driven_by :selenium, using: :chrome do |option|
-    #   option.add_argument("--window-size=1920,1080")
-    #   # screen_size: [1400, 1400], disable-gpu no-sandbox disable-dev-shm-usage
-    # end
-  elsif ENV['SELENIUM_REMOTE_HOST'] 
-    puts "Using Remote / Docker"
-    driven_by :selenium, using: :chrome, screen_size: [1400, 1400], options: {
-      browser: :remote,
-      url: "http://#{ENV.fetch("SELENIUM_REMOTE_HOST")}:4444"
-    }
-  else
-    puts "Using Headless"
-    driven_by :selenium, using: :headless_chrome do |option|
-      option.add_argument('--no-sandbox')
-      option.add_argument('--headless')
-      option.add_argument("--disable-dev-shm-using")
-      option.add_argument("--disable-extensions")
-      option.add_argument("--disable-gpu")
-      option.add_argument("--remote-debugging-port=9222")
-    end
-  end
+  driven_by :selenium, using: :chrome, screen_size: [1400, 1400], options: {
+    browser: :remote,
+    url: "http://#{ENV.fetch('SELENIUM_SERVER')}:4444"
+  }
 end
-
-
-# require "test_helper"
-#
-# class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-#
-#   include Warden::Test::Helpers
-#   Warden.test_mode!
-#
-#   # after do
-#   #   Warden.test_reset!
-#   # end
-#
-#   Capybara.register_driver(:headless_chrome) do |app|
-#     capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-#       chromeOptions: { args: %w[headless disable-gpu no-sandbox disable-dev-shm-usage] }
-#       driver = webdriver.Chrome('/usr/bin/chromedriver',chrome_options=chromeOptions)
-#     )
-#
-#     Capybara::Selenium::Driver.new(
-#       app, browser: :chrome, desired_capabilities: capabilities)
-#   end
-#   Capybara.save_path = "tmp/"
-#
-#   driven_by :headless_chrome
-#   # driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
-#
-# end

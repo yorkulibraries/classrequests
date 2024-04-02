@@ -45,9 +45,6 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     click_on 'Request a Class'
     assert_selector "h1", text: "New Library Class Request"
 
-
-    # puts "******************************* BEFORE SELECTION *********************************"
-    # puts page.body
     # find("#teaching_request_academic_year_chosen", visible: false).find("option[value='2022-2023']").click
     # find("#teaching_request_faculty_abbrev", visible: false).find("option[value='ED - Faculty of Education']").click
     # find("#teaching_request_subject_abbrev", visible: false).find("option[value='BIOL - Biology']").click
@@ -76,11 +73,6 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     select_subj_option_value = 'BIOL'
     select_chosen_option('#teaching_request_subject_abbrev_chosen', select_subj_option_value)
 
-
-    # save_screenshot(full: true)
-
-    # puts "******************************* AFTER SELECTION *********************************"
-    # puts page.body
     # flunk "Eject from test"
 
     # select 'ED - Faculty of Education', from: 'teaching_request_faculty_abbrev_chosen'
@@ -161,9 +153,6 @@ class TeachingRequestsTest < ApplicationSystemTestCase
 
     # fill_in 'teaching_request_request_note', with: 'Sample Test Note'
 
-    page.driver.browser.manage.window.resize_to(1920, 2500)
-    save_screenshot(full: true)
-
     click_on "Submit My Request"
 
     sleep(2) # 2 seconds
@@ -185,10 +174,6 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     puts "#{@tr.name}[#{@tr.number_of_students} Students]"
     # assert_text "#{@tr.name}[#{@tr.number_of_students} Students]"
     assert_text "#{@tr.name}"
-
-
-    page.driver.browser.manage.window.resize_to(1920, 2500)
-    save_screenshot(full: true)
 
   end
 
