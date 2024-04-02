@@ -41,5 +41,12 @@ module Libstar
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     config.assets.paths << Rails.root.join('app', 'assets', 'images', 'backgrounds')
+
+    # set delivery method to :smtp, :sendmail or :test
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = { address: ENV['MAILER_SMTP_HOST'], port: ENV['MAILER_SMTP_PORT'] }
+    config.action_mailer.default_url_options = { host: ENV['MAILER_DEFAULT_URL'] }
+    config.action_mailer.default_options = { from: ENV['MAILER_DEFAULT_FROM'] }
+
   end
 end
