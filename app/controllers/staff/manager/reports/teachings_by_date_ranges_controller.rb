@@ -48,6 +48,7 @@ class Staff::Manager::Reports::TeachingsByDateRangesController < ApplicationCont
   end
 
   def new
+    @status_list_enum = TeachingRequest.status.options(except: [:not_submitted])
   end
 
   def create

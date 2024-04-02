@@ -19,7 +19,8 @@
     </div> <!-- row -->
     <div class='row mt-2'>
       <div class='col-sm-12 text-value'>
-        <%= f.input :subject, as: :select, collection: @subjects_list.map { |id, subject, subject_abbrev| ["#{subject} [#{subject_abbrev}]", subject] },
+        <!-- @subjects_list.map { |id, subject, subject_abbrev| ["#{subject} [#{subject_abbrev}]", subject] }, -->
+        <%= f.input :subject, as: :select, collection: @subjects_list.map {|subject, subject_abbrev| ["#{subject} [#{subject_abbrev}]", subject] },
             include_blank: true, required: false,
             input_html: { class: 'form-select request-chosen' } %>
       </div>

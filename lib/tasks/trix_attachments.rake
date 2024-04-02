@@ -3,6 +3,12 @@
 namespace :trix_attachments do
    desc "Recreate Trix attachments"
    task refresh: :environment do
+
+     puts "all attachment counts"
+     puts ActionText::RichText.where.not(body: nil).count
+     puts "before march 5 2024 attachment counts"
+     puts ActionText::RichText.where.not(body: nil).where('created_at < ?', '2023-03-05').count
+
      ActionText::RichText.where.not(body: nil).find_each do |trix|
        refresh_trix(trix)
      end
@@ -51,8 +57,8 @@ namespace :trix_attachments do
       end
 
       puts "Body is now: "
-         puts trix.body.to_s
-         puts trix.inspect
+      puts trix.body.to_s
+      puts trix.inspect
    #   trix.update_column :body, trix.body.to_s
 
 

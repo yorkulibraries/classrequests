@@ -12,7 +12,10 @@ class Staff::Reports::TeachingsByDateRangesController < Staff::BaseController
 
       ### No Start, End and status values
       logger.debug 'Params present but no values -- first if'
-      @results = TeachingRequest.where(lead_instructor: current_user).or(TeachingRequest.where(second_instructor: current_user)).or(TeachingRequest.where(third_instructor: current_user)).where('status != ?', TeachingRequest.status.deleted)
+      # @results = TeachingRequest.where(lead_instructor: current_user).or(TeachingRequest.where(second_instructor: current_user)).or(TeachingRequest.where(third_instructor: current_user)).where('status != ?', TeachingRequest.status.deleted)
+
+      @results = TeachingRequest.where('lead_instructor_id IN (?) OR second_instructor_id IN (?) OR third_instructor_id IN (?)', @current_user, @current_user, @current_user)
+
 
     elsif (params[:start] && params[:end]) && (params[:start] != '' && params[:end] != '') && (!params[:status] || params[:status] == '')
 
@@ -20,8 +23,11 @@ class Staff::Reports::TeachingsByDateRangesController < Staff::BaseController
       @start_date = params[:start]
       @end_date = params[:end]
 
-      @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: current_user).or(TeachingRequest.where(second_instructor: current_user)).or(TeachingRequest.where(third_instructor: current_user)).where('status != ?', TeachingRequest.status.deleted)
+      # @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: current_user).or(TeachingRequest.where(second_instructor: current_user)).or(TeachingRequest.where(third_instructor: current_user)).where('status != ?', TeachingRequest.status.deleted)
       # .where(Section.where.not(status: Section::UNFULFILLED)
+
+      @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where('lead_instructor_id IN (?) OR second_instructor_id IN (?) OR third_instructor_id IN (?)', @current_user, @current_user, @current_user)
+
 
     elsif (params[:start] && params[:end] && params[:status]) && (params[:start] != '' && params[:end] != '' && params[:status] != '')
 
@@ -34,9 +40,11 @@ class Staff::Reports::TeachingsByDateRangesController < Staff::BaseController
       logger.debug 'Teaching Request Status: ' + params[:status]
       # status_value = TeachingRequest.status.find_value(@status).value
       # where('preferred_date BETWEEN ? AND ?', @start_date, @end_date)
-      @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: current_user, status: @status).or(TeachingRequest.where(second_instructor: current_user, status: @status)).or(TeachingRequest.where(third_instructor: current_user, status: @status)).where('status != ?', TeachingRequest.status.deleted)
+      # @results = TeachingRequest.where(preferred_date: @start_date..@end_date).where(lead_instructor: current_user, status: @status).or(TeachingRequest.where(second_instructor: current_user, status: @status)).or(TeachingRequest.where(third_instructor: current_user, status: @status)).where('status != ?', TeachingRequest.status.deleted)
 
-      logger.debug @results.to_sql
+      @results = TeachingRequest.where(status: @status).where(preferred_date: @start_date..@end_date).where('lead_instructor_id IN (?) OR second_instructor_id IN (?) OR third_instructor_id IN (?)', @current_user, @current_user, @current_user)
+
+      # logger.debug @results.to_sql
     else
       logger.debug 'I am in else '
       logger.debug 'No Results Found'

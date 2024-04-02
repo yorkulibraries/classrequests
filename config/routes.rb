@@ -85,7 +85,6 @@ Rails.application.routes.draw do
       namespace :manager do
         get 'dashboard', to: 'dashboard#index'
         get 'reports/overview', to: 'reports#index'
-        get 'subject_reports/overview', to: 'subject_reports#index'
 
         resources :teaching_requests #, only: [:index, :edit, :update]
         resources :requests do

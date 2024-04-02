@@ -2,7 +2,7 @@
 <!-- <h1>New Library Class Request</h1> -->
 <div class='row'>
   <div class='col-md-12 col-sm-12'>
-    <% page_title 'Teaching By Date Range Results' %>
+    <% page_title 'Teaching By Subject Results' %>
     <h1><%= yield(:page_title) %></h1>
     <hr class='primary'/>
   </div>
@@ -22,12 +22,13 @@
         </dl>
       </div>
     </div>
-    <h5 class='text-primary'>Report Results</h5>
+    <h5 class='text-primary'><%= t(:report_results) %> [<%= "Total: #{@results.count}" %>]</h5>
     <div class='table-responsive'>
-      <h3><%= @subject if @subject %></h3>
+      <h3><%= @subject != '' ? "#{@subject} [#{@results.first.subject_abbrev}]" : t(:all_subjects)%></h3>
       <table class='table table-striped table-sm table-hover'>
         <thead>
           <tr class='table-success'>
+            <th scope='col text-center'>#</th>
             <th scope='col text-center'>ID</th>
             <th scope='col'><%= t(:section) %></th>
             <th scope='col'><%= t(:date_requested) %></th>
@@ -35,7 +36,7 @@
             <th scope='col'><%= t(:time_parsed) %> [<%= t(:duration) %>]</th>
             <th scope='col'><%= t(:course_code) %></th>
             <th scope='col'><%= t(:YUL_lead) %></th>
-            <th scope='col'><%= t(:subject) %></th>            
+            <!--<th scope='col'><%= t(:subject) %></th>  -->          
             <th scope='col'><%= t(:type_of_instruction) %></th>
             <th scope='col'><%= t(:faculty_instructor) %></th>
             <th scope='col'><%= t(:no_of_stds) %></th>
@@ -44,9 +45,10 @@
           </tr>
         </thead>
         <tbody>
-          <% @results.each do |res| %>
+          <% @results.each_with_index do |res, index| %>
           <!-- <tr><%= res.ai(html: true)%></tr> -->
           <tr>
+            <th scope='row text-center'><%= index + 1 %> </th>
             <th scope='row text-center'><%= res.id %> </th>
             <th scope='row text-justify'><%= res.section_name_or_about %></th>
             <td><%= res.created_at.strftime('%b %d, %Y') %></td>
@@ -68,6 +70,9 @@
               <% end %>
               </p>
             </td>
+<!--            <td>
+              <%= res.subject %>[<%= res.subject_abbrev %>
+            </td> -->
             <td> 
               <% if !res.type_of_instructions.blank?  %> 
                 <%= res.type_of_instructions.map(&:name).join(', ')  %> 
@@ -82,7 +87,7 @@
         </tbody>
       </table>
     </div> <!-- table-responsive -->
-    <%= link_to staff_reports_teachings_by_subject_path(start: @start_date, end: @end_date, status: @status, subject: @subject, format: 'xlsx'),
+    <%= link_to staff_manager_reports_teachings_by_subjects_path(start: @start_date, end: @end_date, status: @status, subject: @subject, format: 'xlsx'),
         class: 'btn btn-sm btn-success' do %>
         <i class='fa fa-bar-chart'></i> Export to Excel
     <% end %>
@@ -109,9 +114,9 @@
 <hr class='light'/>
 <div class='row mt-3'>
   <div class='col-md-6 col-sm-12'>
-  <%= link_to staff_subject_reports_overview_path,
+  <%= link_to new_staff_manager_reports_teachings_by_subject_path,
       class: 'btn btn-sm btn-primary' do %>
-      <i class='fa fa-bar-chart'></i> <%= t(:departmental_reports_dashboard) %>
+      <i class='fa fa-bar-chart'></i> <%= t(:subject_reports_dashboard) %>
   <% end %>
   <!--
   -->
