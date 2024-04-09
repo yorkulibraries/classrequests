@@ -141,8 +141,8 @@ $theme-colors: map-merge($theme-colors, $yorku-colors);
 }
 .badge-in-process, .badge-in_process {
 //  background-color: $warning;
-  background-color: $warning //lighten($warning, 20%);
-  // color: $dark;
+  background-color: $warning; //lighten($warning, 20%);
+  color: $dark;
 }
 .badge-unfulfilled {
   background-color:  $dark;//$purple;

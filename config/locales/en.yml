@@ -40,6 +40,7 @@ en:
   cancel_request: 'Cancel Request'
   respond: 'Respond'
   respond_to_assignment: 'Respond to Assignment'
+  mark_unfulfilled: 'Mark Unfulfilled'
   mark_done: 'Mark Done'
   mark_deleted: 'Mark Deleted'
   close: 'Close'

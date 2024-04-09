@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
-  create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
     t.string "record_type", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -43,13 +43,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "announcements", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "announcements", charset: "utf8mb3", force: :cascade do |t|
     t.datetime "published_at", precision: nil
     t.string "announcement_type"
     t.string "name"
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "assignment_responses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "assignment_responses", charset: "utf8mb3", force: :cascade do |t|
     t.string "response"
     t.text "comment_or_reason"
     t.bigint "teaching_request_id", null: false
@@ -69,14 +69,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["user_id"], name: "index_assignment_responses_on_user_id"
   end
 
-  create_table "campus_locations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "campus_locations", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cancel_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "cancel_requests", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "teaching_request_id", null: false
     t.text "reason"
@@ -86,14 +86,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["user_id"], name: "index_cancel_requests_on_user_id"
   end
 
-  create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "departments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "branch_division"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "institute_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "institute_courses", charset: "utf8mb3", force: :cascade do |t|
     t.string "faculty"
     t.string "faculty_abbrev"
     t.string "subject"
@@ -111,7 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notifications", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "recipient_id"
     t.bigint "actor_id"
     t.datetime "read_at", precision: nil
@@ -122,7 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "requests", charset: "utf8mb3", force: :cascade do |t|
     t.string "username"
     t.integer "patron_type"
     t.string "first_name"
@@ -145,7 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
-  create_table "requests_sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "requests_sections", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "request_id"
     t.bigint "section_id"
     t.datetime "created_at", precision: nil, null: false
@@ -154,7 +154,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["section_id"], name: "index_requests_sections_on_section_id"
   end
 
-  create_table "sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "sections", charset: "utf8mb3", force: :cascade do |t|
     t.string "section_name_or_about"
     t.integer "number_of_students"
     t.date "preferred_date"
@@ -173,7 +173,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["status"], name: "index_sections_on_status"
   end
 
-  create_table "settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "settings", charset: "utf8mb3", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
     t.datetime "created_at", null: false
@@ -181,7 +181,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
-  create_table "staff_profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "staff_profiles", charset: "utf8mb3", force: :cascade do |t|
     t.string "specializtion_job_title"
     t.text "profile_bio"
     t.string "role", default: "0", null: false
@@ -194,7 +194,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["user_id"], name: "index_staff_profiles_on_user_id"
   end
 
-  create_table "teaching_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "teaching_requests", charset: "utf8mb3", force: :cascade do |t|
     t.string "username"
     t.string "patron_type"
     t.string "first_name"
@@ -234,7 +234,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["user_id"], name: "index_teaching_requests_on_user_id"
   end
 
-  create_table "teaching_type_of_instructions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "teaching_type_of_instructions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "teaching_request_id", null: false
     t.bigint "type_of_instruction_id", null: false
     t.datetime "created_at", null: false
@@ -243,13 +243,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.index ["type_of_instruction_id"], name: "index_teaching_type_of_instructions_on_type_of_instruction_id"
   end
 
-  create_table "type_of_instructions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "type_of_instructions", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
