@@ -71,7 +71,7 @@ Rails.application.routes.draw do
       ## staff/teaching_requests
       resources :teaching_requests, except: [:index] #only: [:show, :new, :edit, :update, :create, :destroy]
 
-      resources :mark_done_teaching_requests, only: [:update]
+      resources :mark_done_teaching_requests, only: [:edit, :update]
       resources :mark_deleted_teaching_requests, only: [:update]
       resources :mark_unfulfilled_teaching_requests, only: [:update]
 

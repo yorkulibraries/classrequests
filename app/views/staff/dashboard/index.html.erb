@@ -140,9 +140,13 @@
                   <%= link_to staff_mark_unfulfilled_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it unfulfilled?'}, class:'btn btn-sm btn-warning mr-1 mb-1' do %>
                     <i class='fas fa-exclamation-triangle' data-bs-toggle='tooltip' data-bs-placement='bottom' title='<%= t(:mark_unfulfilled) %>'></i>
                   <% end %>
-                  <%= link_to staff_mark_done_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it done?'}, class:'btn btn-sm btn-success mr-1 mb-1' do %>
+                  <!-- link_to staff_mark_done_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it done?'}, class:'btn btn-sm btn-success mr-1 mb-1' do %>
+                    <i class='fas fa-check' data-bs-toggle='tooltip' data-bs-placement='bottom' title='<%= t(:mark_done) %>'></i>
+                  -->
+                  <%= link_to edit_staff_mark_done_teaching_request_path(my_request), class:'btn btn-sm btn-success mr-1 mb-1' do %>
                     <i class='fas fa-check' data-bs-toggle='tooltip' data-bs-placement='bottom' title='<%= t(:mark_done) %>'></i>
                   <% end %>
+                  
                 <% end %>
                 <% if current_user.staff_profile.role.value > 2 %> <!-- if manager or admin -->
                   <%= link_to staff_mark_deleted_teaching_request_path(id: my_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it deleted?'}, class:'btn btn-sm btn-danger mr-1 mb-1' do %>
