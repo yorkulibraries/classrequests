@@ -192,11 +192,11 @@
     </div>
     <div class='col-10 text-md-end'>
       <% if @teaching_request.id %>
-        <%= link_to staff_mark_done_teaching_request_path(id: @teaching_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it done?'}, class:'btn btn-dark' do %>
+        <%= link_to edit_staff_mark_done_teaching_request_path(@teaching_request), class:'btn btn-dark' do %>
           <%= t(:mark_it_done, scope: :button) %>
           <i class='fas fa-smile-beam'></i>
         <% end %>
-        <%= link_to staff_mark_unfulfilled_teaching_request_path(id: @teaching_request.id), method: :patch, data: {confirm: 'Are you sure you want to make it unfulfilled?'}, class:'btn btn-warning' do %>
+        <%= link_to edit_staff_mark_unfulfilled_teaching_request_path(@teaching_request), class:'btn btn-warning' do %>
           <%= t(:mark_it_unfulfilled, scope: :button) %>
           <i class='fas fa-sad-tear text-light'></i>
         <% end %>

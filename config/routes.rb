@@ -73,7 +73,7 @@ Rails.application.routes.draw do
 
       resources :mark_done_teaching_requests, only: [:edit, :update]
       resources :mark_deleted_teaching_requests, only: [:update]
-      resources :mark_unfulfilled_teaching_requests, only: [:update]
+      resources :mark_unfulfilled_teaching_requests, only: [:edit, :update]
 
       resources :teaching_requests do
         resources :assignment_responses
