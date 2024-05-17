@@ -7,4 +7,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     browser: :remote,
     url: "http://#{ENV.fetch('SELENIUM_SERVER')}:4444"
   }
+
+  Capybara.save_path = "tmp/test-screenshots"
+  
 end

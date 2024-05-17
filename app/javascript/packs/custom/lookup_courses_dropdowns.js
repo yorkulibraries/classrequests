@@ -89,13 +89,11 @@ $(document).on('turbolinks:load', () => {
   /**********************************************************************/
 
     // COURSE TITLES
-    // $('#teaching_request_number_title').change(function(){
-    //   $('#teaching_request_institute_course_id').empty();
-    //   console.log('Course/Section was changed!');
-    //   var course_id = $(this).val();
-    //   console.log(($(this).val()));
-    //   $('#teaching_request_institute_course_id').val($(this).val());
-    // });
+    //*** 2024 Update ***/
+    $('#teaching_request_course_title').on('input', function(){
+      var course_title_string = $(this).val();
+      fetchCourseTitlesAuto(course_title_string);
+    });
 
 	/*************************** FUNCTIONS *******************************/
 
@@ -120,13 +118,6 @@ $(document).on('turbolinks:load', () => {
 
           $.each(data, function(id, model) {
             // console.log(data)
-
-            // if (model.faculty.length > 40) {
-            //   faculty_full = model.faculty.substring(0, 40) + ' ...';
-            // }else {
-            //   faculty_full = model.faculty;
-            // }
-
             $(target).append(
               // $('<option>').text(model).attr('subject', id) // populate options
               $('<option>', {
@@ -163,13 +154,6 @@ $(document).on('turbolinks:load', () => {
 
           $.each(data, function(id, model) {
             // console.log(data)
-
-            // if (model.subject.length > 40) {
-            //   subject_full = model.subject.substring(0, 40) + ' ...';
-            // }else {
-            //   subject_full = model.subject;
-            // }
-
             $(target).append(
               // $('<option>').text(model).attr('subject', id) // populate options
               $('<option>', {
@@ -183,72 +167,39 @@ $(document).on('turbolinks:load', () => {
 
       }); //ajax-close
     } // fetchSubjects
+    
+    //*** 2024 Update ***/
+    function filterByTitles(titles) {
+      $("#teaching_request_course_title").autocomplete({
+         source: titles,
+         autoFocus: true,
+         minLength: 2
+      });
+    }
 
-   // FETCH COURSE NUMBER/TITLES
-    var fetchCourseTitles = function(fac_abbrev, subj_abbrev, academic_year){
-      // console.log('I am fetching Subjects AJAX');
+    var fetchCourseTitlesAuto = function(title_string){
+      // console.log('Fetching Course Titles for ' + title_string);
       $.ajax({
         method: 'GET',
-        // url:'/patrons/lookup_courses/?subject_name=' + subj_abbrev + '&faculty_name=' + fac_abbrev + '&academic_year=' + academic_year,
-        url:'/shared/fetch_libstar_data/?subject_name=' + subj_abbrev + '&faculty_name=' + fac_abbrev + '&academic_year=' + academic_year,
+        url: '/shared/fetch_libstar_data/?course_title=' + title_string,
         dataType: 'json',
-        success: function(data) {
-
-          console.log('I SUCCESSFULLY made it to Course Titles!!!');
-          console.log(data[0]);
-          var character_padding = ''
-          var target = $('select#teaching_request_number_title_id');  // field to which options are appended
-          target.empty(); // Clear the dropdown
-          // $(target).append('<option>Select Course Number</option>');
-          $(target).append('<option></option>'); //Add empty row.
-          $.each(data, function(id, model){
-            if (model.title == null) {
-              model.title = ''
-            }
-
-            if (model.title.length > 40 ) {
-              course_title_full = model.title.substring(0, 40) + ' ...';
-            }else {
-              course_title_full = model.title;
-            }
-            if (model.academic_term.length == 1) {
-              character_padding = ' - '
-              console.log(model.academic_term + ':' + model.academic_term.length)
-            }
-
-            $(target).append(
-              $('<option>', {
-                value: model.id,
-                text: model.number + ' - ' + ' [' + model.credits + '.00]'
-                // text: model.academic_term + character_padding + ' \t ' + ' ' + model.number + ' - '  + ' ' + course_title_full + ' [' + model.credits + '.00]'
-
-              }, '</option>')
-            );
-          }); // each end
-          //'\u2022' + ' ' +
-
-         $('select#teaching_request_number_title_id').trigger('chosen:updated');
-        } // success end
-
-      }); //ajax-close
-    } // fetchCourseTitles
-
+        success: function(response) {
+          // Log the entire response as a string
+          // console.log('Response Data (stringified): ', JSON.stringify(response));
+          // console.log('RESPONSE: ', response)
+          var target = $('#teaching_request_course_title');
+          filterByTitles(response);
+          // Trigger search to show suggestions immediately
+          target.autocomplete('search', '');
+        },
+        // error: function(xhr, status, error) {
+        //   console.error('Error fetching course titles:', status, error);
+        // }
+      });
+    };
 
   /**********************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-     /** VERIFY IF STILL NEEDED ****/
+     /** DO NOT REMEMBER WHY I WROTE THE LOCATION FUNCTION. WILL LOOK INTO ****/
 
      $('#location_campus').change(function(){
        $('#session_location').empty();
@@ -281,19 +232,5 @@ $(document).on('turbolinks:load', () => {
          }
        }); //ajax-close
       } // fetchLocation-close
-
-
-      /***** CHOSEN PLUGIN *****/
-
-      // $('.request-chosen').chosen({
-      //   no_results_text: 'No Result Found',
-      //   width: '100%'
-      // });
-
-      // $('#teaching_request_faculty').chosen({
-      //   no_results_text: 'No Result Found',
-      //   width: '100%'
-      // });
-
 
 });
