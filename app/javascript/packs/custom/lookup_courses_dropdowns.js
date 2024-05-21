@@ -8,7 +8,7 @@
 $(document).on('turbolinks:load', () => {
 // document.addEventListener('turbolinks:load', () => {
 
-    console.log( 'Lookup Courses JS!' );
+    // console.log( 'Lookup Courses JS!' );
 
     //Initial Load Reset the dropdowns
     // if $('#teaching_request_academic_year').val() == ''
@@ -21,9 +21,9 @@ $(document).on('turbolinks:load', () => {
     if ($('#teaching_request_academic_year').val() != '') {
       var ay = $('#teaching_request_academic_year').val();
       // fetchFaculties(academic_year);
-      console.log('Acad. Year Not Empty: ' + ay );
+      // console.log('Acad. Year Not Empty: ' + ay );
       // fetchFaculties(academic_year);
-      console.log('Faculty' + $('#teaching_request_faculty_abbrev').val());
+      // console.log('Faculty' + $('#teaching_request_faculty_abbrev').val());
     }
 
   /**********************************************************************/
@@ -37,9 +37,9 @@ $(document).on('turbolinks:load', () => {
       $('select#teaching_request_subject_abbrev').trigger('chosen:updated');
       // $('#teaching_request_number_title_id').empty();
 
-      console.log('Academic Year Changed!');
+      // console.log('Academic Year Changed!');
       var academic_year = $(this).val();
-      console.log('Selected Year: ' + academic_year);
+      // console.log('Selected Year: ' + academic_year);
       fetchFaculties(academic_year);
 
 
@@ -67,7 +67,6 @@ $(document).on('turbolinks:load', () => {
 
       $('#teaching_request_subject_abbrev').trigger('chosen:updated');
 
-
     });
 
   /**********************************************************************/
@@ -82,7 +81,7 @@ $(document).on('turbolinks:load', () => {
       var selectedSubject = selectedSubjectLabel.split('-');
 
       $('#teaching_request_subject').val($.trim(selectedSubject[1]));
-      console.log(($(this).val()));
+      // console.log(($(this).val()));
       // fetchCourseTitles(fac_abbrev, subj_abbrev, academic_year);
     });
 
@@ -106,8 +105,8 @@ $(document).on('turbolinks:load', () => {
         url: '/shared/fetch_libstar_data/?academic_year=' + academic_year,
         dataType: 'json',
         success: function(data) {
-          console.log('SUCCESS OF ACADEMIC YEAR!!!');
-          console.log(data[0]);
+          // console.log('SUCCESS OF ACADEMIC YEAR!!!');
+          // console.log(data[0]);
 
           // field to which options will be appended to.
           var target = $('select#teaching_request_faculty_abbrev');
@@ -134,20 +133,17 @@ $(document).on('turbolinks:load', () => {
 
    // FETCH SUBJECTS FUNCTION
     var fetchSubjects = function(fac_abbrev, academic_year){
-      console.log('I am fetching Subjects AJAX ' + fac_abbrev + ' for ' + academic_year);
+      // console.log('I am fetching Subjects AJAX ' + fac_abbrev + ' for ' + academic_year);
       $.ajax({
         method: 'GET',
-        // url: '/patrons/lookup_courses/?faculty_name=' + fac_abbrev + '&academic_year=' + academic_year,
         url: '/shared/fetch_libstar_data/?faculty_name=' + fac_abbrev + '&academic_year=' + academic_year,
         dataType: 'json',
         success: function(data) {
-          console.log('SUCCESS OF SUBJECTS!!!');
+          // console.log('SUCCESS OF SUBJECTS!!!');
           // console.log(data[0]);
 
           // field to which options will be appended to.
           var target = $('select#teaching_request_subject_abbrev');
-          // var target = $('select#teaching_request_subject_chosen');
-
           target.empty();
           // $(target).append('<option>Select a Subject/Dept</option>');
           $(target).append('<option></option>');
