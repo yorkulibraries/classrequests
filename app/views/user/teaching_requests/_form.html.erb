@@ -14,7 +14,8 @@
           <%= f.input :username, input_html: {value: current_user.username }, as: :hidden %>
       </div>
       <div class='row mt-3'>
-          <%= f.input :patron_type, include_blank: false, input_html: {class: 'form-select request-chosen'}, selected: current_user.iam_identification %>
+          <%= f.input :patron_type, include_blank: false, input_html: {class: 'form-select request-chosen'}, 
+          selected: @teaching_request.patron_type.presence || current_user.iam_identification %>
       </div>
       <div class='row mt-3 behalf_row'>
         <%= f.input :submitted_on_behalf %>
@@ -105,7 +106,7 @@
       </div>
 
       <div class='row mt-3'>
-        <%= f.input :duration, collection: TeachingRequest.duration.options(except: [:sixty_plus]), include_blank: false, input_html: {autocomplete: 'off', class: 'form-select request-chosen' }
+        <%= f.input :duration, collection: TeachingRequest.duration.options(except: [:sixty_plus]), include_blank: false, input_html: {autocomplete: 'off', class: 'form-select request-chosen' }, selected: @teaching_request.duration.presence || :sixty
               %>
       </div>
       <div class='row mt-3'>
