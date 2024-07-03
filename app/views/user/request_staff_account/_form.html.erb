@@ -19,7 +19,7 @@
           <%= f.input :role, as: :hidden %>
         </div>
         <div class='mt-3'>
-          <%= f.association :department , label_method: :name, value_method: :id, include_blank: false, input_html: {class: 'form-select request-chose'}  %>
+          <%= f.association :department , label_method: :name, value_method: :id, include_blank: false, input_html: {class: 'form-select request-chosen'}  %>
         </div>
         <div class='mt-3'>
           <%= f.association :user, label_method: :user_label, value_method: :id, include_blank: false, disabled: false, as: :hidden %>
