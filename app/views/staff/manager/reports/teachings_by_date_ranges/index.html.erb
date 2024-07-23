@@ -36,6 +36,7 @@
             <th scope='col'><%= t(:course_code) %></th>
             <th scope='col'><%= t(:YUL_lead) %></th>
             <th scope='col'><%= t(:type_of_instruction) %></th>
+            <th scope='col'><%= t(:location_or_format) %></th>
             <th scope='col'><%= t(:faculty_instructor) %></th>
             <th scope='col'><%= t(:no_of_stds) %></th>
             <th scope='col'><%= t(:status)%></th>
@@ -63,6 +64,7 @@
                 <%= res.type_of_instructions.map(&:name).join(', ')  %> 
               <% end %>
             </td>
+            <td><%= res.location_preference.titleize %></td>
             <td><%= res.first_name %> <%= res.last_name %></td>
             <td><%= res.number_of_students %></td>
             <td><%= res.status.text %></td>
