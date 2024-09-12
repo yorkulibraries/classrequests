@@ -4,14 +4,17 @@
 <div class='row mt-2'>
   <div class='col-md-12 col-sm-12'>
       <div class='text-gray-700 fw-700'>Faculty/Dept.:</div>
-      <div class='pl-2'><%= @request.faculty %> / <%= @request.subject %></div>
+      <div class='pl-2'><%= @request.faculty %> / <%=  @request.subject.gsub(/\\'/, "'")
+.html_safe %></div>
   </div>
 </div>
 <div class='row mt-2'>
   <div class='col-md-12 col-sm-12'>
     <div class='text-gray-700 fw-700'>Course/Section:</div>
     <div class='pl-2'>
-        <%= @request.academic_year %> : [<%= @request.faculty_abbrev %> / <%= @request.subject_abbrev %> <%= @request.course_number %>]: <%= @request.course_title %><em><%= t(:title_not_provided) if @request.course_title == '' %></em> -
+        <%= @request.academic_year %> : [<%= @request.faculty_abbrev %> / <%= @request.subject_abbrev %> <%= @request.course_number %>]: <%= @request.course_title.gsub(/\\'/, "'")
+.html_safe %><em><%= t(:title_not_provided) if @request.course_title.gsub(/\\'/, "'")
+.html_safe == '' %></em> -
         <%= defined?(@request.section_name_or_about) ? truncate(@request.section_name_or_about, length: 25) : 'Untitled Section' %>
     </div>
   </div>

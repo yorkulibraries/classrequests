@@ -170,3 +170,26 @@ pre kbd { background-color: $gray-200; }
   background-color: lightgreen;
   border-color: green;
 }
+
+/* Customize the autocomplete dropdown */
+.ui-autocomplete {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+  z-index: 1000;
+}
+
+/* Customize each item in the autocomplete dropdown */
+.ui-menu-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* Customize the appearance of the focused item */
+.ui-menu-item-wrapper.ui-state-active {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}

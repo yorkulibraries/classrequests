@@ -28,10 +28,10 @@ class Shared::FetchLibstarDataController < ApplicationController
 
       @fetched_data = InstituteCourse.select(:id, :title, :number, :academic_term, :credits, :academic_year).where(faculty_abbrev:params[:faculty_name]).where('subject_abbrev = ? and academic_year= ?', params[:subject_name],params[:academic_year]).order(:number,:title)
 
-    ## FETCH CAMPUS
-    # elsif (params[:campus_id] && params[:campus_id] != '')
-    #   @fetched_data = Location.where(campus_id: params[:campus_id])
-    # ## SHOW NO DATA
+    ## FETCH COURSE TITLE
+    elsif(!params[:course_title] || params[:course_title] != '') 
+      # puts "I AM IN COURSE TITLE"
+      @fetched_data = InstituteCourse.select(:title).where("title LIKE ?", "%#{params[:course_title]}%").limit(10).pluck(:title)
     else
       @fetched_data = Array('No Data')
     end

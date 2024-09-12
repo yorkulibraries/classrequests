@@ -36,6 +36,7 @@
             <th scope='col'><%= t(:course_code) %></th>
             <th scope='col'><%= t(:YUL_lead) %></th>
             <th scope='col'><%= t(:type_of_instruction) %></th>
+            <th scope='col'><%= t(:location_or_format) %></th>
             <th scope='col'><%= t(:faculty_instructor) %></th>
             <th scope='col'><%= t(:no_of_stds) %></th>
             <th scope='col'><%= t(:status)%></th>
@@ -47,7 +48,11 @@
           <!-- <tr><%= res.ai(html: true)%></tr> -->
           <tr>
             <th scope='row text-center'><%= index + 1 %> </th>
-            <th scope='row text-center'><%= res.id %> </th>
+            <th scope='row text-center'>
+              <%= link_to staff_manager_teaching_request_path(res), class: 'btn btn-sm btn-info', target: :blank do %> 
+                <%= res.id %> 
+              <% end %> 
+            </th>
             <th scope='row text-justify'><%= res.section_name_or_about %></th>
             <td><%= res.created_at.strftime('%b %d, %Y') %></td>
             <td><%= res.preferred_date.to_time.strftime('%b %d, %Y') rescue nil %></td>
@@ -63,6 +68,7 @@
                 <%= res.type_of_instructions.map(&:name).join(', ')  %> 
               <% end %>
             </td>
+            <td><%= res.location_preference.titleize %></td>
             <td><%= res.first_name %> <%= res.last_name %></td>
             <td><%= res.number_of_students %></td>
             <td><%= res.status.text %></td>

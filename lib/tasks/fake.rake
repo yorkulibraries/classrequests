@@ -21,6 +21,7 @@ namespace :fake do
   task generate: :environment do
     Rake::Task["fake:create_fake_users"].invoke
     Rake::Task["fake:create_dummy_requests"].invoke
+    Rake::Task["fake:populate_tr_request_notes"].invoke
   end
 
 
@@ -30,13 +31,13 @@ namespace :fake do
     require 'faker'
     require 'populator'
 
-    admin = User.find_or_create_by!(username: 'superadmin', first_name: 'Super', last_name: 'Admin', email: 'superadmin@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'superadmin@mailinator.com').first
-    manager = User.find_or_create_by!(username: 'pskinner', first_name: 'Principal', last_name: 'Skinner', email: 'skinner@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'skinner@mailinator.com').first
-    faculty = User.find_or_create_by!(username: 'edna', first_name: 'Edna', last_name: 'Krabappel', email: 'Edna@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'db',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'edna@mailinator.com').first
-    librarian = User.find_or_create_by!(username: 'mhouten', first_name: 'Milhouse', last_name: 'Van Houten', email: 'milhouse@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'milhouse@mailinator.com').first
-    librarian_2 = User.find_or_create_by!(username: 'bsimpson', first_name: 'Bart', last_name: 'Simpson', email: 'bart@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'bart@mailinator.com').first
-    librarian_3 = User.find_or_create_by!(username: 'lsimpson', first_name: 'Lisa', last_name: 'Simpson', email: 'lisa@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'lisa@mailinator.com').first
-    librarian_4 = User.find_or_create_by!(username: 'bgumble', first_name: 'Barney', last_name: 'Gumble', email: 'barney@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'barney@mailinator.com').first
+    admin = User.create!(username: 'superadmin', first_name: 'Super', last_name: 'Admin', email: 'superadmin@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'superadmin@mailinator.com').first
+    manager = User.create!(username: 'pskinner', first_name: 'Principal', last_name: 'Skinner', email: 'skinner@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'skinner@mailinator.com').first
+    faculty = User.create!(username: 'edna', first_name: 'Edna', last_name: 'Krabappel', email: 'Edna@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'db',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'edna@mailinator.com').first
+    librarian = User.create!(username: 'mhouten', first_name: 'Milhouse', last_name: 'Van Houten', email: 'milhouse@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'milhouse@mailinator.com').first
+    librarian_2 = User.create!(username: 'bsimpson', first_name: 'Bart', last_name: 'Simpson', email: 'bart@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'bart@mailinator.com').first
+    librarian_3 = User.create!(username: 'lsimpson', first_name: 'Lisa', last_name: 'Simpson', email: 'lisa@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'lisa@mailinator.com').first
+    librarian_4 = User.create!(username: 'bgumble', first_name: 'Barney', last_name: 'Gumble', email: 'barney@mailinator.com', password: 'libstar', password_confirmation: 'libstar', user_source: 'fake',user_group: 'FACULTY::UNKNOWN',is_verified: true) if !User.where(email: 'barney@mailinator.com').first
 
       # user_record = User.where(email: 'superlibrarian@mailinator.com').first
 
@@ -94,6 +95,13 @@ namespace :fake do
         end
       end
     end
+
+    puts "User List"
+    require 'terminal-table'
+    data = User.includes(:staff_profile).where(id: StaffProfile.pluck(:user_id)).pluck(:id, :first_name, :last_name, :email, :role, :department_id, :user_group)
+    table = Terminal::Table.new headings: ['ID', 'First Name', 'Last Name', 'Email', 'Role', 'Department ID', 'User Group'], rows: data
+    puts table
+
   end
 
   task create_dummy_requests: :environment do
@@ -113,7 +121,8 @@ namespace :fake do
     staff_users = User.where("id in (SELECT sp.user_id from staff_profiles sp) AND email like '%mailinator.com'")
     patron_users = User.where("id not in (SELECT sp.user_id from staff_profiles sp) AND email like '%mailinator.com'")
     locations = [:online, :pre_recorded, :in_the_class, :in_the_library, :off_campus, :to_be_determined]
-    durations = ["30", "40", "60", "60+"]
+    # durations = ["30", "40", "60", "60+"]
+    durations = TeachingRequest.duration.values
     status_not_new = ['2', '3', '4', '6']
     status_assigned_in_process_only = ['2', '3']
 
@@ -193,11 +202,9 @@ namespace :fake do
       alternate_time_parsed = DateTime.parse(Faker::Time.between_dates(from: alternate_date_parsed, to: alternate_date_parsed + 5, format: :default)).strftime('%I:%M:%S')
       status_id = status_assigned_in_process_only.sample
       # status_not_new.sample
-
       # Faker::Config.locale = 'en-CA'
-
+      
       ## Step up record
-
       tr.username = Faker::Team.creature,
       tr.patron_type = '0',
       tr.first_name = patron.first_name,
@@ -231,6 +238,7 @@ namespace :fake do
       tr.user_id = patron.id,
       tr.created_at = DateTime.now(),
       tr.updated_at = DateTime.now()
+
     end
 
     ## REQUESTS NOT NEW
@@ -246,9 +254,6 @@ namespace :fake do
       alternate_date_parsed = Faker::Date.between(from: Date.today, to: Date.today + 90) #=> #<Date: 2014-09-24>
       alternate_time_parsed = DateTime.parse(Faker::Time.between_dates(from: alternate_date_parsed, to: alternate_date_parsed + 5, format: :default)).strftime('%I:%M:%S')
       status_id = status_not_new.sample
-      # status_not_new.sample
-
-      # Faker::Config.locale = 'en-CA'
 
       ## Step up record
       tr.username = Faker::Team.creature,
@@ -285,11 +290,32 @@ namespace :fake do
       tr.created_at = DateTime.now(),
       tr.updated_at = DateTime.now()
 
-
     end
     puts "Create Dummy Teaching Requests"
 
   end
+
+
+  task :populate_tr_request_notes => :environment do
+    puts "Create Dummy Request Notes for All Teaching Requests"
+    TeachingRequest.all.each do |request|
+      # Skip the record if a rich text already exists
+      next if ActionText::RichText.exists?(record_type: 'TeachingRequest', record_id: request.id, name: 'request_note')
+  
+      # Generate fake content for the request note
+      fake_content = Faker::Lorem.paragraph
+  
+      # Create a new ActionText::RichText object and associate it with the teaching request
+      rich_text = ActionText::RichText.create(record_type: 'TeachingRequest', record_id: request.id, name: 'request_note')
+  
+      # Set the content of the rich text to the fake content
+      rich_text.body = fake_content
+  
+      # Save the rich text
+      rich_text.save
+    end
+  end
+  
 
 
 

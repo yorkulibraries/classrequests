@@ -17,7 +17,8 @@
           <%= f.input :username, input_html: {value: current_user.username } %>
       </div>
       <div class='row mt-3'>
-          <%= f.input :patron_type, include_blank: false, input_html: {class: 'form-select request-chosen'}, selected: current_user.iam_identification %>
+          <%= f.input :patron_type, include_blank: false, input_html: {class: 'form-select request-chosen'}, 
+          selected: @teaching_request.patron_type.presence || current_user.iam_identification %>
       </div>
       <div class='row mt-3 behalf_row'>
         <%= f.input :submitted_on_behalf %>
@@ -108,9 +109,7 @@
       </div>
 
       <div class='row mt-3'>
-        <%= f.input :duration, collection: TeachingRequest.duration.options(except: [:sixty_plus]), include_blank: false, selected: :sixty,
-              input_html: {autocomplete: 'off', class: 'form-select request-chosen' }
-              %>
+        <%= f.input :duration, collection: TeachingRequest.duration.options(except: [:sixty_plus]), include_blank: false, input_html: {autocomplete: 'off', class: 'form-select request-chosen' } %>
       </div>
       <div class='row mt-3'>
         <%= f.input :location_preference, as: :radio_buttons, collection: TeachingRequest.location_preference.options(except: :off_campus),
@@ -192,11 +191,11 @@
     </div>
     <div class='col-10 text-md-end'>
       <% if @teaching_request.id %>
-        <%= link_to staff_mark_done_teaching_request_path(id: @teaching_request.id), method: :patch, data: {confirm: 'Are you sure you want to mark it done?'}, class:'btn btn-dark' do %>
+        <%= link_to edit_staff_mark_done_teaching_request_path(@teaching_request), class:'btn btn-dark' do %>
           <%= t(:mark_it_done, scope: :button) %>
           <i class='fas fa-smile-beam'></i>
         <% end %>
-        <%= link_to staff_mark_unfulfilled_teaching_request_path(id: @teaching_request.id), method: :patch, data: {confirm: 'Are you sure you want to make it unfulfilled?'}, class:'btn btn-warning' do %>
+        <%= link_to edit_staff_mark_unfulfilled_teaching_request_path(@teaching_request), class:'btn btn-warning' do %>
           <%= t(:mark_it_unfulfilled, scope: :button) %>
           <i class='fas fa-sad-tear text-light'></i>
         <% end %>
