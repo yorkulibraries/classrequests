@@ -49,7 +49,11 @@
           <!-- <tr><%= res.ai(html: true)%></tr> -->
           <tr>
             <th scope='row text-center'><%= index + 1 %> </th>
-            <th scope='row text-center'><%= res.id %> </th>
+            <th scope='row text-center'>
+              <%= link_to staff_manager_teaching_request_path(res), class: 'btn btn-sm btn-info', target: :blank do %> 
+                <%= res.id %> 
+              <% end %> 
+            </th>
             <th scope='row text-justify'><%= res.section_name_or_about %></th>
             <td><%= res.created_at.strftime('%b %d, %Y') %></td>
             <td><%= res.preferred_date.to_time.strftime('%b %d, %Y') rescue nil %></td>

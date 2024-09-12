@@ -6,7 +6,7 @@ wb.add_worksheet(name: "Teachings By Subject Date Range") do |sheet|
   sheet.add_row ["Preferred Date Start", "Preferred Date End", "Subject"]
   sheet.add_row ["#{@start_date.to_time.strftime('%b %d, %Y') rescue nil}", "#{@end_date.to_time.strftime('%b %d, %Y') rescue nil}", "#{@subject}"]
   sheet.add_row []
-  sheet.add_row ["Teaching Request-ID", "Section", "Date Requested", "Preferred Date","Start Time","Duration","Course Code","YUL Lead","YUL Dept","Type of Instruction","YorkU Instructor","Number of Students","Status","Request Note"]
+  sheet.add_row ["Teaching Request-ID", "Section", "Date Requested", "Preferred Date","Start Time","Duration","Course Code","YUL Lead","Type of Instruction","YorkU Instructor","Number of Students","Status","Request Note"]
   # Create entries for each item
   @results.inspect
   @results.each do |res|
