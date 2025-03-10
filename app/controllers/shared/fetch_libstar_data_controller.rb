@@ -1,3 +1,7 @@
+=begin 
+This code may be obsolete. Kept for reference.
+=end
+
 class Shared::FetchLibstarDataController < ApplicationController
 
   def index
