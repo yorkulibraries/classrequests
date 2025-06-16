@@ -37,6 +37,98 @@ namespace :courses do
   end
 
   ########################################
+  ## 2025 - New Courses Source ###########
+  ########################################
+
+  desc "Loads course data from a CSV file. Pass the file path as an argument, e.g., 'rake courses:load_courses[./my_data.csv]'"
+  task :load_courses, [:file_path] => :environment do |t, args|
+    require 'csv'
+
+    # --- Argument Handling and File Path Determination ---
+    data_file_path = args[:file_path] # Get the argument if provided
+
+    if data_file_path.nil? || data_file_path.empty?
+      # If no argument, try the default path
+      data_file_path = File.join(Rails.root, 'lib', 'assets', 'course-data', 'courses_2024-2025.csv')
+      puts "No file path provided. Attempting to load from default: #{data_file_path}"
+    else
+      # If an argument is provided, ensure it's an absolute path or relative to Rails.root
+      # For simplicity, if not absolute, treat as relative to Rails.root
+      data_file_path = File.expand_path(data_file_path, Rails.root)
+      puts "Loading from specified path: #{data_file_path}"
+    end
+
+    # --- File Existence Check ---
+    unless File.exist?(data_file_path)
+      $stderr.puts "Error: File not found at '#{data_file_path}'"
+      exit(1) # Exit with a non-zero status to indicate an error
+    end
+    # --- End Argument Handling ---
+
+    # Define a method to escape characters (keep this if you need it, though Simple Form often handles quoting)
+    # Note: `escape_and_quote` is not used in the `find_by` section which is commented out.
+    # ActiveRecord handles escaping values automatically when using `create` or `find_by`.
+    def escape_and_quote(str)
+      # This method is for preparing string for raw SQL, not typically needed for ActiveRecord
+      str ? "'#{str.gsub(/[\"\'\,]/, '\\\\\0')}'" : nil
+    end
+
+    new_records_count = 0
+    existing_records_count = 0
+
+    puts "Starting course data import from: #{data_file_path}"
+
+    # Loop through each row in the CSV file
+    CSV.foreach(data_file_path, headers: true) do |row|
+      # Extract data from each row - using `row[]` directly for values
+      # Note: No need to `escape_and_quote` when passing to ActiveRecord methods like `find_or_create_by` or `create`
+      academic_term    = row['STUDYSESSION']
+      academic_year    = row['ACADEMICYEAR']
+      faculty          = row['FACULTY']
+      faculty_abbrev   = row['FACULTY_ABREV']
+      subject          = row['SUBJECT']
+      subject_abbrev   = row['SUBJECT_ABREV']
+      title            = row['COURSETITLE']
+      course_number    = row['COURSE_NUMBER']
+      course_credits   = row['CREDIT'] # Note: You might want to convert this to integer or float
+
+      puts "\n***********\n"
+      puts "#{academic_term},#{academic_year}, #{faculty}, #{faculty_abbrev}, #{subject}, #{subject_abbrev}, #{title}, #{course_number}, #{course_credits}\n"
+
+      # Check if the course already exists in the InstituteCourse table
+      institute_course = InstituteCourse.find_by(academic_term: academic_term, academic_year: academic_year, faculty_abbrev: faculty_abbrev, faculty: faculty, subject: subject, subject_abbrev: subject_abbrev, title: title, number:course_number, credits:course_credits)
+
+      if institute_course.nil?
+        puts "Course not found, creating new record...\n"
+        # Create a new InstituteCourse record
+        InstituteCourse.create!(
+          academic_term: academic_term,
+          academic_year: academic_year,
+          faculty: faculty,
+          faculty_abbrev: faculty_abbrev,
+          subject: subject,
+          subject_abbrev: subject_abbrev,
+          title: title,
+          number:course_number,
+          credits:course_credits
+        )
+        new_records_count += 1 
+      else
+        puts "Course already exists: #{faculty}, #{faculty_abbrev}, #{subject}, #{subject_abbrev}, #{title}, #{course_number}, #{course_credits}\n"
+        existing_records_count += 1 
+      end
+      puts "***********\n"
+      
+    end # End CSV.foreach
+
+    puts "\n--- Import Summary ---"
+    puts "New records created: #{new_records_count}"
+    puts "Existing records found (not created): #{existing_records_count}"
+    puts "Total rows processed: #{new_records_count + existing_records_count}"
+
+  end # End task
+
+  ########################################
   ## 2024 ################################
   ########################################
   ## FIRST

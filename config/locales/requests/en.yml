@@ -35,6 +35,7 @@ en:
         course_title: "e.g. Introduction to Economics"
     prompt:
       request:
+        academic_term: "Select Academic Term"
         academic_year: "Select Academic Year"
         faculty_abbrev: "Select A Faculty"
         subject_abbrev: "Select A Department/Subject"
