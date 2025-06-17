@@ -40,9 +40,10 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
     @teaching_request = current_user.teaching_requests.new(first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username, email: current_user.email, submitted_by: current_user.full_name, patron_type: 0)
 
     # e.g. ['2020-2021', '2021-2022']
-    # show_acad_years = ['#{two_years_ago}-#{previous_year}', '#{previous_year}-#{current_year}']
-    # @academic_years = InstituteCourse.select('distinct(academic_year)').where(academic_year: show_acad_years).to_a
-    @academic_years = InstituteCourse.select(:academic_year).distinct
+    @academic_terms = InstituteCourse.select('distinct(academic_term)').to_a
+    @academic_years = {} 
+    #InstituteCourse.select('distinct(academic_year)').where(academic_year: show_acad_years).to_a
+    # @academic_years = InstituteCourse.select(:academic_year).distinct
 
     @course_faculties = {}
     @faculty_departments = {}
@@ -137,7 +138,7 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teaching_request_params
-      params.require(:teaching_request).permit(:username, :patron_type, :first_name, :last_name, :email, :phone, :academic_year, :faculty, :faculty_abbrev, :subject, :subject_abbrev, :course_title, :course_number, :submitted_by, :submitted_on_behalf, :section_name_or_about, :number_of_students, :preferred_date, :preferred_time, :alternate_date, :alternate_time, :duration, :location_preference, :room, :lead_instructor_id, :second_instructor_id, :third_instructor_id, :request_note, :instructor_notes, :status, :user_id, :campus_location_id, type_of_instruction_ids: [])
+      params.require(:teaching_request).permit(:username, :patron_type, :first_name, :last_name, :email, :phone, :academic_term, :academic_year, :faculty, :faculty_abbrev, :subject, :subject_abbrev, :course_title, :course_number, :submitted_by, :submitted_on_behalf, :section_name_or_about, :number_of_students, :preferred_date, :preferred_time, :alternate_date, :alternate_time, :duration, :location_preference, :room, :lead_instructor_id, :second_instructor_id, :third_instructor_id, :request_note, :instructor_notes, :status, :user_id, :campus_location_id, type_of_instruction_ids: [])
 
     end
 

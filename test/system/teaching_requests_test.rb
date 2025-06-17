@@ -11,7 +11,7 @@ class TeachingRequestsTest < ApplicationSystemTestCase
   setup do
     # @teaching_request = teaching_requests(:one)
     # @institute_courses = FactoryBot.create_list(:institute_course, 4)
-    @institute_course = FactoryBot.create(:institute_course, faculty: 'Faculty of Education', faculty_abbrev: 'ED', subject: 'Biology', subject_abbrev: 'BIOL', academic_year: '2022-2023')
+    @institute_course = FactoryBot.create(:institute_course, faculty: 'Faculty of Education', faculty_abbrev: 'ED', subject: 'Biology', subject_abbrev: 'BIOL', academic_year: '2022-2023', academic_term: "Fall/Winter")
     @course_one = FactoryBot.create(:first_course)
     @course_two = FactoryBot.create(:second_course)
     @course_three = FactoryBot.create(:third_course)
@@ -49,6 +49,17 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     # find("#teaching_request_faculty_abbrev", visible: false).find("option[value='ED - Faculty of Education']").click
     # find("#teaching_request_subject_abbrev", visible: false).find("option[value='BIOL - Biology']").click
 
+    assert_selector '#teaching_request_academic_term_chosen'
+
+    select_element = find('#teaching_request_academic_term_chosen')
+    select_element.click
+    within '.chosen-results' do
+      find('li', text: "Fall/Winter").click
+    end
+
+    assert_selector '#teaching_request_academic_term_chosen .chosen-single', text: "Fall/Winter"
+
+    
     assert_selector '#teaching_request_academic_year_chosen'
   
     select_option_value = '2022-2023'

@@ -20,7 +20,8 @@ FactoryBot.define do
     last_name { 'Doe' }
     email { 'johndoe@example.com' }
     association :campus_location, factory: :valid_campus_location
-    academic_year { '2023' }
+    academic_year { 'Fall/Winter' }
+    academic_year { '2023-2024' }
     faculty_abbrev { 'ABC' }
     subject_abbrev { 'DEF' }
     course_number { '101' }
@@ -42,7 +43,7 @@ FactoryBot.define do
     last_name { 'Doe' }
     email { 'johndoe@example.com' }
     association :campus_location, factory: :valid_campus_location
-    academic_year { '2023' }
+    academic_year { '2023-2024' }
     faculty_abbrev { 'ABC' }
     subject_abbrev { 'DEF' }
     course_number { '101' }
