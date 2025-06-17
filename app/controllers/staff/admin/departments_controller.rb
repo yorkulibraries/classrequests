@@ -69,8 +69,5 @@ class Staff::Admin::DepartmentsController < Staff::Admin::BaseController
   # Only allow a list of trusted parameters through.
   def department_params
     params.fetch(:department, {}).permit(:name, :branch_division)
-    # def teaching_request_params
-    #   params.require(:teaching_request).permit(:username, :patron_type, :first_name, :last_name, :email, :phone, :academic_year, :faculty, :faculty_abbrev, :subject, :subject_abbrev, :course_title, :course_number, :submitted_by, :submitted_on_behalf, :section_name_or_about, :number_of_students, :preferred_date, :preferred_time, :alternate_date, :alternate_time, :duration, :location_preference, :lead_instructor_id, :second_instructor_id, :third_instructor_id, :request_note, :instructor_notes, :status, :user_id,)
-    # end
   end
 end

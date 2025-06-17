@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_11_203216) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -229,6 +229,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_30_153233) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "campus_location_id"
+    t.string "academic_term", default: "Missing"
     t.index ["campus_location_id"], name: "index_teaching_requests_on_campus_location_id"
     t.index ["status"], name: "index_teaching_requests_on_status"
     t.index ["user_id"], name: "index_teaching_requests_on_user_id"
