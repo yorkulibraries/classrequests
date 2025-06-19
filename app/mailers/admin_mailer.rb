@@ -40,7 +40,7 @@ class AdminMailer < ApplicationMailer
     @requestor = requestor
     @message = message
 
-    if @requestor.staff_profile.role.staff_instructor
+    if @requestor.staff_profile.role.staff_instructor?
       email_subject = "Classrequests: Staff has cancelled a class"
     else
       email_subject = "Classrequests: User has requested a class cancellation"
