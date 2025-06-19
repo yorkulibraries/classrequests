@@ -40,8 +40,13 @@ class AdminMailer < ApplicationMailer
     @requestor = requestor
     @message = message
 
+    if @requestor.staff_profile.role.staff_instructor
+      email_subject = "Classrequests: Staff has cancelled a class"
+    else
+      email_subject = "Classrequests: User has requested a class cancellation"
+
     attachments.inline["#{Setting.mail_logo_url}"] = File.read("#{Rails.root}/app/assets/images/#{Setting.mail_logo_url}")
-    bootstrap_mail(to: Setting.cancel_request_notification, subject: 'Classrequests: User has requested a class cancellation') do |format|
+    bootstrap_mail(to: Setting.cancel_request_notification, subject: email_subject) do |format|
       format.html
     end
 
