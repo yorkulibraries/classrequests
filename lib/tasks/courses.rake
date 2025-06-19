@@ -131,6 +131,76 @@ namespace :courses do
   ########################################
   ## 2024 ################################
   ########################################
+  
+
+  ## FOUTH
+  task insert_library_faculty: :environment do
+
+    puts "\nINSERTING LIBRARY FACULTY"
+  
+    ## Add Library faculty
+    academic_years = InstituteCourse.select(:academic_term, :academic_year).distinct
+
+    academic_years.each do |ay|
+      library_faculty_check = InstituteCourse.find_by(academic_term: ay[:academic_term], academic_year: ay[:academic_year], faculty_abbrev: "LIB", faculty: "Library", subject: "Other / Internal", subject_abbrev: "OTHER")
+      
+      if library_faculty_check.nil? 
+
+        library_faculty = InstituteCourse.new(
+          academic_term: ay[:academic_term],
+          academic_year: ay[:academic_year],
+          faculty_abbrev: "LIB",
+          faculty: "Library",
+          subject: "Other / Internal",
+          subject_abbrev: "OTHER",
+          # number: 0000,
+          # credits: line_input["credits"],
+          # title: "", faculty: "", subject: "",
+        )
+        library_faculty.save
+        puts "Added Other Library Faculty (LIB) for #{ay[:academic_term]} - #{ay[:academic_year]}"
+      else 
+        puts "** Other Faculty exists for #{ay[:academic_term]} - #{ay[:academic_year]}"
+      end
+
+    end # TASK END
+  end
+
+  ## FIFTH
+  task insert_other_depts: :environment do
+
+    puts "\nINSERTING OTHER OPTIONS"
+    ## Add Other for all faculties
+    grouped = InstituteCourse.all.group(:faculty_abbrev, :academic_year, :academic_term)
+    # grouped = InstituteCourse.select("academic_year, faculty_abbrev, faculty, subject, subject_abbrev, number, academic_term, COUNT (*) as count").group(:faculty_abbrev, :academic_year)
+    
+    grouped.each do |ic|
+      # Check if the course already exists in the InstituteCourse table
+      institute_course = InstituteCourse.find_by(academic_term: ic.academic_term, academic_year: ic.academic_year, faculty_abbrev: ic.faculty_abbrev, faculty: ic.faculty, subject: "Other / New Subject", subject_abbrev: "OTHER", number: 0000)
+
+      if institute_course.nil?
+        new_course_record = InstituteCourse.new(
+          academic_term: ic.academic_term,
+          academic_year: ic.academic_year,
+          faculty_abbrev: ic.faculty_abbrev,
+          faculty: ic.faculty,
+          subject: "Other / New Subject",
+          subject_abbrev: "OTHER",
+          number: 0000,
+          # credits: ic["credits"],
+          # title: "",
+        )
+        new_course_record.save
+        puts "Added Other Subject for #{ic.academic_term} #{ic.academic_year} #{ic.faculty}"
+      else
+        puts "** Other Subject exists for #{ic.academic_term} #{ic.academic_year} #{ic.faculty}"
+      end
+    end
+  end # Task end
+
+  ####################################################
+  ## IF NEEDED, OTHERWISE OBSOLETE by end of 2024 #####
+  ####################################################
   ## FIRST
   task load_yorku_data: :environment do 
     require 'csv'
@@ -295,74 +365,6 @@ namespace :courses do
 
   end
 
-  ## FOUTH
-  task insert_library_faculty: :environment do
-
-    puts "\nINSERTING LIBRARY FACULTY"
-  
-    ## Add Library faculty
-    academic_years = InstituteCourse.select(:academic_year).distinct
-
-    academic_years.each do |ay|
-      library_faculty_check = InstituteCourse.find_by(academic_term: "N/A", academic_year: ay[:academic_year], faculty_abbrev: "LIB", faculty: "Library", subject: "Other / Internal", subject_abbrev: "OTHER")
-
-      if library_faculty_check.nil? 
-
-        library_faculty = InstituteCourse.new(
-          academic_year: ay[:academic_year],
-          faculty_abbrev: "LIB",
-          faculty: "Library",
-          subject: "Other / Internal",
-          subject_abbrev: "OTHER",
-          # number: 0000,
-          # credits: line_input["credits"],
-          # title: "", faculty: "", subject: "",
-          academic_term: "N/A"
-        )
-        library_faculty.save
-        puts "Added Other Library Faculty (LIB) for #{ay[:academic_year]}"
-      else 
-        puts "** Other Faculty exists for #{ay[:academic_year]}"
-      end
-
-    end # TASK END
-  end
-
-  ## FIFTH
-  task insert_other_depts: :environment do
-
-    puts "\nINSERTING OTHER OPTIONS"
-    ## Add Other for all faculties
-    grouped = InstituteCourse.all.group(:faculty_abbrev, :academic_year)
-    # grouped = InstituteCourse.select("academic_year, faculty_abbrev, faculty, subject, subject_abbrev, number, academic_term, COUNT (*) as count").group(:faculty_abbrev, :academic_year)
-    
-    grouped.each do |ic|
-      # Check if the course already exists in the InstituteCourse table
-      institute_course = InstituteCourse.find_by(academic_term: "N/A", academic_year: ic.academic_year, faculty_abbrev: ic.faculty_abbrev, faculty: ic.faculty, subject: "Other / New Subject", subject_abbrev: "OTHER", number: 0000)
-
-      if institute_course.nil?
-        new_course_record = InstituteCourse.new(
-          academic_year: ic.academic_year,
-          faculty_abbrev: ic.faculty_abbrev,
-          faculty: ic.faculty,
-          subject: "Other / New Subject",
-          subject_abbrev: "OTHER",
-          number: 0000,
-          # credits: ic["credits"],
-          # title: "",
-          academic_term: "N/A"
-        )
-        new_course_record.save
-        puts "Added Other Subject for #{ic.faculty}"
-      else
-        puts "** Other Subject exists for #{ic.faculty}"
-      end
-    end
-  end # Task end
-
-  ####################################################
-  ## IF NEEDED, OTHERWISE OBSOLETE by end of 2024 #####
-  ####################################################
   task remove_duplicate_courses: :environment do
 
     puts "REMOVING DUPlICATED COURSES"

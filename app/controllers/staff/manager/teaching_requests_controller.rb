@@ -51,6 +51,7 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
   end
 
   def edit
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
     @academic_years = InstituteCourse.select(:academic_year).distinct
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
     @faculty_departments = InstituteCourse.group(:subject).select('subject_abbrev, subject').where(faculty_abbrev: @teaching_request.faculty_abbrev)
@@ -60,13 +61,14 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
   def create
     @teaching_request = current_user.teaching_requests.new(teaching_request_params)
     @teaching_request.status = TeachingRequest.status.new_request
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
     @academic_years = InstituteCourse.select(:academic_year).distinct
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
     # @teaching_request.status = TeachingRequest::NEW_REQUEST
 
     logger.debug '************** REQUEST PARAMS **********'
-    logger.debug 'PARAM: ' + teaching_request_params['faculty_abbrev']
-    logger.debug 'TeachingRequest FacABBRV: ' + @teaching_request.faculty_abbrev
+    logger.debug 'PARAM: ' + teaching_request_params['academic_year']
+    logger.debug 'TeachingRequest Year: ' + @teaching_request.academic_year
 
     if @teaching_request.faculty_abbrev != nil
       @faculty_departments = InstituteCourse.group(:subject).select('subject_abbrev, subject').where(faculty_abbrev: @teaching_request.faculty_abbrev)
@@ -95,6 +97,7 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
   end
 
   def update
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
     @academic_years = InstituteCourse.select(:academic_year).distinct
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
     @active_instructors = User.includes(:staff_profile).references(:staff_profiles).where.not(staff_profiles: {role: [0,1] }).where(is_active: true).order(:first_name)

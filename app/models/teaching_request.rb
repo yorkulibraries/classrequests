@@ -31,7 +31,7 @@ class TeachingRequest < ApplicationRecord
 
 
   ## VALIDATIONS
-  validates :patron_type, :first_name, :last_name, :email, :academic_year, :faculty_abbrev, :subject_abbrev, :course_number, :status, presence: true
+  validates :patron_type, :first_name, :last_name, :email, :academic_term, :academic_year, :faculty_abbrev, :subject_abbrev, :course_number, :status, presence: true
   validates :number_of_students, :preferred_date, :preferred_time, :duration, :location_preference, presence: true
 
   # Validate rich text content

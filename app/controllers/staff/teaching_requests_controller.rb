@@ -23,6 +23,7 @@ class Staff::TeachingRequestsController < Staff::BaseController
 
   def edit
 
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
     @academic_years = InstituteCourse.select(:academic_year).distinct
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
     @faculty_departments = InstituteCourse.group(:subject).select('subject_abbrev, subject').where(faculty_abbrev: @teaching_request.faculty_abbrev)
@@ -34,6 +35,7 @@ class Staff::TeachingRequestsController < Staff::BaseController
   def create
 
     @teaching_request = current_user.teaching_requests.new(teaching_request_params)
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
     @academic_years = InstituteCourse.select(:academic_year).distinct
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
     @active_instructors = User.includes(:staff_profile).references(:staff_profiles).where.not(staff_profiles: {role: [0,1]}).where(is_active: true).order(:first_name)
@@ -66,6 +68,7 @@ class Staff::TeachingRequestsController < Staff::BaseController
   end
 
   def update
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
     @academic_years = InstituteCourse.select(:academic_year).distinct
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
 
