@@ -26,18 +26,19 @@ class User::TeachingRequestsController < User::BaseController
 
   def edit
     ### USERS CANNOT EDIT REQUEST -- FOR NOW AT LEAST ###
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
   end
 
   def create
     @teaching_request = current_user.teaching_requests.new(teaching_request_params)
     @teaching_request.status = TeachingRequest.status.new_request
-
+    @academic_terms = InstituteCourse.select(:academic_term).distinct
     @academic_years = InstituteCourse.select(:academic_year).distinct
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
 
     logger.debug '************** REQUEST PARAMS **********'
-    logger.debug 'PARAM: ' + teaching_request_params['faculty_abbrev']
-    logger.debug 'TeachingRequest FacABBRV: ' + @teaching_request.faculty_abbrev
+    logger.debug 'PARAM: ' + teaching_request_params['academic_year'] rescue nil 
+    logger.debug 'TeachingRequest Academic Year: ' + @teaching_request.academic_year rescue nil
 
     if @teaching_request.faculty_abbrev != nil
       @faculty_departments = InstituteCourse.group(:subject).select('subject_abbrev, subject').where(faculty_abbrev: @teaching_request.faculty_abbrev)
