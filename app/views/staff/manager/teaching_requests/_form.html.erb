@@ -46,7 +46,7 @@
       <div class='row mt-3'>
           <%= f.input :academic_term, collection: @academic_terms,
                 prompt: t(:academic_term, scope: [:simple_form, :prompt, :request]),
-                label_method: :academic_term, value_method: :academic_term,
+                label_method: :academic_term, value_method: :academic_term,include_blank: true,
                 input_html: {class: 'form-select request-chosen'} %>
       </div>
       <div class='row mt-3'>

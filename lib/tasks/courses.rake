@@ -8,19 +8,16 @@ namespace :courses do
 
     ## LOAD DATA SCRAPED FROM YUL ICAL
     Rake::Task['courses:delete_institute_data'].invoke    
-    Rake::Task['courses:load_yorku_data'].invoke
+    Rake::Task['courses:load_courses'].invoke
     Rake::Task['courses:populate_missing_data'].invoke
   end
 
   task update: :environment do
-    Rake::Task['courses:load_yorku_data'].invoke
+    Rake::Task['courses:load_courses'].invoke
     Rake::Task['courses:populate_missing_data'].invoke
   end
 
   task populate_missing_data: :environment do
-    Rake::Task['courses:populate_faculties_names'].invoke
-    Rake::Task['courses:populate_subject_names'].invoke
-    # Rake::Task['courses:populate_year_level'].invoke
     Rake::Task['courses:insert_library_faculty'].invoke
     Rake::Task['courses:insert_other_depts'].invoke
   end
