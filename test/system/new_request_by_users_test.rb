@@ -19,7 +19,7 @@ class NewRequestByUsersTest < ApplicationSystemTestCase
   test "creating the new request by faculty" do
     visit root_url
     assert_selector "h1", text: "Library Class Request Form"
-    click_link('Get Started')
+    click_link('Request Form')
 
     assert_current_path(new_user_teaching_request_path(locale: 'en'))
     # visit new_user_teaching_request_url

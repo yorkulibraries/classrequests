@@ -31,18 +31,18 @@ class TeachingRequestsTest < ApplicationSystemTestCase
   test 'Make a Teaching Class Requests' do
 
     # Visit homepage
-    # Click on Get Started
+    # Click on Request a Class
     # Login
     # Fill in request details
     # Submit
     # Verify Request
 
     visit root_url
-    click_on 'Get Started'
+    click_on 'Request Form'
 
     ## Should be prompted for login
     sign_in(@patron)
-    click_on 'Request a Class'
+    click_on 'Request Form'
     assert_selector "h1", text: "New Library Class Request"
 
     # find("#teaching_request_academic_year_chosen", visible: false).find("option[value='2022-2023']").click
