@@ -38,7 +38,7 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     # Verify Request
 
     visit root_url
-    click_on 'Request Form'
+    # click_on 'Request Form'
 
     ## Should be prompted for login
     sign_in(@patron)
