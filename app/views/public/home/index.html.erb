@@ -1,48 +1,60 @@
-<!-- <div class='row'>
-  <div class='col-md-12 col-sm-12'>
-  <h1><%= t(:library_class_request_home) %></h1>
-  <hr class='primary'/>
-  </div>
-</div> -->
+
 
 <div class='p-5 mb-4 bg-light rounded-3'>
 
   <h1 class='display-4'><%= t(:library_class_request_form) %></h1>
   <hr class='primary'/>
-
-  <!-- <h3><small class=''><%= t(:libraries_offer) %></small><br/><small class='text-danger'><%= t(:libraries_notice) %></small></h3> -->
-  <ul>
-    <!-- <li><%= raw t(:for_archives_and_special_collection, scope: :libraries_offer_bullets) %> <%== Setting.archives_contact %></li>
-     <li><%= t(:for_frost_and_glendon, scope: :libraries_offer_bullets) %> <%== Setting.other_campus_contact %></li> -->
-    <li><%= raw t(:for_osgoode_law, scope: :libraries_offer_bullets) %> <%== Setting.law_contact %></li>
-    <li><%= t(:for_all_other, scope: :libraries_offer_bullets) %>
-  </ul>
-
-  <h3><small><%=t (:request_schedule) %>:</small></h3>
-  <ul>
-    <li><%= t(:for_fall, scope: :request_schedule_bullets) %><strong><%= t(:fall_date, scope: :request_schedule_bullets) %></strong></li>
-    <li><%= t(:for_winter, scope: :request_schedule_bullets) %></li>
-    <li><%= t(:for_summer, scope: :request_schedule_bullets) %></li>
-    <li><%= raw t(:for_questions_and_suggestions, scope: :request_schedule_bullets) %> <%== Setting.questions_inquiries_contact %></li>
-  </ul>
-  <p><strong><%= t(:special_request_form_note) %></strong></p>
-  <hr class='primary my-4'/>
-
-  <!-- <h3 class='text-center'>All users are required to login with Passport York </h3> -->
-
-  <div class='row mt-2'>
-    <div class='col col-lg-4 col-md-4 col-sm-12 col-xs-12'>
-      <%= link_to new_user_teaching_request_path, class: 'btn btn-lg btn-success w-100' do %>
-        <span><i class='fa fa-graduation-cap mr-2'></i> <%= t(:get_started, scope: :button) %></span>
-      <% end %>
+  <div class="container-fluid mt-4">
+    <div class="row d-flex align-items-stretch mt-4 border-1">
+      <div class="col-md-6 col-sm-12 d-flex">
+        <div class="d-flex flex-column p-3 bg-light border rounded w-100">
+          <h3>Introduction to Library Research</h3>
+          <p>Are you concerned that your students do not have the introductory library skills to complete assignments in your course? The four-class series "Think, Research, Create: Introduction to Library Research", may be the answer. These four classes: </p>
+          
+          <ul>
+            <li>Are 90-minutes each</li>
+            <li>Focus on distinct knowledge and skills </li>
+            <li>Employ active learning principles </li>
+            <li>Are synchronously taught over Zoom or in person </li>
+            <li>Are offered multiple times a term </li>
+          </ul>
+          
+          <p>Students can receive a certificate of completion or participation for each class they attend.  </p>
+          <p>If you are interested in this series and how to incorporate it into your course, please fill out the quick form below </p>
+          <p class="text-danger small fw-2">*** Coming Soon *** </p>
+          <%= link_to "#", class: 'btn btn-lg btn-success w-100 disabled', 'aria-disabled': 'true' do %>
+            <span><i class='fas fa-chalkboard-teacher mr-2'></i> Introduction to Library Skills form</span>
+          <% end %>
+        
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 d-flex">
+        <!-- <div class="p-3 bg-light border rounded mb-3"> -->
+        <div class="d-flex flex-column p-3 bg-light border rounded w-100">
+          <h3>Customized, Advanced or Graduate classes</h3>
+          <p>Does your assignment or course require instruction beyond the fundamentals of library research? If so, please use the booking link below. Please note:  
+          <ul> 
+            <li>Three weeks is required for scheduling purposes </li>
+            <li>The class should be scheduled a week or so after students have received their assignments / topics </li>
+            <li>Instructors must be present throughout the class to engage with students and answer questions about the assignment / topics </li>
+            <li><%= raw t(:for_osgoode_law, scope: :libraries_offer_bullets) %> <%== Setting.law_contact %></li>
+            <li><%= t(:for_all_other, scope: :libraries_offer_bullets) %>
+          </ul>
+          <br/>
+          <p class="text-success fw-2 small mt-auto">Available</p>
+          <%= link_to new_user_teaching_request_path, class: 'btn btn-lg btn-success w-100' do %>
+            <span><i class='fa fa-graduation-cap mr-2'></i> Request a Class</span>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <!-- <div class='col offset-md-4 col-lg-4 col-md-4 col-sm-12 col-xs-12'>
-      <%= link_to staff_dashboard_path, class: 'btn btn-lg btn-dark w-100' do %>
-        <i class='fas fa-sign-in-alt' aria-hidden='true'></i> <%= t(:login_as_yul_staff) %>
-      <% end %>
-    </div> -->
+    <div class="row mt-3">
+      <div class="col-12 text-center">
+        <p style="background-color: #eee" class="p-2"><%= raw t(:for_questions_and_suggestions, scope: :request_schedule_bullets) %>
+        <%== Setting.questions_inquiries_contact %></p>
+      </div>
+    </div>
+
   </div>
 
-  <div class='d-flex justify-content-between'>
-  </div>
 </div> <!-- jumbo -->
