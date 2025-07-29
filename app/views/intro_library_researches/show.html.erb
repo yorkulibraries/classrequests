@@ -1,0 +1,60 @@
+<div class="page-header">
+  <%= link_to intro_library_researches_path, class: 'btn btn-default' do %>
+    All Intro_library_researches
+  <% end %>
+  <%= link_to edit_intro_library_research_path(@intro_library_research), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show intro_library_research</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Username:</dt>
+  <dd><%= @intro_library_research.username %></dd>
+
+  <dt>Patron type:</dt>
+  <dd><%= @intro_library_research.patron_type %></dd>
+
+  <dt>First name:</dt>
+  <dd><%= @intro_library_research.first_name %></dd>
+
+  <dt>Last name:</dt>
+  <dd><%= @intro_library_research.last_name %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= @intro_library_research.email %></dd>
+
+  <dt>Phone:</dt>
+  <dd><%= @intro_library_research.phone %></dd>
+
+  <dt>Academic year:</dt>
+  <dd><%= @intro_library_research.academic_year %></dd>
+
+  <dt>Faculty:</dt>
+  <dd><%= @intro_library_research.faculty %></dd>
+
+  <dt>Faculty abbrev:</dt>
+  <dd><%= @intro_library_research.faculty_abbrev %></dd>
+
+  <dt>Subject:</dt>
+  <dd><%= @intro_library_research.subject %></dd>
+
+  <dt>Subject abbrev:</dt>
+  <dd><%= @intro_library_research.subject_abbrev %></dd>
+
+  <dt>Course number:</dt>
+  <dd><%= @intro_library_research.course_number %></dd>
+
+  <dt>Course title:</dt>
+  <dd><%= @intro_library_research.course_title %></dd>
+
+  <dt>Section name or about:</dt>
+  <dd><%= @intro_library_research.section_name_or_about %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @intro_library_research.status %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @intro_library_research.user %></dd>
+
+</dl>

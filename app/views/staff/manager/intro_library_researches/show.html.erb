@@ -1,0 +1,68 @@
+<div class='row'>
+  <div class='col'>
+    <% page_title "Intro Library Research -- id: #{@intro_library_research.id}" %>
+    <%= content_tag :h1, yield(:page_title) %>
+    <hr class='primary'/>
+  </div>
+</div>
+
+<div class="page-header">
+  <%= link_to staff_manager_intro_library_researches_path, class: 'btn btn-info' do %>
+    <%= t(:back_to_all_intro_library_researches) %>
+  <% end %>
+</div>
+<div class='row mb-2'>
+  <div class='col'>
+    <% intro_library_research = @intro_library_research %>
+    <div class='card mb-3 mt-3'>
+      <div class='card-header'>
+        <div class='row'>
+          <div class='col fw-bold'><%= t(:intro_library_research_id) %>: <%= intro_library_research.id %></div>
+          <div class='col text-muted'><%= t(:submitted) %>: <%= intro_library_research.created_at.strftime('%b %d, %Y - %I:%M %p') %> </div>
+          <div class='col text-muted'><%= t(:last_update) %>: <%= intro_library_research.updated_at.strftime('%b %d, %Y - %I:%M %p') %> </div>
+          <div class='col text-end'><span class="badge badge-pill badge-<%= intro_library_research.status.text.parameterize %>"><%= intro_library_research.status.text %></span></div>
+        </div>
+      </div>
+      <div class='card-body'>
+          <div class='row'>
+            <!-- column -->
+            <div class='col-md-3'>
+              <h5 class='text-primary'><%= t(:people) %></h5>
+              <p class='mb-0 fw-bold small'><%= intro_library_research.first_name %> <%= intro_library_research.last_name %> [<%= intro_library_research.patron_type %>]</p>
+              <p class='text-muted small mb-0'>
+                <%= t(:email) %>: <span class='fw-bold text-dark'><%= intro_library_research.email %></span>
+              </p>
+              <p class='text-muted small mb-0'> <%= t(:submitted_by) %>: <span class='fw-bold text-dark'><%= intro_library_research.submitted_by %></span></p>
+            </div>
+            <!-- column -->
+            <div class='col-md-6'>
+              <h5 class='text-primary'><%= t(:course_info) %></h5>
+              <p class='fw-bold small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= intro_library_research.faculty %> / <%= intro_library_research.subject %>"><%= intro_library_research.academic_year %> - [<%= intro_library_research.faculty_abbrev %> / <%= intro_library_research.subject_abbrev %> <%= intro_library_research.course_number %>]: <%= intro_library_research.course_title %><em><%= t(:title_not_provided) if intro_library_research.course_title == '' %></em> </p>
+
+              <% if intro_library_research.section_name_or_about %>
+                <p class='text-muted small mb-0'>
+                  <%= t(:section) %>:
+                  <span class='fw-bold text-dark'> <%= defined?(intro_library_research.section_name_or_about) ? truncate(intro_library_research.section_name_or_about, length: 25) : 'Untitled Section' %>
+                  </span>
+                </p>
+              <% end %>
+
+              <p class='text-muted small mb-0'>
+                <%= t(:campus_location) %>:
+                <span class='fw-bold text-dark'><%= intro_library_research.campus_location.name rescue nil %></span>
+              </p>
+            </div>
+          </div>
+      </div>
+      <div class='card-footer text-muted'>
+        <div class='row'>
+          <div class='col text-start'>
+             <%= link_to edit_staff_manager_intro_library_research_path(intro_library_research), class: 'btn btn-sm btn-secondary', remote: false do %>
+              <i class='fas fa-edit'></i> <%= t(:edit_request_details) %>
+             <% end %>
+          </div>
+        </div>
+      </div>
+    </div> <!-- card close -->
+  </div>
+</div>

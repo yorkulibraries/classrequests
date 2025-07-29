@@ -19,6 +19,11 @@
       <% end %>
     </li>
     <div class='dropdown-divider'></div>
+    <li><%= link_to staff_manager_intro_library_researches_path(), class: 'dropdown-item' do %>
+      <i class='fas fa-chart-bar text-primary'></i> <%= t(:intro_library_research_dashboard) %> <span class='text-muted text-sm'></span>
+    <% end %>
+    </li>
+    <div class='dropdown-divider'></div>
     <li><%= link_to staff_manager_reports_overview_path(), class: 'dropdown-item' do %>
       <i class='fas fa-chart-bar text-primary'></i> <%= t(:reports_dashboard) %> <span class='text-muted text-sm'></span>
     <% end %>

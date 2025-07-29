@@ -18,7 +18,7 @@ en:
     for_questions_and_suggestions: "For questions and suggestions, please contact "
   special_request_form_note: "Please note that we need at least three weeks for scheduling purposes."
   button:
-    request_library_class: "Request a Class"
+    request_library_class: "Customized, Advanced or Graduate class request"
     admin_access: "Admin Access"
   request_library_class: "Request a Class"
   teaching_calendar: "Teaching Calendar"

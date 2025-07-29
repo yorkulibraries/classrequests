@@ -1,0 +1,40 @@
+<%= simple_form_for(@intro_library_research) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :username %>
+    <%= f.input :patron_type %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :phone %>
+    <%= f.input :academic_year %>
+    <%= f.input :faculty %>
+    <%= f.input :faculty_abbrev %>
+    <%= f.input :subject %>
+    <%= f.input :subject_abbrev %>
+    <%= f.input :course_number %>
+    <%= f.input :course_title %>
+    <%= f.input :section_name_or_about %>
+    <%= f.input :status %>
+    <%= f.association :user %>
+  </div>
+  <hr/>
+  <div class="form-group">
+    <% if intro_library_research.persisted? %>
+      <div class="float-right">
+        <%= link_to 'Destroy', intro_library_research, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if intro_library_research.persisted? %>
+      <%= link_to "Cancel", intro_library_research, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", intro_library_researches_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

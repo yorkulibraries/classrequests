@@ -132,6 +132,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // });
 })
 require('packs/custom/lookup_courses_dropdowns')
+require('packs/custom/lookup_courses_dropdowns_ILR')
 
 
 // FOR BOOTSTRAP 5

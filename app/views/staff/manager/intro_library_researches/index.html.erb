@@ -1,0 +1,115 @@
+<div class='row'>
+  <div class='col'>
+    <% page_title 'Intro Library Research Requests' %>
+    <%= content_tag :h1, yield(:page_title) %>
+    <hr class='primary'/>
+  </div>
+</div>
+
+<!-- REQUESTS TOOLBAR -->
+<div class='btn-toolbar justify-content-center p-3' role='toolbar' aria-label='Toolbar with button groups'>
+  <div class='btn-group me-2 mb-2' role='group' aria-label='First group'>
+    <%= link_to staff_manager_intro_library_researches_path(sort: t(:all)), class: "btn btn-sm #{is_active(t(:all), 'btn')}" do %>
+      <%= 'All Requests' %> <span class='badge bg-secondary'><%= @intro_library_research_valid_count rescue nil %></span>
+    <% end %>
+  </div>
+  <div class='btn-group me-2 mb-2' role='group' aria-label='Second group'>
+    <%= link_to staff_manager_intro_library_researches_path(sort: IntroLibraryResearch.status.new_request.text),
+      class: "btn btn-sm #{is_active(IntroLibraryResearch.status.new_request.text, 'btn')}" do %>
+      <%= IntroLibraryResearch.status.new_request.text %> <span class="badge badge-<%= IntroLibraryResearch.status.new_request.text.parameterize %>"><%= IntroLibraryResearch.where(status: IntroLibraryResearch.status.new_request.value).count %></span>
+    <% end %>
+    <%= link_to staff_manager_intro_library_researches_path(sort: IntroLibraryResearch.status.done.text),
+      class: "btn btn-sm #{is_active(IntroLibraryResearch.status.done.text, 'btn')}" do %>
+        <%= IntroLibraryResearch.status.done.text %> <span class="badge badge-<%= IntroLibraryResearch.status.done.text.parameterize %>"><%= IntroLibraryResearch.where(status: IntroLibraryResearch.status.done.value).count %> </span>
+    <% end %>
+    <%= link_to staff_manager_intro_library_researches_path(sort: IntroLibraryResearch.status.unfulfilled.text),
+      class: "btn btn-sm #{is_active(IntroLibraryResearch.status.unfulfilled.text, 'btn')}" do %>
+        Unfulfilled:  <span class="badge badge-<%= IntroLibraryResearch.status.unfulfilled.text.parameterize %>"><%= IntroLibraryResearch.where(status: IntroLibraryResearch.status.unfulfilled.value).count %></span>
+    <% end %>
+    <%= link_to staff_manager_intro_library_researches_path(sort: IntroLibraryResearch.status.deleted.text),
+      class: "btn btn-sm #{is_active(IntroLibraryResearch.status.deleted.text, 'btn')}" do %>
+       Deleted:  <span class="badge badge-<%= IntroLibraryResearch.status.deleted.text.parameterize %>"><%= IntroLibraryResearch.where(status: IntroLibraryResearch.status.deleted.value).count %></span>
+    <% end %>
+    <%= link_to staff_manager_intro_library_researches_path(sort: IntroLibraryResearch.status.not_submitted.text),
+      class: "btn btn-sm #{is_active(IntroLibraryResearch.status.not_submitted.text, 'btn')}" do %>
+      Not Submitted: <span class="badge badge-<%= IntroLibraryResearch.status.not_submitted.text.parameterize %>"><%= IntroLibraryResearch.where(status: IntroLibraryResearch.status.not_submitted.value).count %></span>
+    <% end %>
+  </div>
+</div>
+<!-- END OF REQUESTS TOOLBAR -->
+
+<!-- PAGINATION -->
+<% if params[:sort] == 'All'%>
+<div class='row'><small class='text-muted text-center'>All Requests <strong>excludes</strong> Deleted and Not Submitted</small></div>
+<% end %>
+<%= paginate @intro_library_researches, theme: 'bootstrap-5',
+                 pagination_class: 'pagination-sm flex-wrap justify-content-center mt-3' %>
+
+<div class='row mb-2'>
+  <div class='col'>
+    <% if @intro_library_researches.count == 0 %>
+      <div class='card mb-3 shadow p-2 rounded'>
+        <div class='card-body'>
+          <h3 class='text-muted'> <%= t(:there_are_no_requests) %> <% if params[:sort] %>
+               with <span class='text-muted'><%= params[:sort] %></span> status
+            <% end %>.</h3>
+        </div>
+      </div>
+    <% end %>
+    <% @intro_library_researches.each do |intro_library_research| %>
+    <div class='card mb-3 mt-3'>
+      <div class='card-header'>
+        <div class='row'>
+          <div class='col fw-bold'><%= t(:intro_library_research_id) %>: <%= intro_library_research.id %></div>
+          <div class='col text-muted'><%= t(:submitted) %>: <%= intro_library_research.created_at.strftime('%b %d, %Y - %I:%M %p') %> </div>
+          <div class='col text-muted'><%= t(:last_update) %>: <%= intro_library_research.updated_at.strftime('%b %d, %Y - %I:%M %p') %> </div>
+          <div class='col text-end'><span class="badge badge-pill badge-<%= intro_library_research.status.text.parameterize %>"><%= intro_library_research.status.text %></span></div>
+        </div>
+      </div>
+      <div class='card-body'>
+          <div class='row'>
+            <!-- column -->
+            <div class='col-md-3'>
+              <h5 class='text-primary'><%= t(:people) %></h5>
+              <p class='mb-0 fw-bold small'><%= intro_library_research.first_name %> <%= intro_library_research.last_name %> [<%= intro_library_research.patron_type %>]</p>
+              <p class='text-muted small mb-0'>
+                <%= t(:email) %>: <span class='fw-bold text-dark'><%= intro_library_research.email %></span>
+              </p>
+              <p class='text-muted small mb-0'> <%= t(:submitted_by) %>: <span class='fw-bold text-dark'><%= intro_library_research.submitted_by %></span></p>
+            </div>
+            <!-- column -->
+            <div class='col-md-6'>
+              <h5 class='text-primary'><%= t(:course_info) %></h5>
+              <p class='fw-bold small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= intro_library_research.faculty %> / <%= intro_library_research.subject %>"><%= intro_library_research.academic_year %> - [<%= intro_library_research.faculty_abbrev %> / <%= intro_library_research.subject_abbrev %> <%= intro_library_research.course_number %>]: <%= intro_library_research.course_title %><em><%= t(:title_not_provided) if intro_library_research.course_title == '' %></em> </p>
+
+              <% if intro_library_research.section_name_or_about %>
+                <p class='text-muted small mb-0'>
+                  <%= t(:section) %>:
+                  <span class='fw-bold text-dark'> <%= defined?(intro_library_research.section_name_or_about) ? truncate(intro_library_research.section_name_or_about, length: 25) : 'Untitled Section' %>
+                  </span>
+                </p>
+              <% end %>
+
+              <p class='text-muted small mb-0'>
+                <%= t(:campus_location) %>:
+                <span class='fw-bold text-dark'><%= intro_library_research.campus_location.name rescue nil %></span>
+              </p>
+            </div>
+          </div>
+      </div>
+      <div class='card-footer text-muted'>
+        <div class='row'>
+          <div class='col text-start'>
+             <%= link_to staff_manager_intro_library_research_path(intro_library_research), class: 'btn btn-sm btn-info', remote: false do %>
+              <i class='fas fa-eye'></i> <%= t(:view_request_details) %>
+             <% end %>
+             <%= link_to edit_staff_manager_intro_library_research_path(intro_library_research), class: 'btn btn-sm btn-secondary', remote: false do %>
+              <i class='fas fa-edit'></i> <%= t(:edit_request_details) %>
+             <% end %>
+          </div>
+        </div>
+      </div>
+    </div> <!-- card close -->
+    <% end %>
+  </div>
+</div>

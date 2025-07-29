@@ -42,7 +42,7 @@ class TeachingRequestsTest < ApplicationSystemTestCase
 
     ## Should be prompted for login
     sign_in(@patron)
-    click_on 'Request Form'
+    click_on ' Customized, Advanced or Graduate class request'
     assert_selector "h1", text: "New Library Class Request"
 
     # find("#teaching_request_academic_year_chosen", visible: false).find("option[value='2022-2023']").click

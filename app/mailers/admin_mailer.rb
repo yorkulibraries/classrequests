@@ -16,6 +16,20 @@ class AdminMailer < ApplicationMailer
 
   end
 
+  def intro_library_research_notification(request)
+    @request = request
+    if Rails.env.development?
+      emails = Setting.system_admin_emails
+    else
+      emails = Setting.new_request_notification
+    end
+    attachments.inline["#{Setting.mail_logo_url}"] = File.read("#{Rails.root}/app/assets/images/#{Setting.mail_logo_url}")
+
+    # mail(to: patron_email, subject: "AUTO NOTIFICATION: Library Class Request Confirmation")
+    bootstrap_mail(to: emails, subject: 'AUTO NOTIFICATION: Intro Library Research Submission')
+
+  end
+
   def new_staff_account_notification(user)
     @user = user
     emails = Setting.system_admin_emails

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :intro_library_researches
   # namespace :user do
   #   get 'cancel_requests/new'
   #   get 'cancel_requests/create'
@@ -42,13 +43,11 @@ Rails.application.routes.draw do
 
 
       resources :teaching_requests
-      # resources :process_submits, only: [:update]
       resources :thank_you, only: [:index]
+      resources :thank_you_intro_library_research, only: [:index]
       resources :request_staff_account, only: [:new, :create]
       resources :cancel_requests, only: [:new, :create]
-      # resources :requests do
-      #   resources :sections
-      # end
+      resources :intro_library_researches
 
     end
 
@@ -87,6 +86,7 @@ Rails.application.routes.draw do
         get 'reports/overview', to: 'reports#index'
 
         resources :teaching_requests #, only: [:index, :edit, :update]
+        resources :intro_library_researches
         resources :requests do
           resources :sections
         end
@@ -125,7 +125,7 @@ Rails.application.routes.draw do
 
   scope module: 'switchboard' do
     get 'operators/index'
-    # get 'denials/index'
+
   end
 
   ## ENABLE THIS FOR PPY

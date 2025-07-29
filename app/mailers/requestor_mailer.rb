@@ -15,6 +15,17 @@ class RequestorMailer < ApplicationMailer
 
   end
 
+  def intro_library_research_submission_confirmation(request)
+    @request = request
+    patron_email = @request.email
+    attachments.inline["#{Setting.mail_logo_url}"] = File.read("#{Rails.root}/app/assets/images/#{Setting.mail_logo_url}")
+
+    # mail(to: patron_email, subject: "AUTO NOTIFICATION: Library Class Request Confirmation")
+    bootstrap_mail(to: patron_email, subject: 'AUTO NOTIFICATION: Intro Library Research Confirmation')
+
+  end
+
+
   def request_assignment(request)
     @request = request
     patron_email = @request.email

@@ -1,0 +1,28 @@
+<div class='container ax-left'>
+  <div class='card my-10'>
+    <div class='card-body'>
+      <%= image_tag attachments["#{Setting.mail_logo_url}"].url, alt: "#{Setting.app_name}", class: 'img-fluid h-16 w-auto ax-left mb-1' %>
+      <hr class='text-red-700 bg-red-400 my-1' />
+      <h1 class='h3 mt-3 mb-2'>Hi <%= @request.first_name %>,</h1>
+      <h5 class='text-gray-700 lh-base'>Thank you for providing this information.</h5>
+      <!-- Uncomment in fall 
+        <h5 class='text-success'>We will review your request and get in touch with you as soon as possible.</h5>
+      -->
+      <h5 class='text-success'>We are happy to share with you what we learn from this new project.  </h5>
+      <p>Please contact us to discuss the series and the logistics of incorporating it into your course. </p>    
+      <p class='text-gray-700 mt-3'>We would be happy to discuss approaches to encourage student attendance and assigning participation marks. <a href="mailto:<%= Setting.director_email %>"><%= Setting.director_name %></a ></p>
+
+      <div class='space-y-3 mt-3'>
+        <div class='bg-gray-100 p-4'>
+          <%= render partial: 'shared/mailer/show_contact_fields', locals: {:@request => @request} %>
+        </div>
+        <div class='bg-gray-100 p-3'>
+          <%= render partial: 'shared/mailer/show_intro_lib_research_course_fields', locals: {:@request => @request} %>
+        </div>
+      </div>
+      
+      <%= render partial: 'shared/mailer/auto_notification_footer' %>
+
+    </div>
+  </div>
+</div>

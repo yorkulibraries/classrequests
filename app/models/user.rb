@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   has_many :teaching_requests
+  has_many :intro_library_researches
   has_many :notifications, foreign_key: :recipient_id
   has_one :staff_profile, dependent: :destroy
 

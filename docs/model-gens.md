@@ -24,3 +24,11 @@ rails g model CancelRequest user:references request:references reason:text
 
 rails g controller User::CancelRequests new create
 
+
+rails g model LibraryResearch username:string patron_type:integer first_name:string last_name:string email:string phone:string academic_year:string faculty:string faculty_abbrev:string subject:string subject_abbrev:string section_name_or_about:string status:string
+
+rails g controller User::
+
+rails g scaffold IntroLibraryResearch username:string patron_type:integer first_name:string last_name:string email:string phone:string academic_year:string faculty:string faculty_abbrev:string subject:string subject_abbrev:string course_number:integer course_title:string section_name_or_about:string status:string user_id:references
+
+rails g scaffold IntroLibraryResearch username:string patron_type:integer first_name:string last_name:string email:string phone:string academic_year:string faculty:string faculty_abbrev:string subject:string subject_abbrev:string course_number:integer course_title:string section_name_or_about:string status:string submitted_by:string user:references

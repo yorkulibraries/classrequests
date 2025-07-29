@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_11_203216) do
+ActiveRecord::Schema[7.0].define(version: 2025_07_25_163059) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -109,6 +109,32 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_11_203216) do
     t.string "section"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "intro_library_researches", charset: "utf8mb3", force: :cascade do |t|
+    t.string "username"
+    t.integer "patron_type"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone"
+    t.bigint "campus_location_id"
+    t.string "academic_term", default: "Missing"
+    t.string "academic_year"
+    t.string "faculty"
+    t.string "faculty_abbrev"
+    t.string "subject"
+    t.string "subject_abbrev"
+    t.integer "course_number"
+    t.string "course_title"
+    t.string "section_name_or_about"
+    t.string "status"
+    t.string "submitted_by"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campus_location_id"], name: "index_intro_library_researches_on_campus_location_id"
+    t.index ["user_id"], name: "index_intro_library_researches_on_user_id"
   end
 
   create_table "notifications", charset: "utf8mb3", force: :cascade do |t|
@@ -288,6 +314,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_11_203216) do
   add_foreign_key "assignment_responses", "users"
   add_foreign_key "cancel_requests", "teaching_requests"
   add_foreign_key "cancel_requests", "users"
+  add_foreign_key "intro_library_researches", "campus_locations"
+  add_foreign_key "intro_library_researches", "users"
   add_foreign_key "requests", "users"
   add_foreign_key "requests_sections", "requests"
   add_foreign_key "requests_sections", "sections"
