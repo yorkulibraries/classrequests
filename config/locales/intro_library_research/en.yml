@@ -5,11 +5,11 @@ en:
   no_emails_are_sent: "This form is for staff only and can be used to backlog classes. No emails are sent on form update."
   helpers:
     submit:
-      teaching_request:
-        create: "Submit My Request"
-        update: "Update My Request"
+      intro_library_research:
+        create: "Log Intro Library Research"
+        update: "Update Intro Library Research"
       cancel_request:
-        create: "Submit Cancel Request"
+        create: "Submit Cancel Intro Library Research"
   enumerize:
     defaults:
       patron_type:

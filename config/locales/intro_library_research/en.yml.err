@@ -1,0 +1,26 @@
+en:
+  status:
+    not_submitted: "Not Submitted"
+    new_request: "New Request"
+    in_process: "In Process"
+    assigned: "Assigned"
+    unfulfilled: "Unfulfilled"
+    deleted: "Deleted"
+  patron_type:
+    faculty: "Faculty"
+    librarian: "Librarian/Archivist"
+    staff: "Staff"
+    other: "Other"
+    unknown: "Unknown"
+  duration:
+    thirty: "30 minutes"
+    forty: "40 minutes"
+    sixty: "60 minutes"
+    sixty_plus: "more than 60 minutes"
+  location_formats:
+    online: "Online Live"
+    pre_recorded: "Pre-Recorded"
+    in_the_class: "In the Class"
+    in_the_library: "In the Library"
+  simple_form:
+    labels:

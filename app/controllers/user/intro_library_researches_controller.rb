@@ -35,7 +35,7 @@ class User::IntroLibraryResearchesController < User::BaseController
     respond_to do |format|
       if @intro_library_research.save
         ## SEND USER EMAIL
-        RequestorMailer.intro_library_research_submission_confirmation(@intro_library_research).deliver_now
+        # RequestorMailer.intro_library_research_submission_confirmation(@intro_library_research).deliver_now
 
         ## SEND ADMIN EMAIL
         AdminMailer.intro_library_research_notification(@intro_library_research).deliver_now
