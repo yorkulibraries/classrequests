@@ -94,19 +94,21 @@ class Staff::Manager::IntroLibraryResearchesController < Staff::Manager::BaseCon
 
   # DELETE /intro_library_researches/1 or /intro_library_researches/1.json
   def destroy
-    @intro_library_research.status = :deleted
-
+    @intro_library_research = IntroLibraryResearch.find(params[:id])
     respond_to do |format|
-      if @intro_library_research.update(intro_library_research_params)
-
-        format.html { redirect_to staff_manager_intro_library_researches_path, notice: "Intro library research was successfully (soft) deleted." }
-        format.json { head :no_content }
+      if @intro_library_research.update(status: IntroLibraryResearch.status.deleted)
+        format.html { redirect_to staff_manager_intro_library_researches_path, sort: @intro_library_research.status.text, notice: 'Intro library research was successfully (soft) deleted.' }
       else
-        format.html { redirect_to user_dashboard_path, notice: 'Intro Library research could not be deleted.' }
-        format.json { render json: @intro_library_research.errors, status: :unprocessable_entity }
+        format.html { 
+          flash[:error] = "ERROR: Intro Library Research (soft) delete failed! -- #{@intro_library_research.errors.full_messages.to_sentence}" 
+          
+          redirect_to staff_manager_intro_library_research_path(@intro_library_research) 
+          }
       end
     end
   end
+  
+  
   
   private
     # Use callbacks to share common setup or constraints between actions.
