@@ -9,8 +9,9 @@ class InstituteCourse < ApplicationRecord
   end
 
   def academic_year_label
-    return unless academic_year
+    return if academic_year.blank?
 
-    "#{academic_year}–#{academic_year + 1}"
+    year = academic_year.to_i
+    "#{year}–#{year + 1}"
   end
 end
