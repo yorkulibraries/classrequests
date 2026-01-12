@@ -90,7 +90,7 @@ $(document).on('turbolinks:load', () => {
             $(target).append(
               $('<option>', {
                 value: model.academic_year,
-                text: model.academic_year
+                text: model.academic_year + '-' + (parseInt(model.academic_year, 10) + 1)
               })
             );
           });
