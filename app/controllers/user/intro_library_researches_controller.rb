@@ -14,7 +14,7 @@ class User::IntroLibraryResearchesController < User::BaseController
 
     show_acad_years = ["#{1.year.ago.year}","#{Date.today.year}","#{1.year.from_now.year}"]
     @academic_years = InstituteCourse.select('distinct(academic_year)').where(academic_year: show_acad_years).to_a
-    @academic_year_options = InstituteCourse.academic_year_options(@academic_year)
+    @academic_year_options = InstituteCourse.academic_year_options(@academic_years.pluck(:academic_year))
 
     @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
 
