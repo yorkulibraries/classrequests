@@ -7,4 +7,10 @@ class InstituteCourse < ApplicationRecord
   def subject_label
     "#{subject_abbrev} - #{subject}"
   end
+
+  def academic_year_label
+    return unless academic_year
+
+    "#{academic_year}–#{academic_year + 1}"
+  end
 end

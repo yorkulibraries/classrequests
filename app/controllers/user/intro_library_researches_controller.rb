@@ -11,9 +11,18 @@ class User::IntroLibraryResearchesController < User::BaseController
     @intro_library_research = current_user.intro_library_researches.new(first_name: current_user.first_name, last_name: current_user.last_name, username: current_user.username, email: current_user.email, submitted_by: current_user.full_name, patron_type: 0, status: :assigned)
     
     @academic_terms = InstituteCourse.select('distinct(academic_term)').to_a
-    @academic_years = {}
-    @course_faculties = {}
-    @faculty_departments = {}
+
+    show_acad_years = ["#{1.year.ago.year}","#{Date.today.year}","#{1.year.from_now.year}"]
+    @academic_years = InstituteCourse.select('distinct(academic_year)').where(academic_year: show_acad_years).to_a
+
+    @course_faculties = InstituteCourse.group(:faculty).select('faculty_abbrev, faculty')
+
+    if @intro_library_research.faculty_abbrev != nil
+      @faculty_departments = InstituteCourse.group(:subject).select('subject_abbrev, subject').where(faculty_abbrev: @intro_library_research.faculty_abbrev)
+    else
+      @faculty_departments = {}
+    end
+    
     @disable_lead = false
 
   end
