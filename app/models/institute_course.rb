@@ -8,10 +8,10 @@ class InstituteCourse < ApplicationRecord
     "#{subject_abbrev} - #{subject}"
   end
 
-  def academic_year_label
-    return if academic_year.blank?
-
-    year = academic_year.to_i
-    "#{year}–#{year + 1}"
+  def self.academic_year_options(years)
+    Array(years).to_h do |year|
+      y = year.to_i
+      ["#{y}-#{y + 1}", year.to_s]
+    end
   end
 end
