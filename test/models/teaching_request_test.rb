@@ -9,9 +9,9 @@ class TeachingRequestTest < ActiveSupport::TestCase
   should enumerize(:patron_type).in(faculty: 0, librarian_staff: 1, other: 9).with_default(:other)
   should enumerize(:status).in(not_submitted: 0, new_request: 1, in_process: 2, assigned: 3, done: 4, unfulfilled: 6, deleted: 9).with_default(:not_submitted)
 
-  should enumerize(:duration).in(thirty: '30', sixty: '60', sixty_plus: '60+', ninety: '90', one_twenty: '120', one_eighty: '180', one_eighty_plus: '180+')
+  should enumerize(:duration).in(thirty: '30', sixty: '60', sixty_plus: '60+', ninety: '90', one_twenty: '120', one_fifty: '150', one_eighty: '180', one_eighty_plus: '180+')
 
-  should enumerize(:location_preference).in(:online, :pre_recorded, :in_the_class, :in_the_library, :off_campus, :to_be_determined).with_default(:to_be_determined)
+  should enumerize(:location_preference).in(:online, :pre_recorded, :hybrid, :in_the_class, :in_the_library, :off_campus, :to_be_determined).with_default(:to_be_determined)
 
   ## PRESENCE
   should validate_presence_of(:patron_type)

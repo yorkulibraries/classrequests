@@ -33,11 +33,13 @@ en:
         sixty_plus: "more than 60 minutes"
         ninety: "90 minutes"
         one_twenty: "120 minutes"
+        one_fifty: '150 minutes'
         one_eighty: "180 minutes"
         one_eighty_plus: "more than 180+ minutes"
       location_preference:
         online: "Online Live"
         pre_recorded: "Pre-Recorded"
+        hybrid: "Hybrid (mix of online & in-person)"
         in_the_class: "In the Class"
         in_the_library: "In the Library"
   simple_form:

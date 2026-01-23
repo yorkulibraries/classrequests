@@ -38,6 +38,7 @@ en:
       location_preference:
         online: "Online Live"
         pre_recorded: "Pre-Recorded"
+        hybrid: "Hybrid (mix of online & in-person)"
         in_the_class: "In the Class"
         in_the_library: "In the Library"
   simple_form:

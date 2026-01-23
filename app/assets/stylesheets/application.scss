@@ -131,6 +131,11 @@ hr {
   border-top: 1px solid $success;
   height: 0.2px;
 }
+.hybrid_colour {
+  background-color: lighten($primary, 55%);
+  border-top: 1px solid $primary;
+  height: 0.2px;
+}
 .off_campus_colour {
   background-color: lighten($teal, 40%);
   border-top: 1px solid $teal;
