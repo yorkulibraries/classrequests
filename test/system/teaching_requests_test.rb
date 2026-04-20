@@ -177,7 +177,7 @@ class TeachingRequestsTest < ApplicationSystemTestCase
     sign_in(@patron)
     visit root_url
     click_on 'My Dashboard'
-    assert_text "#{@patron.first_name} #{@patron.last_name}"
+    assert_selector 'h1', text: "#{@patron.first_name} #{@patron.last_name}'s Dashboard", wait: 10
 
     assert_text "Your Teaching Requests"
 

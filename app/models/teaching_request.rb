@@ -48,6 +48,12 @@ class TeachingRequest < ApplicationRecord
 
   validates_format_of :email, with: /\A[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i
 
+
+  ## if you want to force one type of instruction, 
+  # uncomment the following validation and the method at the bottom of this file
+  # validate :at_most_one_type_of_instruction
+  
+
   ## PAGING (kaminari)
   paginates_per 20
 
@@ -67,4 +73,9 @@ class TeachingRequest < ApplicationRecord
       errors.add(:request_note, "can't be empty")
     end
   end
+  ## force only 1 selection for type of instruction
+  # def at_most_one_type_of_instruction
+  #   ids = type_of_instruction_ids.reject(&:blank?)
+  #   errors.add(:type_of_instruction_ids, "select only one") if ids.size > 1
+  # end
 end
