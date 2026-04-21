@@ -34,6 +34,26 @@ class TeachingRequestTest < ActiveSupport::TestCase
   should allow_value('test@example.com', 'another@test.com').for(:email)
   should_not allow_value('invalid_email', 'test@').for(:email)
 
+  test 'course_number rejects oversized integer values without raising range error' do
+    teaching_request = FactoryBot.build(:default_teaching_request, course_number: '9999999999')
+
+    assert_nothing_raised do
+      assert_not teaching_request.save
+    end
+
+    assert_includes teaching_request.errors[:course_number], 'must be less than or equal to 9999'
+  end
+
+  test 'number_of_students rejects oversized integer values without raising range error' do
+    teaching_request = FactoryBot.build(:default_teaching_request, number_of_students: '9999999999')
+
+    assert_nothing_raised do
+      assert_not teaching_request.save
+    end
+
+    assert_includes teaching_request.errors[:number_of_students], 'must be less than or equal to 9999'
+  end
+
 
   ## CONDITION VALIDATION ON LEAD ONLY IF TR IS IN PROCESS STATUS
   test 'lead_instructor_id presence validation when status is in_process' do
