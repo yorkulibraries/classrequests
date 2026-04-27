@@ -34,7 +34,7 @@ class TeachingRequest < ApplicationRecord
   validates :patron_type, :first_name, :last_name, :email, :academic_term, :academic_year, :faculty_abbrev, :subject_abbrev, :course_number, :status, presence: true
   validates :number_of_students, :preferred_date, :preferred_time, :duration, :location_preference, presence: true
   validates :course_number, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9999 }
-  validates :number_of_students, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 9999 }
+  validates :number_of_students, numericality: { only_integer: true, greater_than: -1, less_than_or_equal_to: 9999 }
 
   # Validate rich text content
   validate :request_note_content
