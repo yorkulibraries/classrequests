@@ -42,16 +42,22 @@ FactoryBot.define do
     first_name { 'John' }
     last_name { 'Doe' }
     email { 'johndoe@example.com' }
+    phone { '416-555-0100' }
     association :campus_location, factory: :valid_campus_location
     academic_year { '2023-2024' }
+    faculty { 'Faculty of Education' }
     faculty_abbrev { 'ABC' }
     subject_abbrev { 'DEF' }
+    subject { 'Biology' }
     course_number { '101' }
     course_title { 'Introduction to 101' }
+    section_name_or_about { 'Section A' }
     status { 0 }
     number_of_students { 30 }
     preferred_date { Date.today }
     preferred_time { Time.now }
+    alternate_date { Date.today + 1.week }
+    alternate_time { Time.now + 2.hours }
     duration { :sixty }
     location_preference { :to_be_determined }
     request_note { 'Sample request note' }

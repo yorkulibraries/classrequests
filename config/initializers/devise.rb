@@ -33,12 +33,9 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  if Setting.system_from_email.present?
-    config.mailer_sender = Setting.system_from_email
-  else
-    config.mailer_sender = 'no-reply@domain.com'
-  end
-
+  
+  # Configure the e-mail address which will be shown in Devise::Mailer.
+  config.mailer_sender = ENV.fetch("DEVISE_MAILER_SENDER", "noreply@library.ca")
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

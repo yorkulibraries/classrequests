@@ -10,3 +10,18 @@ class DeletemailerMailerTest < ActionMailer::TestCase
   # end
 
 end
+
+class RequestorMailerTest < ActionMailer::TestCase
+  setup do
+    @request = FactoryBot.create(:default_teaching_request)
+  end
+
+  test "request submission confirmation renders with settings defaults" do
+    mail = RequestorMailer.request_submission_confirmation(@request)
+
+    assert_equal ["johndoe@example.com"], mail.to
+    assert_equal "AUTO NOTIFICATION: Library Class Request Confirmation", mail.subject
+    assert_includes mail.body.encoded, @request.first_name
+    assert mail.attachments[Setting.mail_logo_url], "expected inline mail logo attachment"
+  end
+end
