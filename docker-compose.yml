@@ -21,8 +21,8 @@ services:
       - RAILS_ENV=${RAILS_ENV:-development}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - DATABASE_URL=mysql2://root:mypasswd@db/${COMPOSE_PROJECT_NAME}_${RAILS_ENV:-development}
-      # - TEST_DATABASE_URL=sqlite3:db/test.sqlite3
-      - TEST_DATABASE_URL=mysql2://root:mypasswd@db/${COMPOSE_PROJECT_NAME}_test
+      - TEST_DATABASE_URL=sqlite3:db/test.sqlite3
+      # - TEST_DATABASE_URL=mysql2://root:mypasswd@db/${COMPOSE_PROJECT_NAME}_test
       - RAILS_SERVE_STATIC_FILES=true
       - NODE_OPTIONS=--openssl-legacy-provider
       - SELENIUM_SERVER=chrome-server
