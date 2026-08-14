@@ -47,7 +47,7 @@ Rails.application.routes.draw do
       resources :thank_you_intro_library_research, only: [:index]
       resources :request_staff_account, only: [:new, :create]
       resources :cancel_requests, only: [:new, :create]
-      resources :intro_library_researches
+      resources :intro_library_researches, only: %i[show new create destroy]
 
     end
 

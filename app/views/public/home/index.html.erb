@@ -1,9 +1,102 @@
 
 
-<div class='p-5 mb-4 bg-light rounded-3'>
+<div class="p-4 p-lg-5 mb-4 bg-white rounded-3">
 
-  <h1 class='display-4'><%= t(:library_class_request_form) %></h1>
-  <hr class='primary pb-1'/>
+  <header class="container-xl px-0 mb-3">
+    <h1 class="display-5 mb-3"><%= t(:library_class_request_form) %></h1>
+    <hr class="primary mb-0"/>
+  </header>
+
+  <%# New stacked homepage content. Keep the previous two-column layout below while this is reviewed. %>
+  <div class="container-xl px-0 mt-4">
+    <section class="row mx-0 mb-4 bg-white border border-2 rounded-1">
+      <div class="col-12 p-0">
+        <div class="p-3 border-start border-5 border-primary">
+            <h2 class="h3 mb-2">
+              <i class="fas fa-book-reader text-primary me-2" aria-hidden="true"></i>
+              <%= link_to "Think, Research, Create: Introduction to Library Research", "https://www.library.yorku.ca/web/ask-services/facultyinstructor-support/think-research-create-introduction-to-library-research/" %>
+              <span class="fw-normal">("Core")</span>
+            </h2>
+            <p class="col-xl-10 px-0 mb-2">Four classes, 90 minutes each, interactive and practical.</p>
+            <ul class="col-xl-10 mb-3 ps-4">
+              <li class="mb-1">Students can receive a certificate of participation after they complete a quiz following each library class.</li>
+              <li>Learning outcomes, registration, schedules, and more information are available <%= link_to "here", "https://www.library.yorku.ca/web/ask-services/facultyinstructor-support/think-research-create-introduction-to-library-research/" %>.</li>
+            </ul>
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-3 mt-3">
+              <%= link_to new_user_intro_library_research_path, class: "btn btn-primary fw-bold text-wrap" do %>
+                <i class="fas fa-calendar-plus me-1" aria-hidden="true"></i>
+                Complete the Core Class Form
+              <% end %><br/>
+              <p class="mb-0">Email <%= mail_to "dcraig@yorku.ca" %> for more information.</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="row mx-0 mb-4 bg-light border border-2 rounded-1">
+      <div class="col-12 p-0">
+        <div class="p-3 border-start border-5 border-info">
+            <h2 class="h3 mb-2">
+              <i class="fas fa-search text-info me-2" aria-hidden="true"></i>
+              Research Excellence Series
+            </h2>
+            <p class="col-xl-10 px-0 mb-2">The Research Excellence Series consists of library classes intended for more advanced courses. They are discipline- and subject-specific, 90 minutes each, interactive and participatory.</p>
+            <p class="col-xl-10 px-0 mb-2 fw-bold">Please choose the broad area under which your course falls to find out more about learning outcomes, registration, scheduling, and more:</p>
+            <nav class="col-xl-10 px-0 mt-3" aria-label="Research Excellence Series subject areas">
+              <ul class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2 list-unstyled mb-0">
+                <li class="col">
+                  <%= link_to "https://www.library.yorku.ca/web/ask-services/facultyinstructor-support/research-excellence-series-business/", 
+                      class: "btn btn-light text-york-red-medium border-secondary d-block h-100 rounded-1 py-2 px-3 fw-bold", 
+                      target: "_blank", rel: "noopener noreferrer" do %>
+                    Business <i class="fas fa-external-link-alt ms-1" aria-hidden="true"></i><span class="visually-hidden"> (opens in a new tab)</span>
+                  <% end %>
+                </li>
+                <li class="col">
+                  <%= link_to "https://www.library.yorku.ca/web/ask-services/facultyinstructor-support/research-excellence-series-health-sciences/", 
+                    class: "btn btn-light text-york-red-medium border-secondary d-block h-100 rounded-1 py-2 px-3 fw-bold", 
+                    target: "_blank", rel: "noopener noreferrer" do %>
+                    Health Sciences <i class="fas fa-external-link-alt ms-1" aria-hidden="true"></i><span class="visually-hidden"> (opens in a new tab)</span>
+                  <% end %>
+                </li>
+                <li class="col">
+                  <%= link_to "https://www.library.yorku.ca/web/ask-services/facultyinstructor-support/research-excellence-series-humanities/", 
+                      class: "btn btn-light text-york-red-medium border-secondary d-block h-100 rounded-1 py-2 px-3 fw-bold", 
+                      target: "_blank", rel: "noopener noreferrer" do %>
+                    Humanities <i class="fas fa-external-link-alt ms-1" aria-hidden="true"></i><span class="visually-hidden"> (opens in a new tab)</span>
+                  <% end %>
+                </li>
+                <li class="col">
+                  <%= link_to "https://www.library.yorku.ca/web/ask-services/facultyinstructor-support/research-excellence-series-social-sciences-laps-euc-ed/", 
+                      class: "btn btn-light text-york-red-medium border-secondary d-block h-100 rounded-1 py-2 px-3 fw-bold", 
+                      target: "_blank", rel: "noopener noreferrer" do %>
+                    Social Sciences <i class="fas fa-external-link-alt ms-1" aria-hidden="true"></i><span class="visually-hidden"> (opens in a new tab)</span>
+                  <% end %>
+                </li>
+              </ul>
+            </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="row mx-0 mb-4 bg-white border border-2 rounded-1">
+      <div class="col-12 p-0">
+        <div class="p-3 border-start border-5 border-success">
+            <h2 class="h3 mb-2">
+              <i class="fas fa-tools text-success me-2" aria-hidden="true"></i>
+              Specialized classes
+            </h2>
+            <p class="col-xl-10 px-0 mb-2">Does your assignment or course require specialized instruction (for example, Government Documents, Data, Maps, or GIS)? If so, please use the booking link below.</p>
+            <p class="col-xl-10 px-0 mb-3 text-secondary fw-bold"><i class="fas fa-clock text-success me-1" aria-hidden="true"></i> Three weeks is required for scheduling purposes.</p>
+            <%= link_to new_user_teaching_request_path, class: "btn btn-success fw-bold text-wrap" do %>
+              <i class="fas fa-calendar-plus me-1" aria-hidden="true"></i>
+              Customized, Advanced or Graduate Class Request Form
+            <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <%# Previous two-column homepage layout retained temporarily for comparison. %>
   <div class="container-fluid mt-4">
     <div class="row d-flex align-items-stretch mt-4 border-1">
       <div class="col-md-6 col-sm-12 d-flex">

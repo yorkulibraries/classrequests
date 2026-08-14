@@ -1,6 +1,8 @@
 class User::IntroLibraryResearchesController < User::BaseController
-  before_action :set_intro_library_research, only: %i[ show edit update destroy ]
-  invisible_captcha only: [:create, :update], on_spam: :your_spam_callback_method
+  # before_action :set_intro_library_research, only: %i[ show edit update destroy ]
+  # invisible_captcha only: [:create, :update], on_spam: :your_spam_callback_method
+  before_action :set_intro_library_research, only: %i[show destroy]
+  invisible_captcha only: [:create], on_spam: :your_spam_callback_method
 
   # GET /intro_library_researches/1 or /intro_library_researches/1.json
   def show
