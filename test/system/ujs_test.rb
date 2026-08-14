@@ -19,10 +19,10 @@ class UjsTest < ApplicationSystemTestCase
       link.id = "ujs-confirm-probe";
       link.setAttribute("data-confirm", "Are you sure?");
       link.textContent = "UJS Confirm Probe";
-      document.body.appendChild(link);
+      document.querySelector("#page-content-wrapper > .container-fluid").prepend(link);
     JS
 
-    click_link "UJS Confirm Probe"
+    find("#ujs-confirm-probe").click
 
     assert_selector ".modal", text: "Are you sure?", visible: true
     assert_selector ".modal .commit", text: "Confirm", visible: true
