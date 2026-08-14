@@ -8,7 +8,7 @@ ruby File.read('.ruby-version').strip
 ###############
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 # gem 'rails', '~> 6.1.4'
-gem 'rails', '7.1.6'
+gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 # Use Puma as the app server
 gem 'puma', '~> 6.6'
 # Use SCSS for stylesheets

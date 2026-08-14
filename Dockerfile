@@ -1,4 +1,6 @@
-FROM ruby:3.1.4-bullseye
+# FROM ruby:3.1.4-bullseye
+FROM ruby:3.1-bookworm
+# FROM ruby:3.2-bookworm
 
 WORKDIR /app
 

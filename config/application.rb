@@ -13,7 +13,12 @@ module Libstar
     
     
     # config.load_defaults 7.0
-    config.load_defaults 7.1
+    # config.load_defaults 7.1
+    config.load_defaults 7.2
+    config.yjit = false ## uncomment this for rails 8 or ruby > 3.3+
+    config.autoload_lib(ignore: %w[assets tasks templates])
+
+    
 
     # config.hosts << "127.0.0.1"
     # config.hosts << "classrequests.me.ca"
