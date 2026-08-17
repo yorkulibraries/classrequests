@@ -7,7 +7,6 @@
     <hr class="primary mb-0"/>
   </header>
 
-  <%# New stacked homepage content. Keep the previous two-column layout below while this is reviewed. %>
   <div class="container-xl px-0 mt-4">
     <section class="row mx-0 mb-4 bg-white border border-2 rounded-1">
       <div class="col-12 p-0">
@@ -96,58 +95,5 @@
     </section>
   </div>
 
-  <%# Previous two-column homepage layout retained temporarily for comparison. %>
-  <div class="container-fluid mt-4">
-    <div class="row d-flex align-items-stretch mt-4 border-1">
-      <div class="col-md-6 col-sm-12 d-flex">
-        <div class="d-flex flex-column p-3 bg-light border rounded w-100">
-          <h3>Introduction to Library Research</h3>
-          <p>If your students require introductory library skills to complete assignments in your course, we recommend our four-class series: <a href="https://www.library.yorku.ca/web/ask-services/facultyinstructor-support/think-research-create-introduction-to-library-research/">"Think, Research, Create: Introduction to Library Research"</a>, </p>
-          <p>Each 90-minute class: </p>
-          <ul>
-            <li>Includes distinct knowledge and skills </li>
-            <li>Employs active learning principles </li>
-            <li>Is taught synchronously over Zoom or in person </li>
-            <li>Is offered multiple times a term </li>
-            
-          </ul>
-          
-          <p>Students can receive a certificate of participation for each class they attend which they can upload to your e-class at your discretion. </p>
-          <p>If you are interested in one or more of the classes and would like to ask your students to attend, please fill out the form below.</p>
-          <p class="bg-warning text-dark small fw-2 badge text-center p-2" style="width: 100px">*** NEW *** </p>
-          <div id="ilr-action">
-            <%= link_to new_user_intro_library_research_path, class: 'btn btn-lg btn-dark w-100', 'aria-disabled': 'true' do %>
-              <span><i class='fas fa-chalkboard-teacher mr-3'></i> &nbsp; Introduction to Library Research classes</span>
-            <% end %>
-          </div>
-        
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-12 d-flex">
-        <!-- <div class="p-3 bg-light border rounded mb-3"> -->
-        <div class="d-flex flex-column p-3 bg-light border rounded w-100">
-          <h3>Customized, Advanced or Graduate classes</h3>
-          <p>Does your assignment or course require instruction beyond the fundamentals of library research? If so, please use the booking link below. Please note:  
-          <ul> 
-            <li>Three weeks is required for scheduling purposes </li>
-            <li>The class should be scheduled a week or so after students have received their assignments / topics </li>
-            <li>Instructors must be present throughout the class to engage with students and answer questions about the assignment / topics </li>
-          </ul>
-          <br/>
-          <p class="text-success fw-2 small mt-auto">Available</p>
-          <%= link_to new_user_teaching_request_path, class: 'btn btn-lg btn-success w-100' do %>
-            <span><i class='fa fa-graduation-cap mr-2'></i>&nbsp; <%= t(:request_library_class, scope: :button) %></span>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-12 text-center">
-        <p style="background-color: #eee" class="p-2"><%= raw t(:for_questions_and_suggestions, scope: :request_schedule_bullets) %>
-        <%== Setting.questions_inquiries_contact %></p>
-      </div>
-    </div>
-
-  </div>
 
 </div> <!-- jumbo -->

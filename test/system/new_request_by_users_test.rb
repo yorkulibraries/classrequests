@@ -13,7 +13,7 @@ class NewRequestByUsersTest < ApplicationSystemTestCase
   test "creating the new request by faculty" do
     visit root_url
     assert_selector "h1", text: "Library Class Request Form"
-    click_link('Customized, Advanced or Graduate class request')
+    click_link('Customized, Advanced or Graduate Class Request Form')
 
     assert_current_path(new_user_teaching_request_path(locale: 'en'))
     # visit new_user_teaching_request_url

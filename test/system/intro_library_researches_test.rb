@@ -10,9 +10,7 @@ class IntroLibraryResearchesTest < ApplicationSystemTestCase
   test "creating the new intro library research request by faculty" do
     visit root_url
     assert_selector "h1", text: "Library Class Request Form"
-    within ("#ilr-action") do
-      click_link('Introduction to Library Research')
-    end
+    click_link('Complete the Core Class Form')
   end
 
   # test "should create intro library research" do
