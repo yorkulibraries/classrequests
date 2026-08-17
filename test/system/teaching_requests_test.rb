@@ -42,39 +42,16 @@ class TeachingRequestsTest < ApplicationSystemTestCase
 
     ## Should be prompted for login
     sign_in(@patron)
-    click_on ' Customized, Advanced or Graduate class request'
+    click_on 'Customized, Advanced or Graduate Class Request Form', exact: true
     assert_selector "h1", text: "New Library Class Request"
 
     # find("#teaching_request_academic_year_chosen", visible: false).find("option[value='2022-2023']").click
     # find("#teaching_request_faculty_abbrev", visible: false).find("option[value='ED - Faculty of Education']").click
     # find("#teaching_request_subject_abbrev", visible: false).find("option[value='BIOL - Biology']").click
 
-    assert_selector '#teaching_request_academic_term_chosen'
-
-    select_element = find('#teaching_request_academic_term_chosen')
-    select_element.click
-    within '.chosen-results' do
-      find('li', text: "Fall/Winter").click
-    end
-
-    assert_selector '#teaching_request_academic_term_chosen .chosen-single', text: "Fall/Winter"
-
-    
-    assert_selector '#teaching_request_academic_year_chosen'
-  
-    select_option_value = '2022-2023'
-    select_element = find('#teaching_request_academic_year_chosen')
-    select_element.click
-    within '.chosen-results' do
-      find('li', text: select_option_value).click
-    end
-    # Assert that the selected option is displayed in the chosen-rails dropdown
-    assert_selector '#teaching_request_academic_year_chosen .chosen-single', text: select_option_value
-
-    
-    ## Select the year
-    select_year_option_value = '2022-2023'
-    select_chosen_option('#teaching_request_academic_year_chosen', select_year_option_value)
+    ## Select the academic term and year
+    select_chosen_option('#teaching_request_academic_term_chosen', 'Fall/Winter')
+    select_chosen_option('#teaching_request_academic_year_chosen', '2022-2023')
 
     ## Select the faculty
     select_fac_option_value = 'ED - Faculty of Education'
