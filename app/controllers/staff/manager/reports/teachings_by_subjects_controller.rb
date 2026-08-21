@@ -1,4 +1,6 @@
-class Staff::Manager::Reports::TeachingsBySubjectsController < ApplicationController
+class Staff::Manager::Reports::TeachingsBySubjectsController < Staff::Manager::BaseController
+  include SubjectPortfolioReportFiltering
+
   layout 'staff/manager/base'
 
   def index
@@ -59,6 +61,8 @@ class Staff::Manager::Reports::TeachingsBySubjectsController < ApplicationContro
       @results = {}
     end
 
+    apply_subject_portfolio_filter
+
     # end
     respond_to do |format|
       format.html
@@ -81,9 +85,16 @@ class Staff::Manager::Reports::TeachingsBySubjectsController < ApplicationContro
       @end_date = params[:teachings_by_subjects][:end_date]
       @status = params[:teachings_by_subjects][:status]
       @subject = params[:teachings_by_subjects][:subject]
+      @subject_portfolio_filter = params[:teachings_by_subjects][:subject_portfolio]
       respond_to do |format|
         format.html {
-          redirect_to staff_manager_reports_teachings_by_subjects_path(start: @start_date, end: @end_date, status: @status, subject: @subject)
+          redirect_to staff_manager_reports_teachings_by_subjects_path(
+            start: @start_date,
+            end: @end_date,
+            status: @status,
+            subject: @subject,
+            subject_portfolio: @subject_portfolio_filter
+          )
         }
       end
     end

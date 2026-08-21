@@ -1,0 +1,81 @@
+<% remote_form = local_assigns.fetch(:remote, false) %>
+<% modal_form = local_assigns.fetch(:modal, false) %>
+
+<%= simple_form_for(
+      @teaching_request,
+      url: staff_manager_portfolio_lead_assignment_path(id: @teaching_request.id),
+      method: :patch,
+      remote: remote_form,
+      html: { id: 'portfolio_lead_assignment_form' }
+    ) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <section aria-labelledby="portfolio-lead-request-heading">
+    <h2 id="portfolio-lead-request-heading" class="h5 text-primary">
+      <%= t('subject_portfolios.assignment.request_information') %>
+    </h2>
+    <dl class="row small mb-4">
+      <dt class="col-sm-3"><%= t('subject_portfolios.claim.fields.portfolio') %></dt>
+      <dd class="col-sm-9"><%= @teaching_request.subject_portfolio&.name %></dd>
+
+      <dt class="col-sm-3"><%= t('subject_portfolios.assignment.fields.requestor') %></dt>
+      <dd class="col-sm-9"><%= @teaching_request.first_name %> <%= @teaching_request.last_name %></dd>
+
+      <dt class="col-sm-3"><%= t('subject_portfolios.assignment.fields.course') %></dt>
+      <dd class="col-sm-9 mb-0">
+        <%= @teaching_request.faculty_abbrev %>/<%= @teaching_request.subject_abbrev %>
+        <%= @teaching_request.course_number %> <%= @teaching_request.academic_year %>
+      </dd>
+    </dl>
+  </section>
+
+  <section aria-labelledby="portfolio-lead-assignment-heading">
+    <h2 id="portfolio-lead-assignment-heading" class="h5 text-primary">
+      <%= t('subject_portfolios.claim.heading') %>
+    </h2>
+    <% if @eligible_members.any? %>
+      <%= f.input :lead_instructor_id,
+                  collection: @eligible_members,
+                  label: t('subject_portfolios.claim.fields.member'),
+                  label_method: :full_name,
+                  value_method: :id,
+                  prompt: t('subject_portfolios.claim.prompt'),
+                  required: true,
+                  input_html: { class: 'form-select' } %>
+    <% else %>
+      <p class="text-muted"><%= t('subject_portfolios.claim.no_members') %></p>
+    <% end %>
+  </section>
+
+  <div class="alert alert-light border small mt-3 mb-0" role="note">
+    <strong><%= t('subject_portfolios.claim.confirmed_heading') %></strong>
+    <%= t('subject_portfolios.claim.confirmed_help') %><br>
+    <strong><%= t('subject_portfolios.claim.acceptance_heading') %></strong>
+    <%= t('subject_portfolios.claim.acceptance_help') %>
+  </div>
+
+  <div class="d-flex flex-wrap gap-2 border-top pt-3 mt-4">
+    <%= button_tag t('subject_portfolios.claim.actions.confirm'),
+                   type: 'submit',
+                   name: 'assignment_mode',
+                   value: 'confirmed',
+                   class: 'btn btn-success',
+                   disabled: !@teaching_request.portfolio_claimable? || @eligible_members.none? %>
+    <%= button_tag t('subject_portfolios.claim.actions.request_acceptance'),
+                   type: 'submit',
+                   name: 'assignment_mode',
+                   value: 'acceptance_required',
+                   class: 'btn btn-outline-primary',
+                   disabled: !@teaching_request.portfolio_claimable? || @eligible_members.none? %>
+    <% if modal_form %>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <%= t('subject_portfolios.claim.actions.cancel') %>
+      </button>
+    <% else %>
+      <%= link_to t('subject_portfolios.claim.actions.cancel'),
+                  staff_manager_teaching_requests_path,
+                  class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+<% end %>

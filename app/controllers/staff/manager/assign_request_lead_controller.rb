@@ -1,4 +1,4 @@
-class Staff::Manager::AssignRequestLeadController < ApplicationController
+class Staff::Manager::AssignRequestLeadController < Staff::Manager::BaseController
   def edit
     set_request
     @active_instructors = User.includes(:staff_profile).references(:staff_profiles).where.not(staff_profiles: {role: [0,1] }).where(is_active: true).order(:first_name)

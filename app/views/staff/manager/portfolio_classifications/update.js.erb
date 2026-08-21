@@ -1,0 +1,5 @@
+<% if @teaching_request.errors.empty? %>
+  window.location.reload();
+<% else %>
+  $('#portfolio_classification_form').replaceWith("<%= escape_javascript(render 'form', remote: true, modal: true) %>");
+<% end %>

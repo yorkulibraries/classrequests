@@ -30,7 +30,7 @@
           <td><%= assignment.response %></td>
           <td><%= assignment.comment_or_reason %></td>
           <!-- <td>
-            <%= link_to staff_teaching_request_assignment_response_path(assignment.teaching_request, assignment) , class: 'btn btn-sm btn-info' do %>
+            <%= link_to staff_teaching_request_assignment_response_path(teaching_request_id: assignment.teaching_request_id, id: assignment.id) , class: 'btn btn-sm btn-info' do %>
               <i class='fas fa-eye'></i>
             <% end %>
           </td> -->

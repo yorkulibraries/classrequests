@@ -26,6 +26,8 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - NODE_OPTIONS=--openssl-legacy-provider
       - SELENIUM_SERVER=chrome-server
+      - MAILER_SMTP_HOST=${MAILER_SMTP_HOST:-mail}
+      - MAILER_SMTP_PORT=${MAILER_SMTP_PORT:-1025}
     env_file:
       - path: ./override.env
         required: false
@@ -56,4 +58,3 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
-

@@ -71,8 +71,11 @@ Rails.application.routes.draw do
       resources :teaching_requests, except: [:index] #only: [:show, :new, :edit, :update, :create, :destroy]
 
       resources :mark_done_teaching_requests, only: [:edit, :update]
+      resources :mark_cancelled_teaching_requests, only: [:update]
       resources :mark_deleted_teaching_requests, only: [:update]
       resources :mark_unfulfilled_teaching_requests, only: [:edit, :update]
+      resources :portfolio_claims, only: [:update]
+      resources :portfolio_declines, only: %i[new create]
 
       resources :teaching_requests do
         resources :assignment_responses
@@ -91,6 +94,9 @@ Rails.application.routes.draw do
           resources :sections
         end
         resources :request_status_updates, only: [:edit, :update]
+        resources :portfolio_assignments, only: [:edit, :update]
+        resources :portfolio_classifications, only: [:edit, :update]
+        resources :portfolio_lead_assignments, only: [:edit, :update]
         resources :assign_request_lead, only: [:edit, :update]
         resources :lead_assignment_response, only: [:edit, :update]
         resource :approve_staff_accounts, only: [:update]
@@ -101,7 +107,7 @@ Rails.application.routes.draw do
           resources :teachings_by_subjects, only: [:index, :new, :create]
         end
 
-        resources :cancel_requests
+        resources :cancel_requests, only: [:index]
 
       end
 
@@ -115,6 +121,11 @@ Rails.application.routes.draw do
         resources :staff_profiles
         resources :type_of_instructions
         resources :campus_locations
+        resources :subject_portfolios do
+          resources :subject_portfolio_memberships,
+                    only: %i[create destroy],
+                    path: 'memberships'
+        end
         resources :users, except: [:new, :create]
         resource :settings
       end

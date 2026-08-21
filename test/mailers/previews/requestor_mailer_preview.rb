@@ -16,10 +16,8 @@ class RequestorMailerPreview < ActionMailer::Preview
   def cancel_request_confirmation
 
     cancel_request = CancelRequest.where.not(user: nil).sample
-    requestor = User.find(cancel_request.user.id)
     request = cancel_request.teaching_request
-    patron_email = requestor.email
-    RequestorMailer.cancel_request_confirmation(request, requestor)
+    RequestorMailer.cancel_request_confirmation(request)
 
   end
 end

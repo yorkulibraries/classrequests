@@ -84,7 +84,10 @@ Rails.application.configure do
 
   # MAIL PARAMS
   config.action_mailer.delivery_method = :smtp # Setting.delivery_method.parameterize.underscore.to_sym #:sendmail
-  config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch('MAILER_SMTP_HOST', 'localhost'),
+    port: ENV.fetch('MAILER_SMTP_PORT', 1025)
+  }
   config.action_mailer.default_url_options = { host: 'localhost:3009'  }
   # mailcatcher -f --http-ip 0.0.0.0"
   

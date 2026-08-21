@@ -1,4 +1,6 @@
 class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseController
+  include SubjectPortfolioReportFiltering
+
   layout 'staff/base'
 
   def index
@@ -75,6 +77,8 @@ class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseControlle
       @results = {}
     end
     
+    apply_subject_portfolio_filter
+
     respond_to do |format|
       format.html
       # format.csv { send_data @results.to_csv }
@@ -95,9 +99,16 @@ class Staff::Reports::TeachingsByDeptDateRangesController < Staff::BaseControlle
       @end_date = params[:teachings_by_dept_date_ranges][:end_date]
       @status = params[:teachings_by_dept_date_ranges][:status]
       @department = params[:teachings_by_dept_date_ranges][:department]
+      @subject_portfolio_filter = params[:teachings_by_dept_date_ranges][:subject_portfolio]
       respond_to do |format|
         format.html {
-          redirect_to staff_reports_teachings_by_dept_date_ranges_path(start: @start_date, end: @end_date, status: @status, department: @department)
+          redirect_to staff_reports_teachings_by_dept_date_ranges_path(
+            start: @start_date,
+            end: @end_date,
+            status: @status,
+            department: @department,
+            subject_portfolio: @subject_portfolio_filter
+          )
         }
       end
     end

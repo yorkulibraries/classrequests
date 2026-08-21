@@ -81,7 +81,7 @@
           <th class='small'><%= t(:duration) %></th>
           <th class='small'><%= t(:location) %></th>
           <th class='small'><%= t(:status) %></th>
-          <th class='small'><%= t(:lead_instructor) %></th>
+          <th class='small'><%= t('subject_portfolios.assignment.fields.assignment') %></th>
           <th class='small'><%= t(:options) %></th>
           <th />
         </thead>
@@ -95,13 +95,28 @@
             <td class='small'><%= request.location_preference.text %></td>
             <td class='small'><span class='badge badge-pill badge-<%= request.status.downcase.parameterize %>'><%= request.status.text %></span></td>
             <td class='small'>
-              <% if request.lead_instructor %>
-                <%= request.lead_instructor.name rescue nil %>
-              <% else %>
-                <%= link_to edit_staff_manager_assign_request_lead_path(id: request.id), class: 'btn btn-sm btn-success', remote: true do %>
-                  <%= t(:assign_request_lead) %>
-                  <i class='fa fa-bolt'></i>
+              <% if request.subject_portfolio %>
+                <span class="badge bg-secondary"><%= request.subject_portfolio.name %></span>
+                <%= link_to edit_staff_manager_portfolio_classification_path(id: request.id),
+                            class: 'btn btn-sm btn-outline-secondary ms-1',
+                            remote: true,
+                            title: t('subject_portfolios.classification.actions.manage') do %>
+                  <i class="fas fa-edit" aria-hidden="true"></i>
                 <% end %>
+              <% elsif request.lead_instructor %>
+                <%= request.lead_instructor.name rescue nil %>
+                <%= link_to edit_staff_manager_portfolio_classification_path(id: request.id),
+                            class: 'btn btn-sm btn-outline-secondary ms-1',
+                            remote: true do %>
+                  <%= t('subject_portfolios.classification.actions.add') %>
+                <% end %>
+              <% elsif request.portfolio_assignable? %>
+                <%= link_to edit_staff_manager_portfolio_assignment_path(id: request.id), class: 'btn btn-sm btn-success', remote: true do %>
+                  <%= t('subject_portfolios.assignment.actions.assign') %>
+                  <i class="fas fa-users ms-1" aria-hidden="true"></i>
+                <% end %>
+              <% else %>
+                <span class="text-muted"><%= t('subject_portfolios.assignment.unassigned') %></span>
               <% end %>
             </td>
             <td colspan='2'>
@@ -123,6 +138,11 @@
   </div>
 </div>
 <% end %>
+
+<%= render 'shared/teaching_request/portfolio_assignment_queue',
+           requests: @portfolio_teaching_requests,
+           mode: :manager_assign,
+           title: t('subject_portfolios.claim.queue.manager_title') %>
 
 <div class='card mb-3 shadow p-2 rounded'>
   <div class='card-body'>

@@ -1,0 +1,15 @@
+New library class request
+
+A request has been assigned to the <%= @subject_portfolio.name %> subject portfolio.
+
+Requestor: <%= @request.first_name %> <%= @request.last_name %> (<%= @request.email %>)
+Course: <%= @request.faculty_abbrev %>/<%= @request.subject_abbrev %> <%= @request.course_number %> - <%= @request.course_title.presence || 'Title not provided' %>
+Preferred date: <%= l(@request.preferred_date, format: :long) %> <%= @request.preferred_time.strftime('%I:%M %p') if @request.preferred_time.present? %>
+Duration: <%= @request.duration.text %>
+Location: <%= @request.location_preference.text %>
+
+Please coordinate within the portfolio to choose the staff member who will lead this request.
+
+Log in: <%= operators_index_url(host: Setting.web_host) %>
+
+THIS IS AN AUTOMATIC NOTIFICATION. DO NOT REPLY TO THIS EMAIL.

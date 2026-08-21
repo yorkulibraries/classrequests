@@ -58,6 +58,11 @@
 </div>
 <% end %>
 
+<%= render 'shared/teaching_request/portfolio_assignment_queue',
+           requests: @portfolio_teaching_requests,
+           mode: :self_claim,
+           title: t('subject_portfolios.claim.queue.staff_title') %>
+
 <% if current_user.staff_profile.is_approved? %>
   <% if @lead_assignments.count != 0 %>
   <div class='section-list-wrapper card mb-3 shadow p-2 rounded border border-primary border-1'>
@@ -88,7 +93,7 @@
                 <% end %>
                 <% if request.status == TeachingRequest.status.new_request ||
                       request.status == TeachingRequest.status.in_process %>
-                  <%= link_to new_staff_teaching_request_assignment_response_path(request), class: 'btn btn-sm btn-secondary mr-1 mb-1', remote: true do %>
+                  <%= link_to new_staff_teaching_request_assignment_response_path(teaching_request_id: request.id), class: 'btn btn-sm btn-secondary mr-1 mb-1', remote: true do %>
                     <%= t(:respond) %>
                     <i class='fas fa-thumbs-up' data-bs-toggle='tooltip' data-bs-placement='top' title='<%= t(:respond_to_assignment) %>'></i>
                     <i class='fas fa-thumbs-down'></i>

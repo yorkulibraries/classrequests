@@ -42,6 +42,7 @@ en:
   respond_to_assignment: 'Respond to Assignment'
   mark_unfulfilled: 'Mark Unfulfilled'
   mark_done: 'Mark Done'
+  mark_cancelled: 'Mark Cancelled'
   mark_deleted: 'Mark Deleted'
   close: 'Close'
   status: 'Status'

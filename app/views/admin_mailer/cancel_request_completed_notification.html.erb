@@ -1,0 +1,15 @@
+<div class='container ax-left'>
+  <div class='card my-10'>
+    <div class='card-body'>
+      <%= image_tag attachments["#{Setting.mail_logo_url}"].url, alt: "#{Setting.app_name}", class: 'img-fluid h-16 w-auto ax-left mb-1' %>
+      <hr class='text-red-700 bg-red-400 my-1' />
+      <h1 class='h3 mt-3 mb-2'>Cancellation completed</h1>
+      <p class='text-gray-700'>Class request #<%= @request.id %> was marked cancelled by <strong><%= @processed_by.name %></strong>.</p>
+      <p class='text-gray-700'>The cancellation was requested by <strong><%= @requestor.name %></strong>, and the requestor confirmation email was sent to <%= @request.email %>.</p>
+      <div class='bg-gray-100 p-3 mt-3'>
+        <%= render partial: 'shared/mailer/show_request_information_fields', locals: {:@request => @request} %>
+      </div>
+      <p class='mt-3'><a class='btn btn-dark' href="<%= staff_manager_teaching_request_url(id: @request.id, locale: I18n.locale) %>">View cancelled request</a></p>
+    </div>
+  </div>
+</div>

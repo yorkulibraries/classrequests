@@ -24,6 +24,17 @@
               input_html: {class: 'form-select request-chosen'} %>
       </div>
     </div> <!-- row -->
+    <div class='row mt-2'>
+      <div class='col-sm-12 text-value'>
+        <%= f.input :subject_portfolio,
+                    as: :select,
+                    collection: subject_portfolio_filter_options,
+                    include_blank: false,
+                    required: false,
+                    label: t('subject_portfolios.classification.reports.filter'),
+                    input_html: { class: 'form-select request-chosen' } %>
+      </div>
+    </div>
     <hr/>
     <div class='row'>
       <div class='form-actions'>

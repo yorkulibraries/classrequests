@@ -1,0 +1,36 @@
+<%= simple_form_for(
+      [:staff, :admin, subject_portfolio],
+      url: subject_portfolio.persisted? ? staff_admin_subject_portfolio_path(id: subject_portfolio.id) : staff_admin_subject_portfolios_path
+    ) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <%= f.input :name,
+                  label: t('subject_portfolios.fields.name'),
+                  input_html: { autocomplete: 'off' } %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :notification_email,
+                  as: :email,
+                  label: t('subject_portfolios.fields.notification_email'),
+                  input_html: { autocomplete: 'email' } %>
+    </div>
+    <div class="col-12">
+      <%= f.input :active,
+                  as: :boolean,
+                  label: t('subject_portfolios.fields.active') %>
+    </div>
+  </div>
+
+  <hr>
+  <div class="d-flex gap-2">
+    <%= f.button :submit,
+                 subject_portfolio.persisted? ? t('subject_portfolios.actions.save') : t('subject_portfolios.actions.create'),
+                 class: 'btn btn-success' %>
+    <%= link_to t('subject_portfolios.actions.cancel'),
+                subject_portfolio.persisted? ? staff_admin_subject_portfolio_path(id: subject_portfolio.id) : staff_admin_subject_portfolios_path,
+                class: 'btn btn-outline-secondary' %>
+  </div>
+<% end %>

@@ -74,3 +74,8 @@ test-screenshots
 
 production-storage/
 storage.bkup.tar
+
+# Microsoft Word lock files
+~$*.docx
+
+docs/local/*

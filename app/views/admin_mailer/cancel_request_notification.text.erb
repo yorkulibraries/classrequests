@@ -1,0 +1,10 @@
+Cancellation request submitted
+
+<%= @requestor.name %> submitted a cancellation request for class request #<%= @request.id %>.
+The teaching request is still active and is pending manager review.
+
+Cancellation reason:
+<%= @message %>
+
+Review the request:
+<%= staff_manager_teaching_request_url(id: @request.id, locale: I18n.locale) %>

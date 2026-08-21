@@ -24,23 +24,17 @@ class AdminMailerPreview < ActionMailer::Preview
   def cancel_request_notification
 
     cancel_request = CancelRequest.where.not(user: nil).sample
-    requestor = User.find(cancel_request.user.id)
-    request = cancel_request.teaching_request
-    patron_email = requestor.email
-    message = (cancel_request.reason != nil) ? cancel_request.reason : "Did not leave a comment"
-    AdminMailer.cancel_request_notification(request, message, requestor)
+    AdminMailer.cancel_request_notification(cancel_request)
 
+  end
+
+  def cancel_request_completed_notification
+    cancel_request = CancelRequest.where.not(user: nil).sample
+    processed_by = User.joins(:staff_profile).first || cancel_request.user
+    AdminMailer.cancel_request_completed_notification(cancel_request, processed_by)
   end
 
   # def error_notification(message)
   #
   # end
-  # def cancel_request_notification
-  #   message =""
-  #   requestor=""
-  #   AdminMailer.cancel_request_notification(request, message, requestor)
-  # end
-
-
-
 end

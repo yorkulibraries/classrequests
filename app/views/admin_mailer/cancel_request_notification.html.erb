@@ -4,11 +4,11 @@
       <%= image_tag attachments["#{Setting.mail_logo_url}"].url, alt: "#{Setting.app_name}", class: 'img-fluid h-16 w-auto ax-left mb-1' %>
       <hr class='text-red-700 bg-red-400 my-1' />
       <h1 class='h3 mt-3 mb-2'>Hi,</h1>
-      <h5 class='lh-base text-danger'>User <%= @requestor.name %> has requested a class cancellation</h5>
-      <!-- <h5 class='text-success'>We will review your request and get in touch with you as soon as possible.</h5> -->
+      <h5 class='lh-base text-danger'><%= @requestor.name %> submitted a class cancellation request.</h5>
+      <p class='text-gray-700'>The teaching request is still active and is pending manager review.</p>
       <div class='space-y-3 mt-3'>
         <div class='bg-gray-100 p-3'>
-          <h5 class='text-red-700'><%= t(:reason_given) %></h5>
+          <h5 class='text-red-700'>Cancellation reason</h5>
           <p class='text-success mt-2 ml-3'><%= @message %></p>
         </div>
         <div class='bg-gray-100 p-3'>
@@ -18,7 +18,7 @@
       <p class='text-gray-700 mt-3'>If you have any further questions, please contact <a href='mailto:<%= Setting.director_email %>'><%= Setting.director_name %></a >, <%= Setting.director_position %>, <a href='mailto: <%= Setting.director_email %>'><%= Setting.director_email %></a>.</p><br/>
       <p class='text-gray-700'><em>Login and Review</em></p>
       <div class='row'>
-        <div class='col-4 text-gray-700 fw-700'><a class='btn btn-success' href="<%= root_url %>en/staff/teaching_requests/<%= @request.id %>"><%= t(:view_request) %> </a></div>
+        <div class='col-4 text-gray-700 fw-700'><a class='btn btn-success' href="<%= staff_manager_teaching_request_url(id: @request.id, locale: I18n.locale) %>">Review cancellation request</a></div>
         <div class='col-4'><a class='btn btn-dark' href="<%= operators_index_url(host: Setting.web_host) %>" target='_blank'><%= Setting.app_name %> <%= t(:dashboard) %></a></div>
       </div>
     </div>

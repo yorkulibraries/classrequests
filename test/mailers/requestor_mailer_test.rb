@@ -24,4 +24,13 @@ class RequestorMailerTest < ActionMailer::TestCase
     assert_includes mail.body.encoded, @request.first_name
     assert mail.attachments[Setting.mail_logo_url], "expected inline mail logo attachment"
   end
+
+  test "cancellation confirmation clearly describes the completed cancellation" do
+    mail = RequestorMailer.cancel_request_confirmation(@request)
+
+    assert_equal [@request.email], mail.to
+    assert_equal "Library class request cancellation confirmed", mail.subject
+    assert_includes mail.text_part.body.decoded, "has been cancelled"
+    assert_includes mail.html_part.body.decoded, "has been processed"
+  end
 end

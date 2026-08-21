@@ -1,0 +1,115 @@
+<% page_title @subject_portfolio.name %>
+
+<div class="card bg-white border shadow-sm mb-4">
+  <div class="card-body p-3 p-lg-4">
+    <div class="row align-items-center mb-3">
+      <div class="col-lg-8">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <h1 class="mb-0"><%= @subject_portfolio.name %></h1>
+          <% if @subject_portfolio.active? %>
+            <span class="badge bg-success"><%= t('subject_portfolios.status.active') %></span>
+          <% else %>
+            <span class="badge bg-secondary"><%= t('subject_portfolios.status.inactive') %></span>
+          <% end %>
+        </div>
+        <hr class="primary mt-2">
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <%= link_to staff_admin_subject_portfolios_path, class: 'btn btn-sm btn-outline-secondary' do %>
+          <i class="fas fa-arrow-left me-1" aria-hidden="true"></i>
+          <%= t('subject_portfolios.actions.back') %>
+        <% end %>
+        <%= link_to edit_staff_admin_subject_portfolio_path(id: @subject_portfolio.id), class: 'btn btn-sm btn-primary' do %>
+          <i class="fas fa-edit me-1" aria-hidden="true"></i>
+          <%= t('subject_portfolios.actions.edit') %>
+        <% end %>
+      </div>
+    </div>
+
+    <dl class="row mb-4">
+      <dt class="col-sm-3 col-lg-2"><%= t('subject_portfolios.fields.notification_email') %></dt>
+      <dd class="col-sm-9 col-lg-10"><%= mail_to @subject_portfolio.notification_email %></dd>
+      <dt class="col-sm-3 col-lg-2"><%= t('subject_portfolios.fields.assigned_requests') %></dt>
+      <dd class="col-sm-9 col-lg-10"><%= @subject_portfolio.teaching_requests.count %></dd>
+    </dl>
+
+    <section aria-labelledby="portfolio-members-heading">
+      <div class="row g-4">
+        <div class="col-xl-8">
+          <h2 id="portfolio-members-heading" class="h3"><%= t('subject_portfolios.members.title') %></h2>
+          <hr>
+
+          <div class="table-responsive">
+            <table class="table table-sm table-striped align-middle">
+              <thead>
+                <tr>
+                  <th scope="col"><%= t('subject_portfolios.members.name') %></th>
+                  <th scope="col"><%= t('subject_portfolios.members.email') %></th>
+                  <th scope="col"><%= t('subject_portfolios.members.role') %></th>
+                  <th scope="col"><%= t('subject_portfolios.members.department') %></th>
+                  <th scope="col" class="text-end"><%= t('subject_portfolios.fields.actions') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @subject_portfolio_memberships.any? %>
+                  <% @subject_portfolio_memberships.each do |membership| %>
+                    <% member = membership.user %>
+                    <tr id="<%= dom_id(membership) %>">
+                      <td class="fw-bold"><%= member.full_name.presence || member.username %></td>
+                      <td><%= mail_to member.email %></td>
+                      <td><%= member.staff_profile&.role&.text %></td>
+                      <td><%= member.staff_profile&.department&.name %></td>
+                      <td class="text-end">
+                        <%= button_to staff_admin_subject_portfolio_subject_portfolio_membership_path(
+                                        subject_portfolio_id: @subject_portfolio.id,
+                                        id: membership.id
+                                      ),
+                                      method: :delete,
+                                      class: 'btn btn-sm btn-outline-danger',
+                                      form: { class: 'd-inline' },
+                                      title: t('subject_portfolios.actions.remove_member'),
+                                      aria: { label: t('subject_portfolios.actions.remove_member_named', name: member.full_name) },
+                                      data: { confirm: t('subject_portfolios.confirmations.remove_member', name: member.full_name) } do %>
+                          <i class="fas fa-user-minus" aria-hidden="true"></i>
+                          <span class="visually-hidden"><%= t('subject_portfolios.actions.remove_member') %></span>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% else %>
+                  <tr>
+                    <td colspan="5" class="text-center text-muted py-3"><%= t('subject_portfolios.members.empty') %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-xl-4">
+          <div class="border bg-light p-3">
+            <h2 class="h5"><%= t('subject_portfolios.members.add') %></h2>
+            <% if @eligible_members.any? %>
+              <%= simple_form_for(
+                    [:staff, :admin, @subject_portfolio, @subject_portfolio_membership],
+                    url: staff_admin_subject_portfolio_subject_portfolio_memberships_path(
+                      subject_portfolio_id: @subject_portfolio.id
+                    )
+                  ) do |f| %>
+                <%= f.association :user,
+                                  collection: @eligible_members,
+                                  label: t('subject_portfolios.members.staff_member'),
+                                  label_method: ->(user) { [user.full_name.presence, user.email, user.staff_profile.role.text].compact.join(' | ') },
+                                  include_blank: false,
+                                  input_html: { class: 'form-select' } %>
+                <%= f.button :submit, t('subject_portfolios.actions.add_member'), class: 'btn btn-success mt-2' %>
+              <% end %>
+            <% else %>
+              <p class="text-muted mb-0"><%= t('subject_portfolios.members.none_available') %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

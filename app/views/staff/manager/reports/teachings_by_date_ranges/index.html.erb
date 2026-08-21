@@ -19,6 +19,8 @@
           <dd class='col'><%= @start_date.to_time.strftime('%b %d, %Y') rescue nil %></dd>
           <dt class='col text-muted'><%= t(:preferred_date_end) %>:</dt>
           <dd class='col'><%= @end_date.to_time.strftime('%b %d, %Y') rescue nil %></dd>
+          <dt class='col text-muted'><%= t('subject_portfolios.classification.reports.filter') %>:</dt>
+          <dd class='col'><%= @subject_portfolio_filter_label %></dd>
         </dl>
       </div>
     </div>
@@ -35,6 +37,7 @@
             <th scope='col'><%= t(:time_parsed) %> [<%= t(:duration) %>]</th>
             <th scope='col'><%= t(:course_code) %></th>
             <th scope='col'><%= t(:YUL_lead) %></th>
+            <th scope='col'><%= t('subject_portfolios.classification.reports.filter') %></th>
             <th scope='col'><%= t(:type_of_instruction) %></th>
             <th scope='col'><%= t(:location_or_format) %></th>
             <th scope='col'><%= t(:faculty_instructor) %></th>
@@ -45,7 +48,7 @@
         </thead>
         <tbody>
           <% @results.each_with_index do |res, index| %>
-          <!-- <tr><%= res.ai(html: true)%></tr> -->
+          <!-- <tr> <%# debug output: res.ai(html: true) %> </tr> -->
           <tr>
             <th scope='row text-center'><%= index + 1 %> </th>
             <th scope='row text-center'>
@@ -63,6 +66,7 @@
               2: <%= res.second_instructor.name if res.second_instructor_id rescue nil %><br/>
               3:<%= res.third_instructor.name if res.third_instructor_id rescue nil %>
             </td>
+            <td><%= subject_portfolio_label_for(res) %></td>
             <td> 
               <% if !res.type_of_instructions.blank?  %> 
                 <%= res.type_of_instructions.map(&:name).join(', ')  %> 
@@ -79,7 +83,7 @@
       </table>
     </div> <!-- table-responsive -->
 
-    <%= link_to staff_manager_reports_teachings_by_date_ranges_path(start: @start_date, end: @end_date, status: @status, format: 'xlsx'),
+    <%= link_to staff_manager_reports_teachings_by_date_ranges_path(start: @start_date, end: @end_date, status: @status, subject_portfolio: @subject_portfolio_filter, format: 'xlsx'),
         class: 'btn btn-sm btn-success' do %>
         <i class='fa fa-bar-chart'></i> <%= t(:export_to_excel) %>
     <% end %>

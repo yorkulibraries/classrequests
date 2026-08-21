@@ -1,0 +1,12 @@
+Library class request lead confirmed
+
+<%= @assignee.full_name %> is now the confirmed lead instructor for a request in the <%= @subject_portfolio.name %> subject portfolio.
+Confirmed by: <%= @confirmed_by.full_name %>
+
+Request ID: <%= @request.id %>
+Requestor: <%= @request.first_name %> <%= @request.last_name %> (<%= @request.email %>)
+Course: <%= @request.faculty_abbrev %>/<%= @request.subject_abbrev %> <%= @request.course_number %> - <%= @request.course_title.presence || 'Title not provided' %>
+
+Log in: <%= operators_index_url(host: Setting.web_host) %>
+
+THIS IS AN AUTOMATIC NOTIFICATION. DO NOT REPLY TO THIS EMAIL.

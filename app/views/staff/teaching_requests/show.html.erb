@@ -40,6 +40,8 @@
             <p class='fw-bold small mb-0 text-dark'><%= request.lead_instructor.name rescue nil%></p>
             <p class='fw-bold small mb-0 text-dark'><%= request.second_instructor.full_name rescue nil%></p>
             <p class='fw-bold small mb-0 text-dark'><%= request.third_instructor.full_name rescue nil%></p>
+            <p class='text-muted small mb-0 mt-2'><%= t('subject_portfolios.assignment.fields.subject_portfolio') %>:</p>
+            <p class='fw-bold small mb-0 text-dark'><%= subject_portfolio_label_for(request) %></p>
           </div>
         <!-- </div>
         <div class='row'> -->
@@ -64,7 +66,6 @@
               <span class='fw-bold text-dark'><%= request.campus_location.name rescue nil %></span>
             </p>
 
-            <!-- <p class='text-muted small mb-0' data-bs-toggle='tooltip' data-bs-placement='top' title="<%= truncate(strip_tags(request.request_note.to_plain_text), length: 25) %>"><%= t(:request_note) %>: <span class='fw-bold text-dark'><%= request.request_note %></span></p> -->
           </div>
         <!-- </div>
         <div class='row'> -->

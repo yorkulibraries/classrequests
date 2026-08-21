@@ -110,10 +110,16 @@ namespace :db do
   ## DEFAULT CAMPUS LOCATIONS
   task load_default_campus_locations: :environment do 
     # Seed data for CampusLocations
-    CampusLocation.find_or_create_by(name: 'Keele', address: "198 York Blvd, North York, ON M3J 2S5")
-    CampusLocation.find_or_create_by(name: 'Glendon', address: "2275 Bayview Ave, North York, ON M4N 3M6" )
-    CampusLocation.find_or_create_by(name: 'Markham', address: "1 University Blvd., Unionville, ON L6G 0A1")
-    CampusLocation.find_or_create_by(name: 'Other', address: "")
+    [
+      { name: 'Keele', address: "198 York Blvd, North York, ON M3J 2S5" },
+      { name: 'Glendon', address: "2275 Bayview Ave, North York, ON M4N 3M6" },
+      { name: 'Markham', address: "1 University Blvd., Unionville, ON L6G 0A1" },
+      { name: 'Other', address: "" }
+    ].each do |attributes|
+      CampusLocation.find_or_create_by!(name: attributes[:name]) do |campus_location|
+        campus_location.address = attributes[:address]
+      end
+    end
   end
 
   task set_update_existing_teaching_requests_to_keele: :environment do

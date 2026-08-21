@@ -1,0 +1,6 @@
+$('#subject-portfolio-decline-dialog').remove();
+$('body').append("<div id='subject-portfolio-decline-dialog'><%= escape_javascript(render 'modal') %></div>");
+$('#subject-portfolio-decline-modal').modal('show');
+$('#subject-portfolio-decline-modal').on('hidden.bs.modal', function() {
+  $('#subject-portfolio-decline-dialog').remove();
+});

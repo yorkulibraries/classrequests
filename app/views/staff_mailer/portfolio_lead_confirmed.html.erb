@@ -1,0 +1,39 @@
+<div class="container ax-left">
+  <div class="card my-10">
+    <div class="card-body">
+      <%= image_tag attachments[Setting.mail_logo_url].url,
+                    alt: Setting.app_name,
+                    class: 'img-fluid h-16 w-auto ax-left mb-1' %>
+      <hr class="text-red-700 bg-red-400 my-1">
+      <h1 class="h3 mt-3 mb-2">Portfolio lead confirmed</h1>
+      <p class="text-gray-700">
+        <strong><%= @assignee.full_name %></strong> is now the confirmed lead instructor
+        for a request in the <strong><%= @subject_portfolio.name %></strong> subject portfolio.
+      </p>
+      <p class="text-gray-700">
+        Confirmed by: <strong><%= @confirmed_by.full_name %></strong>
+      </p>
+
+      <div class="bg-gray-100 p-4 mt-3">
+        <h2 class="h5 text-red-700">Request information</h2>
+        <p><strong>Request ID:</strong> <%= @request.id %></p>
+        <p>
+          <strong>Requestor:</strong>
+          <%= @request.first_name %> <%= @request.last_name %>
+          (<a href="mailto:<%= @request.email %>"><%= @request.email %></a>)
+        </p>
+        <p>
+          <strong>Course:</strong>
+          <%= @request.faculty_abbrev %>/<%= @request.subject_abbrev %>
+          <%= @request.course_number %> - <%= @request.course_title.presence || 'Title not provided' %>
+        </p>
+      </div>
+
+      <a class="btn btn-success mt-3" href="<%= operators_index_url(host: Setting.web_host) %>" target="_blank" rel="noopener">
+        Log in to <%= Setting.app_name %>
+      </a>
+
+      <%= render partial: 'shared/mailer/auto_notification_footer' %>
+    </div>
+  </div>
+</div>

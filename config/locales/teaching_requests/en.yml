@@ -24,6 +24,7 @@ en:
         in_process: "In Process"
         assigned: "Assigned"
         unfulfilled: "Unfulfilled"
+        cancelled: "Cancelled"
         deleted: "Deleted"
     teaching_request:
       duration:

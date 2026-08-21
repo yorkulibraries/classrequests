@@ -1,0 +1,4 @@
+"FACULTY","FACULTY_ABREV","FACULTY_SHORT","PERIODFACULTY","SUBJECT_ABREV","SUBJECT_ABREV2","SUBJECT","ACADEMICYEAR","STUDYSESSION","CRSID","COURSETITLE","COURSETITLE1","COURSE_NUMBER","YEAR_LEVEL","CREDIT","SECTION","INSTRUCTOR_NAME"
+"Faculty of Liberal Arts and Professional Studies","AP","LA&PS","AP","ADMS","ADMS","ADMINISTRATIVE STUDIES","2026","FW","AP/ADMS 1000 3.00","Introduction to Business","Introduction to Business","1000","1","3","A","Test Instructor"
+"Faculty of Liberal Arts and Professional Studies","AP","LA&PS","AP","ADMS","ADMS","ADMINISTRATIVE STUDIES","2026","FW","AP/ADMS 1000 3.00","Introduction to Business","Introduction to Business","1000","1","3","B","Another Instructor"
+"Faculty of Science","SC","SCI","SC","BIOL","BIOL","BIOLOGY","2026","FW","SC/BIOL 1001 3.00","Biology I","Biology I","1001","1","3","A","Science Instructor"

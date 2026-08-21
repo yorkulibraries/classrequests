@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_25_163059) do
+ActiveRecord::Schema[7.2].define(version: 2026_08_21_173000) do
   create_table "action_text_rich_texts", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_25_163059) do
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_campus_locations_on_name", unique: true
   end
 
   create_table "cancel_requests", charset: "utf8mb3", force: :cascade do |t|
@@ -220,6 +221,38 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_25_163059) do
     t.index ["user_id"], name: "index_staff_profiles_on_user_id"
   end
 
+  create_table "subject_portfolio_declines", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "teaching_request_id", null: false
+    t.bigint "subject_portfolio_id", null: false
+    t.bigint "declined_by_id", null: false
+    t.text "reason", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["declined_by_id"], name: "index_subject_portfolio_declines_on_declined_by_id"
+    t.index ["subject_portfolio_id"], name: "index_subject_portfolio_declines_on_subject_portfolio_id"
+    t.index ["teaching_request_id", "created_at"], name: "index_portfolio_declines_on_request_and_created_at"
+    t.index ["teaching_request_id"], name: "index_subject_portfolio_declines_on_teaching_request_id"
+  end
+
+  create_table "subject_portfolio_memberships", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "subject_portfolio_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_portfolio_id", "user_id"], name: "index_subject_portfolio_memberships_on_portfolio_and_user", unique: true
+    t.index ["subject_portfolio_id"], name: "index_subject_portfolio_memberships_on_subject_portfolio_id"
+    t.index ["user_id"], name: "index_subject_portfolio_memberships_on_user_id"
+  end
+
+  create_table "subject_portfolios", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "notification_email", null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_subject_portfolios_on_name", unique: true
+  end
+
   create_table "teaching_requests", charset: "utf8mb3", force: :cascade do |t|
     t.string "username"
     t.string "patron_type"
@@ -256,8 +289,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_25_163059) do
     t.datetime "updated_at", null: false
     t.bigint "campus_location_id"
     t.string "academic_term", default: "Missing"
+    t.bigint "subject_portfolio_id"
     t.index ["campus_location_id"], name: "index_teaching_requests_on_campus_location_id"
     t.index ["status"], name: "index_teaching_requests_on_status"
+    t.index ["subject_portfolio_id"], name: "index_teaching_requests_on_subject_portfolio_id"
     t.index ["user_id"], name: "index_teaching_requests_on_user_id"
   end
 
@@ -321,7 +356,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_25_163059) do
   add_foreign_key "requests_sections", "sections"
   add_foreign_key "staff_profiles", "departments"
   add_foreign_key "staff_profiles", "users"
+  add_foreign_key "subject_portfolio_declines", "subject_portfolios"
+  add_foreign_key "subject_portfolio_declines", "teaching_requests"
+  add_foreign_key "subject_portfolio_declines", "users", column: "declined_by_id"
+  add_foreign_key "subject_portfolio_memberships", "subject_portfolios"
+  add_foreign_key "subject_portfolio_memberships", "users"
   add_foreign_key "teaching_requests", "campus_locations"
+  add_foreign_key "teaching_requests", "subject_portfolios"
   add_foreign_key "teaching_type_of_instructions", "teaching_requests"
   add_foreign_key "teaching_type_of_instructions", "type_of_instructions"
 end

@@ -1,6 +1,7 @@
 class Staff::AssignmentResponsesController < Staff::BaseController
   before_action :set_assignment_response, only: %i[ show edit update destroy ]
   before_action :load_teaching_request
+  before_action :authorize_current_lead, only: %i[new create]
   # before_save :set_teaching_request_status
 
   # GET /assignment_responses or /assignment_responses.json
@@ -26,31 +27,20 @@ class Staff::AssignmentResponsesController < Staff::BaseController
 
   # POST /assignment_responses or /assignment_responses.json
   def create
-    # @assignment_response = @teaching_request.assignment_responses.new(assignment_response_params)
-    @assignment_response = AssignmentResponse.new(assignment_response_params)
+    @assignment_response = @teaching_request.assignment_responses.new(
+      assignment_response_params.merge(user: current_user)
+    )
 
-    lead_name = @assignment_response.teaching_request.lead_instructor.name
-    lead_email = @assignment_response.teaching_request.lead_instructor.email
-
-    if @assignment_response.response == AssignmentResponse.response.accept
-      @assignment_response.teaching_request.status = TeachingRequest.status.assigned
-
-    elsif @assignment_response.response == AssignmentResponse.response.decline
-      @assignment_response.teaching_request.status = TeachingRequest.status.new_request
-      @assignment_response.teaching_request.lead_instructor = nil
-    end
+    lead_name = @teaching_request.lead_instructor.name
+    lead_email = @teaching_request.lead_instructor.email
 
     respond_to do |format|
-      if @assignment_response.save
+      if @teaching_request.record_lead_assignment_response(@assignment_response)
 
         ## SEND ASSIGNED LEAD INSTRUCTOR EMAIL
-        if @assignment_response.comment_or_reason
-          message = @assignment_response.comment_or_reason
-        else
-          message = 'No comment / reason given'
-        end
+        message = @assignment_response.comment_or_reason.presence || 'No comment / reason given'
 
-        tr = @assignment_response.teaching_request
+        tr = @teaching_request
         StaffMailer.lead_assignment_response(tr, @assignment_response.response.text, message, lead_name, lead_email).deliver_now
 
         if tr.status.assigned?
@@ -100,12 +90,19 @@ class Staff::AssignmentResponsesController < Staff::BaseController
       @assignment_response = AssignmentResponse.find(params[:id])
     end
 
+    def authorize_current_lead
+      return if @teaching_request.status&.in_process? &&
+                @teaching_request.lead_instructor_id == current_user.id
+
+      render file: Rails.root.join('public/403.html').to_s, status: :forbidden, layout: false
+    end
+
     def set_teaching_request_status
 
     end
     # Only allow a list of trusted parameters through.
     def assignment_response_params
-      params.require(:assignment_response).permit(:response, :comment_or_reason, :teaching_request_id, :user_id, teaching_request_attributes: [:id, :status, :lead_instructor, :second_instructor_id, :third_instructor_id] )
+      params.require(:assignment_response).permit(:response, :comment_or_reason)
     end
 
 end

@@ -1,0 +1,74 @@
+<% if requests.any? %>
+  <section id="portfolio-assignment-queue" class="card mb-3 shadow p-2 rounded" aria-labelledby="portfolio-assignment-queue-title">
+    <div class="card-body">
+      <h2 id="portfolio-assignment-queue-title" class="card-title"><%= title %></h2>
+      <hr class="secondary border-3">
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-hover align-middle">
+          <thead>
+            <tr>
+              <th scope="col"><%= t('subject_portfolios.claim.fields.portfolio') %></th>
+              <th scope="col"><%= t(:request_info) %></th>
+              <th scope="col"><%= t(:preferred_date) %></th>
+              <th scope="col"><%= t(:location) %></th>
+              <th scope="col" class="text-end"><%= t(:options) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% requests.each do |teaching_request| %>
+              <tr id="<%= dom_id(teaching_request, :portfolio_queue) %>">
+                <td><span class="badge bg-secondary"><%= teaching_request.subject_portfolio.name %></span></td>
+                <td>
+                  <span class="fw-bold"><%= teaching_request.name %></span><br>
+                  <span class="small text-muted"><%= teaching_request.number_of_students %> <%= t(:students) %></span>
+                </td>
+                <td>
+                  <%= teaching_request.preferred_date.strftime('%b %d, %Y') %><br>
+                  <span class="small text-muted"><%= teaching_request.preferred_time.strftime('%I:%M %p') %></span>
+                </td>
+                <td><%= teaching_request.location_preference.text %></td>
+                <td class="text-end text-nowrap">
+                  <% if mode == :self_claim %>
+                    <%= link_to staff_teaching_request_path(id: teaching_request.id),
+                                class: 'btn btn-sm btn-info',
+                                title: t(:view),
+                                aria: { label: t(:view) } do %>
+                      <i class="fas fa-eye" aria-hidden="true"></i>
+                    <% end %>
+                    <%= link_to new_staff_portfolio_decline_path(teaching_request_id: teaching_request.id),
+                                class: 'btn btn-sm btn-outline-danger',
+                                remote: true do %>
+                      <i class="fas fa-undo-alt me-1" aria-hidden="true"></i>
+                      <%= t('subject_portfolios.decline.actions.return') %>
+                    <% end %>
+                    <%= button_to staff_portfolio_claim_path(id: teaching_request.id),
+                                  method: :patch,
+                                  class: 'btn btn-sm btn-success',
+                                  form: { class: 'd-inline' },
+                                  data: { confirm: t('subject_portfolios.claim.confirmations.self_assign') } do %>
+                      <i class="fas fa-hand-paper me-1" aria-hidden="true"></i>
+                      <%= t('subject_portfolios.claim.actions.claim') %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to staff_manager_teaching_request_path(id: teaching_request.id),
+                                class: 'btn btn-sm btn-info',
+                                title: t(:view),
+                                aria: { label: t(:view) } do %>
+                      <i class="fas fa-eye" aria-hidden="true"></i>
+                    <% end %>
+                    <%= link_to edit_staff_manager_portfolio_lead_assignment_path(id: teaching_request.id),
+                                class: 'btn btn-sm btn-success',
+                                remote: true do %>
+                      <i class="fas fa-user-check me-1" aria-hidden="true"></i>
+                      <%= t('subject_portfolios.claim.actions.choose') %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+<% end %>

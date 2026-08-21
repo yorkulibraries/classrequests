@@ -1,4 +1,6 @@
 class Staff::Reports::TeachingsByDateRangesController < Staff::BaseController
+  include SubjectPortfolioReportFiltering
+
   layout 'staff/base'
 
   def index
@@ -31,7 +33,7 @@ class Staff::Reports::TeachingsByDateRangesController < Staff::BaseController
 
     elsif (params[:start] && params[:end] && params[:status]) && (params[:start] != '' && params[:end] != '' && params[:status] != '')
 
-      logger.debug 'All three provided -- I am in elsif #2' 'All three provided -- I am in elsif #2'
+      logger.debug 'All three provided -- I am in elsif #2'
 
       @start_date = params[:start]
       @end_date = params[:end]
@@ -51,6 +53,8 @@ class Staff::Reports::TeachingsByDateRangesController < Staff::BaseController
       @results = {}
 
     end
+    apply_subject_portfolio_filter
+
     respond_to do |format|
       format.html
       # format.csv { send_data @results.to_csv }
@@ -66,9 +70,15 @@ class Staff::Reports::TeachingsByDateRangesController < Staff::BaseController
       @start_date = params[:teachings_by_date_ranges][:start_date]
       @end_date = params[:teachings_by_date_ranges][:end_date]
       @status = params[:teachings_by_date_ranges][:status]
+      @subject_portfolio_filter = params[:teachings_by_date_ranges][:subject_portfolio]
       respond_to do |format|
         format.html {
-          redirect_to staff_reports_teachings_by_date_ranges_path(start: @start_date, end: @end_date, status: @status)
+          redirect_to staff_reports_teachings_by_date_ranges_path(
+            start: @start_date,
+            end: @end_date,
+            status: @status,
+            subject_portfolio: @subject_portfolio_filter
+          )
         }
       end
     end

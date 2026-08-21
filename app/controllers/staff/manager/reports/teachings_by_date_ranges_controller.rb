@@ -1,4 +1,6 @@
-class Staff::Manager::Reports::TeachingsByDateRangesController < ApplicationController
+class Staff::Manager::Reports::TeachingsByDateRangesController < Staff::Manager::BaseController
+  include SubjectPortfolioReportFiltering
+
   layout 'staff/manager/base'
 
   def index
@@ -39,6 +41,8 @@ class Staff::Manager::Reports::TeachingsByDateRangesController < ApplicationCont
       @results = {}
 
     end
+    apply_subject_portfolio_filter
+
     respond_to do |format|
       format.html
       # format.csv { send_data @results.to_csv }
@@ -56,9 +60,15 @@ class Staff::Manager::Reports::TeachingsByDateRangesController < ApplicationCont
       @start_date = params[:teachings_by_date_ranges][:start_date]
       @end_date = params[:teachings_by_date_ranges][:end_date]
       @status = params[:teachings_by_date_ranges][:status]
+      @subject_portfolio_filter = params[:teachings_by_date_ranges][:subject_portfolio]
       respond_to do |format|
         format.html {
-          redirect_to staff_manager_reports_teachings_by_date_ranges_path(start: @start_date, end: @end_date, status: @status)
+          redirect_to staff_manager_reports_teachings_by_date_ranges_path(
+            start: @start_date,
+            end: @end_date,
+            status: @status,
+            subject_portfolio: @subject_portfolio_filter
+          )
         }
       end
     end

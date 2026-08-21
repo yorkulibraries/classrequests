@@ -137,6 +137,14 @@
       <h4 class='card-title text-primary fs-5'><%= t(:instructor_only_area) %></h4>
       <hr class='w-50 ml-0' />
       <div class='row mt-3'>
+        <%= f.association :subject_portfolio,
+              collection: @subject_portfolios,
+              label: t('subject_portfolios.assignment.fields.subject_portfolio'),
+              include_blank: t('subject_portfolios.classification.no_portfolio'),
+              hint: t('subject_portfolios.classification.backlog_help'),
+              input_html: {autocomplete: 'off', class: 'form-select request-chosen'} %>
+      </div>
+      <div class='row mt-3'>
         <% if @disabled %>
           <%= f.input :lead_instructor_id, collection: ints = @active_instructors,
                 label_method: :full_name, value_method: :id, disabled: true,

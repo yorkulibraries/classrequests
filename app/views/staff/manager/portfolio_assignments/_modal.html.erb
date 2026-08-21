@@ -1,0 +1,15 @@
+<div class="modal fade" id="portfolio-assignment-modal" tabindex="-1" aria-labelledby="portfolio-assignment-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title h4" id="portfolio-assignment-modal-title">
+          <%= t('subject_portfolios.assignment.title') %>
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= t('subject_portfolios.assignment.actions.close') %>"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', remote: true, modal: true %>
+      </div>
+    </div>
+  </div>
+</div>

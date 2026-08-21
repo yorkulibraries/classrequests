@@ -55,10 +55,16 @@ if (Rails.env == 'development')
     puts "Created: #{difference} Type of Instructions"
 
 
-    CampusLocation.create(name: 'Keele', address: "198 York Blvd, North York, ON M3J 2S5")
-    CampusLocation.create(name: 'Glendon', address: "2275 Bayview Ave, North York, ON M4N 3M6" )
-    CampusLocation.create(name: 'Markham', address: "1 University Blvd., Unionville, ON L6G 0A1")
-    CampusLocation.create(name: 'Other', address: "")
+    [
+      { name: 'Keele', address: "198 York Blvd, North York, ON M3J 2S5" },
+      { name: 'Glendon', address: "2275 Bayview Ave, North York, ON M4N 3M6" },
+      { name: 'Markham', address: "1 University Blvd., Unionville, ON L6G 0A1" },
+      { name: 'Other', address: "" }
+    ].each do |attributes|
+      CampusLocation.find_or_create_by!(name: attributes[:name]) do |campus_location|
+        campus_location.address = attributes[:address]
+      end
+    end
 
 
     user_record = User.where(email: 'admin@mailinator.com').first

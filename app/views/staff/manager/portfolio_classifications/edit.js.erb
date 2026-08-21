@@ -1,0 +1,6 @@
+$('#portfolio-classification-dialog').remove();
+$('body').append("<div id='portfolio-classification-dialog'><%= escape_javascript(render 'modal') %></div>");
+$('#portfolio-classification-modal').modal('show');
+$('#portfolio-classification-modal').on('hidden.bs.modal', function() {
+  $('#portfolio-classification-dialog').remove();
+});

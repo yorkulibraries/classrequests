@@ -6,7 +6,7 @@ wb.add_worksheet(name: "Teachings By Dept Date Range") do |sheet|
   sheet.add_row ["Preferred Date Start", "Preferred Date End", "Department"]
   sheet.add_row ["#{@start_date.to_time.strftime('%b %d, %Y') rescue nil}", "#{@end_date.to_time.strftime('%b %d, %Y') rescue nil}", "#{@department_name}"]
   sheet.add_row []
-  sheet.add_row ["TeachingRequest-ID", "Section", "Date Requested", "Preferred Date","Start Time","Duration","Course Code","YUL Lead","Type of Instruction","YorkU Instructor","Number of Students","Status","Request Note"]
+  sheet.add_row ["TeachingRequest-ID", "Section", "Date Requested", "Preferred Date","Start Time","Duration","Course Code","YUL Lead","Subject Portfolio","Type of Instruction","YorkU Instructor","Number of Students","Status","Request Note"]
   # Create entries for each item
   @results.inspect
   @results.each do |res|
@@ -23,7 +23,7 @@ wb.add_worksheet(name: "Teachings By Dept Date Range") do |sheet|
 
     tofi = res.type_of_instructions.map(&:name).join(' | ')
 
-		sheet.add_row [res.id, res.section_name_or_about, res.created_at.strftime("%b %d, %Y"), res.preferred_date.to_time.strftime("%b %d, %Y"), "#{res.preferred_time.to_time.strftime("%I:%M %p")}","#{res.duration.text}","#{res.academic_year} - #{res.faculty_abbrev}/ #{res.subject_abbrev} #{res.course_number}", "L: #{lead rescue nil } | \r\n2: #{second rescue nil} | 3: \r\n#{third rescue nil}", "#{tofi rescue nil}", "#{res.first_name} #{res.last_name}", res.number_of_students, res.status, res.request_note ]
+			sheet.add_row [res.id, res.section_name_or_about, res.created_at.strftime("%b %d, %Y"), res.preferred_date.to_time.strftime("%b %d, %Y"), "#{res.preferred_time.to_time.strftime("%I:%M %p")}","#{res.duration.text}","#{res.academic_year} - #{res.faculty_abbrev}/ #{res.subject_abbrev} #{res.course_number}", "L: #{lead rescue nil } | \r\n2: #{second rescue nil} | 3: \r\n#{third rescue nil}", subject_portfolio_label_for(res), "#{tofi rescue nil}", "#{res.first_name} #{res.last_name}", res.number_of_students, res.status, res.request_note&.to_plain_text.to_s.strip ]
     
   end
 end

@@ -1,0 +1,6 @@
+$('#portfolio-lead-assignment-dialog').remove();
+$('body').append("<div id='portfolio-lead-assignment-dialog'><%= escape_javascript(render 'modal') %></div>");
+$('#portfolio-lead-assignment-modal').modal('show');
+$('#portfolio-lead-assignment-modal').on('hidden.bs.modal', function() {
+  $('#portfolio-lead-assignment-dialog').remove();
+});

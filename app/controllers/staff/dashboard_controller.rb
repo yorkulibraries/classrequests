@@ -14,11 +14,22 @@ class Staff::DashboardController < Staff::BaseController
       @greetings = I18n.t 'Access Denied'
     end
 
-    @lead_assignments = TeachingRequest.where(status: TeachingRequest.status.in_process).and(TeachingRequest.where(lead_instructor: current_user))
-    @my_new_teaching_requests = current_user.teaching_requests.where(status: ['1','2','3']).where('preferred_date > ?', Date.today-1)
-    @upcoming_teaching_requests = TeachingRequest.where(status: :assigned).where('preferred_date BETWEEN ? AND ?', Date.today-1, Date.today+14).where('lead_instructor_id = ? OR second_instructor_id = ? OR third_instructor_id = ?', current_user,current_user, current_user)
+    @lead_assignments = TeachingRequest.includes(:subject_portfolio).where(
+      status: TeachingRequest.status.in_process,
+      lead_instructor: current_user
+    )
+    @portfolio_teaching_requests = if current_user.eligible_for_subject_portfolios?
+                                     TeachingRequest.awaiting_portfolio_lead
+                                       .where(subject_portfolio_id: current_user.subject_portfolio_ids)
+                                       .includes(:subject_portfolio)
+                                       .order(:preferred_date, :preferred_time)
+                                   else
+                                     TeachingRequest.none
+                                   end
+    @my_new_teaching_requests = current_user.teaching_requests.includes(:subject_portfolio).where(status: ['1','2','3']).where('preferred_date > ?', Date.today-1)
+    @upcoming_teaching_requests = TeachingRequest.includes(:subject_portfolio).where(status: :assigned).where('preferred_date BETWEEN ? AND ?', Date.today-1, Date.today+14).where('lead_instructor_id = ? OR second_instructor_id = ? OR third_instructor_id = ?', current_user,current_user, current_user)
 
-    @my_teaching_requests = TeachingRequest.where(status: :assigned).where('lead_instructor_id = ? OR second_instructor_id = ? OR third_instructor_id = ?', current_user.id,current_user.id, current_user.id)
+    @my_teaching_requests = TeachingRequest.includes(:subject_portfolio).where(status: :assigned).where('lead_instructor_id = ? OR second_instructor_id = ? OR third_instructor_id = ?', current_user.id,current_user.id, current_user.id)
 
     # current_year = Date.today.year 
     # May 1 Current Year to April 30 Current+1
@@ -33,7 +44,7 @@ class Staff::DashboardController < Staff::BaseController
     end
     end_date = Date.new(current_year + 1, 4, 30)
 
-    @my_completed_teaching_requests = TeachingRequest.where(status: 4)
+    @my_completed_teaching_requests = TeachingRequest.includes(:subject_portfolio).where(status: 4)
                                                  .where(preferred_date: start_date..end_date)
                                                  .where('lead_instructor_id = ? OR second_instructor_id = ? OR third_instructor_id = ?', current_user.id,current_user.id, current_user.id)
 

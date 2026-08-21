@@ -1,0 +1,5 @@
+<% if @subject_portfolio_decline.errors.empty? %>
+  window.location.reload();
+<% else %>
+  $('#subject_portfolio_decline_form').replaceWith("<%= escape_javascript(render 'form', remote: true, modal: true) %>");
+<% end %>

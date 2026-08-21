@@ -1,0 +1,317 @@
+en:
+  subject_portfolios:
+    navigation: "Subject portfolios"
+    index:
+      title: "Subject portfolios"
+      empty: "No subject portfolios have been added."
+    new:
+      title: "New subject portfolio"
+    edit:
+      title: "Edit %{name}"
+    fields:
+      name: "Name"
+      notification_email: "Notification email"
+      active: "Available for assignment"
+      members: "Members"
+      status: "Status"
+      actions: "Actions"
+      assigned_requests: "Assigned requests"
+    status:
+      active: "Active"
+      inactive: "Inactive"
+    lead_assignment_state: "Lead assignment"
+    lead_assignment_states:
+      awaiting_response: "Awaiting lead response"
+      accepted: "Lead accepted assignment"
+      declined: "Lead declined assignment"
+      confirmed_without_response: "Confirmed - no response required"
+      no_response_recorded: "No lead response recorded"
+    members:
+      title: "Portfolio members"
+      add: "Add a member"
+      staff_member: "Staff member"
+      name: "Name"
+      email: "Email"
+      role: "Role"
+      department: "Department"
+      empty: "No members have been added."
+      none_available: "No other eligible staff members are available."
+    actions:
+      add: "Add subject portfolio"
+      create: "Create subject portfolio"
+      save: "Save changes"
+      edit: "Edit"
+      delete: "Delete"
+      manage: "Manage"
+      cancel: "Cancel"
+      back: "All subject portfolios"
+      add_member: "Add member"
+      remove_member: "Remove member"
+      manage_named: "Manage %{name}"
+      edit_named: "Edit %{name}"
+      delete_named: "Delete %{name}"
+      remove_member_named: "Remove %{name} from this portfolio"
+    confirmations:
+      delete: "Delete %{name}? This cannot be undone."
+      remove_member: "Remove %{name} from this subject portfolio?"
+    notices:
+      created: "Subject portfolio was successfully created."
+      updated: "Subject portfolio was successfully updated."
+      destroyed: "Subject portfolio was successfully deleted."
+      in_use: "This subject portfolio has request or return history and cannot be deleted. Deactivate it instead."
+      member_added: "Portfolio member was successfully added."
+      member_removed: "Portfolio member was successfully removed."
+    assignment:
+      title: "Assign subject portfolio"
+      heading: "Portfolio assignment"
+      request_information: "Request information"
+      prompt: "Select an active subject portfolio"
+      unassigned: "Unassigned"
+      portfolio_label: "Portfolio: %{portfolio}"
+      fields:
+        assignment: "Assignment"
+        requestor: "Requestor"
+        email: "Email"
+        course: "Course"
+        subject_portfolio: "Subject portfolio"
+      actions:
+        assign: "Assign portfolio"
+        cancel: "Cancel"
+        close: "Close"
+      errors:
+        active: "must be an active subject portfolio"
+        unavailable: "This request is no longer available for portfolio assignment."
+      notices:
+        assigned: "Request was assigned to %{portfolio} and the portfolio was notified."
+    claim:
+      title: "Select portfolio lead"
+      heading: "Lead instructor assignment"
+      prompt: "Select an eligible portfolio member"
+      no_members: "This portfolio has no eligible members available for assignment."
+      confirmed_heading: "Confirm portfolio lead:"
+      confirmed_help: "Use when the member has already agreed. The request becomes Assigned immediately and no response is required."
+      acceptance_heading: "Request acceptance:"
+      acceptance_help: "Use when the member has not yet agreed. The request remains In Process until the member accepts or declines."
+      queue:
+        staff_title: "Portfolio requests awaiting a lead"
+        manager_title: "Portfolio requests awaiting lead assignment"
+      fields:
+        portfolio: "Subject portfolio"
+        member: "Portfolio member"
+      actions:
+        claim: "Claim request"
+        assign: "Assign member"
+        choose: "Select lead"
+        confirm: "Confirm portfolio lead"
+        request_acceptance: "Request acceptance"
+        cancel: "Cancel"
+        close: "Close"
+      confirmations:
+        self_assign: "Assign this request to yourself as the lead instructor?"
+      errors:
+        unavailable: "This request is no longer available for lead assignment."
+        ineligible: "must be an active, approved member of this subject portfolio"
+        invalid_mode: "Select a valid portfolio lead assignment action."
+        response_unavailable: "This lead assignment is no longer awaiting your response."
+      notices:
+        claimed: "The request was assigned to you as lead instructor."
+        assigned: "The request was assigned to %{member}."
+        confirmed: "%{member} was confirmed as the portfolio lead."
+        acceptance_requested: "%{member} was asked to accept or decline the lead assignment."
+    decline:
+      title: "Return portfolio request"
+      help: "Explain why this portfolio cannot take the request. The request will return to the manager for reassignment; the requestor will not be notified yet."
+      fields:
+        reason: "Reason for returning the request"
+      actions:
+        return: "Return to manager"
+        cancel: "Cancel"
+        close: "Close"
+      confirmation: "Return this request to the manager and remove its current portfolio assignment?"
+      errors:
+        unavailable: "This request is no longer available to return to the manager."
+        ineligible: "must be an active, approved member of this subject portfolio"
+      notices:
+        returned: "The request was returned to the manager for reassignment."
+      history:
+        title: "Portfolio return history"
+        returned_by: "Returned by"
+        returned_at: "Returned at"
+        reason: "Reason"
+    classification:
+      title: "Manage request portfolio"
+      heading: "Subject portfolio classification"
+      help: "This changes the portfolio without replacing any assigned instructors. New and unclaimed in-process requests enter the portfolio queue; historical work keeps its current status."
+      backlog_help: "Choose the portfolio responsible for this historical teaching. This records the classification only and does not send an email."
+      no_portfolio: "No subject portfolio"
+      legacy_label: "No portfolio (legacy)"
+      no_instructors: "No instructors assigned"
+      actions:
+        add: "Add portfolio"
+        manage: "Manage portfolio"
+        save: "Save portfolio"
+      notices:
+        updated: "Request portfolio was updated to %{portfolio}."
+        removed: "The subject portfolio was removed from the request."
+      reports:
+        filter: "Subject portfolio"
+        all: "All portfolios and legacy records"
+
+fr-ca:
+  subject_portfolios:
+    navigation: "Portefeuilles disciplinaires"
+    index:
+      title: "Portefeuilles disciplinaires"
+      empty: "Aucun portefeuille disciplinaire n'a ete ajoute."
+    new:
+      title: "Nouveau portefeuille disciplinaire"
+    edit:
+      title: "Modifier %{name}"
+    fields:
+      name: "Nom"
+      notification_email: "Courriel de notification"
+      active: "Disponible pour l'attribution"
+      members: "Membres"
+      status: "Statut"
+      actions: "Actions"
+      assigned_requests: "Demandes attribuees"
+    status:
+      active: "Actif"
+      inactive: "Inactif"
+    lead_assignment_state: "Attribution de la personne responsable"
+    lead_assignment_states:
+      awaiting_response: "En attente de la reponse de la personne responsable"
+      accepted: "Attribution acceptee par la personne responsable"
+      declined: "Attribution refusee par la personne responsable"
+      confirmed_without_response: "Confirmee - aucune reponse requise"
+      no_response_recorded: "Aucune reponse enregistree"
+    members:
+      title: "Membres du portefeuille"
+      add: "Ajouter un membre"
+      staff_member: "Membre du personnel"
+      name: "Nom"
+      email: "Courriel"
+      role: "Role"
+      department: "Departement"
+      empty: "Aucun membre n'a ete ajoute."
+      none_available: "Aucun autre membre du personnel admissible n'est disponible."
+    actions:
+      add: "Ajouter un portefeuille disciplinaire"
+      create: "Creer le portefeuille disciplinaire"
+      save: "Enregistrer les modifications"
+      edit: "Modifier"
+      delete: "Supprimer"
+      manage: "Gerer"
+      cancel: "Annuler"
+      back: "Tous les portefeuilles disciplinaires"
+      add_member: "Ajouter le membre"
+      remove_member: "Retirer le membre"
+      manage_named: "Gerer %{name}"
+      edit_named: "Modifier %{name}"
+      delete_named: "Supprimer %{name}"
+      remove_member_named: "Retirer %{name} de ce portefeuille"
+    confirmations:
+      delete: "Supprimer %{name}? Cette action est irreversible."
+      remove_member: "Retirer %{name} de ce portefeuille disciplinaire?"
+    notices:
+      created: "Le portefeuille disciplinaire a ete cree."
+      updated: "Le portefeuille disciplinaire a ete mis a jour."
+      destroyed: "Le portefeuille disciplinaire a ete supprime."
+      in_use: "Ce portefeuille contient un historique de demandes ou de retours et ne peut pas etre supprime. Desactivez-le plutot."
+      member_added: "Le membre a ete ajoute au portefeuille."
+      member_removed: "Le membre a ete retire du portefeuille."
+    assignment:
+      title: "Attribuer un portefeuille disciplinaire"
+      heading: "Attribution du portefeuille"
+      request_information: "Renseignements sur la demande"
+      prompt: "Selectionnez un portefeuille disciplinaire actif"
+      unassigned: "Non attribuee"
+      portfolio_label: "Portefeuille : %{portfolio}"
+      fields:
+        assignment: "Attribution"
+        requestor: "Demandeur"
+        email: "Courriel"
+        course: "Cours"
+        subject_portfolio: "Portefeuille disciplinaire"
+      actions:
+        assign: "Attribuer le portefeuille"
+        cancel: "Annuler"
+        close: "Fermer"
+      errors:
+        active: "doit etre un portefeuille disciplinaire actif"
+        unavailable: "Cette demande n'est plus disponible pour l'attribution a un portefeuille."
+      notices:
+        assigned: "La demande a ete attribuee a %{portfolio} et le portefeuille a ete avise."
+    claim:
+      title: "Selectionner la personne responsable du portefeuille"
+      heading: "Attribution de la personne responsable"
+      prompt: "Selectionnez un membre admissible du portefeuille"
+      no_members: "Ce portefeuille ne compte aucun membre admissible disponible pour cette attribution."
+      confirmed_heading: "Confirmer la personne responsable du portefeuille :"
+      confirmed_help: "Utilisez cette option lorsque le membre a deja accepte. La demande passe immediatement a Attribuee et aucune reponse n'est requise."
+      acceptance_heading: "Demander l'acceptation :"
+      acceptance_help: "Utilisez cette option lorsque le membre n'a pas encore accepte. La demande reste En traitement jusqu'a son acceptation ou son refus."
+      queue:
+        staff_title: "Demandes du portefeuille en attente d'une personne responsable"
+        manager_title: "Demandes du portefeuille en attente d'attribution"
+      fields:
+        portfolio: "Portefeuille disciplinaire"
+        member: "Membre du portefeuille"
+      actions:
+        claim: "Prendre la demande"
+        assign: "Attribuer le membre"
+        choose: "Selectionner la personne responsable"
+        confirm: "Confirmer la personne responsable"
+        request_acceptance: "Demander l'acceptation"
+        cancel: "Annuler"
+        close: "Fermer"
+      confirmations:
+        self_assign: "Vous attribuer cette demande comme personne responsable?"
+      errors:
+        unavailable: "Cette demande n'est plus disponible pour l'attribution d'une personne responsable."
+        ineligible: "doit etre un membre actif et approuve de ce portefeuille disciplinaire"
+        invalid_mode: "Selectionnez une action valide pour l'attribution de la personne responsable."
+        response_unavailable: "Cette attribution n'attend plus votre reponse."
+      notices:
+        claimed: "La demande vous a ete attribuee comme personne responsable."
+        assigned: "La demande a ete attribuee a %{member}."
+        confirmed: "%{member} a ete confirme comme personne responsable du portefeuille."
+        acceptance_requested: "%{member} a ete invite a accepter ou refuser l'attribution."
+    decline:
+      title: "Retourner la demande du portefeuille"
+      help: "Expliquez pourquoi ce portefeuille ne peut pas prendre la demande. La demande sera retournee a la gestion pour une nouvelle attribution; la personne requerante ne sera pas encore avisee."
+      fields:
+        reason: "Raison du retour de la demande"
+      actions:
+        return: "Retourner a la gestion"
+        cancel: "Annuler"
+        close: "Fermer"
+      confirmation: "Retourner cette demande a la gestion et retirer son attribution actuelle au portefeuille?"
+      errors:
+        unavailable: "Cette demande ne peut plus etre retournee a la gestion."
+        ineligible: "doit etre un membre actif et approuve de ce portefeuille disciplinaire"
+      notices:
+        returned: "La demande a ete retournee a la gestion pour une nouvelle attribution."
+      history:
+        title: "Historique des retours de portefeuille"
+        returned_by: "Retournee par"
+        returned_at: "Retournee le"
+        reason: "Raison"
+    classification:
+      title: "Gerer le portefeuille de la demande"
+      heading: "Classification par portefeuille disciplinaire"
+      help: "Cette modification ne remplace aucune personne deja attribuee. Les nouvelles demandes et les demandes en traitement sans responsable entrent dans la file du portefeuille; les travaux historiques conservent leur statut."
+      backlog_help: "Selectionnez le portefeuille responsable de cet enseignement historique. Cette classification n'envoie aucun courriel."
+      no_portfolio: "Aucun portefeuille disciplinaire"
+      legacy_label: "Aucun portefeuille (historique)"
+      no_instructors: "Aucune personne attribuee"
+      actions:
+        add: "Ajouter un portefeuille"
+        manage: "Gerer le portefeuille"
+        save: "Enregistrer le portefeuille"
+      notices:
+        updated: "Le portefeuille de la demande est maintenant %{portfolio}."
+        removed: "Le portefeuille disciplinaire a ete retire de la demande."
+      reports:
+        filter: "Portefeuille disciplinaire"
+        all: "Tous les portefeuilles et dossiers historiques"

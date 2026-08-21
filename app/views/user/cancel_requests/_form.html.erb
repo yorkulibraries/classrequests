@@ -9,21 +9,25 @@
         <h4 class='card-title text-primary'><%= t(:teaching_request_cancellation_request) %></h4>
         <hr class='w-50 ml-0' />
 
+        <div class='alert alert-info' role='status'>
+          Submitting this form does not immediately cancel the class request.
+          A manager will review it, and the requestor will receive an email after the cancellation is completed.
+        </div>
+
         <div class='row mt-3'>
           <p class='text-muted'> <%= t(:teaching_request) %>:<br/>
           <span class='text-dark fw-bold'><%= @teaching_request.full_name %></span></p>
         </div>
         <div class='row mt-3'>
-            <div class='col-sm-12 col-md-6'><%= f.input :reason, as: :text, label_html: {class: 'fw-bold'}  %></div>
+            <div class='col-sm-12 col-md-8'><%= f.input :reason, as: :text, required: true, input_html: {rows: 4}, label_html: {class: 'fw-bold'}  %></div>
         </div>
 
         <div class='row mt-3'>
           <%= f.input :teaching_request_id, input_html: {value: @teaching_request.id}, as: :hidden  %>
-          <%= f.input :user_id, input_html: {value: current_user.id}, as: :hidden  %>
         </div>
 
         <div class='row mt-3'>
-          <div class='col-md-4'><%= f.button :submit, data: {confirm: 'Are you sure you want to cancel?'}, class: 'btn btn-success' do %>
+          <div class='col-md-5'><%= f.button :submit, data: {confirm: 'Are you sure you want to submit this cancellation request?'}, class: 'btn btn-danger' do %>
               <%= t(:submit_my_cancel_request) %>
               <i class='fa fa-arrow-right'></i>
           <% end %>

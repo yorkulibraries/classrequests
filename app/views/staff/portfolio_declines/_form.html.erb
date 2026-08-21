@@ -1,0 +1,65 @@
+<% remote_form = local_assigns.fetch(:remote, false) %>
+<% modal_form = local_assigns.fetch(:modal, false) %>
+
+<%= simple_form_for(
+      @subject_portfolio_decline,
+      url: staff_portfolio_declines_path,
+      method: :post,
+      remote: remote_form,
+      html: { id: 'subject_portfolio_decline_form' }
+    ) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.hidden_field :teaching_request_id, value: @teaching_request.id %>
+
+  <section aria-labelledby="portfolio-decline-request-heading">
+    <h2 id="portfolio-decline-request-heading" class="h5 text-primary">
+      <%= t('subject_portfolios.assignment.request_information') %>
+    </h2>
+    <dl class="row small mb-3">
+      <dt class="col-sm-3"><%= t('subject_portfolios.claim.fields.portfolio') %></dt>
+      <dd class="col-sm-9"><%= @teaching_request.subject_portfolio&.name %></dd>
+
+      <dt class="col-sm-3"><%= t('subject_portfolios.assignment.fields.requestor') %></dt>
+      <dd class="col-sm-9"><%= @teaching_request.first_name %> <%= @teaching_request.last_name %></dd>
+
+      <dt class="col-sm-3"><%= t('subject_portfolios.assignment.fields.course') %></dt>
+      <dd class="col-sm-9 mb-0">
+        <%= @teaching_request.faculty_abbrev %>/<%= @teaching_request.subject_abbrev %>
+        <%= @teaching_request.course_number %> <%= @teaching_request.academic_year %>
+      </dd>
+    </dl>
+  </section>
+
+  <p id="portfolio-decline-help" class="small text-muted">
+    <%= t('subject_portfolios.decline.help') %>
+  </p>
+  <%= f.input :reason,
+              as: :text,
+              label: t('subject_portfolios.decline.fields.reason'),
+              required: true,
+              input_html: {
+                rows: 4,
+                maxlength: 2_000,
+                aria: { describedby: 'portfolio-decline-help' }
+              } %>
+  <%= f.input :confirmed,
+              as: :boolean,
+              label: t('subject_portfolios.decline.confirmation'),
+              required: true %>
+
+  <div class="d-flex gap-2 border-top pt-3 mt-4">
+    <%= f.button :submit,
+                 t('subject_portfolios.decline.actions.return'),
+                 class: 'btn btn-danger' %>
+    <% if modal_form %>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        <%= t('subject_portfolios.decline.actions.cancel') %>
+      </button>
+    <% else %>
+      <%= link_to t('subject_portfolios.decline.actions.cancel'),
+                  staff_dashboard_path,
+                  class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+<% end %>

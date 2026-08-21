@@ -1,6 +1,7 @@
 class Staff::TeachingRequestsController < Staff::BaseController
   before_action :set_teaching_request, only: [:show, :edit, :update, :destroy]
   before_action :set_active_instructors, only: [:new, :show, :edit, :create, :update]
+  before_action :set_subject_portfolios, only: [:new, :edit, :create, :update]
   # invisible_captcha only: [:create, :update], on_spam: :your_spam_callback_method
 
   def show
@@ -115,9 +116,18 @@ class Staff::TeachingRequestsController < Staff::BaseController
       @active_instructors = User.includes(:staff_profile).references(:staff_profiles).where(staff_profiles: {role: 2}).where(is_active: true).order(:first_name)
     end
 
+    def set_subject_portfolios
+      @subject_portfolios = SubjectPortfolio.active.order(:name).to_a
+      current_portfolio = @teaching_request&.subject_portfolio
+
+      if current_portfolio.present? && !@subject_portfolios.include?(current_portfolio)
+        @subject_portfolios.unshift(current_portfolio)
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def teaching_request_params
-      params.require(:teaching_request).permit(:username, :patron_type, :first_name, :last_name, :email, :phone, :academic_term, :academic_year, :faculty, :faculty_abbrev, :subject, :subject_abbrev, :course_title, :course_number, :submitted_by, :submitted_on_behalf, :section_name_or_about, :number_of_students, :preferred_date, :preferred_time, :alternate_date, :alternate_time, :duration, :location_preference, :room, :lead_instructor_id, :second_instructor_id, :third_instructor_id, :request_note, :instructor_notes, :status, :user_id, :campus_location_id, type_of_instruction_ids: [])
+      params.require(:teaching_request).permit(:username, :patron_type, :first_name, :last_name, :email, :phone, :academic_term, :academic_year, :faculty, :faculty_abbrev, :subject, :subject_abbrev, :course_title, :course_number, :submitted_by, :submitted_on_behalf, :section_name_or_about, :number_of_students, :preferred_date, :preferred_time, :alternate_date, :alternate_time, :duration, :location_preference, :room, :lead_instructor_id, :second_instructor_id, :third_instructor_id, :request_note, :instructor_notes, :status, :user_id, :campus_location_id, :subject_portfolio_id, type_of_instruction_ids: [])
     end
 
     def your_spam_callback_method

@@ -175,7 +175,12 @@ $theme-colors: map-merge($theme-colors, $yorku-colors);
   color: $white;
 }
 
-.badge-deleted, .badge-cancelled {
+.badge-cancelled {
+  background-color: $york-grey-dark;
+  color: $white;
+}
+
+.badge-deleted {
   background-color: $danger;
   color: $white;
 }

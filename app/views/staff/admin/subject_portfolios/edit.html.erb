@@ -1,0 +1,9 @@
+<% page_title t('subject_portfolios.edit.title', name: @subject_portfolio.name) %>
+
+<div class="row">
+  <div class="col-xl-8">
+    <h1><%= t('subject_portfolios.edit.title', name: @subject_portfolio.name) %></h1>
+    <hr class="primary">
+    <%= render 'form', subject_portfolio: @subject_portfolio %>
+  </div>
+</div>

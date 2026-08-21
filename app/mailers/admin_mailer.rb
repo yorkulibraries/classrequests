@@ -49,23 +49,50 @@ class AdminMailer < ApplicationMailer
 
   end
 
-  def cancel_request_notification(request, message='', requestor='')
-    @request = request
-    @requestor = requestor
-    @message = message
-
-    if @requestor.staff_profile.role.staff_instructor?
-      email_subject = "Classrequests: Staff has cancelled a class"
-    else
-      email_subject = "Classrequests: User has requested a class cancellation"
-    end
+  def cancel_request_notification(cancel_request)
+    @cancel_request = cancel_request
+    @request = cancel_request.teaching_request
+    @requestor = cancel_request.user
+    @message = cancel_request.reason
 
     attachments.inline["#{Setting.mail_logo_url}"] = File.read("#{Rails.root}/app/assets/images/#{Setting.mail_logo_url}")
-    bootstrap_mail(to: Setting.cancel_request_notification, subject: email_subject) do |format|
+    bootstrap_mail(
+      to: cancellation_notification_recipients,
+      subject: "Cancellation requested for class request ##{@request.id}"
+    ) do |format|
+      format.text
       format.html
     end
-
   end
 
+  def cancel_request_completed_notification(cancel_request, processed_by)
+    @cancel_request = cancel_request
+    @request = cancel_request.teaching_request
+    @requestor = cancel_request.user
+    @processed_by = processed_by
+
+    attachments.inline["#{Setting.mail_logo_url}"] = File.read("#{Rails.root}/app/assets/images/#{Setting.mail_logo_url}")
+    bootstrap_mail(
+      to: manager_notification_recipients,
+      subject: "Cancellation completed for class request ##{@request.id}"
+    ) do |format|
+      format.text
+      format.html
+    end
+  end
+
+  private
+
+  def cancellation_notification_recipients
+    (Array(Setting.cancel_request_notification) + manager_notification_recipients)
+      .compact
+      .map(&:strip)
+      .reject(&:blank?)
+      .uniq
+  end
+
+  def manager_notification_recipients
+    Array(Setting.manager_emails).compact.map(&:strip).reject(&:blank?).uniq
+  end
 
 end

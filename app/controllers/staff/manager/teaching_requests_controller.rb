@@ -13,6 +13,8 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
       @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.done.value).order(created_at: :desc).page params[:page]
     elsif params[:sort] && params[:sort] == TeachingRequest.status.unfulfilled.text
       @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.unfulfilled.value).order(created_at: :desc).page params[:page]
+    elsif params[:sort] && params[:sort] == TeachingRequest.status.cancelled.text
+      @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.cancelled.value).order(created_at: :desc).page params[:page]
     elsif params[:sort] && params[:sort] == TeachingRequest.status.deleted.text
       @teaching_requests = TeachingRequest.where(status: TeachingRequest.status.deleted.value).order(created_at: :desc).page params[:page]
     elsif params[:sort] && params[:sort] == TeachingRequest.status.not_submitted.text
@@ -22,6 +24,14 @@ class Staff::Manager::TeachingRequestsController < Staff::Manager::BaseControlle
     else
       @teaching_requests = TeachingRequest.all.order(created_at: :desc).page params[:page]
     end
+
+    @teaching_requests = @teaching_requests.includes(
+      :subject_portfolio,
+      :lead_instructor,
+      :second_instructor,
+      :third_instructor,
+      :assignment_responses
+    )
 
     # @teaching_requests = TeachingRequest.all
     # @course_faculties = InstituteCourse.select('distinct(faculty)')

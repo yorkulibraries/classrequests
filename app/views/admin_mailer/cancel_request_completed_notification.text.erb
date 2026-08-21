@@ -1,0 +1,8 @@
+Cancellation completed
+
+Class request #<%= @request.id %> was marked cancelled by <%= @processed_by.name %>.
+The cancellation was requested by <%= @requestor.name %>.
+The requestor confirmation email was sent to <%= @request.email %>.
+
+View the cancelled request:
+<%= staff_manager_teaching_request_url(id: @request.id, locale: I18n.locale) %>
